@@ -1,1 +1,38 @@
 @CHARSET "EUC-KR";
+
+#check_left_gride {
+   padding-left: 0px;
+   text-align : left;
+}
+
+#check_rigth_gride {
+   padding-left: 0px;
+   text-align : right;
+}
+
+.tab-content {
+   font-size : 20px;
+}
+
+.nav-tabs {
+   font-size : 20px;
+}
+
+.myinfo_input {
+   border-radius : 5px;
+   width : 300px;
+}
+
+#cancle {
+   margin-left : 10%;
+}
+
+.btn {
+   background-color : #3399ff;
+   color : white;
+}
+
+.btn:hover {
+	background-color : #3399ff;
+   color : white;
+}

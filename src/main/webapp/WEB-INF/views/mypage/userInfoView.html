@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Example</title>
+<title>UserInfoView</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,6 +11,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/myPageView.css">
+-->
 
 <style>
 #check_left_gride {
@@ -31,11 +35,6 @@
    font-size : 20px;
 }
 
-.myinfo_input {
-   border-radius : 5px;
-   width : 300px;
-}
-
 #cancle {
    margin-left : 10%;
 }
@@ -45,17 +44,38 @@
    color : white;
 }
 
+.btn:hover {
+	background-color : #3399ff;
+    color : white;
+}
+
+#delete_content {
+	margin : 2%;
+}
+
+#delete_id {
+	margin : 2%;
+}
+
+#delete_nowPw {
+	margin : 2%;
+}
 </style>
+
 </head>
 <body>
 
 <?include "include/head.html"?>
 
+
 <div class="container">
+
 <div class="row">
-<div class="col-sm-6">
-<h1>회원 정보 관리</h1>
-</div>
+
+	<div class="col-sm-6">
+		<h1>회원 정보 관리</h1>
+	</div>
+
 </div>
 
       <br>
@@ -63,105 +83,145 @@
 <div class="row">
 <div class="col-sm-12">
 
-<div class="container">
+<!-- 정보수정 & 회원탈퇴 탭 -->
 <ul class="nav nav-tabs">
-<li class="active">
-<a data-toggle="tab" href="#home">회원정보수정</a>
-</li>
-<li>
-<a data-toggle="tab" href="#menu1">회원탈퇴</a>
-</li>
-</ul>
+	<li class="active">
+		<a data-toggle="tab" href="#home">회원정보수정</a>
+	</li>
+	
+	<li>
+		<a data-toggle="tab" href="#menu1">회원탈퇴</a>
+	</li>
+</ul><!-- 정보수정 & 회원탈퇴 탭 end -->
 
          <br>
          <br>
          <br>
 
-<div class="col-sm-2"></div>
+<!-- 내용 가운데로 보내기로 위한 그리드 -->
+<div class="col-sm-2">
+</div>
 
 <form class="form-horizontal">
 <fieldset>
 
-<div class="tab-content">                  
-<div id="home" class="tab-pane fade in active">
-
-<!-- 아이디 입력창-->
-<div class="form-group">
-<label class="col-md-4 control-label" for="textinput">아이디</label>  
-<div class="col-md-3">
-<input type="text" id="textinput" name="textinput" readOnly="readOnly" class="form-control input-md" placeholder="E-mail"/>
-</div>
-<div class="col-md-4">
-
-</div>
-</div>
-
-
-<!-- 인증번호입력창-->
-<div class="form-group">
-<label class="col-md-4 control-label" for="textinput">현재비밀번호</label>  
-<div class="col-md-3">
-<input id="textinput" name="textinput" type="password" placeholder="check-Number" class="form-control input-md">
-</div>
-</div>
-
-
-<!-- 인증번호입력창-->
-<div class="form-group">
-<label class="col-md-4 control-label" for="textinput">새 비밀번호</label>  
-<div class="col-md-3">
-<input id="textinput" name="textinput" type="password" placeholder="check-Number" class="form-control input-md">
-</div>
-</div>
-
-
-<!-- 인증번호입력창-->
-<div class="form-group">
-<label class="col-md-4 control-label" for="textinput">새비밀번호확인</label>  
-<div class="col-md-3">
-<input id="textinput" name="textinput" type="password" placeholder="check-Number" class="form-control input-md">
-</div>
-</div>
-
-
-
-<!-- 닉네임입력창-->
-<div class="form-group">
-<label class="col-md-4 control-label" for="textinput">닉네임</label>  
-<div class="col-md-3">
-<input id="textinput" name="textinput" type="text" placeholder="Nickname" class="form-control input-md">
-</div>
-<div class="col-md-4">
-<button id="button1id" class="btn btn">중복확인</button>
-
-</div>
-</div>
-
-
-
-
-<!-- 하단버튼 -->
-<div class="form-group">
-<label class="col-md-4 control-label" for="button1id"></label>
-<div class="col-md-8">
-<button id="button_join" name="button1id" class="btn btn">변경완료</button>
-<button id="button_cancle" name="button2id" class="btn btn">취소</button>
-</div>
-</div>
-
-</div><!--정보수정탭-->
-
-<div id="menu1" class="tab-pane fade">
-<h3>Menu 1</h3>
-</div><!--회원탈퇴탭-->
-</div><!--내용컨테이너-->
+	<div class="tab-content"> <!-- 정보수정 + 회원탈퇴 -->
+		
+		<!-- 정보수정 start-->
+		<div id="home" class="tab-pane fade in active"> <!-- id 바꾸지말것 bootstrap고정 -->
+		
+			<!-- 아이디 입력창-->
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="textinput">아이디</label>  
+			<div class="col-md-3">
+			<input type="text" id="update_id" class="form-control input-md" name="updateId" readOnly="readOnly"  placeholder="E-mail"/>
+			</div>
+			<div class="col-md-4">
+			</div>
+			</div>
+			
+			<!-- 비밀번호확인 입력창-->
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="textinput">현재비밀번호</label>  
+			<div class="col-md-3">
+			<input type="password" id="update_nowPw" class="form-control input-md" name="updateNowPw" placeholder="check-Number"/>
+			</div>
+			</div>
+			
+			<!-- 새비밀번호 입력창-->
+			<div class="form-group">
+			<label class="col-md-4 control-label">새 비밀번호</label>  
+			<div class="col-md-3">
+			<input type="password" id="update_newPw" class="form-control input-md" name="updateNewPw" placeholder="check-Number"/>
+			</div>
+			</div>
+			
+			<!-- 새비밀번호확인 입력창-->
+			<div class="form-group">
+			<label class="col-md-4 control-label">새비밀번호확인</label>  
+			<div class="col-md-3">
+			<input type="password" id="update_reNewPw" class="form-control input-md" name="updateReNewPw" placeholder="check-Number"/>
+			</div>
+			</div>
+			
+			
+			
+			<!-- 닉네임 입력창-->
+			<div class="form-group">
+			<label class="col-md-4 control-label">닉네임</label>  
+			<div class="col-md-3">
+			<input type="text" id="update_nickname" class="form-control input-md" name="updateNickname" placeholder="Nickname"/>
+			</div>
+			<div class="col-md-4">
+			<button id="update_button_dup" class="btn btn">중복확인</button>
+			</div>
+			</div>
+			
+			<!-- 하단버튼 -->
+			<div class="form-group">
+			<label class="col-md-4 control-label"></label>
+			<div class="col-md-8">
+			<button id="update_button_join" class="btn btn" name="updateBtnJoin">변경완료</button>
+			<button id="update_button_cancle" class="btn btn" name="updateBtnCancle">취소</button>
+			</div>
+			</div>
+		
+		</div><!--정보수정 end-->
+		
+		
+		<!-- 회원탈퇴 -->
+		<div id="menu1" class="tab-pane fade"> <!-- id 바꾸지말것 bootstrap고정 -->
+			
+			<!-- 아이디 입력창-->
+			<div class="form-group">
+			<label class="col-md-4 control-label">아이디</label>  
+			<div class="col-md-3">
+			<input type="text" id="delete_id" class="form-control input-md" name="deleteId" readOnly="readOnly" placeholder="E-mail"/>
+			</div>
+			<div class="col-md-4">
+			</div>
+			</div>
+			
+			<!-- 비밀번호확인 입력창-->
+			<div class="form-group">
+			<label class="col-md-4 control-label">현재비밀번호</label>  
+			<div class="col-md-3">
+			<input type="password" id="delete_nowPw" class="form-control input-md" name="deleteNowPw" placeholder="check-Number"/>
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<label class="col-md-4 control-label">탈퇴사유</label>
+			<div class="col-md-3">
+			<select id="delete_content" name="year" class="form-control">
+   				<option>010</option>
+    			<option>019</option>
+    		</select>
+			</div>
+			</div>
+			
+			<!-- 하단버튼 -->
+			<div class="form-group">
+			<label class="col-md-4 control-label"></label>
+			<div class="col-md-8">
+			<button id="delete_button_join" class="btn btn" name="deleteBtnJoin">탈퇴완료</button>
+			<button id="delete_button_cancle" class="btn btn" name="deleteBtnCancle">취소</button>
+			</div>
+			</div>
+			
+		</div><!--회원탈퇴탭-->
+		
+	</div><!--내용컨테이너-->
+	
+</fieldset>
+</form>
             
 
-         </div> <!-- col-12 -->
-      </div> <!-- row -->
-   </div> <!-- 바깥 컨테이너 -->
+</div> <!-- col-12 -->
+</div> <!-- <h1>회원정보수정 하단부 row -->
+</div><!-- 제일 바깥 컨테이너 -->
 
-   <?include "include/footer.html"?>
+<?include "include/footer.html"?>
 
 </body>
 </html>
