@@ -4,192 +4,164 @@
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 #check_left_gride {
-	padding-left: 0px;
-	text-align : left;
+   padding-left: 0px;
+   text-align : left;
 }
 
 #check_rigth_gride {
-	padding-left: 0px;
-	text-align : right;
+   padding-left: 0px;
+   text-align : right;
 }
 
 .tab-content {
-	font-size : 20px;
+   font-size : 20px;
 }
 
 .nav-tabs {
-	font-size : 20px;
+   font-size : 20px;
 }
 
 .myinfo_input {
-	border-radius : 5px;
-	width : 300px;
+   border-radius : 5px;
+   width : 300px;
 }
 
 #cancle {
-	margin-left : 10%;
+   margin-left : 10%;
+}
+
+.btn {
+   background-color : #3399ff;
+   color : white;
 }
 
 </style>
 </head>
 <body>
 
-	<?include "include/head.html"?>
+   <?include "include/head.html"?>
 
 
-	<div class="jumbotron text-center">
-		<h1>하늘님 집에보내줘요</h1>
-		<p>please! go HOME ! ! </p>
-	</div>
+   <div class="jumbotron text-center">
+      <h1>하늘님 집에보내줘요</h1>
+      <p>please! go HOME ! ! </p>
+   </div>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-				<h1>회원 정보 관리</h1>
-			</div>
-		</div>
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-6">
+            <h1>회원 정보 관리</h1>
+         </div>
+      </div>
 
-		<br>
-		
-		<div class="row">
-			<div class="col-sm-12">
+      <br>
+      
+      <div class="row">
+         <div class="col-sm-12">
 
-				<div class="container">
-					<ul class="nav nav-tabs">
-						<li class="active">
-							<a data-toggle="tab" href="#home">회원정보수정</a>
-						</li>
-						<li>
-							<a data-toggle="tab" href="#menu1">회원탈퇴</a>
-						</li>
-					</ul>
+            <div class="container">
+               <ul class="nav nav-tabs">
+                  <li class="active">
+                     <a data-toggle="tab" href="#home">회원정보수정</a>
+                  </li>
+                  <li>
+                     <a data-toggle="tab" href="#menu1">회원탈퇴</a>
+                  </li>
+               </ul>
 
-			<br>
-			<br>
-			<br>
+         <br>
+         <br>
+         <br>
 
-					<div class="col-sm-2"></div>
-					
-					
-					<div class="col-sm-8">
-						<div class="tab-content">
-						
-							<div id="home" class="tab-pane fade in active">
-						
-							<form>
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="col-sm-3" id=check_left_gride>
-											아이디
-										</div>
-										<div class="col-sm-6" id=check_rigth_gride>
-											<input readOnly="readOnly" class="myinfo_input" placeholder="dongjin_1204@naver.com"/>
-										</div>
-									</div>
-								</div>
-			<br>
-							
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="col-sm-3" id=check_left_gride>
-											비밀번호 확인
-										</div>
-										<div class="col-sm-6" id=check_rigth_gride>
-											<input type="password" class="myinfo_input" placeholder="********"/>
-										</div>
-									</div>
-								</div>
-							
-			<br>
-							
-							
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="col-sm-3" id=check_left_gride>
-											현재 비밀번호
-										</div>
-										<div class="col-sm-6" id=check_rigth_gride>
-											<input type="password" class="myinfo_input" placeholder="********"/>
-										</div>
-									</div>
-								</div>
-							
-			<br>				
-							
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="col-sm-3" id=check_left_gride>
-											변경 비밀번호
-										</div>
-										<div class="col-sm-6" id=check_rigth_gride>
-											<input type="password" class="myinfo_input" placeholder="********"/>
-										</div>
-									</div>
-								</div>
+               <div class="col-sm-2"></div>
 
-			<br>
-							
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="col-sm-3" id=check_left_gride>
-											닉네임
-										</div>
-										<div class="col-sm-6" id=check_rigth_gride>
-											<input class="myinfo_input" placeholder="NickName"/>
-										</div>
-										<div class="col-sm-2" id=check_rigth_gride>
-											<input type="button" value="중복확인"/>
-										</div>
-										
-									</div>
-									
-								</div>
-							
-			<br>
-			<br>
-			<br>
-							
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="col-sm-3"></div>
-										<div class="col-sm-6">
-											<input type="submit" value="완료" style="width:100px; height:50px"/>
-											<input type="button" value="취소" id="cancle" style="width:100px; height:50px"/>
-										</div>
-										<div class="col-sm-3"></div>
-									</div>
-								</div>
-							
-							</form>
-							
-						</div> <!--회원정보수정 태그 -->
-						
-						<div id="menu1" class="tab-pane fade">
-							<h3>Menu 1</h3>
-						</div> <!-- 회원탈퇴 태그 -->
-						
-						
-					</div> <!-- 내용 -->
-					</div> <!-- 가운데 그리드 -->
-					
-					
-					<div class="col-sm-2"></div>
-					
-				</div> <!-- 내용 컨테이너 -->
+<form class="form-horizontal">
+<fieldset>
 
-			</div> <!-- col-12 -->
-		</div> <!-- row -->
-	</div> <!-- 바깥 컨테이너 -->
 
-	<?include "include/footer.html"?>
+
+<!-- 아이디 입력창-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="textinput">아이디</label>  
+<div class="col-md-3">
+<input type="text" id="textinput" name="textinput" readOnly="readOnly" class="form-control input-md" placeholder="E-mail"/>
+</div>
+<div class="col-md-4">
+
+</div>
+</div>
+
+
+<!-- 인증번호입력창-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="textinput">현재비밀번호</label>  
+<div class="col-md-3">
+<input id="textinput" name="textinput" type="password" placeholder="check-Number" class="form-control input-md">
+</div>
+</div>
+
+
+<!-- 인증번호입력창-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="textinput">새 비밀번호</label>  
+<div class="col-md-3">
+<input id="textinput" name="textinput" type="password" placeholder="check-Number" class="form-control input-md">
+</div>
+</div>
+
+
+<!-- 인증번호입력창-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="textinput">새비밀번호확인</label>  
+<div class="col-md-3">
+<input id="textinput" name="textinput" type="password" placeholder="check-Number" class="form-control input-md">
+</div>
+</div>
+
+
+
+<!-- 닉네임입력창-->
+<div class="form-group">
+<label class="col-md-4 control-label" for="textinput">닉네임</label>  
+<div class="col-md-3">
+<input id="textinput" name="textinput" type="text" placeholder="Nickname" class="form-control input-md">
+</div>
+<div class="col-md-4">
+<button id="button1id" class="btn btn">중복확인</button>
+
+</div>
+</div>
+
+
+
+
+<!-- 하단버튼 -->
+<div class="form-group">
+<label class="col-md-4 control-label" for="button1id"></label>
+<div class="col-md-8">
+<button id="button_join" name="button1id" class="btn btn">변경완료</button>
+<button id="button_cancle" name="button2id" class="btn btn">취소</button>
+</div>
+</div>
+
+
+            
+
+         </div> <!-- col-12 -->
+      </div> <!-- row -->
+   </div> <!-- 바깥 컨테이너 -->
+
+   <?include "include/footer.html"?>
 
 </body>
 </html>
