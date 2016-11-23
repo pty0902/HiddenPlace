@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>내알못</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/homeViewStyle.css">
+<link rel="stylesheet" type="text/css" href="css/reply.css">
+
+
+<style>
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+	width: 70%;
+	margin: auto;
+}
+</style>
+
+</head>
+<body>
+
+	<!-- 상단 로그인 바 -->
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-10"></div>
+			<div class="col-sm-2">
+				<div id="login_button" class="btn-group">
+					<button type="button" class="btn btn-default">로그인</button>
+					<button type="button" class="btn btn-default">회원가입</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 상단 메인 메뉴 바 -->
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-3">
+				<a href="homeView.html"><img id="logo_img" src="image/logo.png"></a>
+			</div>
+			<div id="main_buttons" class="btn-group btn-group-justified">
+				<a href="#" id="main_button_1" class="btn btn-default">홈페이지</a> <a
+					href="#" id="main_button_1" class="btn btn-default">마이페이지</a> <a
+					href="#" class="btn btn-default">나만의 루트</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- 메인 사진 박스 -->
+	<div class="container-fluid">
+		<img id="main_img" src="image/camping.png" alt="route">
+
+		<div class="main_img_text">
+			<h2>내가 알지 못한 멋진 곳이 궁금하신가요?</h2>
+		</div>
+		<div id="search_bar_space" class="container">
+			<form class="inline">
+				<input type="text" placeholder="#당신이 원했던 곳">
+				<button type="submit">
+					<img id="search_button_img" src="image/search_blue.png">
+				</button>
+			</form>
+		</div>
+	</div>
+	<hr>
+
+	<!-- 나만의루트 -->
+	<div class="container">
+
+		<!-- 나만의루트 사진 -->
+		<div id="main_hiddenPlace" class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<img class="hiddenPlace_img" src="image/camera.jpeg">
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+
+		<!-- 나만의루트 내용 -->
+		<div id="main_hiddenPlace" class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<div>
+					<br> <br> <br> <br> <br> <br> <br>
+					<br> <br> <br> <br> <br> <br> <br>
+					<br> <br> <br>
+
+
+				</div>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+
+		<!-- 나만의루트 지도 -->
+		<div id="main_hiddenPlace" class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<div>
+					<img class="hiddenPlace_img" src="image/camera.jpeg">
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+
+		<!-- 나만의루트 즐겨찾기 좋아요 -->
+		<div id="main_hiddenPlace" class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-2">
+				<div class="bookmark_img">
+					<img class="hiddenPlace_logo" src="image/bookmark.png">
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="like_img">
+					<img class="hiddenPlace_logo" src="image/like.png">
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+
+		<!-- 나만의루트 댓글 -->
+		<div id="main_hiddenPlace" class="row">
+		<div class="col-sm-2"></div>
+			 <div class="col-sm-8">
+        <div class="panel panel-white post panel">
+            <div class="post-footer">
+                <div class="input-group"> 
+                    <input class="form-control" placeholder="Add a comment" type="text">
+                    <span class="input-group-addon">
+                        <a href="#"><i class="fa fa-edit"></i></a>  
+                    </span>
+                </div>
+                <ul class="comments-list">
+                    <li class="comment">
+                        <a class="pull-left" href="#">
+                            <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">
+                        </a>
+                        <div class="comment-body">
+                            <div class="comment-heading">
+                                <h4 class="user">Gavino Free</h4>
+                                <h5 class="time">5 minutes ago</h5>
+                            </div>
+                            <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                        </div>
+                        <ul class="comments-list">
+                            <li class="comment">
+                                <a class="pull-left" href="#">
+                                    <img class="avatar" src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">Ryan Haywood</h4>
+                                        <h5 class="time">3 minutes ago</h5>
+                                    </div>
+                                    <p>Relax my friend</p>
+                                </div>
+                            </li> 
+                            <li class="comment">
+                                <a class="pull-left" href="#">
+                                    <img class="avatar" src="http://bootdey.com/img/Content/user_2.jpg" alt="avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">Gavino Free</h4>
+                                        <h5 class="time">3 minutes ago</h5>
+                                    </div>
+                                    <p>Ok, cool.</p>
+                                </div>
+                            </li> 
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+		</div>
+	</div>
+</body>
+</html>
+
+
