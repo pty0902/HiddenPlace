@@ -1,10 +1,409 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내알못</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="homeViewStyle.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
 </head>
 <body>
 
+	<!-- 상단 메인 메뉴 바 -->
+	<div class="container">
+		<div class="col-sm-3">
+			<a href="homeView.html"><img id="logo_img" src="logo.png"></a>
+		</div>
+		<div class="col-sm-7"></div>
+		<div class="col-sm-2">
+			<div id="login_button" class="btn-group">
+				<button type="button" class="btn btn-default">로그인</button>
+				<button type="button" class="btn btn-default">회원가입</button>
+			</div>
+		</div>
+
+		<div id="main_buttons" class="btn-group btn-group-justified">
+			<a href="#" id="main_button_1" class="btn btn-default">홈페이지</a> <a
+				href="#" id="main_button_1" class="btn btn-default">마이페이지</a> <a
+				href="#" class="btn btn-default">나만의 루트</a>
+		</div>
+	</div>
+
+
+	<!-- 메인 사진 박스 -->
+	<div class="container-fluid">
+		<img id="main_img" src="jeju.jpg" alt="route">
+		<div class="main_img_text">
+			<h2>내가 알지 못한 멋진 곳이 궁금하신가요?</h2>
+		</div>
+		<div id="search_bar_space" class="container">
+			<form class="inline">
+				<input type="text" placeholder="#당신이 원했던 곳">
+				<button type="submit">
+					<img id="search_button_img" src="search_blue.png">
+				</button>
+			</form>
+		</div>
+	</div>
+	<!-- 즐겨찾기 -->
+	<div class="container">
+	<br>
+		<h2>즐겨찾기</h2>
+		<div id="line" class="container"></div>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#myroute">나만의 루트</a></li>
+			<li><a data-toggle="tab" href="#hiddenplace">내알못</a></li>
+		
+		</ul>
+
+		<div class="tab-content">
+			<div id="myroute" class="tab-pane fade in active">
+					<div id="main_body" class="container">
+		<div id="main_hiddenPlace" class="row">
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href=""><h7 class="name">존멋지훈</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="route.PNG">
+				</div>
+
+			</div>
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="17H.jpg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="camera.jpeg">
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="camping.png" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="beer.jpeg">
+				</div>
+			</div>
+
+
+		</div>
+					<div id="main_hiddenPlace" class="row">
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href=""><h7 class="name">존멋지훈</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="route.PNG">
+				</div>
+
+			</div>
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="17H.jpg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="camera.jpeg">
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="camping.png" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="beer.jpeg">
+				</div>
+			</div>
+		
+
+		</div>
+	<button id="button1id" name="singlebutton"  class="btn btn">삭제</button>
+	
+	</div>
+			</div>
+			<!-- 내알못 -->
+			<div id="hiddenplace" class="tab-pane fade">
+					<div id="main_body" class="container">
+		<div id="main_hiddenPlace" class="row">
+				<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href=""><h7 class="name">존멋지훈</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="route.PNG">
+				</div>
+
+			</div>
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="17H.jpg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="camera.jpeg">
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="camping.png" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="beer.jpeg">
+				</div>
+			</div>
+		</div>
+		<div id="main_hiddenPlace" class="row">
+				<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href=""><h7 class="name">존멋지훈</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="route.PNG">
+				</div>
+
+			</div>
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="17H.jpg" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="camera.jpeg">
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+				
+				<div class="col-sm-1">
+						 <label class="checkbox-inline">
+      <input type="checkbox" value=""></label>
+					</div>
+					
+					<div class="col-sm-1">
+						<img src="camping.png" class="img-circle" id="img_circle">
+					</div>
+					<div class="col-sm-2">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<img class="hiddenPlace_img" src="beer.jpeg">
+				</div>
+			</div>
+		</div>
+		
+	
+			
+		</div>
+
+	</div>
+
+			</div>
+		</div>
+	
+		
+		<div class="row">
+			<hr>
+		</div>
+
+
+	<!-- 내알못 추천 -->
+
 </body>
 </html>
+
+
