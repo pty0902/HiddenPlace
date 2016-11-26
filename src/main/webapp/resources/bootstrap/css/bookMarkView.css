@@ -1,29 +1,37 @@
-/* 상단 로그인 바 */
-#login_button {
-	margin-top: 40%;
+/* 공통 적용 */
+a { 
+	/* a 태그 링크 밑줄 제거 */
+	text-decoration:none !important; 
 }
 
-#login_button>button {
-	border: 0;
+/* 상단 로그인 바 */
+
+#login_button {
+	margin-top: 4%;
+width: auto;
+float: right;
+}
+#login_button > button {
+	border : 0;
 	outline: 0;
+	background-color: white;
+	width: auto;
 }
 
 /*상단 메인 메뉴 바*/
 #logo_img {
 	width: 170px;
-}
 
+}
 #main_buttons {
-	width: 40%;
-	margin-top: 3%;
-	margin-left: 30%;
+	padding-bottom: 3%; 
+	margin: 0;
 }
-
-#main_buttons>a {
-	font-weight: bold;
+#main_buttons > a {
 	font-size: 120%;
-	border: 0;
+	border : 0;
 	outline: 0;
+	width: 120%;
 }
 
 /*메인 사진 박스*/
@@ -32,7 +40,6 @@
 	height: 400px;
 	opacity: 1.0;
 }
-
 .main_img_text {
 	position: absolute;
 	min-width: 80%;
@@ -42,68 +49,85 @@
 	transform: translate(-50%, -50%);
 	/*font-size: 18px;*/
 }
-
-.main_img_text>h2 {
+.main_img_text > h2 {
 	font-weight: bold;
 	color: white;
-	font-family: font-style : italic;
+	font-family: 
+	font-style: italic;
 }
 
-#search_bar_space {
-	position: absolute;
-	top: 450px;
-	left: 68%;
-	transform: translate(-50%, -50%);
+/* 검색 바 */
+.span12 {
+	position: relative;
+	top: -50px;
+	left: 30%;
+	transform: translate(-50%, -50%);			
 }
-
-#search_bar_space>form>input {
-	background-color: transparent;
-	width: 50%;
+.glyphicon-search {
+	width: 60px;
 	height: 60px;
-	border: 2px solid white;
+}
+.icon-search {
+	background-color: transparent;
+	width: 100px;
+}
+#custom-search-form .search-query {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	width: 600px;
+	height: 40px;
 	font-size: 20px;
-	color: white;
-	padding: 0px 20px 0px 20px;
+	text-align: center;
+	background-color: transparent;
+}
+#custom-search-form button {
+	border: 0;
+	background: none;
+	/** belows styles are working good */
+	padding: 2px 5px;
+	margin-top: 2px;
+	position: relative;
+	left: -28px;
+	/* IE7-8 doesn't have border-radius, so don't indent the padding */
+	margin-bottom: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	background-color: transparent;
+}
+.search-query:focus + button {
+	z-index: 3;   
 }
 
-#search_bar_space>form>button {
-	position: absolute;
-	padding: 0;
-	border: none;
-	left: 524px;
-	top: 2px;
-}
-
-#search_button_img {
-	width: auto;
-	height: 56px;
-}
 
 /*bold*/
 #line {
-	border-top: 1px solid black;
+	border-top: 1px solid grey;
 	margin-top: 0%;
 	/*margin-bottom: 1px solid black;*/
 }
-
 .btn-group>a : hover {
 	background-color: white;
 }
-#button1id{
-background:#3399ff;
-color:white;
-float: right;
-margin-top: 3%;
+#delete_button{
+	background:#3399ff;
+	color:white;
+	float: right;
 }
 
 
 /*즐겨찾기 */
 #main_body {
 	margin-top: 3%;
+	width: 100%;
+	padding: 0;
 }
 
 #main_hiddenPlace {
 	margin-top: 2%;
+	width: 
+}
+#main_hiddenPlace > div {
+	margin-bottom: 5%;
 }
 
 #main_hiddenPlace>div>div>div {
