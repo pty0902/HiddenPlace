@@ -16,28 +16,16 @@ function myHiddenPlaceController() {
    };
    
 
-<<<<<<< HEAD
 // 즐겨찾기 controller 메서드
 	this.requestBookmarkMHP = function() {
 		
-		var myHiddenPlaces  = dao.bookmarkDao(myHiddenPlace);
-=======
-
-// 즐겨찾기 controller 메서드
-	this.requestBookmarkMHP = function(myHiddenPlace) {
-		
-		var myHiddenPlaces  = dao.bookmarkMHPDao(myHiddenPlace);
->>>>>>> refs/heads/mywork/br
+		var myHiddenPlaces  = dao.bookmarkMHPDao();
 		
 		return myHiddenPlaces;
 		
 	}
 	
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> refs/heads/mywork/br
 /*	
 //	 controller 메서드
 	this.requestWriteView = function() {

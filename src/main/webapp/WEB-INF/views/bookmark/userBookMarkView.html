@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <title>내알못</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="homeViewStyle.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../../js/hiddenPlace/myHiddenPlace.js"></script>
+<script src="../../js/controllers/controllers.js"></script>
+
 </head>
 
 
@@ -25,7 +27,6 @@
 		var myHiddenPlaces = Controllers.getMyHiddenPlaceController().requestBookmarkMHP();
 		
 		for(var i = 0 ; i < myHiddenPlaces.length ; i++) {		
-			var bookMark;
 			
 			//체크박스만드는 코드
 			var checkbox_div = $('<div class="col-sm-1"></div>');
@@ -60,7 +61,6 @@
 			bookmarkArticle.append(bookmarkTitleBar, image);
 			
 			//최종코드
-			var bookmark = 
 			$('#bookmark_hiddenPlace').append(bookmarkArticle);
 			
 		}
@@ -78,7 +78,6 @@
 		var myRoutes = Controllers.getMyRouteController().requestBookmarkMR();
 		
 		for(var i = 0 ; i < myRoutes.length ; i++) {		
-			var bookMark;
 			
 			//체크박스만드는 코드
 			var checkbox_div = $('<div class="col-sm-1"></div>');
@@ -113,7 +112,6 @@
 			bookmarkArticle.append(bookmarkTitleBar, image);
 			
 			//최종코드
-			var bookmark = 
 			$('#bookmark_myroute').append(bookmarkArticle);
 			
 		}
@@ -121,7 +119,6 @@
 	});
 
 </script>
-
 
 <body>
 
@@ -208,11 +205,8 @@
 			</div> <!-- 내알못 end -->
 
 
-
-
 		</div> <!-- 내용 end -->
-		
-		
+
 		
 	</div> <!-- 즐겨찾기 container end -->
 	
