@@ -1,5 +1,4 @@
-$('head').append('<script src=\'/myRouteDao.js\'><\/script>');
-
+$('head').append('<script src=\'../../js/myRoute/myRouteDao.js\'><\/script>');
 
 //myHiddenPlace controller 객체
 function myRouteController() {
@@ -7,11 +6,12 @@ function myRouteController() {
 	var dao = new myRouteDao();	
 
 // 즐겨찾기 controller 메서드
-	this.requestBookmarkMR = function(myRoute) {
+	this.requestBookmarkMR = function() {
 		
-		var myRoutes  = dao.bookmarkMRDao(myRoute);
+		var myRoutes  = dao.bookmarkMRDao();
 		
 		return myRoutes;
 		
 	};
+	
 }

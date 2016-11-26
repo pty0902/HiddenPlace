@@ -47,7 +47,7 @@ function myHiddenPlaceDao() {
 
 	
 // 즐겨찾기 내알못 dao 메서드
-	this.bookmarkMHPDao = function(myHiddenPlace) {
+	this.bookmarkMHPDao = function() {
 		
 		try{
 
