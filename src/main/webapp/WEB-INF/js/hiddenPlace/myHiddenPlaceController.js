@@ -1,31 +1,43 @@
-$('head').append('<script src=\'/myHiddenPlaceDao.js\'><\/script>');
+$('head').append('<script src=\'../../js/hiddenPlace/myHiddenPlaceDao.js\'><\/script>');
 
 
 //myHiddenPlace controller 객체
 function myHiddenPlaceController() {
 
-	var dao = new myHiddenPlaceDao();	
+   var dao = new myHiddenPlaceDao();   
 
-//	홈페이지 controller 메서드
-	this.requestHomepage = function(myHiddenPlace) {
+//   홈페이지 controller 메서드
+   this.requestHomepage = function() {
 
-		var myHiddenPlaces  = dao.homepageDao(myHiddenPlace);
-		
-		return myHiddenPlaces;
+      var myHiddenPlaces  = dao.homepageDao();
+      
+      return myHiddenPlaces;
 
-	};
+   };
+   
 
+<<<<<<< HEAD
 // 즐겨찾기 controller 메서드
 	this.requestBookmarkMHP = function() {
 		
 		var myHiddenPlaces  = dao.bookmarkDao(myHiddenPlace);
+=======
+
+// 즐겨찾기 controller 메서드
+	this.requestBookmarkMHP = function(myHiddenPlace) {
+		
+		var myHiddenPlaces  = dao.bookmarkMHPDao(myHiddenPlace);
+>>>>>>> refs/heads/mywork/br
 		
 		return myHiddenPlaces;
 		
 	}
 	
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> refs/heads/mywork/br
 /*	
 //	 controller 메서드
 	this.requestWriteView = function() {
