@@ -7,14 +7,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="homeViewStyle.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="../../js/article/article.js"></script>
+	<script src="../../js/article/articleController.js"></script>
 </head>
 <style>
 		/* 공통 적용 */
@@ -185,8 +183,145 @@
 			width: 700%;
 		}
 
-
 </style>
+
+<!-- 홈페이지 이벤트 핸들링 -->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		var myHiddenPlaces = Controllers.getMyHiddenPlaceController().requestHomepage();
+		
+		//var td_writer = $('<td style="width:80px"></td>').html(myHiddenPlaces[0].nowLoginId);
+		//$('tbody').append(td_writer); //상단 로그인 어펜드 아직 미완성
+		
+		for(var i = 0 ; i < myHiddenPlaces.length ; i++) {		
+			
+			//var td_check = $('<td style="width:80px"></td>').html('<input type="checkbox">'); 체크박스만드는 소스
+			var bookMark;
+			
+			if(myHiddenPlaces[i].bookmark == 0){ // 찜콩에 색이 없다 
+				bookMark = $('<div class="col-sm-1"><img src ="' + myHiddenPlaces[i].imageUrl + '" class ="img-circle"></div>'); //찜콩이미지 색이 없는 코드
+				}else {  // 찜콩에 색이 있다.
+				bookMark = $('<div class="col-sm-1"><img src ="' + myHiddenPlaces[i].imageUrl + '" class ="img-circle"></div>'); //찜콩이미지 색이 있는 코드	
+				}
+				 
+			var writer_a =  $('<a href=""></a>');
+			var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].writer); //작성자명
+			writer_a.append(writer);
+			
+			var writer_div = $('<div class="personal_article"></div>');
+			writer_div.append(writer_a);
+			
+			var writerDate_div =  $('<div class="personal_article"></div>');
+			var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate); //현재시간
+			writerDate_div.append(writerDate);
+			
+			var writerAndDate = $('<div class="col-sm-3"></div>');
+			writerAndDate.append(writer_div, writerDate_div);
+			
+			var bestTitleBar = $('<div class="personal_article_space"></div>');
+			bestTitleBar.append(bookMark, writerAndDate);
+			
+			var bestImage = $('<div class="col-sm-4"></div>');
+			var image = $('<div><a href="#"><img class="hiddenPlace_img" src="' + myHiddenPlaces[i].imageUrl + '"></a></div>'); //이미지
+			bestImage.append(bestTitleBar, image);
+			
+			$('#main_hiddenPlace').append(bestImage); //최종 append
+			
+		}
+		
+	});
+	
+</script>
+
+<!-- 글쓰기 이벤트 핸들링 -->
+<script>
+
+	$(document).ready(function() {
+		
+		$('#write_button').click(function() {
+			
+			Controllers.getArticleController().requestWriteView();
+			
+		});
+		
+	});
+
+</script>
+
+<!-- 전체 선택 이벤트 핸들링 -->
+<script type="text/javascript">
+   $(document).ready(function() {
+      
+      $('#all_check').click(function(){
+      
+         var trs = $('tbody').children();
+         
+         if (this.checked) {            
+            
+        	 for(var i = 0 ; i < trs.length ; i++) {
+               trs.eq(i).children().first().children().prop('checked', true);               
+            }
+        	 
+         } else {
+            
+        	 for(var i = 0 ; i < trs.length ; i++) {
+               trs.eq(i).children().first().children().prop('checked', false);   
+               
+            }
+        	 
+         }
+         
+      });
+      
+   });
+</script>
+
+<!-- 글조회 이벤트 핸들링 -->
+<script>
+
+	$(document).ready(function() {
+		
+		$('.title_td').click(function() {
+			
+			var num = parseInt($(this).prev().text());
+			Controllers.getArticleController().requestSelectOne(num);
+			
+		});
+		
+	});
+
+</script>
+
+<!-- 선택 삭제 이벤트 핸들링 -->
+<script type="text/javascript">
+   $(document).ready(function() {
+      
+      $('#delete_button').click(function(){
+      
+         var delete_nums = [];
+         var trs = $('tbody').children();
+
+         for(var i = 0 ; i < trs.length ; i++) {
+             var checked = trs.eq(i).children().first().children().prop('checked');
+             if(checked) {
+                var num = trs.eq(i).children().eq(1).text(); 
+                   delete_nums += num +',';    
+             }
+          }
+           
+          var length = delete_nums.length;
+          Controllers.getArticleController().requestSelectedDelete(delete_nums.substring(0, length-1));
+        		 
+         Controllers.getArticleController().requestSelectAllView();
+         
+         
+      });
+      
+   });
+</script>
+
 <body>
 <!-- 상단 메인 메뉴 바 -->
 	<div class="container">
@@ -247,6 +382,7 @@
 	<!-- 내알못 추천 -->
 	<div id="main_body" class = "container">
 		<div id="main_hiddenPlace" class="row">
+		
 			<div class="col-sm-4">
 				<div class="personal_article_space">
 					<div class="col-sm-1"><img src ="bookcafe.jpeg" class ="img-circle"></div>
@@ -257,8 +393,8 @@
 				</div>
 				<div><a href="#"><img class="hiddenPlace_img" src="route.png"></a>
 				</div>
-
 			</div>
+			
 			<div class="col-sm-4">
 				<div class="personal_article_space">
 					<div class="col-sm-1"><img src ="17H.jpg" class ="img-circle"></div>
@@ -282,7 +418,9 @@
 				<div><a href="#"><img class="hiddenPlace_img" src="beer.jpeg"></a>
 				</div>
 			</div>
+			
 		</div>
+		
 	</div>
 
 	<!-- youtube & 날씨 -->
