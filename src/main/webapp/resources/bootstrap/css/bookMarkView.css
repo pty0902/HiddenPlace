@@ -1,103 +1,3 @@
-/* 공통 적용 */
-a { 
-	/* a 태그 링크 밑줄 제거 */
-	text-decoration:none !important; 
-}
-
-/* 상단 로그인 바 */
-
-#login_button {
-	margin-top: 4%;
-width: auto;
-float: right;
-}
-#login_button > button {
-	border : 0;
-	outline: 0;
-	background-color: white;
-	width: auto;
-}
-
-/*상단 메인 메뉴 바*/
-#logo_img {
-	width: 170px;
-
-}
-#main_buttons {
-	padding-bottom: 3%; 
-	margin: 0;
-}
-#main_buttons > a {
-	font-size: 120%;
-	border : 0;
-	outline: 0;
-	width: 120%;
-}
-
-/*메인 사진 박스*/
-#main_img {
-	width: 100%;
-	height: 400px;
-	opacity: 1.0;
-}
-.main_img_text {
-	position: absolute;
-	min-width: 80%;
-	text-align: center;
-	top: 350px;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	/*font-size: 18px;*/
-}
-.main_img_text > h2 {
-	font-weight: bold;
-	color: white;
-	font-family: 
-	font-style: italic;
-}
-
-/* 검색 바 */
-.span12 {
-	position: relative;
-	top: -50px;
-	left: 30%;
-	transform: translate(-50%, -50%);			
-}
-.glyphicon-search {
-	width: 60px;
-	height: 60px;
-}
-.icon-search {
-	background-color: transparent;
-	width: 100px;
-}
-#custom-search-form .search-query {
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	width: 600px;
-	height: 40px;
-	font-size: 20px;
-	text-align: center;
-	background-color: transparent;
-}
-#custom-search-form button {
-	border: 0;
-	background: none;
-	/** belows styles are working good */
-	padding: 2px 5px;
-	margin-top: 2px;
-	position: relative;
-	left: -28px;
-	/* IE7-8 doesn't have border-radius, so don't indent the padding */
-	margin-bottom: 0;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	background-color: transparent;
-}
-.search-query:focus + button {
-	z-index: 3;   
-}
-
 
 /*bold*/
 #line {
@@ -138,22 +38,6 @@ float: right;
 	margin-left: -130%;
 }
 
-.img-circle {
-	width: 40px;
-	height: 40px;
-}
-
-.personal_article {
-	width: 200%;
-	margin-left: -70%;
-}
-
-.checkbox-inline {
-	width: 200%;
-	height: 40px;
-	margin-top: 20%;
-}
-
 .personal_article_space {
 	height: 40px;
 	margin-bottom: 1%;
@@ -189,3 +73,46 @@ h2 {
 	margin-top: 40px;
 }
 
+
+/*체크박스 */
+ 
+input[type=checkbox] {  
+    display: none;  
+}
+
+input[type=checkbox] + label{
+    display: inline-block;  
+    cursor: pointer;  
+    position: relative;  
+    padding-left: 25px;  
+    margin-right: 15px;  
+    font-size: 13px;
+}
+
+input[type=checkbox]+ label:before {     
+
+    content: "";  
+    display: inline-block;  
+  
+    width: 20px;  
+    height: 20px;  
+  
+    margin-right: 10px;  
+    position: absolute;  
+    left: 0;  
+    bottom: 1px;  
+    background-color: #ccc;  
+    border-radius: 2px; 
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+}
+input[type=checkbox]:checked + label:before { 
+
+    content: "\2713";  /* 체크모양 */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 18px; 
+    font-weight:800; 
+    color: #fff;  
+    background:#2f87c1;
+    text-align: center;  
+    line-height: 18px;  
+}
