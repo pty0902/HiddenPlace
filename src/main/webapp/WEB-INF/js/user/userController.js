@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 $('head').append('<script src=\'/userDao.js\'><\/script>');
-=======
-$('head').append('<script src=\'../../js/user/userDao.js\'><\/script>');
 
->>>>>>> refs/remotes/dongjin1204/master
 
 // user controller 객체
 function UserController() {
@@ -36,9 +32,6 @@ function UserController() {
 		return isSuccess;
 		
 	}
-<<<<<<< HEAD
 	
-=======
->>>>>>> refs/remotes/dongjin1204/master
 
 }

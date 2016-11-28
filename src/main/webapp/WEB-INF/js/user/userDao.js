@@ -31,6 +31,9 @@ function UserDao() {
 		return isSuccess;
 
 	};
+	
+	
+	
 	// 회원가입 닉네임 중복확인
 	this.nickNameCheckDao = function(nickName) {
 
@@ -48,7 +51,12 @@ function UserDao() {
 	
 					var messageValue = $(data).find('message').text(); // 여기 나중에 수정
 					isSuccess = eval('(' + messageValue + ')');
-	
+					// 위 or 아래
+					if(data == 1){//사용할 수 없는 아이디
+		    			alert("사용할 수 없는 닉네임입니다.");
+		    	    	$("#nickName").val("");
+		    	     }else if(data == -1)//사용할 수 있는 아이디
+		    	  	    alert("사용할 수 있는 닉네임입니다.");
 				}
 			});
 		} catch (e) {
@@ -58,7 +66,7 @@ function UserDao() {
 
 		return isSuccess;
 	}
-	S
+
 	// 로그인 메서드
 	this.userLoginDao = function(user) {
 
