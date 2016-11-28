@@ -1,109 +1,33 @@
-/* 상단 로그인 바 */
-#login_button {
-	margin-top: 40%;
-}
-
-#login_button>button {
-	border: 0;
-	outline: 0;
-}
-
-/*상단 메인 메뉴 바*/
-#logo_img {
-	width: 170px;
-}
-
-#main_buttons {
-	width: 40%;
-	margin-top: 3%;
-	margin-left: 30%;
-}
-
-#main_buttons>a {
-	font-weight: bold;
-	font-size: 120%;
-	border: 0;
-	outline: 0;
-}
-
-/*메인 사진 박스*/
-#main_img {
-	width: 100%;
-	height: 400px;
-	opacity: 1.0;
-}
-
-.main_img_text {
-	position: absolute;
-	min-width: 80%;
-	text-align: center;
-	top: 350px;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	/*font-size: 18px;*/
-}
-
-.main_img_text>h2 {
-	font-weight: bold;
-	color: white;
-	font-family: font-style : italic;
-}
-
-#search_bar_space {
-	position: absolute;
-	top: 450px;
-	left: 68%;
-	transform: translate(-50%, -50%);
-}
-
-#search_bar_space>form>input {
-	background-color: transparent;
-	width: 50%;
-	height: 60px;
-	border: 2px solid white;
-	font-size: 20px;
-	color: white;
-	padding: 0px 20px 0px 20px;
-}
-
-#search_bar_space>form>button {
-	position: absolute;
-	padding: 0;
-	border: none;
-	left: 524px;
-	top: 2px;
-}
-
-#search_button_img {
-	width: auto;
-	height: 56px;
-}
 
 /*bold*/
 #line {
-	border-top: 1px solid black;
+	border-top: 1px solid grey;
 	margin-top: 0%;
 	/*margin-bottom: 1px solid black;*/
 }
-
 .btn-group>a : hover {
 	background-color: white;
 }
-#button1id{
-background:#3399ff;
-color:white;
-float: right;
-margin-top: 3%;
+#delete_button{
+	background:#3399ff;
+	color:white;
+	float: right;
 }
 
 
 /*즐겨찾기 */
 #main_body {
 	margin-top: 3%;
+	width: 100%;
+	padding: 0;
 }
 
 #main_hiddenPlace {
 	margin-top: 2%;
+	width: 
+}
+#main_hiddenPlace > div {
+	margin-bottom: 5%;
 }
 
 #main_hiddenPlace>div>div>div {
@@ -112,22 +36,6 @@ margin-top: 3%;
 }
 #img_circle {
 	margin-left: -130%;
-}
-
-.img-circle {
-	width: 40px;
-	height: 40px;
-}
-
-.personal_article {
-	width: 200%;
-	margin-left: -70%;
-}
-
-.checkbox-inline {
-	width: 200%;
-	height: 40px;
-	margin-top: 20%;
 }
 
 .personal_article_space {
@@ -165,3 +73,46 @@ h2 {
 	margin-top: 40px;
 }
 
+
+/*체크박스 */
+ 
+input[type=checkbox] {  
+    display: none;  
+}
+
+input[type=checkbox] + label{
+    display: inline-block;  
+    cursor: pointer;  
+    position: relative;  
+    padding-left: 25px;  
+    margin-right: 15px;  
+    font-size: 13px;
+}
+
+input[type=checkbox]+ label:before {     
+
+    content: "";  
+    display: inline-block;  
+  
+    width: 20px;  
+    height: 20px;  
+  
+    margin-right: 10px;  
+    position: absolute;  
+    left: 0;  
+    bottom: 1px;  
+    background-color: #ccc;  
+    border-radius: 2px; 
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+}
+input[type=checkbox]:checked + label:before { 
+
+    content: "\2713";  /* 체크모양 */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 18px; 
+    font-weight:800; 
+    color: #fff;  
+    background:#2f87c1;
+    text-align: center;  
+    line-height: 18px;  
+}
