@@ -1,12 +1,12 @@
 //myHiddenPlace dao 객체
-function myHiddenPlaceDao() {
+function MyHiddenPlaceDao() {
 	
 // 즐겨찾기 나만의루트 dao 메서드
 	this.bookmarkMRDao = function() {
 		
 		try{
 
-			myRoutes = [];
+			var myRoutes = [];
 			
 			$.ajax({
 				url: '/' , //홈페이지 불러올 주소

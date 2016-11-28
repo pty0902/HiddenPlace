@@ -1,9 +1,9 @@
 
 //myHiddenPlace dao 객체
-function myHiddenPlaceDao() {
+function MyHiddenPlaceDao() {
 
-//	글저장 dao 메서드
-	this.homepageDao = function() {
+//	내알못 best 3 요청 dao 메서드
+	this.bestMHP = function() {
 		
 		var myHiddenPlaces = [];
 		
@@ -48,6 +48,8 @@ function myHiddenPlaceDao() {
 	
 // 즐겨찾기 내알못 dao 메서드
 	this.bookmarkMHPDao = function() {
+		
+		var myHiddenPlaces = [];
 		
 		try{
 

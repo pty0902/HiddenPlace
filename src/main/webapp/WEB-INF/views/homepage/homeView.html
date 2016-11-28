@@ -4,32 +4,28 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- 홈페이지(공통적용) 스타일시트 -->
-<link rel="stylesheet" type="text/css" href="../../../bootstrap/css/homeViewStyle.css">
-
-<link rel="stylesheet" type="text/css"
-	href="font-awesome/css/font-awesome.min.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/homeViewStyle.css">
+<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../../js/hiddenPlace/myHiddenPlace.js"></script>
-<script src="../../js/controllers/controllers.js"></script>
+<script src="../../js/hiddenPlace/myHiddenPlaceController.js"></script>
+<script src="../../js/hiddenPlace/myRouteController.js"></script>
 </head>
-
 
 <!-- 홈페이지 이벤트 핸들링 -->
 <script type="text/javascript">
 
 	$(document).ready(function() {
 		
-		var myHiddenPlaces = Controllers.getMyHiddenPlaceController().requestHomepage();
+		var mhpController = new MyHiddenPlaceController();
+		
+		var myHiddenPlaces = mhpController.requestBestMHP();
 		
 		//var td_writer = $('<td style="width:80px"></td>').html(myHiddenPlaces[0].nowLoginId);
 		//$('tbody').append(td_writer); //상단 로그인 어펜드 아직 미완성
@@ -98,7 +94,6 @@
          var trs = $('tbody').children();
          
          if (this.checked) {            
-            
         	 for(var i = 0 ; i < trs.length ; i++) {
                trs.eq(i).children().first().children().prop('checked', true);               
             }
@@ -107,7 +102,6 @@
             
         	 for(var i = 0 ; i < trs.length ; i++) {
                trs.eq(i).children().first().children().prop('checked', false);   
-               
             }
         	 
          }
@@ -206,79 +200,40 @@
 		</div>
 	</div>
 
+	
+	
+	<!-- 여기 위까지 header.html 로 할 예정 (아직은미정) -->
+	
+
 	<!-- 지역 선택 바 -->
 	<div id="regionChoice" class="container">
+		
 		<div class="btn-group btn-group-justified">
-			<a href="#" class="btn btn">서울</a> <a href="#" class="btn btn">대전</a>
-			<a href="#" class="btn btn">광주</a> <a href="#" class="btn btn">대구</a>
+			<a href="#" class="btn btn">서울</a>
+			<a href="#" class="btn btn">대전</a>
+			<a href="#" class="btn btn">광주</a>
+			<a href="#" class="btn btn">대구</a>
 			<a href="#" class="btn btn">부산</a>
 		</div>
 
 	</div>
 
+
+
 	<!-- 내알못 추천 -->
 	<div id="main_body" class="container">
 		<div id="main_hiddenPlace" class="row">
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-					<div class="col-sm-1">
-						<img src="bookcafe.jpeg" class="img-circle">
-					</div>
-					<div class="col-sm-3">
-						<div class="personal_article">
-							<a href=""><h7 class="name">존멋지훈</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<a href="#"><img class="hiddenPlace_img" src="route.png"></a>
-				</div>
+			
 
-			</div>
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-					<div class="col-sm-1">
-						<img src="17H.jpg" class="img-circle">
-					</div>
-					<div class="col-sm-3">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<a href="#"><img class="hiddenPlace_img" src="camera.jpeg"></a>
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-					<div class="col-sm-1">
-						<img src="17H.jpg" class="img-circle">
-					</div>
-					<div class="col-sm-3">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<a href="#"><img class="hiddenPlace_img" src="beer.jpeg"></a>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 
-	<!-- youtube & 날씨 -->
+
+
+	<!-- youtube & 날씨 들어갈 예정 -->
+	
+	<!-- footer.html 공간 나중에 밑에 div 삭제 --> 
 	<div id="bottom_body" class="container"></div>
 </body>
 </html>

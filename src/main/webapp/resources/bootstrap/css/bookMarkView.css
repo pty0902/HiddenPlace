@@ -1,19 +1,19 @@
-
 /*bold*/
 #line {
 	border-top: 1px solid grey;
 	margin-top: 0%;
 	/*margin-bottom: 1px solid black;*/
 }
+
 .btn-group>a : hover {
 	background-color: white;
 }
+
 #delete_button{
 	background:#3399ff;
 	color:white;
 	float: right;
 }
-
 
 /*즐겨찾기 */
 #main_body {
@@ -26,6 +26,7 @@
 	margin-top: 2%;
 	width: 
 }
+
 #main_hiddenPlace > div {
 	margin-bottom: 5%;
 }
@@ -34,6 +35,21 @@
 	padding: 0;
 	margin-right: 30px;
 }
+
+#main_myroute {
+	margin-top: 2%;
+	width: 
+}
+
+#main_myroute > div {
+	margin-bottom: 5%;
+}
+
+#main_myroute>div>div>div {
+	padding: 0;
+	margin-right: 30px;
+}
+
 #img_circle {
 	margin-left: -130%;
 }
@@ -73,7 +89,6 @@ h2 {
 	margin-top: 40px;
 }
 
-
 /*체크박스 */
  
 input[type=checkbox] {  
@@ -105,6 +120,7 @@ input[type=checkbox]+ label:before {
     border-radius: 2px; 
     box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
 }
+
 input[type=checkbox]:checked + label:before { 
 
     content: "\2713";  /* 체크모양 */
