@@ -15,36 +15,21 @@ function myHiddenPlaceController() {
 
    };
    
-
-<<<<<<< HEAD
-
 // 즐겨찾기 controller 메서드
 	this.requestBookmarkMHP = function() {
 		
-		var myHiddenPlaces  = dao.bookmarkDao(myHiddenPlace);
+		var myHiddenPlaces  = dao.bookmarkDao();
+	
+	}
 
-
-// 즐겨찾기 controller 메서드
-	this.requestBookmarkMHP = function(myHiddenPlace) {
-		
-		var myHiddenPlaces  = dao.bookmarkMHPDao(myHiddenPlace);
-
-=======
 // 즐겨찾기 controller 메서드
 	this.requestBookmarkMHP = function() {
 		
 		var myHiddenPlaces  = dao.bookmarkMHPDao();
->>>>>>> refs/remotes/dongjin1204/master
 		
 		return myHiddenPlaces;
 		
 	}
-	
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> refs/remotes/dongjin1204/master
 /*	
 //	 controller 메서드
 	this.requestWriteView = function() {
