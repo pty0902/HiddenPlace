@@ -1,19 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <title>내알못</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="homeViewStyle.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../../js/hiddenPlace/myHiddenPlace.js"></script>
+<script src="../../js/controllers/controllers.js"></script>
+
 </head>
+
+
+
+<!-- 내알못 이벤트 핸들링 -->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		var myHiddenPlaces = Controllers.getMyHiddenPlaceController().requestBookmarkMHP();
+		
+		for(var i = 0 ; i < myHiddenPlaces.length ; i++) {		
+			
+			//체크박스만드는 코드
+			var checkbox_div = $('<div class="col-sm-1"></div>');
+			var checkbox = $('<label class="checkbox-inline"></label>').html('<input type="checkbox" value=""/>');
+			checkbox_div.append(checkbox);
+			
+			//작성자명만드는 코드
+			var writer_a = $('<a href=""></a>');
+			var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].writer);  			
+			writer_a.append(writer);
+
+			var writer_div = $('<div class="personal_article"></div>')
+			writer_div.append(writer_a);
+			
+			//작성일자만드는 코드 //현재시간
+			var writeDate_div =  $('<div class="personal_article"></div>');
+			var writeDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate); 
+			writeDate_div.append(writerDate);
+			
+			//작성자 & 작성일자 합치는 코드
+			var writerAndDate = $('<div class="col-sm-3"></div>');
+			writerAndDate.append(writer_div, writeDate_div);
+			
+			var bookmarkTitleBar = $('<div class="personal_article_space"></div>');
+			bookmarkTitleBar.append(checkbox_div, writerAndDate);
+			
+			//이미지만드는 코드
+			var image = $('<div><a href="#"><img class="hiddenPlace_img" src="' + myHiddenPlaces[i].imageUrl + '"></a></div>'); 
+			
+			//전부 합치는 코드
+			var bookmarkArticle = $('<div class="col-sm-4"></div>');
+			bookmarkArticle.append(bookmarkTitleBar, image);
+			
+			//최종코드
+			$('#bookmark_hiddenPlace').append(bookmarkArticle);
+			
+		}
+		
+	});
+
+</script>
+
+
+<!-- 나만의루트 이벤트 핸들링 -->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		var myRoutes = Controllers.getMyRouteController().requestBookmarkMR();
+		
+		for(var i = 0 ; i < myRoutes.length ; i++) {		
+			
+			//체크박스만드는 코드
+			var checkbox_div = $('<div class="col-sm-1"></div>');
+			var checkbox = $('<label class="checkbox-inline"></label>').html('<input type="checkbox" value=""/>');
+			checkbox_div.append(checkbox);
+			
+			//작성자명만드는 코드
+			var writer_a = $('<a href=""></a>');
+			var writer = $('<h7 class="name"></h7>').html(myRoutes[i].writer);  			
+			writer_a.append(writer);
+
+			var writer_div = $('<div class="personal_article"></div>')
+			writer_div.append(writer_a);
+			
+			//작성일자만드는 코드
+			var writeDate_div =  $('<div class="personal_article"></div>');
+			var writeDate = $('<h7 class="insert_date"></h7>').html(myRoutes[i].writeDate); //현재시간
+			writeDate_div.append(writerDate);
+			
+			//작성자 & 작성일자 합치는 코드
+			var writerAndDate = $('<div class="col-sm-3"></div>');
+			writerAndDate.append(writer_div, writeDate_div);
+			
+			var bookmarkTitleBar = $('<div class="personal_article_space"></div>');
+			bookmarkTitleBar.append(checkbox_div, writerAndDate);
+			
+			//이미지만드는 코드
+			var image = $('<div><a href="#"><img class="hiddenPlace_img" src="' + myRoutes[i].imageUrl + '"></a></div>'); //이미지
+			
+			//전부 합치는 코드
+			var bookmarkArticle = $('<div class="col-sm-4"></div>');
+			bookmarkArticle.append(bookmarkTitleBar, image);
+			
+			//최종코드
+			$('#bookmark_myroute').append(bookmarkArticle);
+			
+		}
+		
+	});
+
+</script>
+
 <body>
 
 	<!-- 상단 메인 메뉴 바 -->
@@ -52,6 +158,8 @@
 			</form>
 		</div>
 	</div>
+	
+	
 	<!-- 즐겨찾기 -->
 	<div class="container">
 	<br>
@@ -63,347 +171,50 @@
 		
 		</ul>
 
-		<div class="tab-content">
-			<div id="myroute" class="tab-pane fade in active">
-					<div id="main_body" class="container">
-		<div id="main_hiddenPlace" class="row">
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href=""><h7 class="name">존멋지훈</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="route.PNG">
-				</div>
-
-			</div>
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="17H.jpg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="camera.jpeg">
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="camping.png" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="beer.jpeg">
-				</div>
-			</div>
-
-
-		</div>
-					<div id="main_hiddenPlace" class="row">
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href=""><h7 class="name">존멋지훈</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="route.PNG">
-				</div>
-
-			</div>
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="17H.jpg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="camera.jpeg">
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="camping.png" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="beer.jpeg">
-				</div>
-			</div>
+		<!-- 내용 -->
+		<div class="tab-content"> 
 		
+		
+		
+		
+			<!-- 나만의루트 -->
+			<div id="myroute" class="tab-pane fade in active"> 
+				<div id="main_body" class="container">
+					<div id="bookmark_myroute" class="row">
 
-		</div>
-	<button id="button1id" name="singlebutton"  class="btn btn">삭제</button>
-	
-	</div>
-			</div>
+
+					</div>
+		
+					<button id="button1id" name="singlebutton"  class="btn btn">삭제</button>
+				</div>
+			</div> <!-- 나만의루트 end -->
+			
+			
+			
+			
 			<!-- 내알못 -->
 			<div id="hiddenplace" class="tab-pane fade">
-					<div id="main_body" class="container">
-		<div id="main_hiddenPlace" class="row">
-				<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href=""><h7 class="name">존멋지훈</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="route.PNG">
-				</div>
+				<div id="main_body" class="container">
+					<div id="bookmark_hiddenPlace" class="row">
 
-			</div>
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="17H.jpg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="camera.jpeg">
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="camping.png" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="beer.jpeg">
-				</div>
-			</div>
-		</div>
-		<div id="main_hiddenPlace" class="row">
-				<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="bookcafe.jpeg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href=""><h7 class="name">존멋지훈</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="route.PNG">
-				</div>
-
-			</div>
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="17H.jpg" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="camera.jpeg">
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="personal_article_space">
-				
-				<div class="col-sm-1">
-						 <label class="checkbox-inline">
-      <input type="checkbox" value=""></label>
-					</div>
-					
-					<div class="col-sm-1">
-						<img src="camping.png" class="img-circle" id="img_circle">
-					</div>
-					<div class="col-sm-2">
-						<div class="personal_article">
-							<a href="#"><h7 class="name">노답류지은</h7></a>
-						</div>
-						<div class="personal_article">
-							<h7 class="insert_date">2016-11-21</h7>
-						</div>
-					</div>
-				</div>
-				<div>
-					<img class="hiddenPlace_img" src="beer.jpeg">
-				</div>
-			</div>
-		</div>
-		
-	
 			
-		</div>
+					</div>
+				
+					<button id="button1id" name="singlebutton"  class="btn btn">삭제</button>
+				</div>
+			</div> <!-- 내알못 end -->
 
-	</div>
 
-			</div>
-		</div>
+		</div> <!-- 내용 end -->
+
+		
+	</div> <!-- 즐겨찾기 container end -->
 	
 		
-		<div class="row">
-			<hr>
-		</div>
-
-
-	<!-- 내알못 추천 -->
+	<div class="row">
+		<hr>
+	</div>
+	
 
 </body>
-</html>
-
 
