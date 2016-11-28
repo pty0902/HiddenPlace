@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/dongjin1204/master
 function User(userId,userPw,userNickName,userPhoneNum,userStartDate,userEndDate ) {
 
 	this.userId = userId; // 아이디

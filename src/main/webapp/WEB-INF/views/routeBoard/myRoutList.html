@@ -6,66 +6,157 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-
 <style>
-	#sign_up_border{
-	margin-top: 0%;
-	margin-bottom: 3%;
-	border-top: 1px solid #3399ff;
-	}
-	
-	#sign_up_border_bottom{
-	margin-top: 0%;
-	margin-bottom: 3%;
-	border-bottom: 1px solid #3399ff;
-	}
-	
-	#checkbox_border_rigth{
-	height: 180px;
-	border-right: 1px solid #3399ff;
-	}
-	
-	#orange_hr_border{
-	margin: 0%;
-	border-top: 1px solid #fe5c2d;
-	width: 2%;
-	}
-	
-	#category_margin_bottom{
-	margin-bottom: 0.5%;
-	}
-	
-	#checkbox_padding{
-	margin-top: 0%;
-	padding-right: 5px;
-	padding-left: 5px;
-	}
-	
-	#category_search_button {
-	float: right;
-	background:#3399ff;
-	color:white;
-	border:none;
-	margin-bottom: 1%;
-	margin-right: 4%;
-	}
-	
-	#loot_writer_button {
-	float: right;
-	background:#3399ff;
-	color:white;
-	border:none;
-	margin-top: 2%;
-	margin-bottom: 1%;
-	margin-right: 4%;
-	}
-	
-	
-	#custom-search-form .search-query {
+/* 공통 적용 */
+a {
+   /* a 태그 링크 밑줄 제거 */
+   text-decoration: none !important;
+}
+
+/* 상단 로그인 바 */
+#login_button {
+   margin-top: 4%;
+}
+
+#login_button>button {
+   border: 0;
+   outline: 0;
+   background-color: white;
+}
+
+/*상단 메인 메뉴 바*/
+#logo_img {
+   width: 170px;
+   margin-left: 60%;
+}
+
+#main_buttons {
+   width: 40%;
+   margin-top: 3%;
+   margin-left: 30%;
+}
+
+#main_buttons>a {
+   font-weight: bold;
+   font-size: 120%;
+   border: 0;
+   outline: 0;
+}
+
+/*메인 사진 박스*/
+#main_img {
+   width: 100%;
+   height: 400px;
+   opacity: 1.0;
+}
+
+.main_img_text {
+   position: absolute;
+   min-width: 80%;
+   text-align: center;
+   top: 350px;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   /*font-size: 18px;*/
+}
+
+.main_img_text>h2 {
+   font-weight: bold;
+   color: white;
+   font-family: font-style : italic;
+}
+
+#search_bar_space {
+   position: absolute;
+   top: 450px;
+   left: 68%;
+   transform: translate(-50%, -50%);
+}
+
+#search_bar_space>form>input {
+   background-color: transparent;
+   width: 50%;
+   height: 60px;
+   border: 2px solid white;
+   font-size: 20px;
+   color: white;
+   padding: 0px 20px 0px 20px;
+}
+
+#search_bar_space>form>button {
+   position: absolute;
+   padding: 0;
+   border: none;
+   left: 524px;
+   top: 2px;
+}
+
+#search_button_img {
+   width: auto;
+   height: 56px;
+}
+</style>
+<style>
+   #sign_up_border{
+   margin-top: 0%;
+   margin-bottom: 0%;
+   border-top: 1px solid #3399ff;
+   }
+   
+   #sign_up_border_bottom{
+   margin-top: 0%;
+   margin-bottom: 3%;
+   border-bottom: 1px solid #3399ff;
+   }
+   
+   #checkbox_border_rigth{
+   height: 180px;
+   border-right: 1px solid #3399ff;
+   }
+   
+   #orange_hr_border{
+   margin: 0%;
+   border-top: 1px solid #fe5c2d;
+   width: 2%;
+   }
+   
+   #category_margin_bottom{
+   margin-bottom:1%;
+   margin-top:80px;
+   margin-left:130px;
+   }
+   
+   #checkbox_padding{
+   margin-top: 0%;
+   padding-right: 5px;
+   padding-left: 5px;
+   }
+   
+   #category_search_button {
+   float: right;
+   background:#3399ff;
+   color:white;
+   border:none;
+   margin-bottom: 1%;
+   margin-right: 4%;
+   }
+   
+   #loot_writer_button {
+   float: right;
+   background:#3399ff;
+   color:white;
+   border:none;
+   margin-top: 2%;
+   margin-bottom: 1%;
+   margin-right: 4%;
+   }
+   
+   
+   #custom-search-form .search-query {
          /* padding-right: 3px;
          padding-right: 4px \9;
          padding-left: 3px;
@@ -73,8 +164,8 @@
          width: 400px;
          height: 40px;
          text-align:center;
-		 border-color:black;
-		 
+       border-color:black;
+       
          margin-bottom: 0;
          
          -webkit-border-radius: 5px;
@@ -96,7 +187,7 @@
       }
 
 
-		/*내알못 추천  지훈이형꺼 불러온거*/
+      /*내알못 추천  지훈이형꺼 불러온거*/
       #main_body {
          margin-top: 3%;      
       }
@@ -138,127 +229,154 @@
          left: 80px;
          width: 700%;
       }
+      /*category위치조정*/
+      #search_position{
+      margin-left: 6%;
+      }#midline1{
+      margin-left:-4%;
+      }
+      
+      #midline2{
+      margin-right:4%;
+      }
+      
+      .best-img-circle{
+      
+      	 width : 40px;
+         height: 40px;
+      
+      }
+      
+      .best_hiddenPlace_img{
+      
+     	 width : 350px;
+         height: 300px;
+      }
+      
 </style>
 
 </head>
 <body>
+<!-- 상단 로그인 바 -->
+   <div class="container-fluid">
 
-	<div class="col-md-2"></div>
-	<div id="sign_up_border" class="col-md-8"><h2>CATEGORY</h2></div>
-	<div class="col-md-2"></div>
-	
-	<div class="row"></div>
-	<div class="col-md-2"></div>
-	
-	<!-- 카테고리와 밑에 스타일선 -->
-	<div id="sign_up_border" class="col-md-8">
-	<div class="col-md-1"></div>
-	<div class="col-md-11">
-	<h2 id = "category_margin_bottom">CATEGORY</h2><hr id = "orange_hr_border">
-	</div></div>
-	<div class="col-md-2"></div>
-		
-	
-	<div class="container">
-	
+      <div class="row">
+         <div class="col-sm-10"></div>
+         <div class="col-sm-2">
+            <div id="login_button" class="btn-group">
+               <button type="button" class="btn btn">로그인</button>
+               <button type="button" class="btn btn">회원가입</button>
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+
+   <!-- 상단 메인 메뉴 바 -->
+   <div class="container-fluid">
+
+      <div class="row">
+         <div class="col-sm-3">
+            <a href="homeView.html"><img id="logo_img" src="logo.png"></a>
+         </div>
+         <div id="main_buttons" class="btn-group btn-group-justified">
+            <a href="#" class="btn btn">홈페이지</a> <a href="#" class="btn btn">마이페이지</a>
+            <a href="#" class="btn btn">나만의 루트</a> <a href="#" class="btn btn">즐겨찾기</a>
+         </div>
+      </div>
+   </div>
+
+   <!-- 메인 사진 박스 -->
+   <div class="container-fluid">
+      <img id="main_img" src="camping.png" alt="route">
+
+      <div class="main_img_text">
+         <h2>내가 알지 못한 멋진 곳이 궁금하신가요?</h2>
+      </div>
+      <div id="search_bar_space" class="container">
+         <form class="inline">
+            <input type="text"
+               placeholder="                               #당신이 원했던 곳">
+            <button type="submit">
+               <img id="search_button_img" src="search_transparent1.png">
+            </button>
+         </form>
+      </div>
+   </div>
+
+   <div class="col-md-2"></div>
+   <div id="sign_up_border" class="col-md-8"></div>
+   <div class="col-md-2"></div>
+   <div class="col-md-10">
+   <h2 id = "category_margin_bottom">BEST</h2>
+   </div>
+   <div class="row"></div>
+   <div class="col-md-1"></div>
+   
+   <!-- 카테고리와 밑에 스타일선 -->
+   <div id="sign_up_border" class="col-md-10">
+   <div class="col-md-2"></div>
+   <div class="col-md-10">
+   </div></div>
+   <div class="col-md-2"></div>
+      
+   
+   <div class="container">
+   
+
     <div class="row"></div>
-    
-    <div class="col-md-1"></div>
-    <div class="col-md-1"></div>
-    
-   	 <!-- 지역분류 -->
-    <div class="col-md-1" id = "checkbox_padding">
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" class="all"> 서울전체</label></li>
-           <li><label><input type="checkbox" >강남구</label></li>
-           <li><label><input type="checkbox" >강동구</label></li>
-           <li><label><input type="checkbox" >강북구</label></li>
-           <li><label><input type="checkbox" >강서구</label></li>
-           <li><label><input type="checkbox" >관악구</label></li>
-           <li><label><input type="checkbox" >광진구</label></li>
-         </ul>
-	</div>
-	<div class="col-md-1" id = "checkbox_padding">
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" >구로구</label></li>
-           <li><label><input type="checkbox" >금천구</label></li>
-           <li><label><input type="checkbox" >노원구</label></li>
-           <li><label><input type="checkbox" >도봉구</label></li>
-           <li><label><input type="checkbox" >동대문구</label></li>
-           <li><label><input type="checkbox" >동작구</label></li>
-           <li><label><input type="checkbox" >마포구</label></li>
-         </ul>
-	</div>
-	<div class="col-md-1" id = "checkbox_padding">
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" >서대문구</label></li>
-           <li><label><input type="checkbox" >서초구</label></li>
-           <li><label><input type="checkbox" >성동구</label></li>
-           <li><label><input type="checkbox" >성북구</label></li>
-           <li><label><input type="checkbox" >송파구</label></li>
-           <li><label><input type="checkbox" >양천구</label></li>
-           <li><label><input type="checkbox" >영등포구</label></li>
-         </ul>
-	</div>
-	<div class="col-md-1" id = "checkbox_padding">
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" >용산구</label></li>
-           <li><label><input type="checkbox" >은평규</label></li>
-           <li><label><input type="checkbox" >종로구</label></li>
-           <li><label><input type="checkbox" >중구</label></li>
-           <li><label><input type="checkbox" >중랑구</label></li>
-         </ul>
-	</div>
-	
-	<!-- 카테고리 중간 구분선 -->
-	<div class="col-md-1">
-	<div id="checkbox_border_rigth" class="col-md-6"></div>
-	</div>
-	
-	<!-- 장소분류 -->
-	<div class="col-md-1" id = "checkbox_padding">
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" >전체</label></li>
-           <li><label><input type="checkbox" >호수</label></li>
-         </ul>
-	</div>
-	
-	<div class="col-md-1" id = "checkbox_padding">
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" >카페</label></li>
-           <li><label><input type="checkbox" >기타</label></li>
-         </ul>
-	</div>
-	
-	<div class="col-md-1" id = "checkbox_padding">
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" >공원</label></li>
-         </ul>
-	</div>
-	
-	<div class="col-md-1" id = "checkbox_padding">
-	
-         <ul class="list-unstyled">
-           <li><label><input type="checkbox" >맛집</label></li>
-         </ul>
+  
+<!--나만의 루트 베스트-->  
+<div id="main_hiddenPlace" class="row">
+      
+         <div class="col-sm-4">
+            <div class="personal_article_space">
+               <div class="col-sm-1"><img src ="bookcafe.jpeg" class ="best-img-circle"></div>
+               <div class="col-sm-2">
+                  <div class="personal_article"><a href=""><h6 class="name">존멋지훈</h6></a></div>
+                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
+               </div>
+            </div>
+            <div><a href="#"><img class="best_hiddenPlace_img" src="route.png"></a>
+            </div>
+         </div>
          
-	</div>
-	
-    </div>    
+         <div class="col-sm-4">
+            <div class="personal_article_space">
+               <div class="col-sm-1"><img src ="17H.jpg" class ="best-img-circle"></div>
+               <div class="col-sm-2">
+                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
+                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
+               </div>
+            </div>
+            <div><a href="#"><img class="best_hiddenPlace_img" src="camera.jpeg"></a>
+            </div>
+         </div>
+
+         <div class="col-sm-4">
+            <div class="personal_article_space">
+               <div class="col-sm-1"><img src ="17H.jpg" class ="best-img-circle"></div>
+               <div class="col-sm-2">
+                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
+                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
+               </div>
+            </div>
+            <div><a href="#"><img class="best_hiddenPlace_img" src="beer.jpeg"></a>
+            </div>
+         </div>
+         
+      </div>
+  
     
-    <!-- 카테고리 검색버튼 -->
-    <div class="col-md-2"></div>
-	<div id="sign_up_border_bottom" class="col-md-8"><button id="category_search_button" class="btn btn-success" >Search</button></div>
-	
-	<div class="row"></div>
-	<div class="col-md-3"></div>
-	<div class="col-md-5">
-	<!-- 검색창 -->
-          <form id="custom-search-form" class="form-search form-horizontal pull-right">
-                <input type="text" class="search-query" placeholder="#내가 알지 못한 곳" >
-                <button type="submit" class="glyphicon glyphicon-search"><i class="icon-search"></i></button>
-          </form>
-    </div>	
+ </div>
+ 
+ <!--베스트 아래선  -->
+    <br><br><br>
+   <div class="col-md-1"></div>
+   <div id="sign_up_border" class="col-md-10"></div>
+   <div class="col-md-1"></div>
+ 
     
     <div class="row"></div>
     
@@ -374,7 +492,7 @@
     <!-- 루트쓰기버튼 -->
     <div class="row"></div>
     <div class="col-md-2"></div>
-	<div class="col-md-9"><button id="loot_writer_button" class="btn btn-success" >루트쓰기</button></div>
+   <div class="col-md-9"><button id="loot_writer_button" class="btn btn-success" >루트쓰기</button></div>
     
 </body>
 </html>
