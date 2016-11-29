@@ -1,7 +1,7 @@
 //user dao 객체
 function UserDao() {
 	// 회원가입 메서드
-	this.userInsertDao = function(user) {
+	this.userInsert = function(user) {
 
 		try {
 
@@ -12,7 +12,7 @@ function UserDao() {
 				data : {
 					userId : user.uesrId,
 					userPw : user.userPw,
-					userNickName : user.userNickName,
+					userNickname : user.userNickname,
 					userPhoneNum : user.userPhoneNum
 				},
 				dataType : 'xml', // 서버에서 보내오는 데이터 타입
@@ -35,7 +35,7 @@ function UserDao() {
 	
 	
 	// 회원가입 닉네임 중복확인
-	this.nickNameCheckDao = function(nickName) {
+	this.userNickname = function(nickname) {
 
 		try {
 			
@@ -44,7 +44,7 @@ function UserDao() {
 				async : false,  // false: 동기, true: 비동기
 				type : 'post',
 				data : {
-					nickName : nickName
+					nickname : nickname
 				},
 				dataType : 'xml', // 서버에서 보내오는 데이터 타입
 				success : function(data) { // 서버에서 보내오는 데이터
@@ -54,7 +54,7 @@ function UserDao() {
 					// 위 or 아래
 					if(data == 1){//사용할 수 없는 아이디
 		    			alert("사용할 수 없는 닉네임입니다.");
-		    	    	$("#nickName").val("");
+		    	    	$("#nickname").val("");
 		    	     }else if(data == -1)//사용할 수 있는 아이디
 		    	  	    alert("사용할 수 있는 닉네임입니다.");
 				}
@@ -68,7 +68,7 @@ function UserDao() {
 	}
 
 	// 로그인 메서드
-	this.userLoginDao = function(user) {
+	this.userLogin = function(user) {
 
 		try {
 

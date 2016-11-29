@@ -86,10 +86,10 @@
 			
 			var id = $('#id').val();
 			var pw = $('#pw').val();
-			var nickName = $('#nickName').val();
+			var nickname = $('#nickname').val();
 			var phoneNum = $('#phoneNum_1').val() + $('#phoneNum_2').val() + $('#phoneNum_3').val();
 
-			var newUser = new User(id, pw, nickName, phoneNum);
+			var newUser = new User(id, pw, nickname, phoneNum);
 
 			if(status) {
 				Controllers.getUserController().requestUserInsert(newUser);
@@ -99,21 +99,21 @@
 		
 		
 		// 닉네임 중복확인
-		$('#nickName_check').click(function() {
-			var nickname = $('#nickName').val();
+		$('#nickname_check').click(function() {
+			var nickname = $('#nickname').val();
 			var chkNick = [!@#$%^*+=-]$/; //특수문자
 
 			if ((nickname.length < 2) || (nickname.length > 10)) {
 				alert("닉네임은 2~10글자 사이로 입력해 주세요");
-				$('#nickName').focus();
-				$('#nickName').attr("value", "");
+				$('#nickname').focus();
+				$('#nickname').attr("value", "");
 			} else if (chkNick.test(nickname)) {
 				alert("닉네임에 특수문자는 들어갈 수 없습니다.");
-				$('#nickName').focus();
-				$('#nickName').attr("value", "");
+				$('#nickname').focus();
+				$('#nickname').attr("value", "");
 			} else {
 				
-				Controllers.getUserController().requestNickNameCheck(nickName);
+				Controllers.getUserController().requestNicknameCheck(nickname);
 				
 			}
 		});
@@ -129,10 +129,10 @@
              return status;
          }
          
-         if(!$("#nickName").val()){
+         if(!$("#nickname").val()){
         	 status = false;
              alert("닉네임을 입력하세요.");
-             $("#nickName").focus();
+             $("#nickname").focus();
              return status;
          }
          
@@ -224,9 +224,9 @@
 			<div class="col-sm-6">
 				<div class="col-sm-2" id="check_left_gride">닉네임</div>
 				<div class="col-sm-10" id="check_rigth_gride">
-					<input id="input_id_nickname" placeholder="NickName"></input>
+					<input id="input_id_nickname" placeholder="nickname"></input>
 
-					<button id="nickName_check" type="button"
+					<button id="nickname_check" type="button"
 						style="width: 100px; height: 25px;" class="btn btn-default"
 						disabled="disabled">중복확인</button>
 

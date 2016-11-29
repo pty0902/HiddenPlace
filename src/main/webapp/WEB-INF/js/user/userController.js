@@ -16,9 +16,9 @@ function UserController() {
 	};
 	
 	// 닉네임 중복확인 controller 메서드
-	this.requestNickNameCheck = function(nickName) {
+	this.requestNicknameCheck = function(nickname) {
 		
-		var isSuccess = dao.nickNameCheckDao(nickName);
+		var isSuccess = dao.nicknameCheckDao(nickname);
 		
 		return isSucces;
 	

@@ -1,9 +1,9 @@
 
-function User(userId,userPw,userNickName,userPhoneNum,userStartDate,userEndDate ) {
+function User(userId,userPw,userNickname,userPhoneNum,userStartDate,userEndDate ) {
 
 	this.userId = userId; // 아이디
 	this.userPw = userPw; // 비밀번호
-	this.userNickName = userNickName; // 닉네임
+	this.userNickname = userNickname; // 닉네임
 	this.userPhoneNum = userPhoneNum; // 전화번호
 	this.userStartDate = userStartDate; // 가입일시
 	this.userEndDate = userEndDate; // 탈퇴일시
