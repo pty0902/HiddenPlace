@@ -81,7 +81,9 @@ t
 		
 		// 회원가입 버튼 
 		$('#button_join').click(function() {
-
+			
+			checkValue(); // 입력한 상황 체크
+			
 			var id = $('#id').val();
 			var pw = $('#pw').val();
 			var nickName = $('#nickName').val();
@@ -89,10 +91,13 @@ t
 
 			var newUser = new User(id, pw, nickName, phoneNum);
 
-			Controllers.getUserController().requestUserInsert(newUser);
-
+			if(status) {
+				Controllers.getUserController().requestUserInsert(newUser);
+			}
 		});
- 
+
+		
+		
 		// 닉네임 중복확인
 		$('#nickName_check').click(function() {
 			var nickname = $('#nickName').val();
@@ -113,36 +118,67 @@ t
 			}
 		});
 
-	});
-	
 	// 회원가입시 입력사항 확인
-	
-	 function checkValue()
-     {
-         if(!document.userInfo.id.value){
-             alert("아이디를 입력하세요.");
-             return false;
+	 function checkValue() {
+		 status = true;
+		 
+         if(!$("#id").val()){
+        	 status = false;
+        	 alert("아이디를 입력하세요.");
+             $("#id").focus();
+             return status;
          }
          
-         if(!document.userInfo.pw.value){
+         if(!$("#nickName").val()){
+        	 status = false;
+             alert("닉네임을 입력하세요.");
+             $("#nickName").focus();
+             return status;
+         }
+         
+         if(!$("#pw").val()){
+        	 status = false;
              alert("비밀번호를 입력하세요.");
-             return false;
+             $("#pw").focus();
+             return status;
          }
          
-         // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-         if(document.userInfo.pw.value != document.userInfo.pw_check.value ){
+         if(!$("#pw_check").val(){
+        	 status = false;
              alert("비밀번호를 동일하게 입력하세요.");
-             return false;
+             $("#pw_check").focus();
+             return status;
          }
-     }
+        
+         // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+         if($("#pw").val() != $("#pw_check").val()){
+        	 status = false;
+             alert("비밀번호를 동일하게 입력하세요.");
+             return status;
+         }
+         
+         if(!$("#phoneNum_2").val(){
+        	 status = false;
+             alert("전화번호를 입력하세요.");
+             $("#phoneNum_2").focus();
+             return status;
+         }
+         
+         if(!$("#phoneNum_3").val(){
+        	 status = false;
+             alert("전화번호를 입력하세요.");
+             $("#phoneNum_3").focus();
+             return status;
+         }
+         
+   	 }
 	
+	});
 </script>
 
 <body>
 
-
 	<div class="container">
-
 
 		<div class="row" id="row_margin">
 
@@ -189,9 +225,11 @@ t
 				<div class="col-sm-2" id="check_left_gride">닉네임</div>
 				<div class="col-sm-10" id="check_rigth_gride">
 					<input id="input_id_nickname" placeholder="NickName"></input>
-					<button id="input_button" type="button"
+
+					<button id="nickName_check" type="button"
 						style="width: 100px; height: 25px;" class="btn btn-default"
 						disabled="disabled">중복확인</button>
+
 				</div>
 			</div>
 			<div class="col-sm-2"></div>
