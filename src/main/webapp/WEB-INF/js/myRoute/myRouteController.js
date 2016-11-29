@@ -1,7 +1,7 @@
 $('head').append('<script src=\'../../js/myRoute/myRouteDao.js\'><\/script>');
 
 //myHiddenPlace controller 객체
-function myRouteController() {
+function MyRouteController() {
 
 	var dao = new myRouteDao();	
 
