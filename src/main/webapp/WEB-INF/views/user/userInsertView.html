@@ -6,9 +6,14 @@
 <title>회원 가입</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../../js/user/user.js"></script>
+<script src="../../js/user/userController.js"></script>
 
 <style>
 #check_left_gride {
@@ -17,7 +22,6 @@
 }
 
 #check_rigth_gride {
-	padding-left: 0px;
 	float: right;
 }
 
@@ -36,13 +40,19 @@
 	margin-right: 5%;
 }
 
+#nickname_check {
+	margin-left: 4%;
+	color: white;
+	background: #3399ff;
+}
+
 #input_button {
 	margin-left: 4%;
 	color: white;
 	background: #3399ff;
 }
 
-#input_id_nickname {
+#nickname {
 	margin-left: 6%;
 }
 
@@ -52,6 +62,11 @@
 }
 
 #input_button_background {
+	color: white;
+	background: #3399ff;
+}
+
+#join, #cancel {
 	color: white;
 	background: #3399ff;
 }
@@ -66,110 +81,141 @@
 
 <!-- 회원가입 이벤트 핸들링 -->
 <script>
-
 	$(document).ready(function() {
 
+		var userController = new UserController();
+
 		// 취소 버튼
-		$('button_cancle').click(function() {
-			
+		$('cancel').click(function() {
+
 			location.href = "/main"; // 메인 홈페이지 url
-			
+
 		});
-		
+
 		// 회원가입 버튼 
-		$('#button_join').click(function() {
-			
+		$('#join').click(function() {
+
 			checkValue(); // 입력한 상황 체크
-			
+
 			var id = $('#id').val();
 			var pw = $('#pw').val();
-			var nickName = $('#nickName').val();
+			var nickname = $('#nickname').val();
 			var phoneNum = $('#phoneNum_1').val() + $('#phoneNum_2').val() + $('#phoneNum_3').val();
 
-			var newUser = new User(id, pw, nickName, phoneNum);
+			var newUser = new User(id, pw, nickname, phoneNum);
 
-			if(status) {
-				Controllers.getUserController().requestUserInsert(newUser);
+			if (status) {
+				alert("회원가입 완료");
+				userController.requestUserInsert(newUser);
 			}
 		});
 
-		
-		
 		// 닉네임 중복확인
-		$('#nickName_check').click(function() {
-			var nickname = $('#nickName').val();
-			var chkNick = [!@#$%^*+=-]$/; //특수문자
+		$('#nickname_check').click(function() {
+			var nickname = $('#nickname').val();
+			var chkNick = /[!@#$%^*+=-]$/; //특수문자
 
 			if ((nickname.length < 2) || (nickname.length > 10)) {
 				alert("닉네임은 2~10글자 사이로 입력해 주세요");
-				$('#nickName').focus();
-				$('#nickName').attr("value", "");
+				$('#nickname').focus();
 			} else if (chkNick.test(nickname)) {
 				alert("닉네임에 특수문자는 들어갈 수 없습니다.");
-				$('#nickName').focus();
-				$('#nickName').attr("value", "");
+				$('#nickname').focus();
+				$('#nickname').attr("value", "");
 			} else {
-				
-				Controllers.getUserController().requestNickNameCheck(nickName);
-				
+				alert("사용할 수 있는 닉네임입니다.");
+				userController.requestNicknameCheck(nickname);
+
 			}
 		});
 
-	// 회원가입시 입력사항 확인
-	 function checkValue() {
-		 status = true;
-		 
-         if(!$("#id").val()){
-        	 status = false;
-        	 alert("아이디를 입력하세요.");
-             $("#id").focus();
-             return status;
-         }
-         
-         if(!$("#nickName").val()){
-        	 status = false;
-             alert("닉네임을 입력하세요.");
-             $("#nickName").focus();
-             return status;
-         }
-         
-         if(!$("#pw").val()){
-        	 status = false;
-             alert("비밀번호를 입력하세요.");
-             $("#pw").focus();
-             return status;
-         }
-         
-         if(!$("#pw_check").val(){
-        	 status = false;
-             alert("비밀번호를 동일하게 입력하세요.");
-             $("#pw_check").focus();
-             return status;
-         }
-        
-         // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-         if($("#pw").val() != $("#pw_check").val()){
-        	 status = false;
-             alert("비밀번호를 동일하게 입력하세요.");
-             return status;
-         }
-         
-         if(!$("#phoneNum_2").val(){
-        	 status = false;
-             alert("전화번호를 입력하세요.");
-             $("#phoneNum_2").focus();
-             return status;
-         }
-         
-         if(!$("#phoneNum_3").val(){
-        	 status = false;
-             alert("전화번호를 입력하세요.");
-             $("#phoneNum_3").focus();
-             return status;
-         }
-         
-   	 }
-	
+		// 회원가입시 입력사항 확인
+		function checkValue() {
+			var status = true;
+			var mailId = /^[a-zA-Z0-9_\.-\s]*$/;
+			var id = $("#id").val();
+
+			if (!$("#id").val()) {
+				status = false;
+				alert("이메일을 입력해주세요.");
+				$("#id").focus();
+				return status;
+			}
+
+			if (!$("#nickname").val()) {
+				status = false;
+				alert("닉네임을 입력해주세요.");
+				$("#nickname").focus();
+				return status;
+			}
+
+			if (!$("#pw").val()) {
+				status = false;
+				alert("비밀번호를 입력해주세요.");
+				$("#pw").focus();
+				return status;
+			}
+
+			if (!$("#pw_check").val()) {
+				status = false;
+				alert("비밀번호를 동일하게 입력해주세요.");
+				$("#pw_check").focus();
+				return status;
+			}
+
+			// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+			if ($("#pw").val() != $("#pw_check").val()) {
+				status = false;
+				alert("비밀번호를 동일하게 입력해주세요.");
+				return status;
+			}
+
+			if (!$("#phoneNum_2").val()) {
+				status = false;
+				alert("전화번호를 입력해주세요.");
+				$("#phoneNum_2").focus();
+				return status;
+			}
+
+			if (!$("#phoneNum_3").val()) {
+				status = false;
+				alert("전화번호를 입력해주세요.");
+				$("#phoneNum_3").focus();
+				return status;
+			}
+
+			if (!mailId.test(id)) {
+				status = false;
+				alert("메일을 올바르게 입력해주세요");
+				$("#id").focus();
+				return status;
+			}
+			if ($("#id").val().length < 6) {
+				status = false;
+				alert("메일아이디는 최소 6자리 이상 입력해주세요");
+				$("#id").focus();
+				return status;
+			}
+			if ($("#email").val().indexOf(".") == "-1") {
+				status = false;
+				alert("이메일을 선택해주세요");
+				$("#email").focus();
+				return status;
+			}
+			if ($("#txtMail2").val().indexOf(".") != "-1") {
+				status = false;
+				alert("메일을 올바르게 입력해주세요");
+				$("[name=txtMail1]").focus();
+				return status;
+
+			} else if ($("[name=txtMail3]").val() == "1") {
+				status = false;
+				alert("메일 직접입력을 선택하셨습니다");
+				$("[name=txtMail2]").focus();
+				return status;
+			}
+
+		}
 	});
 </script>
 
@@ -196,17 +242,21 @@
 
 				<div class="col-sm-9" id="check_rigth_gride">
 
-
-					<input id="id" placeholder="E-mail"></input> <select>
-						<option>선택하세요</option>
-						<option>naver.com</option>
-						<option>hanmail.net</option>
-						<option>nate.com</option>
+					<input id="id" placeholder="E-mail"></input> <select id="email">
+						<option value="">선택</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="naver.com">naver.com</option>
+						<option value="hotmail.com">hotmail.com</option>
+						<option value="nate.com">nate.com</option>
+						<option value="yahoo.co.kr">yahoo.co.kr</option>
+						<option value="freechal.com">freechal.com</option>
+						<option value="1">직접입력</option>
 					</select>
 
 					<button id="input_button" type="button"
-						style="width: 100px; height: 25px;" class="btn btn-default"
-						disabled="disabled">인증요청</button>
+						style="width: 100px; height: 25px;" class="btn btn-default">인증요청</button>
 
 				</div>
 			</div>
@@ -221,11 +271,10 @@
 			<div class="col-sm-6">
 				<div class="col-sm-2" id="check_left_gride">닉네임</div>
 				<div class="col-sm-10" id="check_rigth_gride">
-					<input id="input_id_nickname" placeholder="NickName"></input>
+					<input id="nickname" placeholder="nickname"></input>
 
-					<button id="nickName_check" type="button"
-						style="width: 100px; height: 25px;" class="btn btn-default"
-						disabled="disabled">중복확인</button>
+					<button id="nickname_check" type="button"
+						style="width: 100px; height: 25px;" class="btn btn-default">중복확인</button>
 
 				</div>
 			</div>
@@ -281,13 +330,11 @@
 
 		<div class="col-sm-4"></div>
 		<div id="input_button_insert" class="col-sm-4">
-			<button id="input_button_background" type="button"
-				style="width: 100px; height: 30px;" class="btn btn-default"
-				disabled="disabled">취소</button>
+			<button id="cancel" type="button" style="width: 100px; height: 30px;"
+				class="btn btn-default">취소</button>
 			<div class="col-sm-4">
-				<button id="input_button_background" type="button"
-					style="width: 100px; height: 30px;" class="btn btn-default"
-					disabled="disabled">가입완료</button>
+				<button id="join" type="button" style="width: 100px; height: 30px;"
+					class="btn btn-default">가입완료</button>
 
 			</div>
 
