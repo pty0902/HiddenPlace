@@ -15,6 +15,15 @@ function MyHiddenPlaceController() {
 
    };
    
+// 내알못 리스트 controller 메서드
+   this.requestHiddenPlaceSelectAll = function() {
+
+      var myHiddenPlaces  = dao.hiddenPlaceSelectAll();
+      
+      return myHiddenPlaces;
+
+   };
+   
 // 즐겨찾기 controller 메서드
 	this.requestBookmarkMHP = function() {
 		
