@@ -24,7 +24,7 @@ function UserDao() {
 				}
 			});
 		} catch (e) {
-			console.log('userDao 객체 : userInsertDao 메서드에서 예외 발생');
+			console.log('userDao 객체 : userInsert 메서드에서 예외 발생');
 			console.log(e.message);
 		}
 
@@ -35,7 +35,7 @@ function UserDao() {
 	
 	
 	// 회원가입 닉네임 중복확인
-	this.userNickname = function(nickname) {
+	this.userNicknameCheck = function(nickname) {
 
 		try {
 			
@@ -60,10 +60,9 @@ function UserDao() {
 				}
 			});
 		} catch (e) {
-			console.log('userDao 객체 : nickNameCheckDao 메서드에서 예외 발생');
+			console.log('userDao 객체 : nickNameCheck 메서드에서 예외 발생');
 			console.log(e.message);
 		}
-
 		return isSuccess;
 	}
 
@@ -89,7 +88,7 @@ function UserDao() {
 				}
 			});
 		} catch (e) {
-			console.log('userDao 객체 : userLoginDao 메서드에서 예외 발생');
+			console.log('userDao 객체 : userLogin 메서드에서 예외 발생');
 			console.log(e.message);
 		}
 
