@@ -5,11 +5,19 @@
 <title>내알못</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/homeViewStyle.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="font-awesome/css/font-awesome.min.css" />
+	<script src="../../js/hiddenPlace/myHiddenPlace.js"></script>
+	<script src="../../js/hiddenPlace/myHiddenPlaceController.js"></script>
 
 <style>
   #sign_up_border{
@@ -132,6 +140,12 @@
 .img-circle {
 	width: 40px;
 	height: 40px;
+}
+
+#img-best3 {
+	width: 40px;
+	height: 40px;
+	padding-left: 0px;
 }
 
 .personal_article {
@@ -368,6 +382,7 @@
 		.personal_article_space {
 			height: 40px;
 			margin-bottom: 1%;
+			
 		}
 		.name {
 			font-weight: bold;
@@ -388,11 +403,116 @@
 			left: 80px;
 			width: 700%;
 		}
-
-
-
-
+		
+		#sign_up_border { 
+			margin-bottom : 30px;
+		}
+		
+		
 </style>
+
+<!-- 내알못 베스트 3 이벤트 핸들링 -->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		var mhpController  = new myHiddenPlaceController();
+		
+		var myHiddenPlaces = mhpController.requestBestMHP();
+		
+		//var td_writer = $('<td style="width:80px"></td>').html(myHiddenPlaces[0].nowLoginId);
+		//$('tbody').append(td_writer); //상단 로그인 어펜드 아직 미완성
+		
+		for(var i = 0 ; i < myHiddenPlaces.length ; i++) {		
+			
+			//var td_check = $('<td style="width:80px"></td>').html('<input type="checkbox">'); 체크박스만드는 소스(여기서는 안사용)
+			var bookMark;
+			
+			if(myHiddenPlaces[i].bookmark == 0){ // 찜콩에 색이 없다 
+				bookMark = $('<div class="col-sm-1	"><img src ="" class ="best-img-circle"></div>'); //찜콩이미지 색이 없는 코드
+				}else {  // 찜콩에 색이 있다.
+				bookMark = $('<div class="col-sm-1" id = "img-best3" ><img src ="../../img/bookcafe.jpeg" class ="img-circle"></div>'); //찜콩이미지 색이 있는 코드	
+			}
+				
+			var writer_a =  $('<a href=""></a>');
+			var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].writer); //작성자명
+			writer_a.append(writer);
+			
+			var writer_div = $('<div class="personal_article"></div>');
+			writer_div.append(writer_a);
+			
+			var writerDate_div =  $('<div class="personal_article"></div>');
+			var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate); //현재시간
+			writerDate_div.append(writerDate);
+			
+			var writerAndDate = $('<div class="col-sm-4"></div>');
+			writerAndDate.append(writer_div, writerDate_div);	
+			
+			var bestTitleBar = $('<div class="personal_article_space"></div>');
+			bestTitleBar.append(bookMark, writerAndDate);
+			
+			var bestImage = $('<div class="col-sm-4"></div>');
+			var image = $('<div><a href="#"><img class="best_hiddenPlace_img" src="' + myHiddenPlaces[i].imageUrl + '"></a></div>'); //이미지
+			bestImage.append(bestTitleBar, image);
+			
+			$('#hiddenPlace_best3').append(bestImage); //최종 append
+			
+		}
+		
+	});
+
+
+</script>
+
+<!-- 내알못 목록 이벤트 핸들링 -->
+<script>
+
+   $(document).ready(function() {
+      
+	  var mhpController  = new myHiddenPlaceController();
+	   
+      var myHiddenPlaces = mhpController.requestHiddenPlaceSelectAll();
+   
+      for(var i = 0 ; i < myHiddenPlaces.length ; i++) {      
+         
+         var bookMark;
+         
+         
+         if(myHiddenPlaces[i].bookmark == 0){ // 찜콩에 색이 없다 
+            bookMark = $('<div class="col-sm-1"><img src ="" class ="best-img-circle"></div>'); //찜콩이미지 색이 없는 코드
+            }else {  // 찜콩에 색이 있다.
+            bookMark = $('<div class="col-sm-1"><img src ="../../img/bookcafe.jpeg" class ="best-img-circle"></div>'); //찜콩이미지 색이 있는 코드   
+         }
+             
+         var writer_a =  $('<a href=""></a>');
+         var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].writer); //작성자명
+         writer_a.append(writer);
+         
+         var writer_div = $('<div class="personal_article"></div>');
+         writer_div.append(writer_a);
+         
+         var writerDate_div =  $('<div class="personal_article"></div>');
+         var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate); //현재시간
+         writerDate_div.append(writerDate);
+         
+         var writerAndDate = $('<div class="col-sm-3"></div>');
+         writerAndDate.append(writer_div, writerDate_div);
+         
+         var bestTitleBar = $('<div class="personal_article_space"></div>');
+         bestTitleBar.append(bookMark, writerAndDate);
+         
+         var bestImage = $('<div class="col-sm-3"></div>');
+         var image = $('<div><a href="#"><img class="hiddenPlace_img" src="' + myHiddenPlaces[i].imageUrl + '"></a></div>'); //이미지
+         bestImage.append(bestTitleBar, image);
+         
+         $('#main_hiddenPlace').append(bestImage); //최종 append
+         
+      }
+      
+   });
+
+
+</script>
 </head>
 
 <body>
@@ -400,7 +520,7 @@
 <!-- 상단 메인 메뉴 바 -->
 	<div class="container">
 		<div class="col-sm-3">
-			<a href="homeView.html"><img id="logo_img" src="logo.png"></a>
+			<a href="homeView.html"><img id="logo_img" src="../../img/logo.png"></a>
 		</div>
 		<div class="col-sm-9">
 			<div class="col-sm-9"></div>
@@ -427,14 +547,14 @@
 
 	<!-- 메인 사진 박스 -->
 	<div class="container-fluid">
-		<img id="main_img" src="camping.png" alt="route">
+		<img id="main_img" src="../../img/bookcafe.jpeg" alt="route">
 
 		<div class="main_img_text"><h2>내가 알지 못한 멋진 곳이 궁금하신가요?</h2></div>
 
 		<div class="span12">
 			<form id="custom-search-form" class="form-search form-horizontal pull-right">
 				<div class="input-append span12">
-					<input type="text" class="search-query" placeholder="                                          #내가 알지 못한 곳">
+					<input type="text" class="search-query" placeholder="#내가 알지 못한 곳">
 					<button type="submit" class="glyphicon glyphicon-search"><i class="icon-search icon-search-4x"></i></button>
 				</div>
 			</form>
@@ -466,11 +586,9 @@
 		 <div class="col-md-1"></div>
 		 <div class="col-md-4" id = "checkbox_padding">
 		 
-	    <div class="row"></div>
-			
 			<div class="col-md-3" id = "checkbox_padding">
 				<ul class="list-unstyled">
-					<li><label><input type="checkbox" class="all">서울전체</label></li>
+					<li><label><input type="checkbox" class="all">전체</label></li>
 				</ul>
 			</div>
 			
@@ -492,8 +610,6 @@
 				</ul>
 			</div>	
 			
-		
-		<div class="row"></div>
 			
 			<div class="col-md-3" id = "checkbox_padding">
 				<ul class="list-unstyled">
@@ -519,8 +635,6 @@
 				</ul>
 			</div>	
 		
-		<div class="row"></div>
-			
 			<div class="col-md-3" id = "checkbox_padding">
 				<ul class="list-unstyled">
 					<li><label><input type="checkbox">금천구</label></li>
@@ -545,8 +659,6 @@
 				</ul>
 			</div>	
 			
-		<div class="row"></div>
-			
 			<div class="col-md-3" id = "checkbox_padding">
 				<ul class="list-unstyled">
 					<li><label><input type="checkbox">동작구</label></li>
@@ -570,8 +682,6 @@
 					<li><label><input type="checkbox">서초구</label></li>
 				</ul>
 			</div>	
-		
-		<div class="row"></div>
 			
 			<div class="col-md-3" id = "checkbox_padding">
 				<ul class="list-unstyled">
@@ -597,8 +707,6 @@
 				</ul>
 			</div>
 			
-		<div class="row"></div>
-			
 			<div class="col-md-3" id = "checkbox_padding">
 				<ul class="list-unstyled">
 					<li><label><input type="checkbox">영등포구</label></li>
@@ -622,8 +730,6 @@
 					<li><label><input type="checkbox">종로구</label></li>
 				</ul>
 			</div>	
-			
-		<div class="row"></div>
 			
 			<div class="col-md-3" id = "checkbox_padding">
 				<ul class="list-unstyled">
@@ -700,56 +806,15 @@
    <div class="col-md-2"></div>
       
    
-   <div class="container">
-   
-
-    <div class="row"></div>
-  
-<!--나만의 루트 베스트-->  
-<div id="main_hiddenPlace" class="row">
-      
-         <div class="col-sm-4">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="bookcafe.jpeg" class ="best-img-circle"></div>
-               <div class="col-sm-1">
-                  <div class="personal_article"><a href=""><h6 class="name">존멋지훈</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="best_hiddenPlace_img" src="route.png"></a>
-            </div>
-         </div>
-         
-         <div class="col-sm-4">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="best-img-circle"></div>
-               <div class="col-sm-1">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="best_hiddenPlace_img" src="camera.jpeg"></a>
-            </div>
-         </div>
-
-         <div class="col-sm-4">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="best-img-circle"></div>
-               <div class="col-sm-1">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="best_hiddenPlace_img" src="beer.jpeg"></a>
-            </div>
-         </div>
-         
-      </div>
-  
-    
- </div>
+	 <div class="container">
+	    <div class="row"></div>
+		<!--내알못 베스트 3 루트 베스트-->  
+		<div id="hiddenPlace_best3" class="row">
+		      
+		</div>
+	 </div>
  
- <!--베스트 아래선  -->
+ 	<!--베스트 아래선  -->
     <br><br><br>
    <div class="col-md-1"></div>
    <div id="sign_up_border" class="col-md-10"></div>
@@ -763,108 +828,8 @@
    <div id="main_body" class = "container">
       <div id="main_hiddenPlace" class="row">
       
-         <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="bookcafe.jpeg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href=""><h6 class="name">존멋지훈</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="route.png"></a>
-            </div>
-         </div>
-         
-         <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="camera.jpeg"></a>
-            </div>
-         </div>
-
-         <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="beer.jpeg"></a>
-            </div>
-         </div>
-         
-          <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="beer.jpeg"></a>
-            </div>
-         </div>
          
       </div>
-      
-      <div id="main_hiddenPlace" class="row">
-      
-         <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="bookcafe.jpeg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href=""><h6 class="name">존멋지훈</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="route.png"></a>
-            </div>
-         </div>
-         
-         <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="camera.jpeg"></a>
-            </div>
-         </div>
-
-         <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="beer.jpeg"></a>
-            </div>
-         </div>
-         
-          <div class="col-sm-3">
-            <div class="personal_article_space">
-               <div class="col-sm-1"><img src ="17H.jpg" class ="img-circle"></div>
-               <div class="col-sm-2">
-                  <div class="personal_article"><a href="#"><h6 class="name">노답류지은</h6></a></div>
-                  <div class="personal_article"><h6 class="insert_date">2016-11-21</h6></div>
-               </div>
-            </div>
-            <div><a href="#"><img class="hiddenPlace_img" src="beer.jpeg"></a>
-            </div>
-         </div>
-         
-      </div>
-      
    </div>
     
     <!-- 루트쓰기버튼 -->
