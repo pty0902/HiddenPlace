@@ -1,5 +1,6 @@
 @CHARSET "EUC-KR";
 
+
 #check_left_gride {
    padding-left: 0px;
    text-align : left;
@@ -27,12 +28,28 @@
    margin-left : 10%;
 }
 
-.btn {
+#update_button_dup, #update_button_join, 
+#update_button_cancle, #delete_button_join, 
+#delete_button_cancle {
    background-color : #3399ff;
    color : white;
 }
 
-.btn:hover {
+#update_button_dup, #update_button_join, 
+#update_button_cancle, #delete_button_join, 
+#delete_button_cancle:hover {
 	background-color : #3399ff;
    color : white;
+}
+
+#delete_content {
+   margin : 2%;
+}
+
+#delete_id {
+   margin : 2%;
+}
+
+#delete_nowPw {
+   margin : 2%;
 }

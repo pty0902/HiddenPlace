@@ -5,6 +5,12 @@
 <title>내알못</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 상단 공통적용 스타일시트 -->
+<link rel="stylesheet" type="text/css" href="../../../bootstrap/css/homeViewStyle.css">
+
+<!-- 즐겨찾기 스타일시트 -->
+<link rel="stylesheet" type="text/css" href="../../../bootstrap/css/bookMarkView.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="homeViewStyle.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -13,10 +19,9 @@
 <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../../js/hiddenPlace/myHiddenPlace.js"></script>
-<script src="../../js/controllers/controllers.js"></script>
-
+<script src="../../js/hiddenPlace/myHiddenPlaceController.js"></script>
+<script src="../../js/hiddenPlace/myRouteController.js"></script>
 </head>
-
 
 
 <!-- 내알못 이벤트 핸들링 -->
@@ -24,7 +29,9 @@
 
 	$(document).ready(function() {
 		
-		var myHiddenPlaces = Controllers.getMyHiddenPlaceController().requestBookmarkMHP();
+		var mhpController = new MyHiddenPlaceController();
+		
+		var myHiddenPlaces = mhpController.requestBestMHP();
 		
 		for(var i = 0 ; i < myHiddenPlaces.length ; i++) {		
 			
@@ -75,7 +82,9 @@
 
 	$(document).ready(function() {
 		
-		var myRoutes = Controllers.getMyRouteController().requestBookmarkMR();
+		var mrController = new MyRouteController();
+		
+		var myRoutes = mrController.requestBookmarkMR();
 		
 		for(var i = 0 ; i < myRoutes.length ; i++) {		
 			
@@ -127,94 +136,84 @@
 		<div class="col-sm-3">
 			<a href="homeView.html"><img id="logo_img" src="logo.png"></a>
 		</div>
-		<div class="col-sm-7"></div>
-		<div class="col-sm-2">
+
+		<div class="col-sm-9">
 			<div id="login_button" class="btn-group">
-				<button type="button" class="btn btn-default">로그인</button>
-				<button type="button" class="btn btn-default">회원가입</button>
+				<button type="button" class="btn btn">로그인</button>
+				<button type="button" class="btn btn">회원가입</button>
 			</div>
 		</div>
-
-		<div id="main_buttons" class="btn-group btn-group-justified">
-			<a href="#" id="main_button_1" class="btn btn-default">홈페이지</a> <a
-				href="#" id="main_button_1" class="btn btn-default">마이페이지</a> <a
-				href="#" class="btn btn-default">나만의 루트</a>
+		
+		<div class="col-sm-7">
+			<div id="main_buttons" class="btn-group btn-group-justified">
+				<a href="#" class="btn btn">홈페이지</a>
+				<a href="#" class="btn btn">마이페이지</a>
+				<a href="#" class="btn btn">나만의 루트</a>
+				<a href="#" class="btn btn">즐겨찾기</a>
+			</div>
 		</div>
 	</div>
 
-
 	<!-- 메인 사진 박스 -->
-	<div class="container-fluid">
-		<img id="main_img" src="jeju.jpg" alt="route">
+	<div id="main_img_box" class="jumbotron">
+		<img id="main_img" src="pictures/bridge.jpg" alt="성산대교">
+
 		<div class="main_img_text">
 			<h2>내가 알지 못한 멋진 곳이 궁금하신가요?</h2>
 		</div>
-		<div id="search_bar_space" class="container">
-			<form class="inline">
-				<input type="text" placeholder="#당신이 원했던 곳">
-				<button type="submit">
-					<img id="search_button_img" src="search_blue.png">
-				</button>
+		
+		<div class="span12">
+			<form id="custom-search-form"
+				class="form-search form-horizontal pull-right">
+				<div class="input-append span12">
+					<input type="text" class="search-query" placeholder="#내가 알지 못한 곳">
+					<button type="submit" class="glyphicon glyphicon-search">
+						<i class="icon-search"></i>
+					</button>
+				</div>
 			</form>
 		</div>
-	</div>
+	</div> <!-- 메인 사진 박스 end --> <!-- 여기까지가 header.html -->
 	
-	
-	<!-- 즐겨찾기 -->
+	<!-- 즐겨찾기 탭 -->
 	<div class="container">
-	<br>
+		<br>
 		<h2>즐겨찾기</h2>
-		<div id="line" class="container"></div>
+		<div id="line" class="col-sm-12"></div>
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#myroute">나만의 루트</a></li>
 			<li><a data-toggle="tab" href="#hiddenplace">내알못</a></li>
-		
 		</ul>
+		<div class="tab-content">
 
-		<!-- 내용 -->
-		<div class="tab-content"> 
-		
-		
-		
-		
-			<!-- 나만의루트 -->
-			<div id="myroute" class="tab-pane fade in active"> 
+			<!-- 나만의 루트 즐겨찾기 -->
+			<div id="myroute" class="tab-pane fade in active">
 				<div id="main_body" class="container">
-					<div id="bookmark_myroute" class="row">
+					<div id="main_myroute" class="row">
 
 
 					</div>
-		
-					<button id="button1id" name="singlebutton"  class="btn btn">삭제</button>
+					<button id="delete_button" name="singlebutton" class="btn btn">삭제</button>
 				</div>
 			</div> <!-- 나만의루트 end -->
 			
-			
-			
-			
-			<!-- 내알못 -->
+
+			<!-- 내알못 즐겨찾기 -->
 			<div id="hiddenplace" class="tab-pane fade">
 				<div id="main_body" class="container">
-					<div id="bookmark_hiddenPlace" class="row">
+					<div id="main_hiddenPlace" class="row">
 
-			
+
 					</div>
-				
-					<button id="button1id" name="singlebutton"  class="btn btn">삭제</button>
+					<button id="delete_button" name="singlebutton" class="btn btn">삭제</button>
 				</div>
 			</div> <!-- 내알못 end -->
-
-
 		</div> <!-- 내용 end -->
-
-		
-	</div> <!-- 즐겨찾기 container end -->
+	</div> <!-- 내알못,나만의루트 탭 end -->
 	
-		
 	<div class="row">
 		<hr>
 	</div>
-	
 
 </body>
-
+</html>
