@@ -1,0 +1,19 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch br/pty
+# Your branch is up-to-date with 'origin/br/pty'.
+#
+# Changes to be committed:
+#	deleted:    target/classes/META-INF/test.txt
+#	modified:   target/classes/com/phoenix/hiddenplace/HomeController.class
+#	modified:   target/classes/com/phoenix/hiddenplace/controller/ControllerTest.class
+#	deleted:    target/classes/log4j.xml
+#	deleted:    target/classes/log4jdbc.log4j2.properties
+#	deleted:    target/classes/logback.xml
+#	deleted:    target/classes/mappers/Mapper.java
+#	deleted:    target/classes/mybatis-config.xml
+#	modified:   target/test-classes/com/phoenix/hiddenplace/DataSouceTest.class
+#	deleted:    target/test-classes/log4j.xml
+#
+
