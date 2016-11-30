@@ -12,10 +12,14 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../../js/user/user.js"></script>
-<script src="../../js/user/userController.js"></script>
+<script src="../../../resources/js/user/user.js"></script>
+<script src="../../../resources/js/user/userController.js"></script>
 
 <style>
+#email_alert {
+	display: none;
+}
+
 #check_left_gride {
 	padding-left: 0px;
 	float: left;
@@ -40,7 +44,13 @@
 	margin-right: 5%;
 }
 
-#nickname_check {
+#email_check, #nickname_check {
+	margin-left: 4%;
+	color: white;
+	background: #3399ff;
+}
+
+#email_send {
 	margin-left: 4%;
 	color: white;
 	background: #3399ff;
@@ -84,11 +94,12 @@
 	$(document).ready(function() {
 
 		var userController = new UserController();
-
+		var nicknameCheckSuccess = false;
+		
 		// 취소 버튼
 		$('cancel').click(function() {
 
-			location.href = "/main"; // 메인 홈페이지 url
+			location.href = "views/homepage/homeView"; // 메인 홈페이지 url
 
 		});
 
@@ -97,23 +108,24 @@
 
 			var status = checkValue(); // 입력한 상황 체크
 
-			var id = $('#id').val();
-			var pw = $('#pw').val();
-			var nickname = $('#nickname').val();
-			var phoneNum = $('#phoneNum_1').val() + $('#phoneNum_2').val() + $('#phoneNum_3').val();
-
-			var newUser = new User(id, pw, nickname, phoneNum);
-
 			if (status) {
-				alert("회원가입 완료");
+				var id = $('#id').val() + "@" + $('#email1').val();
+				var pw = $('#pw').val();
+				var nickname = $('#nickname').val();
+				var phoneNum = $('#phoneNum_1').val() + $('#phoneNum_2').val() + $('#phoneNum_3').val();
+				var newUser = new User(id, pw, nickname, phoneNum);
+
 				userController.requestUserInsert(newUser);
+			} else {
+				alert("회원가입 실패");
 			}
+
 		});
 
 		// 닉네임 중복확인
 		$('#nickname_check').click(function() {
 			var nickname = $('#nickname').val();
-			var chkNick = /[!@#$%^*+=-]$/; //특수문자
+			var chkNick = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
 
 			if ((nickname.length < 2) || (nickname.length > 10)) {
 				alert("닉네임은 2~10글자 사이로 입력해 주세요");
@@ -123,17 +135,21 @@
 				$('#nickname').focus();
 				$('#nickname').attr("value", "");
 			} else {
-				alert("사용할 수 있는 닉네임입니다.");
-				userController.requestNicknameCheck(nickname);
-
+// 				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
+				nicknameCheckSuccess = true;
 			}
 		});
 
 		// 회원가입시 입력사항 확인
 		function checkValue() {
 
-			var idChk = /^[a-zA-Z0-9]*$/;
+			var idChk = /^[a-zA-Z0-9]*$/; // 영어&숫자만
 			var pwChk = /^[a-zA-Z0-9]*$/; // 영어&숫자만
+
+			var chk1 = /[0-9]{1}/; //숫자만 입력
+			var chk2 = /[a-zA-Z]{1}/; //문자만 입력
+			var chk3 = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
+
 			var id = $("#id").val();
 			var pw = $("#pw").val();
 
@@ -143,8 +159,32 @@
 				return false;
 			}
 
+			if (!idChk.test(id)) {
+				alert("메일은 영어, 숫자만 입력가능합니다.");
+				$("#id").focus();
+				return false;
+			}
+
+			if ($("#id").val().length < 6) {
+				alert("이메일은 6자리 이상 입력해주세요");
+				$("#id").focus();
+				return false;
+			}
+
+			if ($("#email1").val().indexOf(".") == "-1") {
+				alert("이메일을 올바르게 입력해주세요.");
+				$("#email1").focus();
+				return false;
+			}
+
 			if (!$("#nickname").val()) {
 				alert("닉네임을 입력해주세요.");
+				$("#nickname").focus();
+				return false;
+			}
+
+			if (!nicknameCheckSuccess) {
+				alert("닉네임 중복확인을 해주세요");
 				$("#nickname").focus();
 				return false;
 			}
@@ -169,60 +209,75 @@
 			}
 
 			if ($("#pw").val().length < 6) {
-				alert("비밀번호는 6자 이상 입력해주세요.");
+				alert("비밀번호를 6자 이상 입력해주세요.");
 				$("#pw").focus();
 				return false;
 			}
 
-			if (!pwChk.test(pw)) {
-				alert("비밀번호는 문자+숫자의 조합으로 입력해주세요.");
+			if (chk1.test(pw) && chk2.test(pw)) {
+				return true;
+			} else {
+				alert("비밀번호를 문자, 숫자의 조합으로 입력해주세요.");
 				$("#pw").focus();
 				return false;
 			}
-			// 전화번호는 선택사항
-			/* if (!$("#phoneNum_2").val()) {
-				alert("전화번호를 입력해주세요.");
-				$("#phoneNum_2").focus();
-				return false;
-			}
 
-			if (!$("#phoneNum_3").val()) {
-				alert("전화번호를 입력해주세요.");
-				$("#phoneNum_3").focus();
-				return false;
-			} */
-
-			if (!idChk.test(id)) {
-				alert("메일은 영어, 숫자만 입력가능합니다.");
-				$("#id").focus();
-				return false;
-			}
-
-			if ($("#id").val().length < 6) {
-				alert("메일아이디는 6자리 이상 입력해주세요");
-				$("#id").focus();
-				return false;
-			}
-
-			if ($("#email").val().indexOf(".") == "-1") {
-				alert("이메일을 선택해주세요");
-				$("#email").focus();
-				return false;
-			}
-
-			/* 	if ($("#txtMail2").val().indexOf(".") != "-1") {
-					status = false;
-					alert("메일을 올바르게 입력해주세요");
-					$("[name=txtMail1]").focus();
-					return status;
-
-				} else if ($("[name=txtMail3]").val() == "1") {
-					status = false;
-					alert("메일 직접입력을 선택하셨습니다");
-					$("[name=txtMail2]").focus();
-					return status;
-				} */
 			return true;
+		}
+
+	});
+
+	// email 직접입력
+	$(document).ready(function() {
+		var email2 = $('#email2');
+		var email1 = $('#email1');
+
+		email2.bind('change', null, function() {
+
+			var host = this.value; // email2.value
+
+			if (host != 'etc' && host != '') { // 이메일
+				email1.attr('readonly', true);
+				email1.val(host).change();
+			} else if (host == 'etc') { // 직접입력 선택시
+				email1.attr('readonly', false);
+				email1.val('').change();
+				email1.focus();
+			} else {
+				email1.attr('readonly', true);
+				email1.val('').change();
+			}
+		});
+	});
+
+	// 이메일 인증
+	$(document).ready(function() {
+		var emailSendSuccess = false;
+		var certificationNum;
+		var isSuccess = false;
+		var isEmailCheck = false;
+		// 이메일 인증번호 발송	
+		function emailSendFuc() {
+			$('#emailSend').click(function() {
+				$("#email_alert").show();
+				var certificationNum = parseInt(Math.random() * 1000000);
+				var email = $('#id').val() + "@" + $('#emial1').val();
+
+				isSuccess = userController.requestEmailSend(email, certificationNum);
+
+			});
+		}
+		// 이메일 인증번호 확인 
+		function emailCheckFuc() {
+			$("#email_check").click(function() {
+				if (isSuccess) {
+					var userInputNum = $('#email_confirm').val();
+					isEmailCheck = userController.requestEmailCheck(userInputNum, certificationNum);
+
+				} else {
+					alert("이메일 전송을 먼저 수행하십시오.");
+				}
+			});
 		}
 	});
 </script>
@@ -246,12 +301,18 @@
 			<div class="col-sm-4"></div>
 
 			<div class="col-sm-6">
-				<div class="col-sm-3" id="check_left_gride">아이디</div>
+				<div id="email_alert" class="alert alert-dismissible alert-danger">
+					<strong style="font-size: 120%;">잠시만 기다려 주세요.</strong>
+				</div>
+
+				<div class="col-sm-3" id="check_left_gride">아이디(이메일) *</div>
 
 				<div class="col-sm-9" id="check_rigth_gride">
 
-					<input id="id" placeholder="E-mail"></input> <select id="email">
-						<option value="">선택</option>
+
+					<input id="id" placeholder="E-mail"></input> <input id="email1"
+						name="email1" readonly="readonly" value="" /> <select id="email2">
+						<option value="" selected="selected">이메일 선택</option>
 						<option value="gmail.com">gmail.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="hanmail.net">hanmail.net</option>
@@ -260,14 +321,35 @@
 						<option value="nate.com">nate.com</option>
 						<option value="yahoo.co.kr">yahoo.co.kr</option>
 						<option value="freechal.com">freechal.com</option>
-						<option value="1">직접입력</option>
+						<option value="etc">직접입력</option>
 					</select>
 
-					<button id="input_button" type="button"
-						style="width: 100px; height: 25px;" class="btn btn-default">인증요청</button>
+					<button id="email_send" type="button"
+						style="width: 100px; height: 25px;" class="btn btn-default">인증
+						요청</button>
 
 				</div>
 			</div>
+			<div class="col-sm-2"></div>
+
+		</div>
+
+		<div class="row" id="row_margin">
+			<div class="col-sm-4"></div>
+
+			<div class="col-sm-6">
+				<div class="col-sm-3" id="check_left_gride">인증코드 입력 *</div>
+
+				<div class="col-sm-9" id="check_rigth_gride">
+					<input id="email_confirm" placeholder="email_confirm"></input>
+
+					<button id="email_check" type="button"
+						style="width: 100px; height: 25px;" class="btn btn-default">인증
+					</button>
+
+				</div>
+			</div>
+
 			<div class="col-sm-2"></div>
 
 		</div>
@@ -277,7 +359,7 @@
 
 			<div class="col-sm-4"></div>
 			<div class="col-sm-6">
-				<div class="col-sm-2" id="check_left_gride">닉네임</div>
+				<div class="col-sm-2" id="check_left_gride">닉네임 *</div>
 				<div class="col-sm-10" id="check_rigth_gride">
 					<input id="nickname" placeholder="nickname"></input>
 
@@ -294,7 +376,7 @@
 
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
-				<div class="col-sm-4" id="check_left_gride">비밀번호</div>
+				<div class="col-sm-4" id="check_left_gride">비밀번호 *</div>
 				<div class="col-sm-8" id="check_rigth_gride">
 					<input id="pw" type="password" placeholder="Password"></input>
 				</div>
@@ -307,7 +389,7 @@
 
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
-				<div class="col-sm-4" id="check_left_gride">비밀번호 확인</div>
+				<div class="col-sm-4" id="check_left_gride">비밀번호 확인 *</div>
 				<div class="col-sm-8" id="check_rigth_gride">
 					<input id="pw_check" type="password" placeholder="Password-Check"></input>
 				</div>
