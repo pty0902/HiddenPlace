@@ -95,7 +95,7 @@
 		// 회원가입 버튼 
 		$('#join').click(function() {
 
-			checkValue(); // 입력한 상황 체크
+			var status = checkValue(); // 입력한 상황 체크
 
 			var id = $('#id').val();
 			var pw = $('#pw').val();
@@ -131,90 +131,98 @@
 
 		// 회원가입시 입력사항 확인
 		function checkValue() {
-			var status = true;
-			var mailId = /^[a-zA-Z0-9_\.-\s]*$/;
+
+			var idChk = /^[a-zA-Z0-9]*$/;
+			var pwChk = /^[a-zA-Z0-9]*$/; // 영어&숫자만
 			var id = $("#id").val();
+			var pw = $("#pw").val();
 
 			if (!$("#id").val()) {
-				status = false;
 				alert("이메일을 입력해주세요.");
 				$("#id").focus();
-				return status;
+				return false;
 			}
 
 			if (!$("#nickname").val()) {
-				status = false;
 				alert("닉네임을 입력해주세요.");
 				$("#nickname").focus();
-				return status;
+				return false;
 			}
 
 			if (!$("#pw").val()) {
-				status = false;
 				alert("비밀번호를 입력해주세요.");
 				$("#pw").focus();
-				return status;
+				return false;
 			}
 
 			if (!$("#pw_check").val()) {
-				status = false;
 				alert("비밀번호를 동일하게 입력해주세요.");
 				$("#pw_check").focus();
-				return status;
+				return false;
 			}
 
 			// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
 			if ($("#pw").val() != $("#pw_check").val()) {
-				status = false;
+				$("#pw_check").focus();
 				alert("비밀번호를 동일하게 입력해주세요.");
-				return status;
+				return false;
 			}
 
-			if (!$("#phoneNum_2").val()) {
-				status = false;
+			if ($("#pw").val().length < 6) {
+				alert("비밀번호는 6자 이상 입력해주세요.");
+				$("#pw").focus();
+				return false;
+			}
+
+			if (!pwChk.test(pw)) {
+				alert("비밀번호는 문자+숫자의 조합으로 입력해주세요.");
+				$("#pw").focus();
+				return false;
+			}
+			// 전화번호는 선택사항
+			/* if (!$("#phoneNum_2").val()) {
 				alert("전화번호를 입력해주세요.");
 				$("#phoneNum_2").focus();
-				return status;
+				return false;
 			}
 
 			if (!$("#phoneNum_3").val()) {
-				status = false;
 				alert("전화번호를 입력해주세요.");
 				$("#phoneNum_3").focus();
-				return status;
+				return false;
+			} */
+
+			if (!idChk.test(id)) {
+				alert("메일은 영어, 숫자만 입력가능합니다.");
+				$("#id").focus();
+				return false;
 			}
 
-			if (!mailId.test(id)) {
-				status = false;
-				alert("메일을 올바르게 입력해주세요");
-				$("#id").focus();
-				return status;
-			}
 			if ($("#id").val().length < 6) {
-				status = false;
-				alert("메일아이디는 최소 6자리 이상 입력해주세요");
+				alert("메일아이디는 6자리 이상 입력해주세요");
 				$("#id").focus();
-				return status;
+				return false;
 			}
+
 			if ($("#email").val().indexOf(".") == "-1") {
-				status = false;
 				alert("이메일을 선택해주세요");
 				$("#email").focus();
-				return status;
-			}
-			if ($("#txtMail2").val().indexOf(".") != "-1") {
-				status = false;
-				alert("메일을 올바르게 입력해주세요");
-				$("[name=txtMail1]").focus();
-				return status;
-
-			} else if ($("[name=txtMail3]").val() == "1") {
-				status = false;
-				alert("메일 직접입력을 선택하셨습니다");
-				$("[name=txtMail2]").focus();
-				return status;
+				return false;
 			}
 
+			/* 	if ($("#txtMail2").val().indexOf(".") != "-1") {
+					status = false;
+					alert("메일을 올바르게 입력해주세요");
+					$("[name=txtMail1]").focus();
+					return status;
+
+				} else if ($("[name=txtMail3]").val() == "1") {
+					status = false;
+					alert("메일 직접입력을 선택하셨습니다");
+					$("[name=txtMail2]").focus();
+					return status;
+				} */
+			return true;
 		}
 	});
 </script>
@@ -288,7 +296,7 @@
 			<div class="col-sm-4">
 				<div class="col-sm-4" id="check_left_gride">비밀번호</div>
 				<div class="col-sm-8" id="check_rigth_gride">
-					<input id="pw" placeholder="Password"></input>
+					<input id="pw" type="password" placeholder="Password"></input>
 				</div>
 			</div>
 			<div class="col-sm-4"></div>
@@ -301,7 +309,7 @@
 			<div class="col-sm-4">
 				<div class="col-sm-4" id="check_left_gride">비밀번호 확인</div>
 				<div class="col-sm-8" id="check_rigth_gride">
-					<input id="pw_check" placeholder="Password-Check"></input>
+					<input id="pw_check" type="password" placeholder="Password-Check"></input>
 				</div>
 			</div>
 			<div class="col-sm-4"></div>
