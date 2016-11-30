@@ -1,5 +1,5 @@
 //myHiddenPlace dao 객체
-function MyHiddenPlaceDao() {
+function MyRouteDao() {
 	
 // 즐겨찾기 나만의루트 dao 메서드
 	this.bookmarkMRDao = function() {
