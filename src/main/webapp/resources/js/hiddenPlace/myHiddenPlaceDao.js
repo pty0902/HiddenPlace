@@ -5,6 +5,8 @@ function MyHiddenPlaceDao() {
 //	내알못 best 3 요청 dao 메서드
 	this.bestMHP = function() {
 		
+		alert("Dao 도착");
+		
 		var myHiddenPlaces = [];
 		
 		try{
