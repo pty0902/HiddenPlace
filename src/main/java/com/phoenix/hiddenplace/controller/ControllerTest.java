@@ -12,9 +12,4 @@ public class ControllerTest {
       return "/views/user/userInsertView";
    }
    
-   @RequestMapping(value="/homepage/homeJspTest")
-   public void test2(){
-      System.out.println("jsp 파일 호출");
-   }
-
 }
