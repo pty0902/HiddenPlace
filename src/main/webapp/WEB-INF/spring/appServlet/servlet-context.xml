@@ -20,20 +20,12 @@
 	<resources mapping="/js/**" location="/WEB-INF/js/" /> 
 	
 	<!--  jsp 시작을 위한 -->
-<<<<<<< HEAD
-	 <!--  <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-=======
 	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
->>>>>>> refs/remotes/origin/master
 		
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 		
-<<<<<<< HEAD
-	</beans:bean>   -->
-=======
 	</beans:bean> -->
->>>>>>> refs/remotes/origin/master
 	
 	<!-- html시작을 위한 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
