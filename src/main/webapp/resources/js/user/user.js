@@ -1,5 +1,5 @@
 
-function User(userId,userPw,userNickname,userPhoneNum,userStartDate,userEndDate ) {
+function User(userId,userPw,userNickname,userPhoneNum,userStartDate,userEndDate) {
 
 	this.userId = userId; // 아이디
 	this.userPw = userPw; // 비밀번호

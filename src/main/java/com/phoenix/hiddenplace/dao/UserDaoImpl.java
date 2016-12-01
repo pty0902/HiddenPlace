@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao {
 	@Inject
 	private SqlSession session;
 
-	private static String namespace = "com.phoenix.hiddenplace.mappers.UserMapper";
+	private static String namespace = "com.phoenix.hiddenplace.mapper.UserMapper";
 
 	@Override
 	public void create(User user) throws Exception {

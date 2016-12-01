@@ -107,17 +107,14 @@
 		$('#join').click(function() {
 
 			var status = checkValue(); // 입력한 상황 체크
-
+			var isSuccess = false;
 			if (status) {
 				var id = $('#id').val() + "@" + $('#email1').val();
 				var pw = $('#pw').val();
 				var nickname = $('#nickname').val();
 				var phoneNum = $('#phoneNum_1').val() + $('#phoneNum_2').val() + $('#phoneNum_3').val();
 				var newUser = new User(id, pw, nickname, phoneNum);
-
-				userController.requestUserInsert(newUser);
-			} else {
-				alert("회원가입 실패");
+				isSuccess = userController.requestUserInsert(newUser);
 			}
 
 		});
@@ -135,8 +132,9 @@
 				$('#nickname').focus();
 				$('#nickname').attr("value", "");
 			} else {
-// 				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
+				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
 				nicknameCheckSuccess = true;
+				alert("사용가능한 닉네임입니다.");
 			}
 		});
 
@@ -214,7 +212,7 @@
 				return false;
 			}
 
-			if (chk1.test(pw) && chk2.test(pw)) {
+			if (chk1.test(pw) && chk2.test(pw)) {	
 				return true;
 			} else {
 				alert("비밀번호를 문자, 숫자의 조합으로 입력해주세요.");

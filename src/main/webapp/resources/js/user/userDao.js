@@ -3,26 +3,28 @@ function UserDao() {
 	// 회원가입 메서드
 	this.userInsert = function(newUser) {
 
-		alert("dao까지 왔음");
 		try {
 			$.ajax({
 				url : '/user/userInsertView', // 홈페이지 불러올 주소
 				async : false, // false: 동기, true: 비동기
 				type : 'post', // 요청방식 get or post
 				data : {
-					userId : newUser.uesrId,
+					userId : newUser.userId,
 					userPw : newUser.userPw,
 					userNickname : newUser.userNickname,
 					userPhoneNum : newUser.userPhoneNum
 				},
-				dataType : 'xml', // 서버에서 보내오는 데이터 타입
-				success : function(data) { // 서버에서 보내오는 데이터
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
+				success : function(result) { // 서버에서 보내오는 데이터
 
-					isSucces: $(this).find('isSuccess').text() // 회원가입 성공 여부
+					alert(result);
+					// if(result == 'success'){
+					// alert("성공");
+					// }
+					// isSucces : $(this).find('success').text() // 회원가입 성공 여부
 
 					// var messageValue = $(data).find('message').text(); // 여기 나중에 수정
 					// isSuccess = eval('(' + messageValue + ')');
-
 				}
 			});
 		} catch (e) {
@@ -30,18 +32,17 @@ function UserDao() {
 			console.log(e.message);
 		}
 
-		return isSuccess;
-
+		return result;
 	};
 
 	// 회원가입 닉네임 중복확인
-	this.userNicknameCheck = function(nickname) {
+	this.nicknameCheck = function(nickname) {
 
-		alert("dao까지 왔음");
+		alert(nickname);
 		try {
 
 			$.ajax({
-				url : '/user/userInsertView', // 닉네임 중복 체크할 곳
+				url : '/user/nicknameCheck', // 닉네임 중복 체크할 곳
 				async : false, // false: 동기, true: 비동기
 				type : 'post',
 				data : {
@@ -162,7 +163,7 @@ function UserDao() {
 
 	};
 
-	// 정보수정 
+	// 정보수정
 	this.updateDao = function(user) {
 
 		var update_myInfo;
@@ -195,7 +196,7 @@ function UserDao() {
 
 	};
 
-	// 회원탈퇴 
+	// 회원탈퇴
 	this.test = function(delete_pw) {
 
 		var isSuccess;
@@ -223,8 +224,5 @@ function UserDao() {
 			console.log(e.message);
 		}
 
-	}
-	
-	
-	
+	};
 }
