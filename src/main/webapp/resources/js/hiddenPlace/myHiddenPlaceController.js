@@ -33,6 +33,8 @@ function MyHiddenPlaceController() {
 		return myHiddenPlaces;
 		
 	}
+}
+
 /*	
 //	 controller 메서드
 	this.requestWriteView = function() {
@@ -106,17 +108,3 @@ function MyHiddenPlaceController() {
 
 	};
 */
-	
-	}
-//controller 객체(static)
-var Controllers = function() {	
-
-};
-
-Controllers.articleController = new ArticleController();
-
-Controllers.getArticleController = function() {
-	
-	return Controllers.articleController;
-
-};
