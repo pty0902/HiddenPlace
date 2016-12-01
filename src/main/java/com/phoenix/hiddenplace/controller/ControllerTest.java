@@ -13,6 +13,7 @@ public class ControllerTest {
       return "/views/homepage/homeView";
    }
    
+<<<<<<< HEAD
    @RequestMapping(value="/homepage/homeJspTest")
    public void test2(){
       System.out.println("jsp 파일 호출");
@@ -30,4 +31,6 @@ public class ControllerTest {
       return "/views/bookmark/userBookMarkView";
    }
 
+=======
+>>>>>>> refs/remotes/dongjin1204/master
 }
