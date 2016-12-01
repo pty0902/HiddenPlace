@@ -1,5 +1,8 @@
 /com/
 <<<<<<< HEAD
+/mappers/
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 /mappers/
 =======
@@ -7,3 +10,8 @@
 =======
 /mappers/
 >>>>>>> refs/remotes/origin/master
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/br/pty
+>>>>>>> refs/remotes/origin/br/pty
