@@ -13,17 +13,12 @@ function UserDao() {
 					userNickname : newUser.userNickname,
 					userPhoneNum : newUser.userPhoneNum
 				},
-				dataType : 'xml', // 서버에서 보내오는 데이터 타입
-				success : function(result) { // 서버에서 보내오는 데이터
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
+				success : function(data) { // 서버에서 보내오는 데이터
 
-					alert(result);
-					// if(result == 'success'){
-					// alert("성공");
-					// }
-					// isSucces : $(this).find('success').text() // 회원가입 성공 여부
+					alert(data);
+					isSuccess = data;
 
-					// var messageValue = $(data).find('message').text(); // 여기 나중에 수정
-					// isSuccess = eval('(' + messageValue + ')');
 				}
 			});
 		} catch (e) {
@@ -31,7 +26,7 @@ function UserDao() {
 			console.log(e.message);
 		}
 
-		return result;
+		return isSuccess;
 	};
 
 	// 회원가입 닉네임 중복확인
@@ -50,6 +45,7 @@ function UserDao() {
 				success : function(data) { // 서버에서 보내오는 데이터 // data = success
 
 					isSuccess = data;
+					
 				}
 			});
 		} catch (e) {

@@ -131,7 +131,7 @@
 				$('#nickname').focus();
 				$('#nickname').attr("value", "");
 			} else {
-				userController.requestNicknameCheck(nickname);
+				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
 				alert(nicknameCheckSuccess);
 			}
 		});
