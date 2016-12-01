@@ -2,7 +2,6 @@
 function UserDao() {
 	// 회원가입 메서드
 	this.userInsert = function(newUser) {
-
 		try {
 			$.ajax({
 				url : '/user/userInsertView', // 홈페이지 불러올 주소
@@ -14,7 +13,7 @@ function UserDao() {
 					userNickname : newUser.userNickname,
 					userPhoneNum : newUser.userPhoneNum
 				},
-				dataType : 'text', // 서버에서 보내오는 데이터 타입
+				dataType : 'xml', // 서버에서 보내오는 데이터 타입
 				success : function(result) { // 서버에서 보내오는 데이터
 
 					alert(result);

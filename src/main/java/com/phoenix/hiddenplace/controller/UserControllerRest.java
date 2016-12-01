@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.phoenix.hiddenplace.domain.User;
@@ -22,7 +21,7 @@ public class UserControllerRest {
 
 	// 회원가입
 	@RequestMapping(value = "/userInsertView", method = RequestMethod.POST)
-	public ResponseEntity<String> insert(@RequestBody User user) {
+	public ResponseEntity<String> insert(User user) {
 
 		System.out.println("회원가입 컨트롤러RESTFUL");
 		System.out.println(user.toString());

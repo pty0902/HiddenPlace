@@ -7,7 +7,6 @@ function UserController() {
 
 	// 회원가입
 	this.requestUserInsert = function(newUser) {
-
 		var isSuccess = dao.userInsert(newUser);
 
 		if (isSuccess) {
@@ -22,12 +21,6 @@ function UserController() {
 	this.requestNicknameCheck = function(nickname) {
 
 		var isSuccess = dao.nicknameCheck(nickname);
-
-		if (isSuccess) {
-			alert("사용가능한 닉네임입니다.");
-		} else {
-			alert("사용불가능한 닉네임입니다.");
-		}
 
 		return isSuccess;
 	}
