@@ -13,7 +13,6 @@ public class ControllerTest {
       return "/views/homepage/homeView";
    }
    
-<<<<<<< HEAD
    @RequestMapping(value="/homepage/homeJspTest")
    public void test2(){
       System.out.println("jsp 파일 호출");
@@ -24,13 +23,11 @@ public class ControllerTest {
       System.out.println("html 파일 호출");
       return "/views/bookmark/userBookMarkView";
    }
-   selectedDeleteMHP
+ 
    @RequestMapping(value="/bookmark/userBookMarkView")
-   public String test3() {
+   public String test4() {
       System.out.println("html 파일 호출");
       return "/views/bookmark/userBookMarkView";
    }
 
-=======
->>>>>>> refs/remotes/dongjin1204/master
 }
