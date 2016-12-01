@@ -131,9 +131,8 @@
 				$('#nickname').focus();
 				$('#nickname').attr("value", "");
 			} else {
-// 				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
-				nicknameCheckSuccess = true;
-				alert("사용가능한 닉네임입니다.");
+				userController.requestNicknameCheck(nickname);
+				alert(nicknameCheckSuccess);
 			}
 		});
 

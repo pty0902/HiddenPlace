@@ -37,7 +37,6 @@ function UserDao() {
 	// 회원가입 닉네임 중복확인
 	this.nicknameCheck = function(nickname) {
 
-		alert(nickname);
 		try {
 
 			$.ajax({
@@ -47,11 +46,10 @@ function UserDao() {
 				data : {
 					nickname : nickname
 				},
-				dataType : 'xml', // 서버에서 보내오는 데이터 타입
-				success : function(data) { // 서버에서 보내오는 데이터
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
+				success : function(data) { // 서버에서 보내오는 데이터 // data = success
 
-					isSucces: $(this).find('isSuccess').text() // 사용가능한 닉네임 : true
-
+					isSuccess = data;
 				}
 			});
 		} catch (e) {

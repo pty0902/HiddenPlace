@@ -22,7 +22,12 @@ function UserController() {
 
 		var isSuccess = dao.nicknameCheck(nickname);
 
-		return isSuccess;
+		if (isSuccess === 'success') {
+			alert("사용가능한 닉네임입니다.");
+		}
+		if (isSuccess === 'fail') {
+			alert("이미 사용중인 닉네임입니다.");
+		}
 	}
 
 	// 이메일 인증 1
