@@ -3,13 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.phoenix.hiddenplace.mapper.UserMapper">
+<mapper namespace="com.phoenix.hiddenplace.mappers.UserMapper">
 
 	<!-- 회원가입 -->
 	<insert id="create">
 		insert into TBL_USER (USERID, USERPW, USERNICKNAME,
 		USERPHONENUM)
-		values(#{userId}, #{userPw}, #{userNickname}, #{userPhoneNum})
+		values(#{userId}, #{userPw}, #{userNickname},
+		#{userPhoneNum})
 	</insert>
 
 	<!-- 닉네임 중복확인 -->
@@ -19,5 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		tbl_user
 		where userNickname = #{userNickname}
 	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="delete">
+
+		delete from TBL_USER
+		where userPw = #{userPw}
+	</delete>
+
 
 </mapper>

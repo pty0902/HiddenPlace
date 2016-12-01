@@ -10,4 +10,12 @@ public interface UserService {
 	// 닉네임 중복확인
 	public String nicknameCheck(String nickname) throws Exception;
 
+	public User readMyPage(String userId) throws Exception;
+
+	// 회원정보 수정
+	public void modify(User user) throws Exception;
+
+	// 회원탈퇴
+	public void delete(String userPw) throws Exception;
+
 }

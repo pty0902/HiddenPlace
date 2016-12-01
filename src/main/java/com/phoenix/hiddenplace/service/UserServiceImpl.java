@@ -17,13 +17,32 @@ public class UserServiceImpl implements UserService {
 	public void create(User user) throws Exception {
 
 		dao.create(user);
-		
+
 	}
 
 	@Override
 	public String nicknameCheck(String nickname) throws Exception {
 
 		return dao.nicknameCheck(nickname);
+
+	}
+
+	@Override
+	public User readMyPage(String userId) throws Exception {
+		return dao.readMyPage(userId);
+	}
+
+	@Override
+	public void modify(User user) throws Exception {
+
+		dao.update(user); // userNickName, userPw 수정
+
+	}
+
+	@Override
+	public void delete(String userPw) throws Exception {
+
+		dao.delete(userPw);
 
 	}
 

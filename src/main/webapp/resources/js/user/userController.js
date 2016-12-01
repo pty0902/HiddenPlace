@@ -16,7 +16,6 @@ function UserController() {
 			alert("회원가입 실패");
 		}
 
-
 	};
 
 	// 닉네임 중복확인 controller 메서드
@@ -57,5 +56,14 @@ function UserController() {
 		return isSuccess;
 
 	}
+
+	// 글수정뷰 controller 메서드
+	this.requestUpdate = function(user) {
+		
+		var isSuccess = dao.updateDao(user);
+		
+		return isSuccess;
+
+	};
 
 }

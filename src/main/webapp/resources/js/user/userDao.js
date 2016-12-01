@@ -162,4 +162,37 @@ function UserDao() {
 
 	};
 
+	// 정보수정 dao 메서드
+	this.updateDao = function(user) {
+
+		var update_myInfo;
+
+		try {
+			alert("수정Dao 도착");
+			$.ajax({
+				url : '/modify',
+				async : false,
+				type : 'get',
+				data : {
+					userNickname : user.userNickname,
+					userPw : user.userPw
+				},
+				dataType : 'xml', // 서버에서 보내오는 데이터 타입
+				success : function(data) {
+					
+					var messageValue = $(data).find('message').text(); // 여기 나중에 수정
+					isSuccess = eval('(' + messageValue + ')');
+					
+				}
+			});
+
+		} catch (e) {
+			console.log('ArticleDao 객체 : selectUpdateDao 메서드에서 예외 발생');
+			console.log(e.message);
+		}
+
+		return isSuccess;
+
+	};
+
 }
