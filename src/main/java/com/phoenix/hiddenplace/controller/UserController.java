@@ -15,15 +15,16 @@ import com.phoenix.hiddenplace.service.UserService;
 @RequestMapping(value = "/user")
 public class UserController {
 
-	@Inject
-	private UserService service;
+//	@Inject
+//	private UserService service;
 
 	// 회원가입
 	@RequestMapping(value = "/userInsertView", method = RequestMethod.GET)
-	public void insertGET() throws Exception {
+	public String insertGET() throws Exception {
 
 		System.out.println("회원가입 컨트롤러에용");
 
+		return "/views/user/userInsertView";
 	}
 
 	// 회원가입
@@ -32,7 +33,7 @@ public class UserController {
 
 		System.out.println(user.toString());
 
-		service.create(user);
+//		service.create(user);
 
 		rttr.addFlashAttribute("result", "isSuccess");
 

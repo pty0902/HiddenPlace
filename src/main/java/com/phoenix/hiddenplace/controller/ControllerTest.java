@@ -10,7 +10,7 @@ public class ControllerTest {
    public String test1() {
       System.out.println("html 파일 호출");
       return "/views/homepage/homeView";	
-   }
+   }	
    
 //   @RequestMapping(value="/homepage/homeJspTest")
 //   public void test2(){

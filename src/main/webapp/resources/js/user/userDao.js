@@ -6,7 +6,7 @@ function UserDao() {
 		alert("dao까지 왔음");
 		try {
 			$.ajax({
-				url : '/views/user/userInsertView', // 홈페이지 불러올 주소
+				url : '/user/userInsertView', // 홈페이지 불러올 주소
 				async : false, // false: 동기, true: 비동기
 				type : 'post', // 요청방식 get or post
 				data : {
@@ -132,7 +132,7 @@ function UserDao() {
 		return isEmailCheck;
 	};
 
-	// 로그인 메서드
+	// 로그인
 	this.userLogin = function(user) {
 
 		try {
@@ -162,7 +162,7 @@ function UserDao() {
 
 	};
 
-	// 정보수정 dao 메서드
+	// 정보수정 
 	this.updateDao = function(user) {
 
 		var update_myInfo;
@@ -179,10 +179,10 @@ function UserDao() {
 				},
 				dataType : 'xml', // 서버에서 보내오는 데이터 타입
 				success : function(data) {
-					
+
 					var messageValue = $(data).find('message').text(); // 여기 나중에 수정
 					isSuccess = eval('(' + messageValue + ')');
-					
+
 				}
 			});
 
@@ -195,4 +195,36 @@ function UserDao() {
 
 	};
 
+	// 회원탈퇴 
+	this.test = function(delete_pw) {
+
+		var isSuccess;
+
+		try {
+			$.ajax({
+				url : '/deleteUser',
+				async : false,
+				type : 'get',
+				dataType : 'json', // 서버에서 보내오는 데이터 타입
+				data : ({
+					userPw : delete_pw
+				}),
+				success : function(data) {
+					console.log(data);
+					var messageValue = $(data).find('message').text();
+					console.log(messageValue + ", " + typeof (messageValue));
+					isSuccess = eval('(' + messageValue + ')');
+					console.log(isSuccess + ", " + typeof (isSuccess));
+				}
+			});
+
+		} catch (e) {
+			console.log("userDao 객체: userDao메서드에서 예외 발생");
+			console.log(e.message);
+		}
+
+	}
+	
+	
+	
 }
