@@ -18,26 +18,8 @@
 
 	<!-- html 시작을 위한 -->
 	<resources mapping="/views/**" location="/WEB-INF/views/" />
-<<<<<<< HEAD
 	<resources mapping="/js/**" location="/WEB-INF/js/" /> 
 	
-	<!--  jsp 시작을 위한 -->
-	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-		
-	</beans:bean> -->
-	
-	<!-- html시작을 위한 -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	
-		<beans:property name="prefix" value="" />
-		<beans:property name="suffix" value=".html" />
-		
-	</beans:bean> 
-	
-=======
 
 	<!-- jsp 시작을 위한 -->
 	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
@@ -57,7 +39,6 @@
 			name="suffix" value=".jsp" /> -->
 	</beans:bean>
 
->>>>>>> refs/remotes/dongjin1204/master
 	<context:component-scan base-package="com.phoenix.hiddenplace" />
 
 </beans:beans>
