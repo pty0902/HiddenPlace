@@ -18,5 +18,12 @@ public class ControllerTest {
       System.out.println("html 파일 호출");
       return "/views/bookmark/userBookMarkView";
    }
+   
+   @RequestMapping(value="/routeBoard/myRoutSelectOne")
+   public String test4() {
+      System.out.println("html 파일 호출");
+      return "/views/routeBoard/myRoutSelectOne";
+   }
+
 
 }
