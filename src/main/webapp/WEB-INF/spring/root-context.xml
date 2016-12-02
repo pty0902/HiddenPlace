@@ -53,6 +53,18 @@
 		<property name="mailSender" ref="EmailSender" />
 	</bean>
 
+	<!-- <authentication-manager> <authentication-provider user-service-ref="securityService"> 
+		<password-encoder ref="passwordEncoder" /> </authentication-provider> </authentication-manager> 
+		<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" 
+		/> -->
+
+	<bean id="customAuthenticationProvider" class="com.phoenix.hiddenplace.security.CustomAuthenticationProvider">
+		<property name="passwordEncoder" ref="passwordEncoder" />
+	</bean>
+
+	<!-- 스프링 시큐리티가 기본 제공하는 PasswordEncoder 구현 -->
+	<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 
 	<context:component-scan base-package="com.phoenix.hiddenplace.controller"></context:component-scan>

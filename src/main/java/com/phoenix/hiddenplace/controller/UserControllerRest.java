@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,8 +27,8 @@ public class UserControllerRest {
 	private Email email;
 	@Inject
 	private EmailSender emailSender;
-	// @Inject
-	// private PasswordEncoder passwordEncoder;
+	@Inject
+	private PasswordEncoder passwordEncoder;
 
 	// 회원가입
 	@RequestMapping(value = "/userInsertView", method = RequestMethod.POST)
@@ -38,6 +39,7 @@ public class UserControllerRest {
 		ResponseEntity<String> entity = null;
 
 		try {
+			user.setUserPw(passwordEncoder.encode(user.getUserPw()));
 			service.create(user);
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		} catch (Exception e) {
