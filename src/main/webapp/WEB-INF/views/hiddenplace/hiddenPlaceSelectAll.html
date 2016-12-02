@@ -16,8 +16,11 @@
 	href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="font-awesome/css/font-awesome.min.css" />
-	<script src="../../js/hiddenPlace/myHiddenPlace.js"></script>
-	<script src="../../js/hiddenPlace/myHiddenPlaceController.js"></script>
+	<script src="../../../resources/js/hiddenPlace/myHiddenPlace.js"></script>
+	<script src="../../../resources/js/hiddenPlace/myHiddenPlaceController.js"></script>
+	<script src="../../../resources/js/page/criteria.js"></script>
+	<script src="../../../resources/js/page/pageMaker.js"></script>
+	<script src="../../../resources/js/page/pageController.js"></script>
 
 <style>
   #sign_up_border{
@@ -411,12 +414,12 @@
 		
 </style>
 
-<!-- 내알못 베스트 3 이벤트 핸들링 -->
+<!-- <!-- 내알못 베스트 3 이벤트 핸들링 
 <script type="text/javascript">
 
 	$(document).ready(function() {
 		
-		var mhpController  = new myHiddenPlaceController();
+		var mhpController  = new MyHiddenPlaceController();
 		
 		var myHiddenPlaces = mhpController.requestBestMHP();
 		
@@ -463,13 +466,13 @@
 
 
 </script>
-
+ -->
 <!-- 내알못 목록 이벤트 핸들링 -->
 <script>
 
    $(document).ready(function() {
       
-	  var mhpController  = new myHiddenPlaceController();
+	  var mhpController  = new MyHiddenPlaceController();
 	   
       var myHiddenPlaces = mhpController.requestHiddenPlaceSelectAll();
    
@@ -513,6 +516,60 @@
 
 
 </script>
+
+<!-- 페이지 번호 이벤트 핸들링 -->
+<script>
+
+$(document).ready(function() {
+    
+	var pageController  = new PageController();
+	   
+    var pageMaker = pageController.requestPage();
+ 
+    	if(pageMaker.prev == true) {
+	    	 var laquo_link =  $('<li><a href="#" id = "laquo" >&laquo;</a></li>');//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+	    	 $('#page_append').append(laquo_link); //최종 append 
+    	}
+    	
+     	 for(var i = 0 ; pageMaker.startPage < pageMaker.endPage + 1  ; pageMaker.startPage++ ){
+    		 //var displayPageNum =  $('');
+    		/*   if(pageMaker.page == i){ //클릭이 됬을때는 a링크 없애고 버튼 활성화  이걸로 다시 바꾸기 pageMaker.cri.page
+    		 
+    		 var displayPageNum_active =  $('<li><a href="#" class = "active" >'+pageMaker.startPage+'</a></li>');
+    		 $('#page_append').append(displayPageNum_active); //최종 append 
+    		 
+    		 } */ //우리는 active 클래스 정의된게 없어서 클래스만 추가됨 해당 번호에 
+    		 
+    		 var displayPageNum_nonActive =  $('<li><a href="#" id = "pageNum">'+pageMaker.startPage+'</a></li>'); //누르면 서치이벤트 페이지 전환되야함
+    		 
+    		 $('#page_append').append(displayPageNum_nonActive); //최종 append 
+    		 
+    		 i++; 
+    		 
+      	  }
+
+     	if(pageMaker.next > 0 && pageMaker.endPage > 0) {
+ 	    	 var raquo_link =  $(' <li><a href="#" id = "raquo" >&raquo;</a></li>');//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+ 	    	//pageMaker.makeSearch(pageMaker.endPage +1)
+ 	    	 $('#page_append').append(raquo_link); //최종 append 
+     	} 
+    	 
+	$('#pageNum').click(function() {
+		
+		var page = $(this).val;
+		var perPageNum = 10;
+		
+		var cri = new criteria(page, perPageNum);
+		
+		alert(cri.page);
+		alert(cri.perPageNum);
+		
+	});
+	
+ });
+ 
+</script>
+
 </head>
 
 <body>
@@ -823,13 +880,23 @@
     
     <div class="row"></div>
     
+  
     <!-- 내알못 추천 -->
-    
    <div id="main_body" class = "container">
-      <div id="main_hiddenPlace" class="row">
-      
          
-      </div>
+       <div id="main_hiddenPlace" class="row">
+         
+       </div>
+      	<!-- 페이지 메기기 -->
+	   <div class="box-footer">
+	      <div class="text-center">
+	         <ul class="pagination" id = "page_append">
+	         
+	            
+	         </ul>
+	      </div>
+	   </div>
+			      
    </div>
     
     <!-- 루트쓰기버튼 -->
