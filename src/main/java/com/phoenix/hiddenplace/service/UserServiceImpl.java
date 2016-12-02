@@ -29,7 +29,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User readMyPage(String userId) throws Exception {
+		
 		return dao.readMyPage(userId);
+		
 	}
 
 	@Override
@@ -45,5 +47,11 @@ public class UserServiceImpl implements UserService {
 		dao.delete(userPw);
 
 	}
+	
+	@Override
+	   public User login(User user) throws Exception {
+
+	      return dao.loginPro(user);
+	   }
 
 }

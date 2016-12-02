@@ -21,8 +21,8 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../../../resources/js/hiddenPlace/myHiddenPlace.js"></script>
 <script
-	src="../../../resources/js/hiddenPlace/myHiddenPlaceController.js"></script>
-<script src="../../../resources/js/myRoute/myRouteController.js"></script>
+	src="../../../resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
+<script src="../../../resources/js/myroute/myRouteController.js"></script>
 </head>
 
 <!-- 홈페이지 이벤트 핸들링 -->
@@ -153,12 +153,26 @@
 		});
 
 	});
-	
-	
 </script>
 
+<!-- 지역 선택 이벤트 핸들링 -->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		$('#regionChoice_button').click(function() {
+			
+			var region = $(this).text());
+			var mhpController = new myHiddenPlaceController();
+		
+			var selectAll = mhpController.requestSelectAll(region);
+			
+		});
+		
+	});
+	</script>
+
 <body>
-	<!-- 상단 메인 메뉴 바 -->
 	<!-- 상단 메인 메뉴 바 -->
 	<div class="container">
 		<div class="col-sm-3">
@@ -169,8 +183,10 @@
 
 		<div class="col-sm-9">
 			<div id="login_button" class="btn-group">
-				<button type="button" class="btn btn">로그인</button>
-				<button type="button" class="btn btn">회원가입</button>
+				<a href=loginview><button type="button" class="btn btn"
+						style="background-color: white">로그인</button></a> <a
+					href=userInsertview><button type="button" class="btn btn"
+						style="background-color: white">회원가입</button></a>
 			</div>
 		</div>
 		<div class="col-sm-7">
@@ -221,12 +237,67 @@
 	</div>
 
 
-
 	<!-- 내알못 추천 -->
 	<div id="main_body" class="container">
-		<div id="main_hiddenPlace" class="row"></div>
-	</div>
+		<div id="main_hiddenPlace" class="row">
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+					<div class="col-sm-1">
+						<img src="bookcafe.jpeg" class="img-circle">
+					</div>
+					<div class="col-sm-3">
+						<div class="personal_article">
+							<a href=""><h7 class="name">존멋지훈</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<a href="#"><img class="hiddenPlace_img" src="route.png"></a>
+				</div>
 
+			</div>
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+					<div class="col-sm-1">
+						<img src="17H.jpg" class="img-circle">
+					</div>
+					<div class="col-sm-3">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<a href="#"><img class="hiddenPlace_img" src="camera.jpeg"></a>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="personal_article_space">
+					<div class="col-sm-1">
+						<img src="17H.jpg" class="img-circle">
+					</div>
+					<div class="col-sm-3">
+						<div class="personal_article">
+							<a href="#"><h7 class="name">노답류지은</h7></a>
+						</div>
+						<div class="personal_article">
+							<h7 class="insert_date">2016-11-21</h7>
+						</div>
+					</div>
+				</div>
+				<div>
+					<a href="#"><img class="hiddenPlace_img" src="beer.jpeg"></a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- youtube & 날씨 들어갈 예정 -->
@@ -234,7 +305,7 @@
 		<div class="col-sm-1"></div>
 		<div class="col-sm-5">
 			<h4>날씨 자리</h4>
-			
+
 		</div>
 		<div class="col-sm-5">
 			<h4>유튜브 자리</h4>
