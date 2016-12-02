@@ -125,4 +125,34 @@ public class UserControllerRest {
 		return entity;
 	}
 
+	// 회원탈퇴
+	@RequestMapping(value = "/deleteUser")
+	public ResponseEntity<String> deleteUser(@RequestParam("userPw") String userPw) {
+
+		System.out.println("deleteUser 파일 호출");
+		ResponseEntity<String> entity = null;
+
+		try {
+			service.delete(userPw);
+
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	// 로그인 logic 처리 필요함
+	@RequestMapping(value = "/login") // session에서 아이디 가져옴, 패스워드 처리하기
+	public User login(User user) throws Exception {
+
+		System.out.println(user.getUserId());
+		System.out.println(user.getUserPw());
+		User user1 = service.login(user); // 로직 처리 : 패스워드 일치
+
+		System.out.println(user1.getUserId());
+		System.out.println(user1.getUserPw());
+		return user1;
+	}
 }
