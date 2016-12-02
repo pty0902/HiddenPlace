@@ -60,12 +60,8 @@ function UserDao() {
 
 		try {
 			$.ajax({
-<<<<<<< HEAD:src/main/webapp/resources/js/user/userDao.js
-				url : '/', 
-=======
 				url : '/user/emailSend',
 				async : false, // false: 동기, true: 비동기
->>>>>>> br/pty:src/main/webapp/resources/js/user/userDao.js
 				type : 'POST',
 				data : {
 					email : email,
@@ -113,7 +109,7 @@ function UserDao() {
 	};
 
 	// 로그인 메서드
-	this.userLoginDao = function(user) {
+	this.userLogin = function(user) {
 
 		try {
 			$.ajax({
@@ -140,7 +136,7 @@ function UserDao() {
 	};
 	
 	// 정보수정
-	this.updateDao = function(user) {
+	this.update = function(user) {
 
 		var update_myInfo;
 

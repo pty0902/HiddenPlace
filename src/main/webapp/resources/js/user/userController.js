@@ -69,18 +69,10 @@ function UserController() {
 		return isSuccess;
 
 	}
-<<<<<<< HEAD:src/main/webapp/resources/js/user/userController.js
 	//	로그인 controller 메서드
 	this.requestLogin = function(user) {
-=======
 
-	// 로그인
-	this.requestLogin = function(id, pw) {
-
-		var isSuccess = dao.userLogin(id, pw);
->>>>>>> br/pty:src/main/webapp/resources/js/user/userController.js
-
-		var isSuccess = dao.userLoginDao(user);
+		var isSuccess = dao.userLogin(user);
 		return isSuccess;
 
 	};
@@ -88,7 +80,7 @@ function UserController() {
 	// 회원정보 수정
 	this.requestUpdate = function(user) {
 
-		var isSuccess = dao.updateDao(user);
+		var isSuccess = dao.update(user);
 
 		return isSuccess;
 

@@ -49,7 +49,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public User loginPro(User user) throws Exception {
 
 		return session.selectOne(namespace + ".selectUser", user);
@@ -57,12 +56,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
-=======
 	public String emailCheck(String email) throws Exception {
 		
 		return session.selectOne(namespace + ".emailCheck", email);
 		
 	}
 
->>>>>>> br/pty
 }
