@@ -29,7 +29,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User readMyPage(String userId) throws Exception {
+		
 		return dao.readMyPage(userId);
+		
 	}
 
 	@Override

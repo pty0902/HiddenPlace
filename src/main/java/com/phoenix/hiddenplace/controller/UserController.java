@@ -23,9 +23,6 @@ public class UserController {
 		return "/views/user/userInsertView";
 	}
 
-
-
-
 	// 회원탈퇴
 	@RequestMapping(value = "/deleteUser")
 	public void test1(@RequestParam("userPw") String userPw) {

@@ -11,6 +11,7 @@ public class ControllerTest {
       System.out.println("html 파일 호출");
       return "/views/homepage/homeView";	
    }	
+   
    @RequestMapping(value="/homepage/homeJspTest")
    public void test2(){
       System.out.println("jsp 파일 호출");
