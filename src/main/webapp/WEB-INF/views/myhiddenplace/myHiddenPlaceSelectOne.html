@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>내알못</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/homeViewStyle.css">
+<link rel="stylesheet" type="text/css" href="css/reply.css">
+
+
+<style>
+/* 공통 적용 */
+a {
+   /* a 태그 링크 밑줄 제거 */
+   text-decoration: none !important;
+}
+
+/* 상단 로그인 바 */
+#login_button {
+   margin-top: 4%;
+}
+
+#login_button>button {
+   border: 0;
+   outline: 0;
+   background-color: white;
+}
+
+/*상단 메인 메뉴 바*/
+#logo_img {
+   width: 170px;
+   margin-left: 60%;
+}
+
+#main_buttons {
+   width: 40%;
+   margin-top: 3%;
+   margin-left: 30%;
+}
+
+#main_buttons>a {
+   font-weight: bold;
+   font-size: 120%;
+   border: 0;
+   outline: 0;
+}
+
+/*메인 사진 박스*/
+#main_img {
+   width: 100%;
+   height: 400px;
+   opacity: 1.0;
+}
+
+.main_img_text {
+   position: absolute;
+   min-width: 80%;
+   text-align: center;
+   top: 350px;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   /*font-size: 18px;*/
+}
+
+.main_img_text>h2 {
+   font-weight: bold;
+   color: white;
+   font-family: font-style : italic;
+}
+
+#search_bar_space {
+   position: absolute;
+   top: 450px;
+   left: 68%;
+   transform: translate(-50%, -50%);
+}
+
+#search_bar_space>form>input {
+   background-color: transparent;
+   width: 50%;
+   height: 60px;
+   border: 2px solid white;
+   font-size: 20px;
+   color: white;
+   padding: 0px 20px 0px 20px;
+}
+
+#search_bar_space>form>button {
+   position: absolute;
+   padding: 0;
+   border: none;
+   left: 524px;
+   top: 2px;
+}
+
+#search_button_img {
+   width: auto;
+   height: 56px;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+   width: 70%;
+   margin: auto;
+}
+#respone_button{
+color:blue;
+}
+
+</style>
+
+</head>
+<body>
+
+   <!-- 상단 로그인 바 -->
+   <div class="container-fluid">
+
+      <div class="row">
+         <div class="col-sm-10"></div>
+         <div class="col-sm-2">
+            <div id="login_button" class="btn-group">
+               <button type="button" class="btn btn-default">로그인</button>
+               <button type="button" class="btn btn-default">회원가입</button>
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+   <!-- 상단 메인 메뉴 바 -->
+   <div class="container-fluid">
+
+      <div class="row">
+         <div class="col-sm-3">
+            <a href="homeView.html"><img id="logo_img" src="logo.png"></a>
+         </div>
+         <div id="main_buttons" class="btn-group btn-group-justified">
+            <a href="#" id="main_button_1" class="btn btn-default">홈페이지</a> <a
+               href="#" id="main_button_1" class="btn btn-default">마이페이지</a> <a
+               href="#" class="btn btn-default">나만의 루트</a>
+         </div>
+      </div>
+   </div>  <!-- 여기까진 header/include-->
+
+   
+   <!-- 메인 사진 박스 -->
+   <div class="container-fluid">
+      <img id="main_img" src="camping.png" alt="route">
+
+      <div class="main_img_text">
+         <h2>내가 알지 못한 멋진 곳이 궁금하신가요??</h2>
+      </div>
+      <div id="search_bar_space" class="container">
+         <form class="inline">
+            <input type="text" placeholder="#당신이 원했던 곳">
+            <button type="submit">
+               <img id="search_button_img" src="search_blue.png">
+            </button>
+         </form>
+      </div>
+   </div>
+   <hr>
+
+   <!-- 나만의루트 -->
+   <div class="container">
+
+      <!-- 나만의루트 사진 -->
+      <div id="main_hiddenPlace" class="row">
+         <div class="col-sm-2"></div>
+         <div class="col-sm-8">
+            <img class="hiddenPlace_img" src="camera.jpeg">
+         </div>
+         <div class="col-sm-2"></div>
+      </div>
+
+      <!-- 나만의루트 내용 -->
+      <div id="main_hiddenPlace" class="row">
+         <div class="col-sm-3"></div>
+         <div class="col-sm-6">
+            <div>
+               <br> <br> <br> <br> <br> <br> <br>
+               <br> <br> <br> <br> <br> <br> <br>
+               <br> <br> <br>
+
+
+            </div>
+         </div>
+         <div class="col-sm-3"></div>
+      </div>
+
+      <!-- 나만의루트 지도 -->
+      <div id="main_hiddenPlace" class="row">
+         <div class="col-sm-2"></div>
+         <div class="col-sm-8">
+            <div>
+               <img class="hiddenPlace_img" src="camera.jpeg">
+            </div>
+         </div>
+         <div class="col-sm-4"></div>
+      </div>
+   <br>
+      <!-- 나만의루트 즐겨찾기 좋아요 -->
+      <div id="main_hiddenPlace" class="row">
+         <div class="col-sm-4"></div>
+         <div class="col-sm-2">
+            <div class="bookmark_img">
+               <img class="hiddenPlace_logo" src="bookmark.png">
+            </div>
+         </div>
+         <div class="col-sm-2">
+            <div class="like_img">
+               <img class="hiddenPlace_logo" src="like.png">
+            </div>
+         </div>
+         <div class="col-sm-4"></div>
+      </div>
+<br><br><br>
+      <!-- 나만의루트 댓글 -->
+      <div id="main_hiddenPlace" class="row">
+      <div class="col-sm-2"></div>
+          <div class="col-sm-8">
+        <div class="panel panel-white post panel">
+            <div class="post-footer">
+                <div class="input-group"> 
+                    <input class="form-control" placeholder="Add a comment" type="text">
+                    <span class="input-group-addon">
+                        <a href="#"><i class="fa fa-edit"></i></a>  
+                    </span>
+                </div>
+                <ul class="comments-list">
+                    <li class="comment">
+                       
+                        <div class="comment-body">
+                            <div class="comment-heading">
+                                <h4 class="user">Gavino Free</h4>
+                                <h5 class="time">5 minutes ago</h5>
+                            </div>
+                            <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh    <a href="#" id="respone_button">댓글</a></p>
+                        </div>
+                        <ul class="comments-list">
+                            <li class="comment">
+                               
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">Ryan Haywood</h4>
+                                        <h5 class="time">3 minutes ago</h5>
+                                    </div>
+                                    <p>Relax my friend</p>
+                                </div>
+                            </li> 
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+      </div>
+   </div>
+</body>
+</html>
+

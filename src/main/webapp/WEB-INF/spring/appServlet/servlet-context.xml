@@ -18,6 +18,8 @@
 
 	<!-- html 시작을 위한 -->
 	<resources mapping="/views/**" location="/WEB-INF/views/" />
+	<resources mapping="/js/**" location="/WEB-INF/js/" /> 
+	
 
 	<!-- jsp 시작을 위한 -->
 	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
