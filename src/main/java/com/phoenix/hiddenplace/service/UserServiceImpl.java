@@ -46,4 +46,12 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public String emailCheck(String email) throws Exception {
+		
+		return dao.emailCheck(email);
+		
+	}
+
+
 }

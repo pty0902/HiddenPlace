@@ -17,4 +17,7 @@ public interface UserDao {
 
 	// 회원탈퇴
 	public void delete(String userPw) throws Exception;
+
+	// 이메일 중복확인
+	public String emailCheck(String email) throws Exception;
 }

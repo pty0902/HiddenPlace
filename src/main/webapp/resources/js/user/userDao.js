@@ -16,7 +16,6 @@ function UserDao() {
 				dataType : 'text', // 서버에서 보내오는 데이터 타입
 				success : function(data) { // 서버에서 보내오는 데이터
 
-					alert(data);
 					isSuccess = data;
 
 				}
@@ -45,7 +44,7 @@ function UserDao() {
 				success : function(data) { // 서버에서 보내오는 데이터 // data = success
 
 					isSuccess = data;
-					
+
 				}
 			});
 		} catch (e) {
@@ -58,25 +57,19 @@ function UserDao() {
 	// 이메일로 인증코드 발송
 	this.emailSend = function(email, certificationNum) {
 
-		alert("dao까지 왔음");
 		try {
 			$.ajax({
-				url : '/', // ㅁㅍ
+				url : '/user/emailSend',
+				async : false, // false: 동기, true: 비동기
 				type : 'POST',
 				data : {
 					email : email,
 					certificationNum : certificationNum
-				// 메일로 보낼 인증번호
 				},
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
 				success : function(data) {
-					$("#email_alert").hide();
 
-					if (data == 'emailCheckOK') {
-						alert("이메일이 전송되었습니다.")
-						isSuccess = true;
-					} else if (data == 'emailCheckFail') {
-						alert("중복된 이메일 입니다. 다른 이메일을 입력하여주십시오.")
-					}
+					isSuccess = data;
 				}
 			});
 		} catch (e) {
@@ -92,30 +85,18 @@ function UserDao() {
 
 		try {
 			$.ajax({
-				url : '/seoulmate/member/regist/emailcheck',
+				url : '/user/emailCheck',
+				async : false, // false: 동기, true: 비동기
 				data : {
 					userInputNum : userInputNum,
 					certificationNum : certificationNum
 				},
 				type : 'POST',
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
 				success : function(data) {
 
-					if (data == 'emailCheckSuccess') {
-						alert("이메일 인증에 성공하였습니다.");
-						/* emailInput(); */
-						$('#email_join').attr("readonly", "readonly");
-						$('#email_confirm').attr("readonly", "readonly");
+					isSuccess = data; // success or fail
 
-						// $('#emailSend').attr("disabled", true);
-						// $('#emailCheckSuccess').attr("disabled", true);
-						$('#emailSend').attr("class", "btn disabled");
-						$('#emailCheckSuccess').attr("class", "btn disabled");
-
-						isEmailCheck = true;
-
-					} else if (data == 'emailCheckFail') {
-						alert("이메일 인증에 실패하였습니다. 인증번호를 확인하여주십시오.");
-					}
 				}
 			});
 		} catch (e) {
@@ -123,7 +104,7 @@ function UserDao() {
 			console.log(e.message);
 		}
 
-		return isEmailCheck;
+		return isSuccess;
 	};
 
 	// 로그인
