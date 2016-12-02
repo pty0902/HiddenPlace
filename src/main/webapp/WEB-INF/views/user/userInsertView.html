@@ -95,6 +95,7 @@
 
 		var userController = new UserController();
 		var nicknameCheckSuccess = false;
+		var emailCheckSuccess = false;
 
 		// 취소 버튼
 		$('cancel').click(function() {
@@ -116,24 +117,6 @@
 				userController.requestUserInsert(newUser);
 			}
 
-		});
-
-		// 닉네임 중복확인
-		$('#nickname_check').click(function() {
-			var nickname = $('#nickname').val();
-			var chkNick = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
-
-			if ((nickname.length < 2) || (nickname.length > 10)) {
-				alert("닉네임은 2~10글자 사이로 입력해 주세요");
-				$('#nickname').focus();
-			} else if (chkNick.test(nickname)) {
-				alert("닉네임에 특수문자는 들어갈 수 없습니다.");
-				$('#nickname').focus();
-				$('#nickname').attr("value", "");
-			} else {
-				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
-				alert(nicknameCheckSuccess);
-			}
 		});
 
 		// 회원가입시 입력사항 확인
@@ -168,7 +151,7 @@
 			}
 
 			if ($("#email1").val().indexOf(".") == "-1") {
-				alert("이메일을 올바르게 입력해주세요.");
+				alert("이메일을 올바르게 입력하거나 선택해주세요.");
 				$("#email1").focus();
 				return false;
 			}
@@ -209,7 +192,13 @@
 				$("#pw").focus();
 				return false;
 			}
-
+			
+			if (!emailCheckSuccess) {
+				alert("이메일 인증을 해주세요.");
+				$("#email_confirm").focus();
+				return false;
+			}
+			
 			if (chk1.test(pw) && chk2.test(pw)) {
 				return true;
 			} else {
@@ -220,6 +209,54 @@
 
 			return true;
 		}
+
+		// 닉네임 중복확인
+		$('#nickname_check').click(function() {
+			var nickname = $('#nickname').val();
+			var chkNick = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
+
+			if ((nickname.length < 2) || (nickname.length > 10)) {
+				alert("닉네임은 2~10글자 사이로 입력해 주세요");
+				$('#nickname').focus();
+			} else if (chkNick.test(nickname)) {
+				alert("닉네임에 특수문자는 들어갈 수 없습니다.");
+				$('#nickname').focus();
+				$('#nickname').attr("value", "");
+			} else {
+				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
+				alert(nicknameCheckSuccess);
+			}
+		});
+
+		var emailSendSuccess = false;
+		var certificationNum;
+
+		// 이메일 인증번호 발송	
+		$('#email_send').click(function() {
+			$("#email_alert").show();
+			certificationNum = parseInt(Math.random() * 1000000);
+			var email = $('#id').val() + "@" + $('#email1').val();
+
+			emailSendSuccess = userController.requestEmailSend(email, certificationNum);
+			$("#email_alert").hide();
+		});
+		// 이메일 인증번호 확인 
+		$("#email_check").click(function() {
+			if (emailSendSuccess) {
+				var userInputNum = $('#email_confirm').val();
+
+				emailCheckSuccess = userController.requestEmailCheck(userInputNum, certificationNum);
+				//	 			$('#email_join').attr("readonly", "readonly");						
+				// 			$('#email_confirm').attr("readonly", "readonly");
+
+				// 			//$('#emailSend').attr("disabled", true);
+				// 			//$('#emailCheckSuccess').attr("disabled", true);
+				// 			$('#emailSend').attr("class", "btn disabled");
+				// 			$('#emailCheckSuccess').attr("class", "btn disabled");
+			} else {
+				alert("인증번호 전송을 먼저 수행하십시오.");
+			}
+		});
 
 	});
 
@@ -244,37 +281,6 @@
 				email1.val('').change();
 			}
 		});
-	});
-
-	// 이메일 인증
-	$(document).ready(function() {
-		var emailSendSuccess = false;
-		var certificationNum;
-		var isSuccess = false;
-		var isEmailCheck = false;
-		// 이메일 인증번호 발송	
-		function emailSendFuc() {
-			$('#emailSend').click(function() {
-				$("#email_alert").show();
-				var certificationNum = parseInt(Math.random() * 1000000);
-				var email = $('#id').val() + "@" + $('#emial1').val();
-
-				isSuccess = userController.requestEmailSend(email, certificationNum);
-
-			});
-		}
-		// 이메일 인증번호 확인 
-		function emailCheckFuc() {
-			$("#email_check").click(function() {
-				if (isSuccess) {
-					var userInputNum = $('#email_confirm').val();
-					isEmailCheck = userController.requestEmailCheck(userInputNum, certificationNum);
-
-				} else {
-					alert("이메일 전송을 먼저 수행하십시오.");
-				}
-			});
-		}
 	});
 </script>
 
@@ -306,7 +312,7 @@
 				<div class="col-sm-9" id="check_rigth_gride">
 
 
-					<input id="id" placeholder="E-mail"></input> <input id="email1"
+					<input id="id" placeholder="E-mail"></input>@<input id="email1"
 						name="email1" readonly="readonly" value="" /> <select id="email2">
 						<option value="" selected="selected">이메일 선택</option>
 						<option value="gmail.com">gmail.com</option>
@@ -321,8 +327,7 @@
 					</select>
 
 					<button id="email_send" type="button"
-						style="width: 100px; height: 25px;" class="btn btn-default">인증
-						요청</button>
+						style="width: 100px; height: 25px;" class="btn btn-default">인증요청</button>
 
 				</div>
 			</div>
@@ -340,7 +345,7 @@
 					<input id="email_confirm" placeholder="email_confirm"></input>
 
 					<button id="email_check" type="button"
-						style="width: 100px; height: 25px;" class="btn btn-default">인증
+						style="width: 100px; height: 25px;" class="btn btn-default">인증확인
 					</button>
 
 				</div>
