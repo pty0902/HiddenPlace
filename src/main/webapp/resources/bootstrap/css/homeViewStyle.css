@@ -185,7 +185,7 @@ a {
 
 /*동영상*/
 #visual {
-   /*   position: relative; */
+   
    height: 350px;
    width: 100%;
    margin-left: 0px;
@@ -199,7 +199,8 @@ a {
    background: #000; /* 배경 이미지로 대체 가능 */
    background-size: cover;
    z-index: -100;
-   margin-left: 50px;
+   margin-left: 150px;
+   margin-right: 70px;
 }
 
 #video-bg iframe {

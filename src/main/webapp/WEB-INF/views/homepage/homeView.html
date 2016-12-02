@@ -197,7 +197,7 @@ $(document).ready(function() {
 	  function error() {
 		  weather.innerHTML = "위치 정보 기능을 지원하지 않습니다.";
 	  };
-    
+
 });
 </script>
 
@@ -230,9 +230,9 @@ $(document).ready(function() {
 		<div class="col-sm-9">
 			<div id="login_button" class="btn-group">
 				<a href=loginview><button type="button" class="btn btn"
-						style="background-color: white">로그인</button></a> <a
+						style="background-color: white; color: blue;">로그인</button></a> <a
 					href=userInsertview><button type="button" class="btn btn"
-						style="background-color: white">회원가입</button></a>
+						style="background-color: white; color: blue;">회원가입</button></a>
 			</div>
 		</div>
 		<div class="col-sm-7">
@@ -346,12 +346,9 @@ $(document).ready(function() {
 	</div><br><br><br><br><br><br>
 
 
-   <!-- youtube & 날씨 들어갈 예정 -->
-   <!-- <div class="container" style="text-align: center;"> -->
-
-
+   <!-- youtube & 날씨  -->
    <div class = "col-sm-1"></div>
-      <div class="col-sm-4">
+      <div class="col-sm-5">
          <div id="visual">
             <div id="video-bg">
                <iframe src="https://www.youtube.com/embed/PaQi8KVcJbQ"></iframe>
@@ -359,7 +356,8 @@ $(document).ready(function() {
          </div>
       </div>
 
-         <a href="http://www.kma.go.kr/index.jsp"><div id="weather_iframe"></div></a>
+         <!--  http://www.kma.go.kr/index.jsp -->
+         <div id="weather_iframe"></div>
    
       <div class="col-sm-1"></div>
 <!--    </div> --><br><br><br>
