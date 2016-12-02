@@ -59,10 +59,9 @@ function UserDao() {
 	// 이메일로 인증코드 발송
 	this.emailSend = function(email, certificationNum) {
 
-		alert("dao까지 왔음");
 		try {
 			$.ajax({
-				url : '/', // ㅁㅍ
+				url : '/', 
 				type : 'POST',
 				data : {
 					email : email,
@@ -131,7 +130,6 @@ function UserDao() {
 	this.userLoginDao = function(user) {
 
 		try {
-
 			$.ajax({
 				url : '/user/login',
 				async : false,
@@ -142,8 +140,7 @@ function UserDao() {
 				},
 				dataType : 'json',
 				success : function(data) {
-					var user = data;
-					user1 = eval('(' + user.userPw + ')');
+					var return_user = data;
 				}
 			});
 		} catch (e) {
@@ -151,7 +148,8 @@ function UserDao() {
 			console.log(e.message);
 		}
 
-		return user1;
+		
+		return user;
 
 	};
 	
@@ -201,15 +199,11 @@ function UserDao() {
 				async : false,
 				type : 'get',
 				dataType : 'json', // 서버에서 보내오는 데이터 타입
-				data : ({
+				data : {
 					userPw : delete_pw
-				}),
+				},
 				success : function(data) {
-					console.log(data);
-					var messageValue = $(data).find('message').text();
-					console.log(messageValue + ", " + typeof (messageValue));
-					isSuccess = eval('(' + messageValue + ')');
-					console.log(isSuccess + ", " + typeof (isSuccess));
+					
 				}
 			});
 
