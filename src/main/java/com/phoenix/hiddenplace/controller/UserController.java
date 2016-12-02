@@ -1,4 +1,4 @@
-package com.phoenix.hiddenplace.controller;
+ package com.phoenix.hiddenplace.controller;
 
 import javax.inject.Inject;
 
