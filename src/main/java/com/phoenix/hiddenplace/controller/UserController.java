@@ -79,6 +79,7 @@ public class UserController {
 		}
 		return entity;
 	}
+<<<<<<< HEAD
 	
 	//로그인 logic 처리 필요함
 	@RequestMapping(value="/login") //session에서 아이디 가져옴, 패스워드 처리하기 
@@ -92,5 +93,10 @@ public class UserController {
 	      System.out.println(user1.getUserPw());
 	      return user1;
 	}
+=======
+
+	
+	
+>>>>>>> br/pty
 	
 }

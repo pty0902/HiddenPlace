@@ -21,4 +21,6 @@ public interface UserService {
 	//로그인
 	public User login(User user) throws Exception;
 
+	// 이메일 중복확인
+	public String emailCheck(String email) throws Exception;
 }
