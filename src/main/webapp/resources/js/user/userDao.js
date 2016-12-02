@@ -1,5 +1,6 @@
 //user dao 객체
 function UserDao() {
+	
 	// 회원가입 메서드
 	this.userInsert = function(newUser) {
 		try {
@@ -132,7 +133,7 @@ function UserDao() {
 		try {
 
 			$.ajax({
-				url : '/login',
+				url : '/user/login',
 				async : false,
 				type : 'get',
 				data : {
@@ -153,6 +154,7 @@ function UserDao() {
 		return user1;
 
 	};
+	
 	// 정보수정
 	this.updateDao = function(user) {
 
