@@ -12,16 +12,33 @@ public class ControllerTest {
       return "/views/homepage/homeView";	
    }	
    
+<<<<<<< HEAD
+}
+=======
+   @RequestMapping(value="/homepage/homeJspTest")
+   public void test2(){
+      System.out.println("jsp 파일 호출");
+   }
+   
    @RequestMapping(value="/bookmark/userBookMarkView")
    public String test3() {
       System.out.println("html 파일 호출");
       return "/views/bookmark/userBookMarkView";
    }
+<<<<<<< HEAD
    
    @RequestMapping(value="/routeBoard/myRoutSelectOne")
    public String test4() {
       System.out.println("html 파일 호출");
       return "/views/routeBoard/myRoutSelectOne";
+=======
+ 
+   @RequestMapping(value="/bookmark/userBookMarkView")
+   public String test4() {
+      System.out.println("html 파일 호출");
+      return "/views/bookmark/userBookMarkView";
+>>>>>>> parent of 266abf2... [merge]yonghan
    }
 
 }
+>>>>>>> origin/master
