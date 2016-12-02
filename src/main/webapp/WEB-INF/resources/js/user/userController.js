@@ -20,7 +20,16 @@ function UserController() {
 	// 닉네임 중복확인
 	this.requestNicknameCheck = function(nickname) {
 
-		var isSuccess = dao.nicknameCheck(nickname);
+		var nicknameCheck = dao.nicknameCheck(nickname);
+		var isSuccess;
+		if (nicknameCheck === 'success') {
+			alert("사용가능한 닉네임입니다.");
+			isSuccess = true;
+		}
+		if (nicknameCheck === 'fail') {
+			alert("이미 사용중인 닉네임입니다.");
+			isSuccess = false;
+		}
 
 		return isSuccess;
 	}
