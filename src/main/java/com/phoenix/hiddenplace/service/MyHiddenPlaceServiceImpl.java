@@ -18,5 +18,4 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		dao.insert(myHiddenPlace);		
 	}
 
-
 }

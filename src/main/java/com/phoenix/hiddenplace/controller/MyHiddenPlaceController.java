@@ -30,7 +30,6 @@ public class MyHiddenPlaceController {
 
 	}
 
-
 	//request insert 컨트롤러 post 메서드
 	@RequestMapping(value ="/insert", method = RequestMethod.POST)
 	public String insertPOST(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {

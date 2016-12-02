@@ -6,5 +6,4 @@ public interface MyHiddenPlaceService {
 
 	public void insert(MyHiddenPlace domain)throws Exception;
 	
-	
 }

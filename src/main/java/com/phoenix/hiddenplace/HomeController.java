@@ -28,7 +28,7 @@ public class HomeController {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		
-		logger.info("2016-12-02_11:27am");
+		logger.info("2016-12-02_12:45am");
 		
 		
 		

@@ -87,5 +87,6 @@ public class UserController {
 	      System.out.println(user.getUserId());
 	      System.out.println(user.getUserPw());
 	      return service.login(user); //로직 처리 : 패스워드 일치      
-	   }
+	}
+	
 }
