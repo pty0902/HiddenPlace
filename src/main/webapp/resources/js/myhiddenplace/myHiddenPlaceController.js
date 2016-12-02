@@ -8,8 +8,6 @@ function MyHiddenPlaceController() {
 //   내알못 best 3 요청 controller 메서드
    this.requestBestMHP = function() {
 
-	  alert("컨트롤 도착");
-	   
       var myHiddenPlaces  = dao.bestMHP();
       
       return myHiddenPlaces;
