@@ -28,5 +28,23 @@ public class ControllerTest {
       System.out.println("html 파일 호출");
       return "/views/routeBoard/myRoutSelectOne";
    }
+   
+   @RequestMapping(value="/homeview")
+   public String homeView() {
+      
+      return "/views/homepage/homeView";
+   }
+   
+   @RequestMapping(value="/loginview")
+   public String loginView() {
+      
+      return "/views/user/userLoginView";
+   }
+   
+   @RequestMapping(value="/userInsertview")
+   public String userInsertview() {
+      
+      return "/views/user/userInsertView";
+   }
 
 }
