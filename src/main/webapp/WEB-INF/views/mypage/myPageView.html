@@ -4,20 +4,127 @@
 <title>UserInfoView</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="font-awesome/css/font-awesome.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="../../../resources/js/user/user.js"></script>
+<script src="../../../resources/js/user/userController.js"></script>
+
 
 <!-- 상단 공통적용 스타일시트 -->
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/homeViewStyle.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/bootstrap/css/homeViewStyle.css">
 <!-- 즐겨찾기 스타일시트 -->
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/myPageView.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/bootstrap/css/myPageView.css">
+
+<script>
+	$(document).ready(
+		function() {
+
+
+// 			var requestUrl = window.location.href;
+// 			var requestQueryString = window.location.href.slice(requestUrl
+// 					.indexOf('?') + 1);
+// 			var requestParameters = requestQueryString.split('&');
+
+// 			var userId = requestParameters[0].split('=')[1];
+// 			var userPw = requestParameters[1].split('=')[1];
+// 			var userNickName = requestParameters[2].split('=')[1];
+
+// 			$('#update_id').val(userId);
+// 			$('#update_nickname').val(unescape(userNickName));
+			<!-- 회원삭제 버튼클릭 -->
+			$('#delete_button_join').click(function() {			
+			//var userController = new UserController();
+			var delete_pw = $('#delete_nowPw').val();
+			//userController.requestDelete(delete_pw);
+			
+			var isSuccess;
+		
+		 try {
+             $.ajax({
+                url : '/deleteUser',
+                async : false,
+                type : 'get',
+                dataType : 'json', // 서버에서 보내오는 데이터 타입
+                data : ({
+                   userPw : delete_pw
+                }),
+                success : function(data) {
+                   console.log(data);
+                   var messageValue = $(data).find(
+                         'message').text();
+                   console.log(messageValue + ", "
+                         + typeof (messageValue));
+                   isSuccess = eval('(' + messageValue
+                         + ')');
+                   console.log(isSuccess + ", "
+                         + typeof (isSuccess));
+                }
+             });
+
+          } catch (e) {
+             console.log("userDao 객체: userDao메서드에서 예외 발생");
+             console.log(e.message);
+          }
+			
+		});
+			<!-- 회원수정 버튼클릭 -->
+
+			$('#update_button_join').click(function() {
+				alert("test");
+				
+			var myUserController = new UserController();
+			var userNickName = $('#update_nickname').val();
+			
+			var userPw = $('#update_newPw').val();
+			var user = new User();
+			user.userNickName = userNickName;
+			
+			user.userPw = userPw;
+						myUserController.requestUpdate(user);
+
+// 				if ($('#update_newPw').val() == $('#update_reNewPw').val()) {
+// 					if ($('#update_nowPw').val() == "userPw") {
+// 						//수정 controller 호출
+// 						var userPw = $('#update_newPw').val();
+// 						var userNickName = $('#update_nickname').val();
+// 						var user = new User();
+// 						user.userId = userId;
+// 						user.userPw = userPw;
+// 						user.userNickName = useruserNickNamePw;
+					
+// 						Controllers.getUserController().requestUpdate(user);
+// 					} else {
+// 						alert("현재 비밀번호가 일치하지 않습니다")
+// 					}
+
+// 				} else {
+
+// 					alert("수정 비밀번호가 일치하지 않습니다")
+
+// 				}
+
+			});
+
+		});
+</script>
 
 </head>
+
 <body>
 
 	<?include "include/header.html"?>

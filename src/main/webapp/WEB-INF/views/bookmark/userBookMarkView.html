@@ -18,9 +18,10 @@
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="../../js/hiddenPlace/myHiddenPlace.js"></script>
-<script src="../../js/hiddenPlace/myHiddenPlaceController.js"></script>
-<script src="../../js/hiddenPlace/myRouteController.js"></script>
+<script src="../../../js/myhiddenplace/myHiddenPlace.js"></script>
+<script src="../../../resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
+<script src="../../../resources/js/bookmark/bookMarkController.js"></script>
+<script src="../../../resources/js/myroute/myRouteController.js"></script>
 </head>
 
 
@@ -31,14 +32,18 @@
 		
 		var mhpController = new MyHiddenPlaceController();
 		
-		var myHiddenPlaces = mhpController.requestBestMHP();
+		var myHiddenPlaces = mhpController.requestBookmarkMHP();
 		
 		for(var i = 0 ; i < myHiddenPlaces.length ; i++) {		
+			var bookMark;
+			
+			//글번호만드는 코드
+			var num = $('<div hidden>'+ myHiddenPlaces[i].num + '</div>'); //글번호
 			
 			//체크박스만드는 코드
 			var checkbox_div = $('<div class="col-sm-1"></div>');
 			var checkbox = $('<label class="checkbox-inline"></label>').html('<input type="checkbox" value=""/>');
-			checkbox_div.append(checkbox);
+			checkbox_div.append(checkbox, num);
 			
 			//작성자명만드는 코드
 			var writer_a = $('<a href=""></a>');
@@ -46,25 +51,26 @@
 			writer_a.append(writer);
 
 			var writer_div = $('<div class="personal_article"></div>')
-			writer_div.append(writer_a);
+			writer_div.append(writer_a); 
+			
 			
 			//작성일자만드는 코드 //현재시간
 			var writeDate_div =  $('<div class="personal_article"></div>');
 			var writeDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate); 
-			writeDate_div.append(writerDate);
+			writeDate_div.append(writeDate);
 			
 			//작성자 & 작성일자 합치는 코드
-			var writerAndDate = $('<div class="col-sm-3"></div>');
+			var writerAndDate = $('<div class="col-sm-4"></div>');
 			writerAndDate.append(writer_div, writeDate_div);
 			
 			var bookmarkTitleBar = $('<div class="personal_article_space"></div>');
 			bookmarkTitleBar.append(checkbox_div, writerAndDate);
 			
 			//이미지만드는 코드
-			var image = $('<div><a href="#"><img class="hiddenPlace_img" src="' + myHiddenPlaces[i].imageUrl + '"></a></div>'); 
+			var image = $('<div><a href="../homepage/homeView.html"><img class="hiddenPlace_img" src="' + myHiddenPlaces[i].imageUrl + '"></a></div>'); 
 			
 			//전부 합치는 코드
-			var bookmarkArticle = $('<div class="col-sm-4"></div>');
+			var bookmarkArticle = $('<div class="col-sm-4" ></div>');
 			bookmarkArticle.append(bookmarkTitleBar, image);
 			
 			//최종코드
@@ -77,21 +83,25 @@
 </script>
 
 
-<!-- 나만의루트 이벤트 핸들링 -->
+ <!-- 나만의루트 이벤트 핸들링 -->
 <script type="text/javascript">
 
 	$(document).ready(function() {
 		
-		var mrController = new MyRouteController();
+	var mrController = new MyRouteController();
 		
 		var myRoutes = mrController.requestBookmarkMR();
 		
 		for(var i = 0 ; i < myRoutes.length ; i++) {		
+			var bookMark;
+			
+			//글번호만드는 코드
+			var num = $('<div hidden>'+ myRoutes[i].num + '</div>'); //글번호
 			
 			//체크박스만드는 코드
 			var checkbox_div = $('<div class="col-sm-1"></div>');
 			var checkbox = $('<label class="checkbox-inline"></label>').html('<input type="checkbox" value=""/>');
-			checkbox_div.append(checkbox);
+			checkbox_div.append(checkbox, num);
 			
 			//작성자명만드는 코드
 			var writer_a = $('<a href=""></a>');
@@ -104,10 +114,10 @@
 			//작성일자만드는 코드
 			var writeDate_div =  $('<div class="personal_article"></div>');
 			var writeDate = $('<h7 class="insert_date"></h7>').html(myRoutes[i].writeDate); //현재시간
-			writeDate_div.append(writerDate);
+			writeDate_div.append(writeDate);
 			
 			//작성자 & 작성일자 합치는 코드
-			var writerAndDate = $('<div class="col-sm-3"></div>');
+			var writerAndDate = $('<div class="col-sm-4"></div>');
 			writerAndDate.append(writer_div, writeDate_div);
 			
 			var bookmarkTitleBar = $('<div class="personal_article_space"></div>');
@@ -120,14 +130,67 @@
 			var bookmarkArticle = $('<div class="col-sm-4"></div>');
 			bookmarkArticle.append(bookmarkTitleBar, image);
 			
+			
 			//최종코드
 			$('#bookmark_myroute').append(bookmarkArticle);
 			
 		}
 		
-	});
+	}); 
 
+</script> 
+
+<!-- 선택 삭제 이벤트 핸들링 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		var bookMarkController = new BookMarkController();
+	
+		$('#mhpDeleteButton').click(function(){
+
+			var delete_nums = [];
+			
+			var mhps = $('#bookmark_hiddenPlace').children();
+			
+			for(var i = 0 ; i < mhps.length ; i++) {
+				
+				var checked = mhps.eq(i).children().eq(0).children().eq(0).children().first().children().prop('checked');
+				
+				if(checked) {
+					
+					var mhpBookMark_delete_num = mhps.eq(i).children().eq(0).children().eq(0).children().eq(1).text();
+					delete_nums.push(mhpBookMark_delete_num);
+				}
+				
+			}
+			alert(delete_nums);
+			var isSuccess = bookMarkController.requestSelectedDeleteMHP(delete_nums);
+		});
+		
+		$('#mrDeleteButton').click(function(){
+
+			var delete_nums = [];
+			
+			var mrs = $('#bookmark_myroute').children();
+			
+			for(var i = 0 ; i < mrs.length ; i++) {
+				
+				var checked = mrs.eq(i).children().eq(0).children().eq(0).children().first().children().prop('checked');
+				
+				if(checked) {
+					
+					var mrBookMark_delete_num = mrs.eq(i).children().eq(0).children().eq(0).children().eq(1).text();
+					delete_nums.push(mrBookMark_delete_num);
+				}
+				
+			}
+			alert(delete_nums);
+			var isSuccess = bookMarkController.requestSelectedDeleteMR(delete_nums);
+		});
+		
+	});
 </script>
+
 
 <body>
 
@@ -136,84 +199,98 @@
 		<div class="col-sm-3">
 			<a href="homeView.html"><img id="logo_img" src="logo.png"></a>
 		</div>
-
-		<div class="col-sm-9">
+		<div class="col-sm-7"></div>
+		<div class="col-sm-2">
 			<div id="login_button" class="btn-group">
-				<button type="button" class="btn btn">로그인</button>
-				<button type="button" class="btn btn">회원가입</button>
+				<button type="button" class="btn btn-default">로그인</button>
+				<button type="button" class="btn btn-default">회원가입</button>
 			</div>
 		</div>
-		
-		<div class="col-sm-7">
-			<div id="main_buttons" class="btn-group btn-group-justified">
-				<a href="#" class="btn btn">홈페이지</a>
-				<a href="#" class="btn btn">마이페이지</a>
-				<a href="#" class="btn btn">나만의 루트</a>
-				<a href="#" class="btn btn">즐겨찾기</a>
-			</div>
+
+		<div id="main_buttons" class="btn-group btn-group-justified">
+			<a href="#" id="main_button_1" class="btn btn-default">홈페이지</a> <a
+				href="#" id="main_button_1" class="btn btn-default">마이페이지</a> <a
+				href="#" class="btn btn-default">나만의 루트</a>
 		</div>
 	</div>
 
-	<!-- 메인 사진 박스 -->
-	<div id="main_img_box" class="jumbotron">
-		<img id="main_img" src="pictures/bridge.jpg" alt="성산대교">
 
+	<!-- 메인 사진 박스 -->
+	<div class="container-fluid">
+		<img id="main_img" src="jeju.jpg" alt="route">
 		<div class="main_img_text">
 			<h2>내가 알지 못한 멋진 곳이 궁금하신가요?</h2>
 		</div>
-		
-		<div class="span12">
-			<form id="custom-search-form"
-				class="form-search form-horizontal pull-right">
-				<div class="input-append span12">
-					<input type="text" class="search-query" placeholder="#내가 알지 못한 곳">
-					<button type="submit" class="glyphicon glyphicon-search">
-						<i class="icon-search"></i>
-					</button>
-				</div>
+		<div id="search_bar_space" class="container">
+			<form class="inline">
+				<input type="text" placeholder="#당신이 원했던 곳">
+				<button type="submit">
+					<img id="search_button_img" src="search_blue.png">
+				</button>
 			</form>
 		</div>
-	</div> <!-- 메인 사진 박스 end --> <!-- 여기까지가 header.html -->
+	</div>
 	
-	<!-- 즐겨찾기 탭 -->
+	
+	<!-- 즐겨찾기 -->
 	<div class="container">
-		<br>
+	<br>
 		<h2>즐겨찾기</h2>
-		<div id="line" class="col-sm-12"></div>
+		<div id="line" class="container"></div>
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#myroute">나만의 루트</a></li>
-			<li><a data-toggle="tab" href="#hiddenplace">내알못</a></li>
+			<li class="active"><a data-toggle="tab" href="#hiddenplace">내알못</a></li>
+			<li><a data-toggle="tab" href="#myroute">나만의 루트</a></li>
+		
 		</ul>
-		<div class="tab-content">
 
-			<!-- 나만의 루트 즐겨찾기 -->
-			<div id="myroute" class="tab-pane fade in active">
+		<!-- 내용 -->
+		<div class="tab-content"> 
+		
+		
+		
+		
+			<!-- 내알못 -->
+			<div id="hiddenplace" class="tab-pane fade in active">
 				<div id="main_body" class="container">
-					<div id="main_myroute" class="row">
+					<div id="bookmark_hiddenPlace" class="row">
 
-
-					</div>
-					<button id="delete_button" name="singlebutton" class="btn btn">삭제</button>
-				</div>
-			</div> <!-- 나만의루트 end -->
 			
-
-			<!-- 내알못 즐겨찾기 -->
-			<div id="hiddenplace" class="tab-pane fade">
-				<div id="main_body" class="container">
-					<div id="main_hiddenPlace" class="row">
-
-
 					</div>
-					<button id="delete_button" name="singlebutton" class="btn btn">삭제</button>
+				
+					<button id="mhpDeleteButton" name="singlebutton"  class="btn btn">삭제</button>
 				</div>
 			</div> <!-- 내알못 end -->
-		</div> <!-- 내용 end -->
-	</div> <!-- 내알못,나만의루트 탭 end -->
+
+
+
+
+			<!-- 나만의루트 -->
+				<div id="myroute" class="tab-pane fade"> 
+					<div id="main_body" class="container">
+						<div id="bookmark_myroute" class="row">
 	
+	
+						</div>
+			
+						<button id="mrDeleteButton" name="singlebutton"  class="btn btn">삭제</button>
+					</div>
+			</div> <!-- 나만의루트 end -->
+
+
+
+
+
+		</div> <!-- 내용 end -->
+		
+		
+		
+	</div> <!-- 즐겨찾기 container end -->
+	
+		
 	<div class="row">
 		<hr>
 	</div>
+	
 
 </body>
 </html>
