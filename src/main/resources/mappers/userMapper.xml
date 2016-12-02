@@ -26,6 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from TBL_USER
 		where userPw = #{userPw}
 	</delete>
+	
+	<!-- 로그인 -->
+	<select id="selectUser" resultType="com.phoenix.hiddenplace.domain.User">
+      select userId, userPw
+      from tbl_user
+      where userId = #{userId}
+   </select>
 
 
 </mapper>
