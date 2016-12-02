@@ -23,18 +23,6 @@ public class UserController {
 		return "/views/user/userInsertView";
 	}
 
-	// // 회원가입 이거 대신 UserControllerRest에서 수행
-	// @RequestMapping(value = "/userInsertView", method = RequestMethod.POST)
-	// public String insert(User user, RedirectAttributes rttr) throws Exception {
-	//
-	// System.out.println(user.toString());
-	//
-	// service.create(user);
-	//
-	// rttr.addFlashAttribute("result", "success");
-	//
-	// return "redirect:/views/user/userInsertView";
-	// }
 
 
 

@@ -62,17 +62,5 @@ public class UserControllerRest {
 		return entity;
 
 	}
-	// 회원가입
-	// @RequestMapping(value = "/userInsertView", method = RequestMethod.POST)
-	// public String insert(@RequestBody User user, RedirectAttributes rttr) throws Exception {
-	//
-	// System.out.println(user.toString());
-	//
-	// service.create(user);
-	//
-	// rttr.addFlashAttribute("result", "success");
-	//
-	// return "redirect:/views/user/userInsertView";
-	// }
 
 }
