@@ -56,4 +56,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
+	public String emailCheck(String email) throws Exception {
+		
+		return session.selectOne(namespace + ".emailCheck", email);
+		
+	}
+
 }

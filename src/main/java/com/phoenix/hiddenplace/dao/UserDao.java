@@ -20,4 +20,7 @@ public interface UserDao {
 	
 	//로그인
 	public User loginPro(User vo) throws Exception;
+
+	// 이메일 중복확인
+	public String emailCheck(String email) throws Exception;
 }
