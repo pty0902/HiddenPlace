@@ -337,9 +337,6 @@
 			z-index: 3;   
 		}
 
-
-		
-
 		/*지역 선택 바*/
 		#regionChoice {
 			/*border-top : 1px solid black;*/
@@ -414,7 +411,7 @@
 		
 </style>
 
-<!-- <!-- 내알못 베스트 3 이벤트 핸들링 
+<!-- 내알못 베스트 3 이벤트 핸들링  -->
 <script type="text/javascript">
 
 	$(document).ready(function() {
@@ -438,18 +435,19 @@
 			}
 				
 			var writer_a =  $('<a href=""></a>');
-			var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].writer); //작성자명
+			var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].userNickName); //작성자명
 			writer_a.append(writer);
 			
 			var writer_div = $('<div class="personal_article"></div>');
 			writer_div.append(writer_a);
 			
 			var writerDate_div =  $('<div class="personal_article"></div>');
-			var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate); //현재시간
+			var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate.substr(0, 10)); //현재시간
 			writerDate_div.append(writerDate);
 			
 			var writerAndDate = $('<div class="col-sm-4"></div>');
-			writerAndDate.append(writer_div, writerDate_div);	
+			var hiddenNum = $('<div hidden></div>').html(myHiddenPlaces[i].num); // 글번호 숨기기
+			writerAndDate.append(writer_div, writerDate_div, hiddenNum);	
 			
 			var bestTitleBar = $('<div class="personal_article_space"></div>');
 			bestTitleBar.append(bookMark, writerAndDate);
@@ -466,14 +464,14 @@
 
 
 </script>
- -->
-<!-- 내알못 목록 이벤트 핸들링 -->
+
+ <!-- 내알못 목록 이벤트 핸들링  -->
 <script>
 
    $(document).ready(function() {
       
 	  var mhpController  = new MyHiddenPlaceController();
-	   
+	  
       var myHiddenPlaces = mhpController.requestHiddenPlaceSelectAll();
    
       for(var i = 0 ; i < myHiddenPlaces.length ; i++) {      
@@ -488,18 +486,19 @@
          }
              
          var writer_a =  $('<a href=""></a>');
-         var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].writer); //작성자명
+         var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].userNickName); //작성자명
          writer_a.append(writer);
          
          var writer_div = $('<div class="personal_article"></div>');
          writer_div.append(writer_a);
          
          var writerDate_div =  $('<div class="personal_article"></div>');
-         var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate); //현재시간
+         var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate.substr(0, 10)); //현재시간
          writerDate_div.append(writerDate);
          
          var writerAndDate = $('<div class="col-sm-3"></div>');
-         writerAndDate.append(writer_div, writerDate_div);
+         var hiddenNum = $('<div hidden></div>').html(myHiddenPlaces[i].num); // 글번호 숨기기
+         writerAndDate.append(writer_div, writerDate_div, hiddenNum);
          
          var bestTitleBar = $('<div class="personal_article_space"></div>');
          bestTitleBar.append(bookMark, writerAndDate);
@@ -526,8 +525,8 @@ $(document).ready(function() {
 	   
     var pageMaker = pageController.requestPage();
  
-    	if(pageMaker.prev == true) {
-	    	 var laquo_link =  $('<li><a href="#" id = "laquo" >&laquo;</a></li>');//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+    	if(pageMaker.prev == true) {//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+	    	 var laquo_link =  $('<li><a  id = "laquo" >&laquo;</a></li>');
 	    	 $('#page_append').append(laquo_link); //최종 append 
     	}
     	
@@ -540,7 +539,7 @@ $(document).ready(function() {
     		 
     		 } */ //우리는 active 클래스 정의된게 없어서 클래스만 추가됨 해당 번호에 
     		 
-    		 var displayPageNum_nonActive =  $('<li><a href="#" id = "pageNum">'+pageMaker.startPage+'</a></li>'); //누르면 서치이벤트 페이지 전환되야함
+    		 var displayPageNum_nonActive =  $('<li><a class = "pagenum">'+pageMaker.startPage+'</a></li>'); //누르면 서치이벤트 페이지 전환되야함
     		 
     		 $('#page_append').append(displayPageNum_nonActive); //최종 append 
     		 
@@ -548,23 +547,69 @@ $(document).ready(function() {
     		 
       	  }
 
-     	if(pageMaker.next > 0 && pageMaker.endPage > 0) {
- 	    	 var raquo_link =  $(' <li><a href="#" id = "raquo" >&raquo;</a></li>');//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+     	if(pageMaker.next > 0 && pageMaker.endPage > 0) {//오른쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+ 	    	 var raquo_link =  $(' <li><a id = "raquo" >&raquo;</a></li>');
  	    	//pageMaker.makeSearch(pageMaker.endPage +1)
  	    	 $('#page_append').append(raquo_link); //최종 append 
      	} 
     	 
-	$('#pageNum').click(function() {
+ });
+ 
+</script>
+
+<!-- 페이지 번호 이벤트 핸들링 -->
+<script>
+
+$(document).ready(function() {
+    
+ 	$('.pagenum').click(function() { //페이지 전환
+ 		
+		var page = $(this).text(); //내가 클릭한 페이지의 번호를 가져온다.
 		
-		var page = $(this).val;
-		var perPageNum = 10;
+		  var mhpController  = new MyHiddenPlaceController();
+		   
+	      var myHiddenPlaces = mhpController.requestMhpPageingSelectAll(page);
+	   
+	      $('#main_hiddenPlace *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
+	      
+	      for(var i = 0 ; i < myHiddenPlaces.length ; i++) { //페이지 번호를 보내고 그에 해당하는 목록을 가져와서 뿌려준다.    
+	         
+	         var bookMark;
+	         
+	         
+	         if(myHiddenPlaces[i].bookmark == 0){ // 찜콩에 색이 없다 
+	            bookMark = $('<div class="col-sm-1"><img src ="" class ="best-img-circle"></div>'); //찜콩이미지 색이 없는 코드
+	            }else {  // 찜콩에 색이 있다.
+	            bookMark = $('<div class="col-sm-1"><img src ="../../img/bookcafe.jpeg" class ="best-img-circle"></div>'); //찜콩이미지 색이 있는 코드   
+	         }
+	             
+	         var writer_a =  $('<a href=""></a>');
+	         var writer = $('<h7 class="name"></h7>').html(myHiddenPlaces[i].userNickName); //작성자명
+	         writer_a.append(writer);
+	         
+	         var writer_div = $('<div class="personal_article"></div>');
+	         writer_div.append(writer_a);
+	         
+	         var writerDate_div =  $('<div class="personal_article"></div>');
+	         var writerDate = $('<h7 class="insert_date"></h7>').html(myHiddenPlaces[i].writeDate.substr(0, 10)); //현재시간
+	         writerDate_div.append(writerDate);
+	         
+	         var writerAndDate = $('<div class="col-sm-3"></div>');
+	         var hiddenNum = $('<div hidden></div>').html(myHiddenPlaces[i].num); // 글번호 숨기기
+	         writerAndDate.append(writer_div, writerDate_div, hiddenNum);
+	         
+	         var bestTitleBar = $('<div class="personal_article_space"></div>');
+	         bestTitleBar.append(bookMark, writerAndDate);
+	         
+	         var bestImage = $('<div class="col-sm-3"></div>');
+	         var image = $('<div><a><img class="hiddenPlace_img" src="' + myHiddenPlaces[i].imageUrl + '"></a></div>'); //이미지
+	         bestImage.append(bestTitleBar, image);
+	         
+	         $('#main_hiddenPlace').append(bestImage); //최종 append
+	         
+	      }
 		
-		var cri = new criteria(page, perPageNum);
-		
-		alert(cri.page);
-		alert(cri.perPageNum);
-		
-	});
+	}); 
 	
  });
  

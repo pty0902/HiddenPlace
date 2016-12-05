@@ -1,16 +1,14 @@
 package com.phoenix.hiddenplace.domain;
 
-import java.util.Date;
-
 public class MyHiddenPlace {
 
-	private Integer num;
+	private int num;
 	private String userId;
 	private int regionTownCode;
 	private int themeCode;
 	private String title;
 	private String content;
-	private Date writeDate;
+	private String writeDate;
 	private int upCount;
 	private int readCount;
 	private String storeName;
@@ -18,12 +16,18 @@ public class MyHiddenPlace {
 	private double latitude;
 	private double longitude;
 	private String detailAddress;
+	private String userNickName; //닉네임 유저
 	
-	public Integer getNum() {
+	public String getUserNickName() {
+		return userNickName;
+	}
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
+	}
+	public int getNum() {
 		return num;
 	}
-	
-	public void setNum(Integer num) {
+	public void setNum(int num) {
 		this.num = num;
 	}
 	
@@ -66,12 +70,10 @@ public class MyHiddenPlace {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	public Date getWriteDate() {
+	public String getWriteDate() {
 		return writeDate;
 	}
-	
-	public void setWriteDate(Date writeDate) {
+	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
 	

@@ -14,7 +14,7 @@ import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 import com.phoenix.hiddenplace.service.MyHiddenPlaceService;
 
 @Controller
-@RequestMapping("/hiddenplace/*")
+@RequestMapping("/myhiddenplace/*")
 public class MyHiddenPlaceController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyHiddenPlaceController.class);
@@ -22,14 +22,14 @@ public class MyHiddenPlaceController {
 	@Inject
 	private MyHiddenPlaceService service;
 
-	//request insert 컨트롤러 get 메서드
-	@RequestMapping(value ="/insert", method = RequestMethod.GET)
-	public void insertGET(MyHiddenPlace myHiddenPlace, Model model) throws Exception {
+	//request 내알못 목록 컨트롤러
+	@RequestMapping(value ="/myHiddenPlaceSelectAll", method = RequestMethod.GET)
+	public String selectAllMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
 
-		logger.info("insert get ............");
+		return "/views/myhiddenplace/myHiddenPlaceSelectAll";
 
 	}
-
+	
 	//request insert 컨트롤러 post 메서드
 	@RequestMapping(value ="/insert", method = RequestMethod.POST)
 	public String insertPOST(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
