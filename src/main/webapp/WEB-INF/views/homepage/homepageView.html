@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>내가 알지 못한 곳 - HOME</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/customize/css/homepageView.css" />
+<script src="javascript/pace.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="javascript/swiper.jquery.min.js"></script>
+<script src="javascript/animate-on-scroll.js"></script>
+<script src="javascript/script.js"></script>
+
+<script src="../../../resources/js/myroute/myRoute.js"></script>
+<script src="../../../resources/js/myroute/myRouteController.js"></script>
+<script src="../../../resources/js/myhiddenplace/myHiddenPlace.js"></script>
+<script src="../../../resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
+
+</head>
+
+<!-- 홈페이지 MyHiddenPlace best4 이벤트 핸들링 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var mhpController = new MyHiddenPlaceController();
+		var myHiddenPlaces = mhpController.requestBestMHP();
+
+		for (var i = 0; i < myHiddenPlaces.length; i++) {
+			
+			var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
+			var imgMHP = $('<img src="' + myHiddenPlaces[i].imageUrl + '"/>'); //이미지
+			var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
+			var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickname); //작성자
+			var pDateMHP = $('<p></p>').html(myHiddenPlaces[i].writeDate); //작성일자
+			var pUpcountMHP = $('<p></p>').html(myHiddenPlaces[i].upCount); //추천수
+			var pNumMHP = $('<p hidden></p>').html(myHiddenPlaces[i].num); //글번호
+			
+			figcaptionMHP.append(pUserNicknameMHP, pDateMHP, pUpcountMHP, pNumMHP); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+			figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+			$('#bestMHP4').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
+		
+		}
+
+	});
+</script>
+
+<!-- 홈페이지 MyRoute best4 이벤트 핸들링 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var mrController = new MyRouteController();
+		var myRoutes = mrController.requestBestMR();
+
+		for (var i = 0; i < myRoutes.length; i++) {
+			
+			//figure class명: animateOnScroll, 바뀐 이후 css 바뀐거있으면 되돌려야함
+			var figureMR = $('<figure class="figureMR" data-animation="fadeIn"></figure>'); //figure태그
+			var imgMR = $('<img src="' + myRoutes[i].imageUrl + '"/>'); //이미지
+			var figcaptionMR = $('<figcaption></figcaption>'); //figcaption태그
+			var pUserNicknameMR = $('<p></p>').html(myRoutes[i].userNickname); //작성자
+			var pDateMR = $('<p></p>').html(myRoutes[i].writeDate); //작성일자
+			var pUpcountMR = $('<p></p>').html(myRoutes[i].upCount); //추천수
+			var pNumMR = $('<p hidden></p>').html(myRoutes[i].num); //글번호
+			
+			figcaptionMR.append(pUserNicknameMR, pDateMR, pUpcountMR, pNumMR); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+			figureMR.append(imgMR, figcaptionMR); // figure태그에 이미지, figcaption append
+			$('#bestMR4').append(figureMR); //나만의루트 div에 bestMR[i] 게시글 append
+		
+		}
+
+	});
+</script>
+
+<!-- 글조회 (MHP) 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+		$('.figureMHP').click(function() {
+			var num = $(this).children().eq(1).children().eq(3).text();
+			var mhpController = new MyHiddenPlaceController();
+			mhpController.requestSelectOneMHP(num);
+		});
+});
+</script>
+
+<!-- 글조회 (MR) 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+		$('.figureMR').click(function() {
+			var num = $(this).children().eq(1).children().eq(3).text();
+			var mrController = new MyRouteController();
+			mrController.requestSelectOneMR(num);
+		});
+});
+</script>
+	
+<body class="home-page">
+	
+	<section>
+				<img src="../../../resources/bootstrap/images/home.jpg" alt="" />
+	</section>
+
+	<section>
+		<div class="container">
+			<h3>내알못 베스트</h3>
+			<div id="bestMHP4" class="portfolio grid-4">
+
+
+				
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<h3>나만의 루트 베스트</h3>
+			<div ID="bestMR4" class="portfolio grid-4">
+				
+
+				
+			</div>
+		</div>
+	</section>
+
+</body>
+
+</html>
