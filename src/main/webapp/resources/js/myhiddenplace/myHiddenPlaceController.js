@@ -5,39 +5,30 @@ function MyHiddenPlaceController() {
 
    var dao = new MyHiddenPlaceDao();   
 
-// 내알못 best 3 요청 controller 메서드
+// 내알못 best 4 요청 controller 메서드
    this.requestBestMHP = function() {
 
-      var myHiddenPlaces  = dao.bestMHP();
+	  var myHiddenPlaces  = dao.bestMHP();
       
       return myHiddenPlaces;
 
    };
-   
-// 내알못 리스트 controller 메서드
-   this.requestHiddenPlaceSelectAll = function() {
-
-      var myHiddenPlaces  = dao.hiddenPlaceSelectAll();
-      
-      return myHiddenPlaces;
-
-   };
-   
-// 내알못 페이징 클릭식 리스트 controller 메서드
-   this.requestMhpPageingSelectAll = function(page) {
-
-      var myHiddenPlaces  = dao.pageingSelectAll(page);
-      
-      return myHiddenPlaces;
-
-   };
-   
-// 즐겨찾기 controller 메서드
-	this.requestBookmarkMHP = function() {
+	
+// 글 조회(홈페이지에서 클릭이벤트) controller 메서드
+	this.requestSelectOneMHP = function(num) {
 		
-		var myHiddenPlaces  = dao.bookmarkMHPDao();
+		var requestUrl = 'myHiddenPlaceSelectOne.html?num=' + num;
 		
-		return myHiddenPlaces;
+		document.location = requestUrl;
+		
+	};
+	
+// 글 목록 페이지요청 controller 메서드
+	this.requestMHPUrl = function() {
+		
+		var requestUrl = 'myHiddenPlaceSelectAll.html';
+		
+		document.location = requestUrl;
 		
 	};
 }

@@ -1,4 +1,3 @@
-
 function User(userId,userPw,userNickname,userPhoneNum,userStartDate,userEndDate) {
 
 	this.userId = userId; // 아이디

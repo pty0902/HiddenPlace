@@ -1,149 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>내알못</title>
+<title>header</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="homeViewStyle.css">
-<style>
-/* 공통 적용 */
-a {
-	/* a 태그 링크 밑줄 제거 */
-	text-decoration: none !important;
-}
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/headerStyle.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
+<script src="javascript/pace.min.js"></script>
 
-/* 상단 로그인 바 */
-#login_button {
-	margin-top: 4%;
-}
-
-#login_button>button {
-	border: 0;
-	outline: 0;
-	background-color: white;
-}
-
-/*상단 메인 메뉴 바*/
-#logo_img {
-	width: 170px;
-	margin-left: 60%;
-}
-
-#main_buttons {
-	width: 40%;
-	margin-top: 3%;
-	margin-left: 30%;
-}
-
-#main_buttons>a {
-	font-weight: bold;
-	font-size: 120%;
-	border: 0;
-	outline: 0;
-}
-
-/*메인 사진 박스*/
-#main_img {
-	width: 100%;
-	height: 400px;
-	opacity: 1.0;
-}
-
-.main_img_text {
-	position: absolute;
-	min-width: 80%;
-	text-align: center;
-	top: 350px;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	/*font-size: 18px;*/
-}
-
-.main_img_text>h2 {
-	font-weight: bold;
-	color: white;
-	font-family: font-style : italic;
-}
-
-#search_bar_space {
-	position: absolute;
-	top: 450px;
-	left: 68%;
-	transform: translate(-50%, -50%);
-}
-
-#search_bar_space>form>input {
-	background-color: transparent;
-	width: 50%;
-	height: 60px;
-	border: 2px solid white;
-	font-size: 20px;
-	color: white;
-	padding: 0px 20px 0px 20px;
-}
-
-#search_bar_space>form>button {
-	position: absolute;
-	padding: 0;
-	border: none;
-	left: 524px;
-	top: 2px;
-}
-
-#search_button_img {
-	width: auto;
-	height: 56px;
-}
-</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="javascript/swiper.jquery.min.js"></script>
+<script src="javascript/animate-on-scroll.js"></script>
+<script src="javascript/script.js"></script>
 
 </head>
-<body>
 
-	<!-- 상단 로그인 바 -->
-	<div class="container-fluid">
+<!-- 홈페이지 head menu 이벤트 핸들링 -->
+<script type="text/javascript">
+   $(document).ready(function() {
+      
+      //session에 저장되있는 userId값 가져오기
+	  //var loginState = localStorage.getItem('userId');
+      var loginState = "s";
+      
+      var headmenuLink1;
+      var headmenuLink2;
+      
+      if(loginState == null) {
+         headmenuLink1 = $('<li><p id="headmenu-login">로그인</p></li>');
+         headmenuLink2 = $('<li><p id="headmenu-userInsert">회원가입</p></li>');
+      } else {
+         headmenuLink1 = $('<li class="dropdown">'
+                     +'     	<p id="headmenu-mypage" class="dropbtn">마이 페이지</p>'
+                     +'     		<div id="link1Div" class="dropdown-content">'
+                     +'     			<p id="submenu-myinfo">회원정보관리</p>'
+                     +'     			<p id="submenu-boormark">즐겨찾기</p>'
+                     +'     		</div>'
+                     +'     </li>');
+         headmenuLink2 = $('<li id="headmenu-logout" class="dropdown"><p class="dropbtn" >로그아웃</p></li>');
+      }
+      
+      $('#headmenuLinks').append(headmenuLink1, headmenuLink2);
+   });
+</script>
 
-		<div class="row">
-			<div class="col-sm-10"></div>
-			<div class="col-sm-2">
-				<div id="login_button" class="btn-group">
-					<button type="button" class="btn btn">로그인</button>
-					<button type="button" class="btn btn">회원가입</button>
-				</div>
-			</div>
+<!-- 로그인 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-login').click(function() {
+		var userController = new UserController();
+		userController.requestLoginUrl();
+	});
+});
+</script>
 
-		</div>
-	</div>
+<!--head menu 회원가입 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-userInsert').click(function() {
+		var userController = new UserController();
+		userController.requestUserInsertUrl();
+	});
+});
+</script>
 
-	<!-- 상단 메인 메뉴 바 -->
-	<div class="container-fluid">
+<!--head menu 마이페이지 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-mypage').click(function() {
+		var userController = new UserController();
+		userController.requestMypageUrl();
+	});
+});
+</script>
 
-		<div class="row">
-			<div class="col-sm-3">
-				<a href="homeView.html"><img id="logo_img" src="logo.png"></a>
-			</div>
-			<div id="main_buttons" class="btn-group btn-group-justified">
-				<a href="#" class="btn btn">홈페이지</a> <a href="#" class="btn btn">마이페이지</a>
-				<a href="#" class="btn btn">나만의 루트</a> <a href="#" class="btn btn">즐겨찾기</a>
-			</div>
-		</div>
-	</div>
+<!-- head menu 로그아웃 이벤트 핸들링 -->
+<script>
+   $('#headmenu-logout').click(function() {
 
-	<!-- 메인 사진 박스 -->
-	<div class="container-fluid">
-		<img id="main_img" src="camping.png" alt="route">
+      var userId = localStorage.getItem('userId');
 
-		<div class="main_img_text">
-			<h2>내가 알지 못한 멋진 곳이 궁금하신가요?</h2>
-		</div>
-		<div id="search_bar_space" class="container">
-			<form class="inline">
-				<input type="text"
-					placeholder="                               #당신이 원했던 곳">
-				<button type="submit">
-					<img id="search_button_img" src="search_transparent1.png">
-				</button>
-			</form>
-		</div>
-	</div>
+      var userController = new UserController();
+      var isSuccess = userController.requestLogout(userId);
+
+      if (isSuccess == true) {
+         alert("로그아웃 되었습니다.")
+         localStorage.clear();
+      }
+
+   });
+</script>
+
+<!-- sub menu 회원정보관리 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#submenu-myinfo').click(function() {
+		var userController = new UserController();
+		userController.requestMyInfoUrl();
+	});
+});
+</script>
+
+<!-- sub menu 즐겨찾기 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#submenu-bookmark').click(function() {
+		var userController = new UserController();
+		userController.requestBookmarkUrl();
+	});
+});
+</script>
+
+<!-- 내알못 목록 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#listMHP').click(function() {
+		var mhpController = new MyHiddenPlaceController();
+		mhpController.requestMHPUrl();
+	});
+});
+</script>
+
+<!-- 나만의루트 목록 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#listMR').click(function() {
+		var mrController = new MyRouteController();
+		mrController.requestMRUrl();
+	});
+});
+</script>
+
+
+<body class="home-page">
+
+<!-- 로그인 & 회원가입 / 로그아웃 & 마이페이지 -->
+   <footer class="home-headmenu">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3" id="headmenu">
+               <ul id="headmenuLinks" class="menu-links">
+               
+                  
+               </ul>
+            </div>
+         </div>
+      </div>
+   </footer>
+
+   <header>
+      <div class="container hidden-xs logo">
+         <a href="index.html"><img class="img-responsive" src="../../bootstrap/images/mhp.png" alt="Logo" /></a>
+      </div>
+
+      <div class="navbar-wrapper">
+         <div class="container">
+            <nav class="navbar navbar-static-top">
+               
+               <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-center navbar-nav">
+                  
+                     <li class="dropdown">
+                        <p id="listMHP" data-toggle="dropdown" class="dropdown-toggle">my hidden place</p>
+                     </li>
+                     
+                     <li class="dropdown">
+                        <p id="listMR" data-toggle="dropdown" class="dropdown-toggle">My Route</p>
+                     </li>
+                     
+                  </ul>
+               </div>
+
+            </nav>
+         </div>
+      </div>
+   </header>
+
+</body>
+
+</html>
