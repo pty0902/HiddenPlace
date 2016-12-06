@@ -31,4 +31,45 @@ function MyHiddenPlaceController() {
 		document.location = requestUrl;
 		
 	};
+	
+//	내알못 추천 메서드
+	this.requestUpcount = function(upCountCode) {
+
+		var isSuccess = dao.upCount(upCountCode);
+
+		return isSuccess;
+
+	};
+
+//	내알못 댓글추가 메서드
+	this.requestReplyInsert = function(nickName, comment) {
+
+		var isSuccess = dao.replyInsert(nickName, comment);
+		return isSuccess;
+
+	};
+
+//	내알못 댓글목록 메서드
+	this.requestReplySelectAll = function(num) {
+
+		var replies = dao.replySelectAll(num);
+		return replies;
+
+	};
+
+//	내알못 댓글수정 메서드
+	this.requestReplyUpdate = function(num, replyNum, updateComment) {
+
+		var isSuccess = dao.replyUpdte(num, replyNum, updateComment);
+		return isSuccess;
+	};
+	
+
+//	내알못 댓글삭제 메서드
+	this.requestReplyDelete = function(num, replyNum) {
+
+		var isSuccess = dao.replyDelete(num, replyNum);
+		return isSuccess;
+	};
+	
 }

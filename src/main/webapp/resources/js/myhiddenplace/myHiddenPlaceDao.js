@@ -78,5 +78,223 @@ function MyHiddenPlaceDao() {
 		return myHiddenPlaces;
 		
 	};
+	
+//	내알못 조회 dao 메서드
+	this.selectOneMHP = function(num) {
+
+		alert("Dao 도착");
+		var myHiddenPlace;
+		
+		try{
+
+			$.ajax({
+				url: '/',
+				async : false,
+				type: 'get',     
+				data:{
+					num: num	
+				},
+
+				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				
+				success: function (data) { //서버에서 보내오는 데이터
+					
+					$(data).find('myHiddenPlace').each( function(){
+						myHiddenPlace = {
+							title:$(this).find('title').text(), //글제목
+							imageUrl:$(this).find('imageUrl').text(), //이미지경로
+							content:$(this).find('content').text(), //이미지+내용
+							upClick:$(this).find('upClick').text(), //추천수
+							latitude:$(this).find('latitude').text(), //위도
+							longitude:$(this).find('longitude').text(), //경도
+							userNickname:$(this).find('userNickname').text(), 
+							nowLoginId:$(this).find('nowLoginId').text() //현재로그인한 사용자아이디
+							
+						}					
+						
+					});	
+					
+				}
+			});
+
+		} catch(e) {
+			console.log('selectOneMHP 객체 : selectOneDao 메서드에서 예외 발생');
+			console.log(e.message);
+		}	
+		return myHiddenPlace;
+
+	};
+
+//	추천(좋아요) dao 메서드
+	this.upCount = function(upCountCode) {
+		alert("dao 도착");
+		var isSuccess;
+		try {
+			$.ajax({
+				url: '/', //홈페이지 불러올 주소
+				async : false, //false: 동기, true: 비동기
+				type: 'get', //요청방식 get or post              
+				data: {
+					upCountCode : upCountCode
+				},
+				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				success: function (data) {
+					
+					var messageValue =$(data).find('message').text();
+					isSuccess = eval('(' + messageValue + ')');
+					
+				}
+			});
+			
+		} catch(e) {
+			console.log('ArticleDao 객체 : saveDao 메서드에서 예외 발생');
+			console.log(e.message);
+		}
+		if(upCountCode==0){
+			isSuccess = false;	
+		} else {
+			isSuccess = true;	
+		}
+		alert(isSuccess);
+		return isSuccess;
+		
+	};
+	
+	
+//	댓글 추가 dao 메서드
+	this.replyInsert = function(nickName, comment) {
+		alert("Insertdao 도착");
+		var isSuccess;
+		try{
+			
+			$.ajax({
+				url: '/' , //홈페이지 불러올 주소
+				async : false, //false: 동기, true: 비동기
+				type: 'get', //요청방식 get or post      
+				data: {
+					nickName : nickName,
+					comment : comment
+				},
+				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				success: function (data) { //서버에서 보내오는 데이터
+					
+					$(data).find('myHiddenPlace').each( function(){
+						
+						var messageValue =$(data).find('message').text();
+						isSuccess = eval('(' + messageValue + ')');
+						
+						});					
+						
+					}
+					
+				});
+				
+		} catch(e) {
+			console.log('reply Dao 객체 : replyInsert 메서드에서 예외 발생');
+			console.log(e.message);
+		}
+		
+		return isSuccess;
+	};
+	
+	
+	//댓글 목록 dao 메서드
+	this.replySelectAll = function(num) {
+		alert("SelectAlldao 도착");
+		var replies = [];	
+		try{
+			
+			$.ajax({
+				url: '/' , //홈페이지 불러올 주소
+				async : false, //false: 동기, true: 비동기
+				type: 'get', //요청방식 get or post      
+				data: {
+					num: num
+				},
+				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				success: function (data) { //서버에서 보내오는 데이터
+					
+					$(data).find('replies').each( function(){
+						var reply = {
+							replyNum:$(this).find('userNickname').text(),
+							userNickname:$(this).find('userNickname').text(),
+							comment:$(this).find('comment').text()
+						}					
+						
+						replies.push(reply);
+					});	
+					
+				}
+			});
+			
+				
+		} catch(e) {
+			console.log('replies 객체 : replySelectAll 메서드에서 예외 발생');
+			console.log(e.message);
+		}
+
+		return replies;
+	};
+	
+	
+	//댓글삭제 dao
+	this.replyDelete = function(num, replyNum) {
+		alert("replyDeleteDao 도착");
+		var isSuccess;
+		try{
+
+			$.ajax({
+				url: '/',
+				async : false,
+				type: 'get',               
+				data: {
+					num : num,
+					replyNum : replyNum
+				},
+				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				success: function (data) {
+					var messageValue =$(data).find('message').text();
+					isSuccess = eval('(' + messageValue + ')');
+				}
+			});
+
+		}catch(e) {
+			console.log('ArticleDao 객체 : selectOneDao 메서드에서 예외 발생');
+			console.log(e.message);
+		}   
+
+		return isSuccess;
+	};
+		
+
+	//댓글 수정 dao
+	this.replyUpdte = function(num, replyNum, updateComment) {
+		alert("replyUpdteDao 도착");
+		var isSuccess;
+		try{
+
+			$.ajax({
+				url: '/',
+				async : false,
+				type: 'get',               
+				data: {
+					num : num,
+					replyNum : replyNum,
+					updateComment : updateComment
+				},
+				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				success: function (data) {
+					var messageValue =$(data).find('message').text();
+					isSuccess = eval('(' + messageValue + ')');
+				}
+			});
+
+		}catch(e) {
+			console.log('replyUpdteDao 객체 : replyUpdteDao 메서드에서 예외 발생');
+			console.log(e.message);
+		}   
+
+		return isSuccess;
+	};
 
 }
