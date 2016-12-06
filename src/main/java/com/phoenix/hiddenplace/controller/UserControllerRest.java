@@ -34,7 +34,7 @@ public class UserControllerRest {
 	private PasswordEncoder passwordEncoder;
 
 	// 회원가입
-	@RequestMapping(value = "/userInsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/userInsertView", method = RequestMethod.POST)
 	public ResponseEntity<String> insert(User user) {
 
 		System.out.println("회원가입 컨트롤러RESTFUL");
@@ -140,7 +140,7 @@ public class UserControllerRest {
 	}
 
 	// 비밀번호 찾기 (변경)
-	@RequestMapping(value = "/forgetPwUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/forgetPwUpdateView", method = RequestMethod.POST)
 	public ResponseEntity<String> forgetPwUpdate(String email, String newPw) {
 
 		ResponseEntity<String> entity = null;
@@ -161,7 +161,7 @@ public class UserControllerRest {
 	}
 
 	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/userloginView", method = RequestMethod.POST)
 	public void login(Login login, HttpSession session, Model model) throws Exception {
 
 		System.out.println(login.getUserId());

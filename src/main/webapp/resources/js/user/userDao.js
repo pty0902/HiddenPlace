@@ -33,7 +33,7 @@ function UserDao() {
 	this.userInsert = function(newUser) {
 		try {
 			$.ajax({
-				url : '/user/userInsert', // 홈페이지 불러올 주소
+				url : '/user/userInsertView', // 홈페이지 불러올 주소
 				async : false, // false: 동기, true: 비동기
 				type : 'post', // 요청방식 get or post
 				data : {
@@ -114,7 +114,7 @@ function UserDao() {
 
 		try {
 			$.ajax({
-				url : '/user/forgetPwUpdate',
+				url : '/user/forgetPwUpdateView',
 				async : false, // false: 동기, true: 비동기
 				type : 'post',
 				data : {
@@ -166,7 +166,7 @@ function UserDao() {
 
 		try {
 			$.ajax({
-				url : '/user/login',
+				url : '/user/userloginView',
 				async : false,
 				type : 'post',
 				data : {
@@ -181,7 +181,7 @@ function UserDao() {
 				}
 			});
 		} catch (e) {
-			console.log('userDao 객체 : userLogin 메서드에서 예외 발생');
+			console.log('userDao 객체 : userloginView 메서드에서 예외 발생');
 			console.log(e.message);
 		}
 

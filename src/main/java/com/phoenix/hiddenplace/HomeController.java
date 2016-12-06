@@ -29,7 +29,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "views/homepage/homeView";
+		return "/views/hompage/homepageView";
 	}
 
 }
