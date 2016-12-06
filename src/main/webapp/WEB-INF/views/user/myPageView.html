@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>ZUPA - Responsive Website Template / Portfolio</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+<link rel="shortcut icon"
+	href="../../../resources/HTML/images/favicon.ico" />
+<link
+	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/animate.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/style.css" />
+<script src="../../../resources/HTML/javascript/pace.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../../resources/HTML/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../resources/HTML/javascript/modernizr-custom.js"></script>
+<script src="../../../resources/HTML/javascript/script.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="../../../resources/js/user/user.js"></script>
+<script src="../../../resources/js/user/userController.js"></script>
+
+</head>
+
+<style>
+#enter, #cancel {
+	width: 100%;
+}
+
+#nickname_check {
+	height: 37px;
+}
+</style>
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-12">
+				<article class="content">
+					<section>
+
+						<!-- 정보수정 & 회원탈퇴 탭 -->
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#userUpdate">회원정보수정</a>
+							</li>
+
+							<li><a data-toggle="tab" href="#userDelete">회원탈퇴</a></li>
+
+						</ul>
+						<!-- 정보수정 & 회원탈퇴 탭 end -->
+
+						<br> <br> <br>
+
+
+						<div class="tab-content">
+							<!-- 정보수정 + 회원탈퇴 -->
+
+							<!-- 정보수정 start-->
+							<div id="userUpdate" class="tab-pane fade in active">
+								<!-- id 바꾸지말것 bootstrap고정 -->
+
+								<h2>회원정보 수정</h2>
+								<!-- 아이디 -->
+								<div id="contact_form" class="form-horizontal">
+									<div class="form-group">
+										<label class="col-sm-3 control-label">아이디(E-mail)</label>
+										<div class="col-sm-6 animated-form-control">
+											<input type="text" name="name" class="text form-control"
+												id="Form_Form_name" required="required" aria-required="true" />
+										</div>
+
+									</div>
+
+
+									<!-- 현재비밀번호 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">현재비밀번호</label>
+										<div class="col-sm-6 animated-form-control">
+											<input placeholder="Password" type="text" name="name"
+												class="text form-control" id="now_pw" required="required"
+												aria-required="true" />
+										</div>
+
+									</div>
+									<!-- 변경비밀번호 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">변경비밀번호</label>
+										<div class="col-sm-6 animated-form-control">
+											<input placeholder="New Password" type="text" name="name"
+												class="text form-control" id="new_pw" required="required"
+												aria-required="true" />
+										</div>
+
+									</div>
+									<!-- 변경비밀번호 확인 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">변경비밀번호 확인</label>
+										<div class="col-sm-6 animated-form-control">
+											<input placeholder="New Password Check" type="text"
+												name="name" class="text form-control" id="new_pw_check"
+												required="required" aria-required="true" />
+										</div>
+
+									</div>
+									<!-- 닉네임 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">닉네임</label>
+										<div class="col-sm-6 animated-form-control">
+											<input type="text" name="name" class="text form-control"
+												id="nickname" required="required" aria-required="true" />
+										</div>
+										<div class="col-sm-3 animated-form-control">
+											<button id="nickname_check" class="btn btn-primary">중복확인</button>
+										</div>
+
+									</div>
+									<!-- 변경확인 버튼 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label"></label>
+										<div class="col-sm-3 animated-form-control">
+											<button id="enter" class="btn btn-primary">확인</button>
+										</div>
+										<div class="col-sm-3">
+											<button id="cancel" class="btn btn-primary">취소</button>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--정보수정 tab end-->
+
+							<!-- 회원탈퇴 -->
+							<div id="userDelete" class="tab-pane fade">
+
+								<h2>회원탈퇴</h2>
+
+								<div id="contact_form" class="form-horizontal">
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label">현재비밀번호</label>
+										<div class="col-sm-6 animated-form-control">
+											<input placeholder="Now Password" type="text" name="name"
+												class="text form-control" id="Form_Form_name"
+												required="required" aria-required="true" />
+										</div>
+									</div>
+
+									<!-- 탈퇴 사유 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">탈퇴사유</label>
+										<div class="col-sm-6 animated-form-control">
+											<select id="sel1" class="text form-control" name="sel1"
+												onchange="selectReason();">
+												<option value=''>Select</option>
+												<option>정보가 유용하지 않아서</option>
+												<option>서비스가 마음에 들지 않아서</option>
+												<option>디자인이 마음에 들지 않아서</option>
+												<option value="write">직접 입력</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label"></label>
+										<div class="col-sm-6 animated-form-control">
+											<input type="text" class="text form-control"
+												style="display: none;" id="sel2" name="sel2">
+										</div>
+									</div>
+
+									<!-- 변경확인 버튼 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label"></label>
+										<div class="col-sm-3 animated-form-control">
+											<button id="enter" class="btn btn-primary">확인</button>
+										</div>
+										<div class="col-sm-3">
+											<button id="cancel" class="btn btn-primary">취소</button>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+							<!-- 회원탈퇴 tab end-->
+						</div>
+						<!-- tab div -->
+					</section>
+				</article>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		function selectReason() {
+			if (document.getElementById("sel1").value == "write") {
+				document.getElementById("sel2").style.display = "";
+			} else {
+				document.getElementById("sel2").style.display = "none";
+			}
+		}
+	</script>
+
+
+</body>
+
+</html>
