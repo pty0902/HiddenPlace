@@ -1,4 +1,4 @@
-$('head').append('<script src=\'../../../resources/js/user/userDao.js\'><\/script>');
+$('head').append('<script src=\'/resources/js/user/userDao.js\'><\/script>');
 
 //user controller 객체
 function UserController() {
