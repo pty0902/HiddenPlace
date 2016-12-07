@@ -34,7 +34,7 @@ public class UserControllerRest {
 	private PasswordEncoder passwordEncoder;
 
 	// 회원가입
-	@RequestMapping(value = "/userInsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<String> insert(User user) {
 
 		System.out.println("회원가입 컨트롤러RESTFUL");

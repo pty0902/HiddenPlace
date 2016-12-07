@@ -33,9 +33,9 @@ function UserDao() {
 	this.userInsert = function(newUser) {
 		try {
 			$.ajax({
-				url : '/user/userInsert', // 홈페이지 불러올 주소
+				url : '/user/insert', // 홈페이지 불러올 주소
 				async : false, // false: 동기, true: 비동기
-				type : 'post', // 요청방식 get or post
+				type : 'post', // 요청방식	 get or post
 				data : {
 					userId : newUser.userId,
 					userPw : newUser.userPw,
