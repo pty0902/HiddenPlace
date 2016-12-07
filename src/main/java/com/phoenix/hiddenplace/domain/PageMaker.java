@@ -1,4 +1,3 @@
-//1
 package com.phoenix.hiddenplace.domain;
 
 import org.springframework.web.util.UriComponents;

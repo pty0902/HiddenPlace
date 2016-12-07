@@ -12,15 +12,5 @@ public class ControllerTest {
       return "/views/homepage/homepageView";
       
    }
-<<<<<<< HEAD
-=======
-   
-   @RequestMapping(value="/myHiddenPlaceInsert")
-   public String InsertMHP() {
-      
-      return "/views/myhiddenplace/myHiddenPlaceInsert";
-      
-   }
 
->>>>>>> refs/remotes/dongjin1204/master
 }
