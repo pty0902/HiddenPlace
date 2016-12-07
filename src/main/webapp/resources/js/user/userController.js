@@ -34,16 +34,7 @@ function UserController() {
 	// 마이페이지 페이지요청 controller 메서드
 	this.requestMypageUrl = function() {
 		
-		var requestUrl = 'myPageView.html';
-		
-		document.location = requestUrl;
-		
-	};
-	
-	// 회원정보관리 페이지요청 controller 메서드
-	this.requestMyInfoUrl = function() {
-		
-		var requestUrl = '.html';
+		var requestUrl = 'mypageView.html';
 		
 		document.location = requestUrl;
 		
@@ -57,14 +48,15 @@ function UserController() {
 		document.location = requestUrl;
 		
 	};
-	
-	
+
 	// 회원가입
 	this.requestUserInsert = function(newUser) {
+
 		var isSuccess = dao.userInsert(newUser);
 
 		if (isSuccess) {
 			alert("회원가입 성공");
+			requestLoginUrl(); // 로그인 페이지로 이동
 		} else {
 			alert("회원가입 실패");
 		}
@@ -103,16 +95,28 @@ function UserController() {
 			isSuccess = false;
 		}
 		return isSuccess;
-		
+
 	}
+
+	// 비밀번호 찾기(변경) 페이지요청 controller 메서드
+	this.requestForgetPwUpdateUrl = function(email) {
+
+		var requestUrl = 'forgetPwUpdateView/' + email;
+
+		document.location = requestUrl;
+
+	};
 
 	// 비밀번호 찾기 (변경)
 	this.requestForgetPwUpdate = function(email, newPw) {
 
 		var isSuccess = dao.forgetPwUpdate(email, newPw);
-
-		return isSuccess;
-
+		if (isSuccess === 'success') {
+			alert("비밀번호가 변경되었습니다.");
+			requestLoginUrl(); // 로그인 페이지로 이동
+		} else {
+			alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
+		}
 	}
 
 	// 비밀번호 찾기 이메일 인증번호 전송
@@ -132,5 +136,48 @@ function UserController() {
 		return isSuccess;
 
 	}
+
+	// 로그인
+	this.requestLogin = function(user) {
+
+		var isSuccess = dao.userLogin(user);
+
+		return isSuccess;
+
+	};
+
+	// 회원정보 수정 (닉네임만 변경)
+	this.requestUserUpdateN = function(email, nowPw, newNickname) {
+
+		var isSuccess = dao.userUpdateN(email, nowPw, newNickname);
+
+		return isSuccess;
+
+	};
+	
+	// 회원정보 수정 
+	this.requestUserUpdateP = function(email, nowPw, newPw, newNickname) {
+
+		var isSuccess = dao.userUpdateP(email, nowPw, newPw, newNickname);
+
+		return isSuccess;
+
+	};
+
+	// 회원탈퇴
+	this.requestUserDelete = function(email, pw) {
+
+		var isSuccess = dao.userDelete(email, pw);
+		
+		alert(isSuccess);
+		if (isSuccess === 'success') {
+			alert("회원 탈퇴가 완료되었습니다.");
+			// 메인홈페이지 url 메서드
+		} else if (isSuccess === 'fail') {
+			alert("회원님의 비밀번호가 일치하지 않습니다.");
+		}
+		return isSuccess;
+
+	};
 
 }

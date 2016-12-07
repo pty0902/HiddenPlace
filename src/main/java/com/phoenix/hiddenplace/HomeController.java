@@ -21,7 +21,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		System.out.println("12.6 재작업 하늘&지은&태양");
+		System.out.println("12.7 4:50pm");
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
@@ -29,7 +29,11 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
+<<<<<<< HEAD
 		return "views/homepage/homepageView";
+=======
+		return "/views/hompage/homepageView";
+>>>>>>> refs/remotes/origin/master
 	}
 
 }

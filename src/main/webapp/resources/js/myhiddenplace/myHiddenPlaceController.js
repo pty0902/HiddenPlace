@@ -72,4 +72,18 @@ function MyHiddenPlaceController() {
 		return isSuccess;
 	};
 	
+	
+//내알못 글쓰기 메서드
+	this.requestInsertMHP = function(content,latitude, longitude) {
+		
+		var insertMHP  = dao.myHiddenPlaceInsert(content,latitude, longitude);
+
+		if (isSuccess) {
+			alert("회원가입 성공");
+		} else {
+			alert("회원가입 실패");
+		}
+
+	};
+	
 }
