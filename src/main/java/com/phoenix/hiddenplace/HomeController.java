@@ -29,11 +29,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-<<<<<<< HEAD
 		return "views/homepage/homepageView";
-=======
-		return "/views/hompage/homepageView";
->>>>>>> refs/remotes/origin/master
 	}
 
 }
