@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>비밀번호 찾기</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+<link rel="shortcut icon"
+	href="../../../resources/HTML/images/favicon.ico" />
+<link
+	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/animate.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/style.css" />
+<script src="../../../resources/HTML/javascript/pace.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../../resources/HTML/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../resources/HTML/javascript/modernizr-custom.js"></script>
+<script src="../../../resources/HTML/javascript/script.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="../../../resources/js/user/user.js"></script>
+<script src="../../../resources/js/user/userController.js"></script>
+
+</head>
+
+<script>
+	$(document).ready(function() {
+
+		var userController = new UserController();
+		var email = localStorage.email;
+		localStorage.clear();
+
+		// 취소 버튼 
+		$('#cancel').click(function() {
+
+			location.replace(""); // 홈페이지로 이동
+
+		});
+
+		// 확인 버튼 
+		$('#enter').click(function() {
+
+			var status = checkValue(); // 입력한 상황 체크
+			if (status) {
+				var newPw = $('#new_pw').val();
+				userController.requestForgetPwUpdate(email, newPw);
+			}
+
+		});
+
+		function checkValue() {
+
+			var chk1 = /[0-9]{1}/; //숫자만 입력
+			var chk2 = /[a-zA-Z]{1}/; //문자만 입력
+
+			var pw = $("#new_pw").val();
+
+			if (!$("#new_pw").val()) {
+				alert("비밀번호를 입력해주세요.");
+				$("#new_pw").focus();
+				return false;
+			}
+
+			if (!$("#new_pw_check").val()) {
+				alert("비밀번호를 동일하게 입력해주세요.");
+				$("#new_pw_check").focus();
+				return false;
+			}
+
+			// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+			if ($("#new_pw").val() != $("#new_pw_check").val()) {
+				$("#new_pw_check").focus();
+				alert("비밀번호를 동일하게 입력해주세요.");
+				return false;
+			}
+
+			if ($("#new_pw").val().length < 6) {
+				alert("비밀번호를 6자 이상 입력해주세요.");
+				$("#new_pw").focus();
+				return false;
+			}
+
+			if (chk1.test(pw) && chk2.test(pw)) {
+				return true;
+			} else {
+				alert("비밀번호를 문자, 숫자의 조합으로 입력해주세요.");
+				$("#new_pw").focus();
+				return false;
+			}
+
+			return true;
+		}
+	});
+</script>
+<style>
+#enter, #cancel {
+	width: 100%;
+}
+</style>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-12">
+				<article class="content">
+
+					<section>
+						<!-- 비밀번호 찾기-->
+						<h2>비밀번호 찾기 (변경)</h2>
+
+						<div id="contact_form" class="form-horizontal">
+
+							<!-- 새비밀번호 입력 -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">새 비밀번호</label>
+								<div class="col-sm-6 animated-form-control">
+									<input placeholder="New Password" type="password" name="name"
+										class="text form-control" id="new_pw" required="required"
+										aria-required="true" />
+								</div>
+							</div>
+
+							<!-- 새비밀번호 확인 -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">새 비밀번호 확인</label>
+								<div class="col-sm-6 animated-form-control">
+									<input placeholder="New Password Check" type="password"
+										name="name" class="text form-control" id="new_pw_check"
+										required="required" aria-required="true" />
+								</div>
+							</div>
+
+							<!-- 변경확인 버튼 -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label"></label>
+								<div class="col-sm-3">
+									<button id="enter" class="btn btn-primary">변경하기</button>
+								</div>
+								<div class="col-sm-3">
+									<button id="cancel" class="btn btn-primary">취소</button>
+								</div>
+							</div>
+
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

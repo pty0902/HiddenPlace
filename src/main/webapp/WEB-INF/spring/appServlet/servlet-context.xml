@@ -40,5 +40,11 @@
 	</beans:bean>
 
 	<context:component-scan base-package="com.phoenix.hiddenplace" />
+	
+	<beans:bean class="com.phoenix.hiddenplace.interceptor.LoginInterceptor" id="loginInterceptor"> </beans:bean>
+	<beans:bean class="com.phoenix.hiddenplace.interceptor.AuthInterceptor" id="authInterceptor"> </beans:bean>
+
+
+
 
 </beans:beans>

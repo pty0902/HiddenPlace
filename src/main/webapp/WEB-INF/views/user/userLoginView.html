@@ -1,1 +1,184 @@
-1
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+
+<link rel="shortcut icon"
+	href="../../../resources/HTML/images/favicon.ico" />
+<link
+	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/animate.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/HTML/css/style.css" />
+<script src="../../../resources/HTML/javascript/pace.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../../resources/HTML/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../resources/HTML/javascript/modernizr-custom.js"></script>
+<script src="../../../resources/HTML/javascript/script.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="../../../resources/js/user/user.js"></script>
+<script src="../../../resources/js/user/userController.js"></script>
+</head>
+<script>
+
+window.fbAsyncInit = function() {
+    FB.init({
+       appId :'548366072035004',
+       cookie : true, 
+       xfbml : true, // parse social plugins on this page
+       version : 'v2.0' 
+    });
+
+ };
+ 
+//sdk
+ (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id))
+       return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/ko_KR/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+
+
+ function facebookLogin() {
+     
+    FB.login(function(response){
+       if (response.status === 'connected') {
+              FB.api('/me?fields=name,email',function(user) {
+              console.log(user.name);
+              console.log(user.id);
+              console.log(user.email);
+              },{scope : 'public_profile,email,user_birthday,user_likes'});
+           } else if (response.status === 'not_authorized') {
+              
+           } else {
+              
+           }
+    });
+    
+ }
+  
+</script>
+
+<script>
+<!-- 로그인 버튼 이벤트 -->
+$(document).ready(function() {
+	
+	
+     <!-- 로그인 버튼클릭 -->
+     $('#login').click(function() {
+          
+     var userController = new UserController();
+     
+     var id = $('#id').val();
+     var pw = $('#pw').val();
+     var user = new User(id, pw);
+     userController.requestLogin(user);
+
+     });
+
+     
+     
+     
+  });
+</script>
+
+<style>
+#login, #facebook_login, #google_login {
+	width: 100%;
+}
+</style>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-12">
+				<article class="content">
+
+					<section>
+						<h2>로그인</h2>
+
+						<div id="contact_form" class="form-horizontal">
+
+
+							<!-- 아이디(이메일) -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">아이디(E-mail)</label>
+								<div class="col-sm-6 animated-form-control" id="input_div">
+									<input id="id" placeholder="E-mail" type="text" name="name"
+										class="text form-control" required="required"
+										aria-required="true" />
+								</div>
+							</div>
+							<!-- 비밀번호 -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">비밀번호</label>
+								<div class="col-sm-6 animated-form-control" id="input_div">
+									<input id="pw" placeholder="Password" type="password"
+										name="name" class="text form-control" required="required"
+										aria-required="true" />
+								</div>
+							</div>
+
+							<!-- 회원가입 / 비밀번호 찾기-->
+							<div class="form-group">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-3">
+									<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<a
+										href="userInsert.html" id="userInsert">회원가입</a>
+								</div>
+								<div class="col-sm-3">
+									<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<a
+										href="forgetPw.html" id="forgetPw">비밀번호 찾기</a>
+								</div>
+							</div>
+
+							<!-- 로그인 버튼 -->
+							<div class="form-group">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-6">
+									<button id="login" type="button" class="btn btn-primary btn-md">로그인</button>
+								</div>
+							</div>
+
+							<!-- 구글, 페이스북 로그인 버튼 -->
+							<div class="form-group">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-3">
+									<button id="facebook_login" name="singlebutton"
+										class="btn btn-primary Login_button" onclick="facebookLogin()">Facebook
+										Login</button>
+								</div>
+								<div class="col-sm-3">
+									<button id="google_login" name="singlebutton"
+										class="btn btn-primary Login_button">Google Login</button>
+								</div>
+							</div>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+
+</html>

@@ -57,5 +57,80 @@ function UserController() {
 		document.location = requestUrl;
 		
 	};
+	
+	
+	// 회원가입
+	this.requestUserInsert = function(newUser) {
+		var isSuccess = dao.userInsert(newUser);
+
+		if (isSuccess) {
+			alert("회원가입 성공");
+		} else {
+			alert("회원가입 실패");
+		}
+
+	};
+
+	// 닉네임 중복확인
+	this.requestNicknameCheck = function(nickname) {
+
+		var nicknameCheck = dao.nicknameCheck(nickname);
+		var isSuccess = false;
+
+		if (nicknameCheck === 'success') {
+			alert("사용가능한 닉네임입니다.");
+			isSuccess = true;
+		}
+		if (nicknameCheck === 'fail') {
+			alert("이미 사용중인 닉네임입니다.");
+			isSuccess = false;
+		}
+
+		return isSuccess;
+	}
+
+	// 회원가입 이메일 인증번호 전송
+	this.requestEmailSend = function(email, certificationNum) {
+
+		var emailSendCheck = dao.emailSend(email, certificationNum);
+		var isSuccess = false;
+
+		if (emailSendCheck === 'success') {
+			alert("인증번호가 전송되었습니다.");
+			isSuccess = true;
+		} else if (emailSendCheck === 'fail') {
+			alert("이미 사용중인 이메일입니다.");
+			isSuccess = false;
+		}
+		return isSuccess;
+		
+	}
+
+	// 비밀번호 찾기 (변경)
+	this.requestForgetPwUpdate = function(email, newPw) {
+
+		var isSuccess = dao.forgetPwUpdate(email, newPw);
+
+		return isSuccess;
+
+	}
+
+	// 비밀번호 찾기 이메일 인증번호 전송
+	this.requestForgetPwEmailSend = function(email, certificationNum) {
+
+		var emailSendCheck = dao.forgetEmailSend(email, certificationNum);
+		var isSuccess = false;
+
+		if (emailSendCheck === 'success') {
+			alert("인증번호가 전송되었습니다.");
+			isSuccess = true;
+		} else if (emailSendCheck === 'fail') {
+			alert("존재하지 않는 이메일입니다.");
+			isSuccess = false;
+		}
+
+		return isSuccess;
+
+	}
 
 }
