@@ -54,7 +54,7 @@
 			var status = checkEmail(); // 이메일 유효성 검사 
 			if (status) {
 				// 				$("#email_alert").show();
-				certificationNum = parseInt(Math.random() * 1000000);
+				certificationNum = parseInt(Math.random() * 1000000); // ?????
 				email = $('#id').val();
 				alert(certificationNum);
 				emailSendSuccess = userController.requestForgetPwEmailSend(email, certificationNum);
@@ -65,14 +65,11 @@
 		// 이메일 인증번호 확인 
 		$("#email_check").click(function() {
 
-			if (!emailSendSuccess) { // 인증번호를 전송한 상태
+			if (emailSendSuccess) { // 인증번호를 전송한 상태
 				var userInputNum = $('#email_confirm').val();
 				var email = $('#id').val();
-				if (userInputNum != certificationNum) { // 인증번호 일치시 다음 비밀번호 찾기 페이지로 이동
-					localStorage.email = email; // localStorage에 메일 저장
-					location.href = "../../views/user/forgetPwUpdate.html";
-					// 					location.href = "../../views/user/forgetPwUpdate.html?email=" + email;
-					// 					userController.requestForgetPw(email);
+				if (userInputNum == certificationNum) { // 인증번호 일치시 다음 비밀번호 찾기 페이지로 이동
+					userController.requestForgetPwUpdateUrl(email);
 				} else {
 					alert("인증번호를 올바르게 입력해주세요.");
 					$('#email_confirm').focus();

@@ -20,12 +20,10 @@ public interface UserService {
 	// 로그인
 	public User login(Login login) throws Exception;
 
-//	public User readMyPage(String userId) throws Exception;
-//
-//	// 회원정보 수정
-//	public void modify(User user) throws Exception;
-//
-//	// 회원탈퇴
-//	public void delete(String userPw) throws Exception;
+	// 회원정보 수정
+	public void modify(User user) throws Exception;
+
+	// 회원탈퇴
+	public void delete(User user) throws Exception;
 
 }

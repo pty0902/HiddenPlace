@@ -50,22 +50,17 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-//	@Override
-//	public User readMyPage(String userId) throws Exception {
-//		return session.selectOne(namespace + ".read", userId);
-//	}
-//
-//	@Override
-//	public void update(User user) throws Exception {
-//
-//		session.update(namespace + ".update", user);
-//
-//	}
-//
-//	@Override
-//	public void delete(String userPw) throws Exception {
-//
-//		session.delete(namespace + ".delete", userPw);
-//
-//	}
+	@Override
+	public void update(User user) throws Exception {
+
+		session.update(namespace + ".update", user);
+
+	}
+
+	@Override
+	public void delete(User user) throws Exception {
+		
+		session.delete(namespace + ".delete", user);
+
+	}
 }
