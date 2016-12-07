@@ -296,5 +296,34 @@ function MyHiddenPlaceDao() {
 
 		return isSuccess;
 	};
+	
+	
+//	내알못 글쓰기 dao
+	this.myHiddenPlaceInsert = function(content,latitude, longitude) {
+		
+			try {
+				$.ajax({
+					url : '/', // 홈페이지 불러올 주소
+					async : false, // false: 동기, true: 비동기
+					type : 'post', // 요청방식 get or post
+					data : {
+						content : content,
+						latitude : latitude,
+						longitude : longitude
+						
+					},
+					dataType : 'xml', // 서버에서 보내오는 데이터 타입
+					success : function(data) { // 서버에서 보내오는 데이터
+
+
+					}
+				});
+			} catch (e) {
+				console.log('userDao 객체 : userInsert 메서드에서 예외 발생');
+				console.log(e.message);
+			}
+
+			return isSuccess;
+		};
 
 }
