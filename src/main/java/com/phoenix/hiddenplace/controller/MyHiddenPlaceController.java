@@ -1,4 +1,3 @@
-//1
 package com.phoenix.hiddenplace.controller;
 
 import javax.inject.Inject;

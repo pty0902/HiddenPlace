@@ -42,8 +42,10 @@
 	$(document).ready(function() {
 
 		var userController = new UserController();
-		var email = localStorage.email;
-		localStorage.clear();
+
+		var url = unescape(location.href); // url = http://localhost:8080/user/forgetPwUpdateView/pty0902@naver.com
+		var pm = url.split('/'); // pm[0] = http: , pm[1] = ,  
+		var email = pm[5]; // pty0902@naver.com
 
 		// 취소 버튼 
 		$('#cancel').click(function() {
@@ -58,6 +60,7 @@
 			var status = checkValue(); // 입력한 상황 체크
 			if (status) {
 				var newPw = $('#new_pw').val();
+
 				userController.requestForgetPwUpdate(email, newPw);
 			}
 
@@ -67,6 +70,7 @@
 
 			var chk1 = /[0-9]{1}/; //숫자만 입력
 			var chk2 = /[a-zA-Z]{1}/; //문자만 입력
+			var chk3 = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
 
 			var pw = $("#new_pw").val();
 
@@ -95,7 +99,7 @@
 				return false;
 			}
 
-			if (chk1.test(pw) && chk2.test(pw)) {
+			if ((chk1.test(pw) && chk2.test(pw)) || chk3.test(pw)) {
 				return true;
 			} else {
 				alert("비밀번호를 문자, 숫자의 조합으로 입력해주세요.");

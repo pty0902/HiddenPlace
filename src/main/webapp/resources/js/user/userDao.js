@@ -1,34 +1,8 @@
 //user dao 객체
 function UserDao() {
 	
-	// 로그아웃 메서드
-	this.userLogout = function(userId) {
+	var isSuccess;
 
-		try {
-			
-			$.ajax({
-				url : '/user/logout',
-				async : false,
-				type : 'get',
-				data : {
-					userId : userId
-				},
-				dataType : 'xml',
-				success : function(data) {
-					var messageValue = $(data).find('message').text();
-					var	isSuccess = eval('(' + messageValue + ')');
-				}
-			});
-			
-		} catch (e) {
-			console.log('userDao 객체 : userLogoutDao 메서드에서 예외 발생');
-			console.log(e.message);
-		}
-
-		return isSuccess;
-
-	};
-	
 	// 회원가입
 	this.userInsert = function(newUser) {
 		try {
@@ -37,10 +11,11 @@ function UserDao() {
 				async : false, // false: 동기, true: 비동기
 				type : 'post', // 요청방식 get or post
 				data : {
-					userId : newUser.userId,
-					userPw : newUser.userPw,
-					userNickname : newUser.userNickname,
-					userPhoneNum : newUser.userPhoneNum
+					// userId : newUser.userId,
+					// userPw : newUser.userPw,
+					// userNickname : newUser.userNickname,
+					// userPhoneNum : newUser.userPhoneNum
+					user : newUser
 				},
 				dataType : 'text', // 서버에서 보내오는 데이터 타입
 				success : function(data) { // 서버에서 보내오는 데이터
@@ -111,10 +86,9 @@ function UserDao() {
 
 	// 비밀번호 찾기 (변경)
 	this.forgetPwUpdate = function(email, newPw) {
-
 		try {
 			$.ajax({
-				url : '/user/forgetPwUpdate',
+				url : '/user/forgetPwUpdateView',
 				async : false, // false: 동기, true: 비동기
 				type : 'post',
 				data : {
@@ -124,7 +98,7 @@ function UserDao() {
 				dataType : 'text', // 서버에서 보내오는 데이터 타입
 				success : function(data) {
 
-					isSuccess = data; // success or fail
+					isSuccess = data; // success
 
 				}
 			});
@@ -176,7 +150,7 @@ function UserDao() {
 				dataType : '?????',
 				success : function(data) { // 로그인 성공시 유저의 ID를 가져올게요
 
-					var log = data;
+					log = data;
 
 				}
 			});
@@ -189,4 +163,93 @@ function UserDao() {
 
 	};
 
+	//
+
+	// 회원정보 수정 (닉네임만 변경)
+	this.userUpdateN = function(email, nowPw, newNickname) {
+		try {
+			$.ajax({
+				url : '/user/userUpdate',
+				async : false,
+				type : 'post',
+				data : {
+					email : email,
+					nowPw : nowPw,
+					newNickname : newNickname
+				},
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
+				success : function(data) {
+
+					isSuccess = data; // success or fail
+
+				}
+			});
+
+		} catch (e) {
+			console.log('ArticleDao 객체 : userUpdate 메서드에서 예외 발생');
+			console.log(e.message);
+		}
+
+		return isSuccess;
+
+	};
+
+	// 회원정보 수정
+	this.userUpdateP = function(email, nowPw, newPw, newNickname) {
+		try {
+			$.ajax({
+				url : '/user/userUpdate',
+				async : false,
+				type : 'post',
+				data : {
+					email : email,
+					nowPw : nowPw,
+					newPw : newPw,
+					newNickname : newNickname
+				},
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
+				success : function(data) {
+
+					isSuccess = data; // success or fail
+
+				}
+			});
+
+		} catch (e) {
+			console.log('ArticleDao 객체 : userUpdate 메서드에서 예외 발생');
+			console.log(e.message);
+		}
+
+		return isSuccess;
+
+	};
+
+	// 회원탈퇴
+	this.userDelete = function(email, pw) {
+
+		try {
+			$.ajax({
+				url : '/user/userDelete',
+				async : false,
+				type : 'post',
+
+				data : {
+					userId : email,
+					userPw : pw
+				},
+				dataType : 'text', // 서버에서 보내오는 데이터 타입
+				success : function(data) {
+
+					isSuccess = data; // success or fail
+
+				}
+			});
+		} catch (e) {
+			console.log("userDao 객체: userDelete 메서드에서 예외 발생");
+			console.log(e.message);
+		}
+
+		return isSuccess;
+
+	};
 }
