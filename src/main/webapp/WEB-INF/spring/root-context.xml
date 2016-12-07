@@ -1,73 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+      http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
+   <!-- Root Context: defines shared resources visible to all other web components -->
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="url"
-			value="jdbc:log4jdbc:mysql://127.0.0.1:3306/HiddenPlace"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="1234"></property>
-	</bean>
+   <bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+      <property name="url"
+         value="jdbc:log4jdbc:mysql://127.0.0.1:3306/HiddenPlace"></property>
+      <property name="username" value="root"></property>
+      <property name="password" value="1234"></property>
+   </bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
-	</bean>
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource"></property>
+      <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+      <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+   </bean>
 
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
-	</bean>
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+   </bean>
 
-	<bean id="EmailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="defaultEncoding" value="utf-8" />
-		<property name="username" value="xptz98@gmail.com" />
-		<property name="password" value="spfp4256" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.starttls.enable">true</prop>
-				<prop key="mail.smtp.auth">true</prop>
-			</props>
-		</property>
-	</bean>
+   <bean id="EmailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="defaultEncoding" value="utf-8" />
+      <property name="username" value="xptz98@gmail.com" />
+      <property name="password" value="spfp4256" />
+      <property name="javaMailProperties">
+         <props>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+            <prop key="mail.smtp.auth">true</prop>
+         </props>
+      </property>
+   </bean>
 
-	<bean id="email" class="com.phoenix.hiddenplace.util.Email">
-	</bean>
+   <bean id="email" class="com.phoenix.hiddenplace.util.Email">
+   </bean>
 
-	<bean id="emailSender" class="com.phoenix.hiddenplace.util.EmailSender">
-		<property name="mailSender" ref="EmailSender" />
-	</bean>
+   <bean id="emailSender" class="com.phoenix.hiddenplace.util.EmailSender">
+      <property name="mailSender" ref="EmailSender" />
+   </bean>
 
-	<!-- <authentication-manager> <authentication-provider user-service-ref="securityService"> 
-		<password-encoder ref="passwordEncoder" /> </authentication-provider> </authentication-manager> 
-		<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" 
-		/> -->
+   <!-- <authentication-manager> <authentication-provider user-service-ref="securityService"> 
+      <password-encoder ref="passwordEncoder" /> </authentication-provider> </authentication-manager> 
+      <beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" 
+      /> -->
 
-	<bean id="customAuthenticationProvider" class="com.phoenix.hiddenplace.security.CustomAuthenticationProvider">
-		<property name="passwordEncoder" ref="passwordEncoder" />
-	</bean>
+   <bean id="customAuthenticationProvider" class="com.phoenix.hiddenplace.security.CustomAuthenticationProvider">
+      <property name="passwordEncoder" ref="passwordEncoder" />
+   </bean>
 
-	<!-- 스프링 시큐리티가 기본 제공하는 PasswordEncoder 구현 -->
-	<bean id="passwordEncoder"
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+   <!-- 이미지 파일 저장 경로지정하는곳 -->
+   <bean id="uploadPath" class="java.lang.String">
+      <constructor-arg value="C:\\imageUpload\\upload">
+      </constructor-arg>
+   </bean>
+
+   <!-- 스프링 시큐리티가 기본 제공하는 PasswordEncoder 구현 -->
+   <bean id="passwordEncoder"
+      class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+   
 
 
-	<context:component-scan base-package="com.phoenix.hiddenplace.controller"></context:component-scan>
-	<context:component-scan base-package="com.phoenix.hiddenplace.dao"></context:component-scan>
-	<context:component-scan base-package="com.phoenix.hiddenplace.service"></context:component-scan>
+   <context:component-scan base-package="com.phoenix.hiddenplace.controller"></context:component-scan>
+   <context:component-scan base-package="com.phoenix.hiddenplace.dao"></context:component-scan>
+   <context:component-scan base-package="com.phoenix.hiddenplace.service"></context:component-scan>
 </beans>
