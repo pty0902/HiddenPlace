@@ -33,8 +33,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="/resources/bootstrap/js/user/user.js"></script>
-<script src="/resources/bootstrap/js/user/userController.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 
 <script src="/resources/bootstrap/HTML/javascript/isotope.min.js"></script>
 </head>
@@ -56,7 +56,7 @@
 				// 				$("#email_alert").show();
 				certificationNum = parseInt(Math.random() * 1000000); // ?????
 				email = $('#id').val();
-				alert(certificationNum);
+				alert("인증번호 : "+certificationNum);
 				emailSendSuccess = userController.requestForgetPwEmailSend(email, certificationNum);
 				// 				$("#email_alert").hide();
 			}

@@ -2,14 +2,15 @@
 <html lang="en">
 
 <head>
-<title>ZUPA - Responsive Website Template / Portfolio</title>
+<title>회원 정보 관리</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-<link rel="shortcut icon" href="/resources/bootstrap/HTML/images/favicon.ico" />
+<link rel="shortcut icon"
+	href="/resources/bootstrap/HTML/images/favicon.ico" />
 <link
 	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
 	rel='stylesheet' type='text/css'>
@@ -32,8 +33,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="/resources/bootstrap/js/user/user.js"></script>
-<script src="/resources/bootstrap/js/user/userController.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 
 </head>
 
@@ -83,10 +84,9 @@
 			    	 var newNickname = $('#now_nickname').val(); // 변경할 닉네임
 					
 			    	 if(!newPw) { // 비밀번호를 변경하지 않을 경우
-			    		 alert("닉네임만 수정");
 			    		 userController.requestUserUpdateN(email, nowPw, newNickname);
+			    	 	
 			    	 } else { // 비밀번호를 변경할 경우
-				    	alert("비밀번호도 변경");
 			    		 userController.requestUserUpdateP(email, nowPw, newPw, newNickname);	
 						
 			    	 }
@@ -100,7 +100,7 @@
 	    		var chk1 = /[0-9]{1}/; //숫자만 입력
 				var chk2 = /[a-zA-Z]{1}/; //문자만 입력
 				var chk3 = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
-				var chk4 = /^\s+|\s+$/g; // 공백
+				var chk4 = /[\s]/;// 공백
 				
 				var pw = $("#new_pw").val();
 				
@@ -137,11 +137,17 @@
 				}
 				
 				if($("#new_pw").val()){
-					if ($("#new_pw").val().length < 6) {
-						alert("변경할 비밀번호를 6자 이상 입력해주세요.");
+					if ($("#new_pw").val().length < 6 || (nickname.length > 12)) {
+						alert("비밀번호를 6~12자리로 입력해주세요.");
 						$("#new_pw").focus();
 						return false;
 					}
+				}
+				
+				if(chk4.test(pw)){
+					alert("비밀번호에 공백은 들어갈 수 없습니다.");
+					$("#new_pw").focus();
+					return false;
 				}
 				
 				if($("#new_pw").val()){
@@ -162,12 +168,12 @@
 				$('#nickname_check').click(function() {
 					var nickname = $('#now_nickname').val();
 					var chkNick = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
-					var chkN = /^\s+|\s+$/g; // 공백
+					var chkNull = /[\s]/; // 공백
 					
 					if ((nickname.length < 2) || (nickname.length > 10)) {
 						alert("닉네임은 2~10글자 사이로 입력해 주세요");
 						$('#now_nickname').focus();
-					} else if (chkNick.test(nickname) || chkN.test(nickname)) {
+					} else if (chkNick.test(nickname) || chkNull.test(nickname)) {
 						alert("닉네임에 특수문자나 공백은 들어갈 수 없습니다.");
 						$('#now_nickname').focus();
 						$('#now_nickname').attr("value", "");

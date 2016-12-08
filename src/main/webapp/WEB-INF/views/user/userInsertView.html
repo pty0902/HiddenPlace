@@ -5,7 +5,8 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 
-<link rel="shortcut icon" href="/resources/bootstrap/HTML/images/favicon.ico" />
+<link rel="shortcut icon"
+	href="/resources/bootstrap/HTML/images/favicon.ico" />
 <link
 	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
 	rel='stylesheet' type='text/css'>
@@ -28,8 +29,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="/resources/bootstrap/js/user/user.js"></script>
-<script src="/resources/bootstrap/js/user/userController.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 
 </head>
 <script>
@@ -94,7 +95,7 @@
 			var chk1 = /[0-9]{1}/; //숫자만 입력
 			var chk2 = /[a-zA-Z]{1}/; //문자만 입력
 			var chk3 = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
-			var chk4 = /^\s+|\s+$/g; // 공백
+			var chk4 = /[\s]/; // 공백
 
 			var pw = $("#pw").val();
 
@@ -134,29 +135,34 @@
 				alert("비밀번호를 동일하게 입력해주세요.");
 				return false;
 			}
-
-			if ($("#pw").val().length < 6) {
-				alert("비밀번호를 6자 이상 입력해주세요.");
+			if ($("#pw").val().length < 6 || (nickname.length > 12)) {
+				alert("비밀번호를 6~12자리로 입력해주세요.");
 				$("#pw").focus();
 				return false;
 			}
 
-			if ($('#phoneNum_2').val().length > 4) {
+			if ($('#phoneNum_2').val().length > 4 || chk4.test($('#phoneNum_2').val())) {
 				alert("전화번호를 올바르게 입력해주세요.");
 				$("#phoneNum_2").focus();
 				return false;
 			}
 
-			if ($('#phoneNum_3').val().length > 4) {
+			if ($('#phoneNum_3').val().length > 4 || chk4.test($('#phoneNum_3').val())) {
 				alert("전화번호를 올바르게 입력해주세요.");
-				$("#phoneNum_2").focus();
+				$("#phoneNum_3").focus();
 				return false;
 			}
 
+			if(chk4.test(pw)){
+				alert("비밀번호에 공백은 들어갈 수 없습니다.");
+				$("#pw").focus();
+				return false;
+			}
+			
 			if ((chk1.test(pw) && chk2.test(pw)) || chk3.test(pw)) {
 				return true;
 			} else {
-				alert("비밀번호를 문자, 숫자의 조합으로 입력해주세요.");
+				alert("비밀번호는 문자, 숫자의 조합으로 입력해주세요.(특수문자 가능)");
 				$("#pw").focus();
 				return false;
 			}
@@ -168,12 +174,12 @@
 		$('#nickname_check').click(function() {
 			var nickname = $('#nickname').val();
 			var chkNick = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
-			var chkN = /^\s+|\s+$/g; // 공백
+			var chkNull = /[\s]/; // 공백
 
 			if ((nickname.length < 2) || (nickname.length > 10)) {
 				alert("닉네임은 2~10글자 사이로 입력해 주세요");
 				$('#nickname').focus();
-			} else if (chkNick.test(nickname) || chkN.test(nickname)) {
+			} else if (chkNick.test(nickname) || chkNull.test(nickname)) {
 				alert("닉네임에 특수문자나 공백은 들어갈 수 없습니다.");
 				$('#nickname').focus();
 				$('#nickname').attr("value", "");
@@ -195,16 +201,15 @@
 
 			if (status) {
 				// 				$("#email_alert").show();
-				alert(certificationNum);
 				certificationNum = parseInt(Math.random() * 1000000);
 				var email = $('#id').val();
-				alert(certificationNum);
+				alert("인증번호 : " + certificationNum);
 				emailSendSuccess = userController.requestEmailSend(email, certificationNum);
 				// 				$("#email_alert").hide();
 			}
 		});
 
-		// 이메일 인증(비밀번호 찾기)
+		// 이메일 인증
 		$("#email_check").click(function() {
 
 			if (emailSendSuccess) { // 인증번호를 전송한 상태
@@ -214,6 +219,7 @@
 					alert("이메일 인증에 성공하였습니다.");
 					$('#email_confirm').attr("readonly", "readonly");
 					$('#email_check').attr("readonly", "readonly");
+					emailCheckSuccess = true;
 				} else {
 					alert("인증번호를 올바르게 입력해주세요.");
 					$('#email_confirm').focus();
@@ -302,6 +308,14 @@
 									<input placeholder="Password Check" id="pw_check"
 										type="password" name="email" class="text form-control"
 										required="required" />
+								</div>
+							</div>
+
+							<div class="form-group" style="line-height: 0;">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9">
+									<span style="font-size: 12px;">비밀번호는 공백없이 문자, 숫자를 조합하여
+										입력 가능 (6~12자리, 특수문자 가능)</span>
 								</div>
 							</div>
 

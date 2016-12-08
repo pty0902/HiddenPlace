@@ -28,8 +28,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="/resources/bootstrap/js/user/user.js"></script>
-<script src="/resources/bootstrap/js/user/userController.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 </head>
 <script>
 
@@ -72,18 +72,19 @@ window.fbAsyncInit = function() {
     });
     
  }
-  
+ 
+ 
 </script>
 
 <script>
-<!-- 로그인 버튼 이벤트 -->
 $(document).ready(function() {
 	
+	 var userController = new UserController();
 	
      <!-- 로그인 버튼클릭 -->
      $('#login').click(function() {
           
-     var userController = new UserController();
+    
      
      var id = $('#id').val();
      var pw = $('#pw').val();
@@ -91,7 +92,20 @@ $(document).ready(function() {
      userController.requestLogin(user);
 
      });
+     
+     <!-- 회원가입 페이지 요청 -->
+     $('#userInsert').click(function() {
+    	 
+    	 userController.requestUserInsertUrl();
+    	 
+     });
+     <!-- 비밀번호 찾기 페이지 요청 -->
+     $('#forgetPw').click(function() {
 
+    	 userController.requestForgetPwUrl();
+    	 
+     });
+      
      
      
      
@@ -140,11 +154,11 @@ $(document).ready(function() {
 								<div class="col-sm-3"></div>
 								<div class="col-sm-3">
 									<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<a
-										href="userInsert.html" id="userInsert">회원가입</a>
+										id="userInsert">회원가입</a>
 								</div>
 								<div class="col-sm-3">
 									<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<a
-										href="forgetPw.html" id="forgetPw">비밀번호 찾기</a>
+										id="forgetPw">비밀번호 찾기</a>
 								</div>
 							</div>
 
