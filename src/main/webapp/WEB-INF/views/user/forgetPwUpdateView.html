@@ -33,8 +33,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="/resources/bootstrap/js/user/user.js"></script>
-<script src="/resources/bootstrap/js/user/userController.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 
 </head>
 
@@ -71,7 +71,8 @@
 			var chk1 = /[0-9]{1}/; //숫자만 입력
 			var chk2 = /[a-zA-Z]{1}/; //문자만 입력
 			var chk3 = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
-
+			var chk4 = /[\s]/; // 공백
+			
 			var pw = $("#new_pw").val();
 
 			if (!$("#new_pw").val()) {
@@ -93,12 +94,18 @@
 				return false;
 			}
 
-			if ($("#new_pw").val().length < 6) {
-				alert("비밀번호를 6자 이상 입력해주세요.");
+			if ($("#new_pw").val().length < 6 || (nickname.length > 12)) {
+				alert("비밀번호를 6~12자리로 입력해주세요.");
 				$("#new_pw").focus();
 				return false;
 			}
 
+			if(chk4.test(pw)){
+				alert("비밀번호에 공백은 들어갈 수 없습니다.");
+				$("#new_pw").focus();
+				return false;
+			}
+			
 			if ((chk1.test(pw) && chk2.test(pw)) || chk3.test(pw)) {
 				return true;
 			} else {

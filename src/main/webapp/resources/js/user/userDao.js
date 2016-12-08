@@ -1,21 +1,22 @@
 //user dao 객체
 function UserDao() {
-	
+
 	var isSuccess;
 
 	// 회원가입
 	this.userInsert = function(newUser) {
+
 		try {
 			$.ajax({
 				url : '/user/userInsert', // 홈페이지 불러올 주소
 				async : false, // false: 동기, true: 비동기
 				type : 'post', // 요청방식 get or post
 				data : {
-					// userId : newUser.userId,
-					// userPw : newUser.userPw,
-					// userNickname : newUser.userNickname,
-					// userPhoneNum : newUser.userPhoneNum
-					user : newUser
+					userId : newUser.userId,
+					userPw : newUser.userPw,
+					userNickname : newUser.userNickname,
+					userPhoneNum : newUser.userPhoneNum
+				// user : newUser
 				},
 				dataType : 'text', // 서버에서 보내오는 데이터 타입
 				success : function(data) { // 서버에서 보내오는 데이터
@@ -36,7 +37,6 @@ function UserDao() {
 	this.nicknameCheck = function(nickname) {
 
 		try {
-
 			$.ajax({
 				url : '/user/nicknameCheck', // 닉네임 중복 체크할 곳
 				async : false, // false: 동기, true: 비동기
