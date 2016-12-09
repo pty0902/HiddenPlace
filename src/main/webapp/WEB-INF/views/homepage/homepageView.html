@@ -53,7 +53,10 @@
     text-align: right;
     overflow: hidden;
     text-overflow: ellipsis; 
-    border: 1px solid #000000;
+}
+
+.imgSize {
+	height: 267.43px;
 }
 </style>
 </head>
@@ -62,30 +65,55 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-			var mhpController = new MyHiddenPlaceController();
-			var myHiddenPlaces = mhpController.requestBestMHP();
+			var nowLoginId = localStorage.getItem('userId');
 			
-			for (var i = 0; i < myHiddenPlaces.length; i++) {
-
-				var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
-				var imgMHP = $('<img src="' + myHiddenPlaces[i].imageUrl + '"/>'); //이미지
-				var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
-				var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaces[i].title);
-				var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickname); //작성자
-				var pDateMHP = $('<p></p>').html(myHiddenPlaces[i].writeDate); //작성일자
-				var pReadCountMHP = $('<p></p>').html(myHiddenPlaces[i].readCount); //추천수
-				var pNumMHP = $('<p hidden></p>').html(myHiddenPlaces[i].num); //글번호
+			var mhpController = new MyHiddenPlaceController();
+			var myHiddenPlaces = mhpController.requestBestMHP(nowLoginId);
+			
+			if(nowLoginId == null) {
 				
-				if(myHiddenPlaces[i].bookmark == 1){
-					var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
-				} else {
-					var	imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')						
+				for (var i = 0; i < myHiddenPlaces.length; i++) {
+
+					var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
+					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].imageUrl + '"/>'); //이미지
+					var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
+					var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaces[i].title);
+					var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickname); //작성자
+					var pDateMHP = $('<p></p>').html(myHiddenPlaces[i].writeDate); //작성일자
+					var pReadCountMHP = $('<p></p>').html(myHiddenPlaces[i].readCount); //추천수
+					var pNumMHP = $('<p hidden></p>').html(myHiddenPlaces[i].num); //글번호
+					
+					figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+					figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+					$('#bestMHP4').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
+
 				}
+				
+			} else {
+			
+				for (var i = 0; i < myHiddenPlaces.length; i++) {
 
-				figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
-				figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-				$('#bestMHP4').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
+					var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
+					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].imageUrl + '"/>'); //이미지
+					var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
+					var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaces[i].title);
+					var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickname); //작성자
+					var pDateMHP = $('<p></p>').html(myHiddenPlaces[i].writeDate); //작성일자
+					var pReadCountMHP = $('<p></p>').html(myHiddenPlaces[i].readCount); //추천수
+					var pNumMHP = $('<p hidden></p>').html(myHiddenPlaces[i].num); //글번호
+				
+					if(myHiddenPlaces[i].bookmark == 1) {
+						var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
+					} else {
+						var	imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')						
+					}
 
+					figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+					figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+					$('#bestMHP4').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
+					
+				}
+				
 			}
 
 	});
@@ -95,41 +123,65 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
+		var nowLoginId = localStorage.getItem('userId');
+		
 		var mrController = new MyRouteController();
-		var myRoutes = mrController.requestBestMR();
+		var myRoutes = mrController.requestBestMR(nowLoginId);
+		
+		if(nowLoginId == null) {
+			
+			for (var i = 0; i < myRoutes.length; i++) {
 
-		for (var i = 0; i < myRoutes.length; i++) {
-			
-			//figure class명: animateOnScroll, 바뀐 이후 css 바뀐거있으면 되돌려야함
-			var figureMR = $('<figure class="figureMR" data-animation="fadeIn"></figure>'); //figure태그
-			var imgMR = $('<img src="' + myRoutes[i].imageUrl + '"/>'); //이미지
-			var figcaptionMR = $('<figcaption></figcaption>'); //figcaption태그
-			var hTitle = $('<h2 class="hTextLine"></h2>').html(myRoutes[i].title);
-			var pUserNicknameMR = $('<p></p>').html(myRoutes[i].userNickname); //작성자
-			var pDateMR = $('<p></p>').html(myRoutes[i].writeDate); //작성일자
-			var pReadCountMR = $('<p></p>').html(myRoutes[i].readCount); //추천수
-			var pNumMR = $('<p hidden></p>').html(myRoutes[i].num); //글번호
-			
-			if(myRoutes[i].bookmark == 1){
-				var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
-			} else {
-				var	imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')						
+				var figureMR = $('<figure class="figureMR" data-animation="fadeIn"></figure>'); //figure태그
+				var imgMR = $('<img class="imgSize" src="' + myRoutes[i].imageUrl + '"/>'); //이미지
+				var figcaptionMR = $('<figcaption></figcaption>'); //figcaption태그
+				var hTitle = $('<h2 class="hTextLine"></h2>').html(myRoutes[i].title);
+				var pUserNicknameMR = $('<p></p>').html(myRoutes[i].userNickname); //작성자
+				var pDateMR = $('<p></p>').html(myRoutes[i].writeDate); //작성일자
+				var pReadCountMR = $('<p></p>').html(myRoutes[i].readCount); //추천수
+				var pNumMR = $('<p hidden></p>').html(myRoutes[i].num); //글번호
+				
+				figcaptionMR.append(hTitle, pUserNicknameMR, pDateMR, pReadCountMR, pNumMR); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+				figureMR.append(imgMR, figcaptionMR); // figure태그에 이미지, figcaption append
+				$('#bestMR4').append(figureMR); //내알못 div에 bestMHP[i] 게시글 append
+
 			}
 			
-			figcaptionMR.append(hTitle, pUserNicknameMR, pDateMR, pReadCountMR, pNumMR, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
-			figureMR.append(imgMR, figcaptionMR); // figure태그에 이미지, figcaption append
-			$('#bestMR4').append(figureMR); //나만의루트 div에 bestMR[i] 게시글 append
+		} else {
 		
+			for (var i = 0; i < myRoutes.length; i++) {
+
+				var figureMR = $('<figure class="figureMR" data-animation="fadeIn"></figure>'); //figure태그
+				var imgMR = $('<img class="imgSize" src="' + myRoutes[i].imageUrl + '"/>'); //이미지
+				var figcaptionMR = $('<figcaption></figcaption>'); //figcaption태그
+				var hTitle = $('<h2 class="hTextLine"></h2>').html(myRoutes[i].title);
+				var pUserNicknameMR = $('<p></p>').html(myRoutes[i].userNickname); //작성자
+				var pDateMR = $('<p></p>').html(myRoutes[i].writeDate); //작성일자
+				var pReadCountMR = $('<p></p>').html(myRoutes[i].readCount); //추천수
+				var pNumMR = $('<p hidden></p>').html(myRoutes[i].num); //글번호
+			
+				if(myRoutes[i].bookmark == 1) {
+					var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
+				} else {
+					var	imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')						
+				}
+
+				figcaptionMR.append(hTitle, pUserNicknameMR, pDateMR, pReadCountMR, pNumMR, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+				figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+				$('#bestMR4').append(figureMR); //내알못 div에 bestMHP[i] 게시글 append
+				
+			}
+			
 		}
 
-	});
+});
 </script>
 
 <!-- 글조회 (MHP) 이벤트 핸들링 -->
 <script>
 $(document).ready(function() {
 		$('.figureMHP').click(function() {
-			var num = $(this).children().eq(1).children().eq(3).text();
+			var num = $(this).children().eq(1).children().eq(4).text();
 			var mhpController = new MyHiddenPlaceController();
 			mhpController.requestSelectOneMHP(num);
 		});

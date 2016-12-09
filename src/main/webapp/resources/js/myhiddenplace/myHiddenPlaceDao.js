@@ -2,7 +2,7 @@
 function MyHiddenPlaceDao() {
 
 //	내알못 best 4 요청 dao 메서드
-	this.bestMHP = function() {
+	this.bestMHP = function(nowLoginId) {
 		
 		var myHiddenPlaces = [];
 
@@ -13,18 +13,20 @@ function MyHiddenPlaceDao() {
 				async : false, //false: 동기, true: 비동기
 				type: 'get', //요청방식 get or post      
 				data: {
-					//보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
+					userId : nowLoginId//보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
 				},
 				dataType: 'xml', //서버에서 보내오는 데이터 타입
 				success: function (data) { //서버에서 보내오는 데이터
 				
-					$(data).find('myHiddenPlace').each( function() {
+					$(data).find('myHiddenPlace').each(function() {
 						var myHiddenPlace = {
 							num:$(this).find('num').text(), //글번호
 							userNickname:$(this).find('userNickname').text(), //작성자
 							writeDate:$(this).find('writeDate').text(), //작성일자
-							upCount:$(this).find('upCount').text(), //추천수
-							imageUrl:$(this).find('imageUrl').text() //이미지경로
+							readCount:$(this).find('readCount').text(), //추천수
+							imageUrl:$(this).find('imageUrl').text(), //이미지경로
+							bookmark:$(this).find('bookmark').text(), //즐겨찾기 여부 0or1 현재 로그인한 userId가 즐겨찾기한 게시글인경우 1 리턴, userId가 null값(로그인x)이 넘어갈 경우도 생각
+							title:$(this).find('title').text() //글제목
 						}					
 						
 						myHiddenPlaces.push(myHiddenPlace);
@@ -33,35 +35,43 @@ function MyHiddenPlaceDao() {
 			});*/
 			
 			var myHiddenPlace1 = {
-					num:1,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
+					num:1, //글번호 hidden으로할거임
+					userNickname:"이동진", //유저닉네임
+					writeDate:20161206, //작성일자
+					readCount:1, //조회수
+					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
+					bookmark:1, //북마크 여부 0or1
+					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			var myHiddenPlace2 = {
-					num:2,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
+					num:2, //글번호 hidden으로할거임
+					userNickname:"이동진", //유저닉네임
+					writeDate:20161206, //작성일자
+					readCount:1, //조회수
+					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
+					bookmark:1, //북마크 여부 0or1
+					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			var myHiddenPlace3 = {
-					num:3,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
+					num:3, //글번호 hidden으로할거임
+					userNickname:"이동진", //유저닉네임
+					writeDate:20161206, //작성일자
+					readCount:1, //조회수
+					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
+					bookmark:1, //북마크 여부 0or1
+					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			var myHiddenPlace4 = {
-					num:4,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
+					num:4, //글번호 hidden으로할거임
+					userNickname:"이동진", //유저닉네임
+					writeDate:20161206, //작성일자
+					readCount:1, //조회수
+					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
+					bookmark:1, //북마크 여부 0or1
+					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			myHiddenPlaces.push(myHiddenPlace1);

@@ -6,9 +6,9 @@ function MyRouteController() {
 	var dao = new MyRouteDao();	
 
 // 나만의루트 best 4 요청 controller 메서드
-	this.requestBestMR = function() {
+	this.requestBestMR = function(nowLoginId) {
 
-		var myRoutes  = dao.bestMR();
+		var myRoutes  = dao.bestMR(nowLoginId);
 	      
 		return myRoutes;
 

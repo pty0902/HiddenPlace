@@ -6,9 +6,9 @@ function MyHiddenPlaceController() {
    var dao = new MyHiddenPlaceDao();   
 
 // 내알못 best 4 요청 controller 메서드
-   this.requestBestMHP = function() {
+   this.requestBestMHP = function(nowLoginId) {
 
-	  var myHiddenPlaces  = dao.bestMHP();
+	  var myHiddenPlaces  = dao.bestMHP(nowLoginId);
       
       return myHiddenPlaces;
 
