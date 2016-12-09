@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+
+<link rel="shortcut icon"
+	href="/resources/bootstrap/HTML/images/favicon.ico" />
+<link
+	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css"
+	href="/resources/bootstrap/HTML/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/bootstrap/HTML/css/animate.css" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/bootstrap/HTML/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/bootstrap/HTML/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/bootstrap/HTML/css/style.css" />
+<script src="/resources/bootstrap/HTML/javascript/pace.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/resources/bootstrap/HTML/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/HTML/javascript/modernizr-custom.js"></script>
+<script src="/resources/bootstrap/HTML/javascript/script.js"></script>
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+</head>
+<script>
+
+</script>
+<style>
+@media ( min-width :300px) {
+	.material-icons {
+		float: left;
+	}
+	.material-icons {
+		width: 10%;
+	}
+}
+
+#login {
+	width: 300px;
+	margin-left: 18px;
+}
+
+#md {
+	width: 400px;
+}
+
+#input_div {
+	width: 67%;
+}
+
+/* 	display: inline-block; */
+.form-group>.fb-login-button {
+	margin-left: 45px;
+}
+
+#naver_id_login {
+	margin-left: 45px;
+}
+
+.material-icons {
+	margin-left: 10%;
+}
+
+.material-icons, #input_div, #pw, #id {
+	display: inline-block;
+}
+
+.l {
+	margin-left: 11%;
+	color: black;
+}
+
+a {
+	font-size: 15px;
+}
+
+#forgetPw {
+	margin-left: 13%;
+}
+
+
+</style>
+
+<body>
+
+
+
+
+	<!-- 회원가입 modal -->
+	<div class="modal fade" id="homeLogin" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static">
+
+		<div class="modal-dialog modal-sm" id="md">
+
+			<div class="modal-content">
+
+				<!-- 팝업 header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true"><i class="material-icons">clear</i></span><span
+							class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">HiddenPlace 로그인</h4>
+				</div>
+				<!-- 팝업 body -->
+				<div class="modal-body">
+
+					<div id="contact_form" class="form-horizontal">
+						<section>
+						<h2>회원 가입</h2>
+						<div id="contact_form" class="form-horizontal">
+							<!-- 아이디(이메일) -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">	<i class="material-icons" style="font-size: 30px">email</i> </label>
+								<div class="col-sm-6 animated-form-control">
+									<input placeholder="E-mail" type="text" name="name"
+										class="text form-control" id="id" required="required"
+										aria-required="true" />
+								</div>
+								<div class="col-sm-2 email-button">
+									<button id="email_send" class="btn btn-primary ">인증요청</button>
+								</div>
+							</div>
+							<!-- 인증번호  -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-6 animated-form-control">
+									<input placeholder="Confirm Number" type="text" name="name"
+										class="text form-control" id="E-mail Confirm"
+										required="required" aria-required="true" />
+								</div>
+								<div class="col-sm-2">
+									<button id="email_check" class="btn btn-primary ">인증확인</button>
+								</div>
+							</div>
+							<!-- 닉네임 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><i class="material-icons" style="font-size:36px">perm_identity</i></label>
+								<div class="col-sm-6 animated-form-control">
+									<input placeholder="Nickname" id="nickname" type="text"
+										name="email" class="form-control" required="required" />
+								</div>
+								<div class="col-sm-2 ">
+									<button id="nickname_check" class="btn btn-primary ">중복확인</button>
+								</div>
+							</div>
+							<!-- 비밀번호 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><i class="material-icons" style="font-size: 30px">lock</i></label>
+								<div class="col-sm-6 animated-form-control">
+									<input placeholder="Password " id="pw" type="password"
+										name="email" class="form-control" required="required" />
+								</div>
+							</div>
+							<!-- 비밀번호 확인 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-6 animated-form-control">
+									<input placeholder="Password Check" id="pw_check"
+										type="password" name="email" class="form-control"
+										required="required" />
+								</div>
+							</div>
+
+							<!-- 전화번호 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><i class="fa fa-whatsapp" style="font-size:36px"></i></label>
+
+								<div class="col-sm-2 ">
+									<select id="phoneNum_1" class="form-control">
+										<option>010</option>
+										<option>019</option>
+										<option>011</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input id="phoneNum_2" size="6" class="form-control">
+								</div>
+								<div class="col-sm-2">
+									<input id="phoneNum_3" size="6" class="form-control">
+								</div>
+
+							</div>
+
+							<div class="form-group">
+								<br />
+								<div class="col-sm-4"></div>
+								<div class="col-sm-2">
+									<button id="join" class="btn btn-primary ">가입하기</button>
+								</div>
+							</div>
+						</div>
+					</section>
+						
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	<!-- 로그인 버튼 -->
+	<a id="test">modal test</a>
+
+	<!-- 로그인 modal -->
+	<div class="modal fade" id="modal_test" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static">
+
+		<!-- 여기 modal 내용 -->
+
+	</div>
+	<div id="fb-root"></div>
+</body>
+
+
+
+
+<!-- api 로그인 script 참고용 -->
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+<script type="text/javascript">
+	var naver_id_login = new naver_id_login("YOUR_CLIENT_ID", "YOUR_CALLBACK_URL");
+	var state = naver_id_login.getUniqState();
+	naver_id_login.setButton("white", 2, 40);
+	naver_id_login.setDomain("YOUR_SERVICE_URL");
+	naver_id_login.setState(state);
+	naver_id_login.setPopup();
+	naver_id_login.init_naver_id_login();
+</script>
+
+<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId : '916384101825169',
+			xfbml : true,
+			version : 'v2.8'
+		});
+	};
+
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+</html>
