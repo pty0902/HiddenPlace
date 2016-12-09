@@ -10,31 +10,31 @@
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 <link rel="shortcut icon"
-	href="../../../resources/HTML/images/favicon.ico" />
+	href="/resources/bootstrap/HTML/images/favicon.ico" />
 <link
 	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/bootstrap/css/bootstrap.min.css" />
+	href="/resources/bootstrap/HTML/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/animate.css" />
+	href="/resources/bootstrap/HTML/css/animate.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/font-awesome.min.css" />
+	href="/resources/bootstrap/HTML/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/swiper.min.css" />
+	href="/resources/bootstrap/HTML/css/swiper.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/style.css" />
-<script src="../../../resources/HTML/javascript/pace.min.js"></script>
+	href="/resources/bootstrap/HTML/css/style.css" />
+<script src="/resources/bootstrap/HTML/javascript/pace.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="../../../resources/HTML/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../../resources/HTML/javascript/modernizr-custom.js"></script>
-<script src="../../../resources/HTML/javascript/script.js"></script>
+<script src="/resources/bootstrap/HTML/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/HTML/javascript/modernizr-custom.js"></script>
+<script src="/resources/bootstrap/HTML/javascript/script.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="../../../resources/js/user/user.js"></script>
-<script src="../../../resources/js/user/userController.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 
 </head>
 
@@ -42,8 +42,10 @@
 	$(document).ready(function() {
 
 		var userController = new UserController();
-		var email = localStorage.email;
-		localStorage.clear();
+
+		var url = unescape(location.href); // url = http://localhost:8080/user/forgetPwUpdateView/pty0902@naver.com
+		var pm = url.split('/'); // pm[0] = http: , pm[1] = ,  
+		var email = pm[5]; // pty0902@naver.com
 
 		// 취소 버튼 
 		$('#cancel').click(function() {
@@ -58,6 +60,7 @@
 			var status = checkValue(); // 입력한 상황 체크
 			if (status) {
 				var newPw = $('#new_pw').val();
+
 				userController.requestForgetPwUpdate(email, newPw);
 			}
 
@@ -67,7 +70,9 @@
 
 			var chk1 = /[0-9]{1}/; //숫자만 입력
 			var chk2 = /[a-zA-Z]{1}/; //문자만 입력
-
+			var chk3 = /[~!@#$%^&*()_+|<>?{}]{1}/; //특수문자
+			var chk4 = /[\s]/; // 공백
+			
 			var pw = $("#new_pw").val();
 
 			if (!$("#new_pw").val()) {
@@ -89,13 +94,19 @@
 				return false;
 			}
 
-			if ($("#new_pw").val().length < 6) {
-				alert("비밀번호를 6자 이상 입력해주세요.");
+			if ($("#new_pw").val().length < 6 || (nickname.length > 12)) {
+				alert("비밀번호를 6~12자리로 입력해주세요.");
 				$("#new_pw").focus();
 				return false;
 			}
 
-			if (chk1.test(pw) && chk2.test(pw)) {
+			if(chk4.test(pw)){
+				alert("비밀번호에 공백은 들어갈 수 없습니다.");
+				$("#new_pw").focus();
+				return false;
+			}
+			
+			if ((chk1.test(pw) && chk2.test(pw)) || chk3.test(pw)) {
 				return true;
 			} else {
 				alert("비밀번호를 문자, 숫자의 조합으로 입력해주세요.");

@@ -10,33 +10,33 @@
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 <link rel="shortcut icon"
-	href="../../../resources/HTML/images/favicon.ico" />
+	href="/resources/bootstrap/HTML/images/favicon.ico" />
 <link
 	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/bootstrap/css/bootstrap.min.css" />
+	href="/resources/bootstrap/HTML/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/animate.css" />
+	href="/resources/bootstrap/HTML/css/animate.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/font-awesome.min.css" />
+	href="/resources/bootstrap/HTML/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/swiper.min.css" />
+	href="/resources/bootstrap/HTML/css/swiper.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/HTML/css/style.css" />
-<script src="../../../resources/HTML/javascript/pace.min.js"></script>
+	href="/resources/bootstrap/HTML/css/style.css" />
+<script src="/resources/bootstrap/HTML/javascript/pace.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="../../../resources/HTML/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../../resources/HTML/javascript/modernizr-custom.js"></script>
-<script src="../../../resources/HTML/javascript/script.js"></script>
+<script src="/resources/bootstrap/HTML/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/HTML/javascript/modernizr-custom.js"></script>
+<script src="/resources/bootstrap/HTML/javascript/script.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="../../../resources/js/user/user.js"></script>
-<script src="../../../resources/js/user/userController.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 
-<script src="../../../resources/HTML/javascript/isotope.min.js"></script>
+<script src="/resources/bootstrap/HTML/javascript/isotope.min.js"></script>
 </head>
 
 <script>
@@ -54,9 +54,9 @@
 			var status = checkEmail(); // 이메일 유효성 검사 
 			if (status) {
 				// 				$("#email_alert").show();
-				certificationNum = parseInt(Math.random() * 1000000);
+				certificationNum = parseInt(Math.random() * 1000000); // ?????
 				email = $('#id').val();
-				alert(certificationNum);
+				alert("인증번호 : "+certificationNum);
 				emailSendSuccess = userController.requestForgetPwEmailSend(email, certificationNum);
 				// 				$("#email_alert").hide();
 			}
@@ -65,14 +65,11 @@
 		// 이메일 인증번호 확인 
 		$("#email_check").click(function() {
 
-			if (!emailSendSuccess) { // 인증번호를 전송한 상태
+			if (emailSendSuccess) { // 인증번호를 전송한 상태
 				var userInputNum = $('#email_confirm').val();
 				var email = $('#id').val();
-				if (userInputNum != certificationNum) { // 인증번호 일치시 다음 비밀번호 찾기 페이지로 이동
-					localStorage.email = email; // localStorage에 메일 저장
-					location.href = "../../views/user/forgetPwUpdate.html";
-					// 					location.href = "../../views/user/forgetPwUpdate.html?email=" + email;
-					// 					userController.requestForgetPw(email);
+				if (userInputNum == certificationNum) { // 인증번호 일치시 다음 비밀번호 찾기 페이지로 이동
+					userController.requestForgetPwUpdateUrl(email);
 				} else {
 					alert("인증번호를 올바르게 입력해주세요.");
 					$('#email_confirm').focus();
@@ -115,7 +112,7 @@
 <style>
 @font-face {
 	font-family: 'baemin';
-	src: url(../../../resources/bootstrap/fonts/배달의민족주아체.ttf);
+	src: url(/resources/bootstrap/bootstrap/fonts/배달의민족주아체.ttf);
 }
 
 body {
