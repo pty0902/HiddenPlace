@@ -1,4 +1,4 @@
-$('head').append('<script src=\'../../../resources/js/myhiddenplace/myHiddenPlaceDao.js\'><\/script>');
+$('head').append('<script src=\'../../resources/js/myhiddenplace/myHiddenPlaceDao.js\'><\/script>');
 
 //myHiddenPlace controller 객체
 function MyHiddenPlaceController() {
@@ -74,15 +74,11 @@ function MyHiddenPlaceController() {
 	
 	
 //내알못 글쓰기 메서드
-	this.requestInsertMHP = function(content,latitude, longitude) {
+	this.requestInsertMHP = function(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema) {
 		
-		var insertMHP  = dao.myHiddenPlaceInsert(content,latitude, longitude);
+		var isSuccess  = dao.myHiddenPlaceInsert(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema);
 
-		if (isSuccess) {
-			alert("회원가입 성공");
-		} else {
-			alert("회원가입 실패");
-		}
+		return isSuccess;
 
 	};
 	
