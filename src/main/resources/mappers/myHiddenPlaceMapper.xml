@@ -201,4 +201,9 @@
 			bno > 0 
 		]]>
 	</select> -->
+		<insert id="insert">
+		insert into TBL_BOARD (USERID, STORENAME,TITLEIMGURL,THEMECODE,TITLE,CONTENT,LATITUDE,LONGITUDE)
+		values("qwer522", #{storeName}, "string",#{themeCode},#{title},#{content}, #{latitude}, #{longitude})
+		</insert>
+	
 </mapper>

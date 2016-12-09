@@ -9,7 +9,14 @@ public class ControllerTest {
    @RequestMapping(value="/homepage/homepageView")
    public String homeView() {
       
-      return "/views/homepage/homepageView";
+      return "/views/homepage/homeView";
+      
+   }
+   
+   @RequestMapping(value="/myhiddenplace/myHiddenPlaceInsert")
+   public String InsertMHP() {
+      
+      return "/views/myhiddenplace/myHiddenPlaceInsert";
       
    }
 
