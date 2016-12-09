@@ -309,30 +309,39 @@ function MyHiddenPlaceDao() {
 	
 	
 //	내알못 글쓰기 dao
-	this.myHiddenPlaceInsert = function(content,latitude, longitude) {
+	this.myHiddenPlaceInsert = function(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema) {
+		
+		var isSuccess;
 		
 			try {
 				$.ajax({
-					url : '/', // 홈페이지 불러올 주소
+					url : '/myhiddenplace/insertMHP', // 홈페이지 불러올 주소
 					async : false, // false: 동기, true: 비동기
 					type : 'post', // 요청방식 get or post
 					data : {
+						
 						content : content,
 						latitude : latitude,
-						longitude : longitude
+						longitude : longitude,
+						storeName : mhpStoreName,
+						title : mhpTitle,
+						themeCode : mhpThema
 						
 					},
-					dataType : 'xml', // 서버에서 보내오는 데이터 타입
-					success : function(data) { // 서버에서 보내오는 데이터
+					dataType: 'text', //서버에서 보내오는 데이터 타입
+					success: function (data) {
 
-
+						isSuccess = data; // success
+						
 					}
 				});
-			} catch (e) {
-				console.log('userDao 객체 : userInsert 메서드에서 예외 발생');
-				console.log(e.message);
-			}
 
+			}catch(e) {
+				console.log('ArticleDao 객체 : selectOneDao 메서드에서 예외 발생');
+				console.log(e.message);
+			}   
+			
+			alert(isSuccess);
 			return isSuccess;
 		};
 

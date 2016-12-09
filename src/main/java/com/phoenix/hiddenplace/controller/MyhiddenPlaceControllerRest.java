@@ -138,5 +138,24 @@ public class MyhiddenPlaceControllerRest {
             return ResponseEntity.badRequest().build();
         }
     }
+	
+	
+	// 내알못 등록 
+	   @RequestMapping(value = "/insertMHP", method = RequestMethod.POST)
+	   public ResponseEntity<String> insert(MyHiddenPlace myHiddenPlace) {
+		   System.out.println("왔니");
+		   System.out.println(myHiddenPlace.getContent());
+	      ResponseEntity<String> entity = null;
 
-}
+	      try {
+	    	  service.insert(myHiddenPlace);
+	         entity = new ResponseEntity<String>("success", HttpStatus.OK);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      }
+
+	      return entity;
+	   }
+	   
+	}   

@@ -9,7 +9,7 @@ import com.phoenix.hiddenplace.domain.PageMaker;
 
 public interface MyHiddenPlaceService {
 
-	public void insert(MyHiddenPlace domain)throws Exception;
+	public void insert(MyHiddenPlace myHiddenPlace)throws Exception;
 
 	List<MyHiddenPlace> list(PageMaker pageMaker) throws Exception; //내알못 목록
 	
