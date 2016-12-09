@@ -34,10 +34,9 @@ public class UserControllerRest {
 	private PasswordEncoder passwordEncoder;
 
 	// 회원가입
-	@RequestMapping(value = "/userInsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public ResponseEntity<String> insert(User user) {
 
-		System.out.println("회원가입 컨트롤러RESTFUL");
 		System.out.println(user.toString());
 		ResponseEntity<String> entity = null;
 
@@ -57,7 +56,6 @@ public class UserControllerRest {
 	@RequestMapping(value = "/nicknameCheck")
 	public ResponseEntity<String> nicknameCheck(String nickname) {
 
-		System.out.println("닉네임 중복확인 컨트롤러RESTFUL");
 		ResponseEntity<String> entity = null;
 		String checkNickname = null;
 		try {
@@ -140,19 +138,18 @@ public class UserControllerRest {
 	}
 
 	// 비밀번호 찾기 (변경)
-	@RequestMapping(value = "/forgetPwUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/forgetPwUpdateView", method = RequestMethod.POST)
 	public ResponseEntity<String> forgetPwUpdate(String email, String newPw) {
-
+		System.out.println(email);
+		System.out.println(newPw);
 		ResponseEntity<String> entity = null;
 		try {
-			String updatePw = (passwordEncoder.encode(newPw)); // 비밀번호 암호화(변경할 비밀번호)
+			String updatePw = passwordEncoder.encode(newPw); // 비밀번호 암호화(변경할 비밀번호)
 			User user = new User();
 			user.setUserId(email);
 			user.setUserPw(updatePw);
 			service.pwUpdate(user);
-
-			// entity = new ResponseEntity<String>("success", HttpStatus.OK);
-			// entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -166,34 +163,70 @@ public class UserControllerRest {
 
 		System.out.println(login.getUserId());
 		System.out.println(login.getUserPw());
-		
+
 		User user = service.login(login); // 로그인된 user
 
 		if (user == null) {
 			return;
 		}
-		
-		System.out.println("로그인된 ID : "+user.getUserId() );
-		System.out.println("로그인된 PW : "+user.getUserPw());
-		
+
+		System.out.println("로그인된 ID : " + user.getUserId());
+		System.out.println("로그인된 PW : " + user.getUserPw());
+
 		model.addAttribute("user", user);
 	}
 
-	// // 회원탈퇴
-	// @RequestMapping(value = "/deleteUser")
-	// public ResponseEntity<String> deleteUser(@RequestParam("userPw") String userPw) {
-	//
-	// System.out.println("deleteUser 파일 호출");
-	// ResponseEntity<String> entity = null;
-	//
-	// try {
-	// service.delete(userPw);
-	//
-	// entity = new ResponseEntity<String>("success", HttpStatus.OK);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
-	// }
-	// return entity;
-	// }
+	// 회원수정
+	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
+	public ResponseEntity<String> userUpdate(String email, String nowPw, String newPw, String newNickname) throws Exception {
+
+		ResponseEntity<String> entity = null;
+		try {
+			Login login = new Login();
+			login.setUserId(email); // 현재 로그온 상태의 아이디
+			User searchUser = service.login(login); // 현재 로그인한 아이디의 유저 정보를 가져옴(id,pw) 없다면 null
+
+			if (searchUser != null && passwordEncoder.matches(nowPw, searchUser.getUserPw())) { // 비밀번호 일치
+				searchUser.setUserNickname(newNickname); // 현재 입력되어 있는 닉네임
+				if (newPw == null) { // 닉네임만 변경하였을 경우
+					service.modify(searchUser);
+				} else { // 닉네임, 비밀번호 변경
+					searchUser.setUserPw(passwordEncoder.encode(newPw)); // 변경할 비밀번호
+					service.modify(searchUser);
+				}
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			} else { // 비밀번호 불일치
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	// 회원탈퇴
+	@RequestMapping(value = "/userDelete", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteUser(User user) {
+
+		ResponseEntity<String> entity = null;
+		try {
+			Login login = new Login();
+			login.setUserId(user.getUserId()); // 현재 로그온 상태의 아이디
+			User searchUser = service.login(login); // 현재 로그인한 아이디의 유저 정보를 가져옴(id,pw) 없다면 null
+			// 검색한 유저 정보가 존재 AND 검색한 유저의 비밀번호와 입력한 비밀번호가 일치하는지
+			if (searchUser != null && passwordEncoder.matches(user.getUserPw(), searchUser.getUserPw())) { // 비밀번호 일치
+				service.delete(searchUser); // id와 입력한 비밀번호가 일치하는 컬럼을 삭제(회원탈퇴)
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			} else { // 비밀번호 불일치
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
 }

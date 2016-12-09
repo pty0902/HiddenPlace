@@ -37,18 +37,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{userId}
 	</update>
 
-	<!-- 로그인 -->
+	<!-- 로그인, 비밀번호 확인 -->
 	<select id="login" resultType="User">
-		select userId, userPw
+		select *
 		from
 		TBL_USER
-		where userId = #{userId} and userPw = #{userPw}
+		where userId = #{userId} 
 	</select>
-
+	
+	<!-- 회원수정 -->
+	<select id="update" resultType="User">
+		update TBL_USER
+		set userPw = #{userPw}, userNickname = #{userNickname}
+		where userId = #{userId}
+	</select>
+	
 	<!-- 회원탈퇴 -->
 	<delete id="delete">
 		delete from TBL_USER
-		where userPw = #{userPw}
+		where userId = #{userId}
 	</delete>
 
 

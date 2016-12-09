@@ -1,5 +1,6 @@
 package com.phoenix.hiddenplace.service;
 
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
 	public User login(Login login) throws Exception {
 
 		return dao.login(login);
+		
 	}
 
 	@Override
@@ -48,25 +50,17 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	// @Override
-	// public User readMyPage(String userId) throws Exception {
-	//
-	// return dao.readMyPage(userId);
-	//
-	// }
-	//
-	// @Override
-	// public void modify(User user) throws Exception {
-	//
-	// dao.update(user); // userNickName, userPw 수정
-	//
-	// }
-	//
-	// @Override
-	// public void delete(String userPw) throws Exception {
-	//
-	// dao.delete(userPw);
-	//
-	// }
+	@Override
+	public void modify(User user) throws Exception {
 
+		dao.update(user);
+
+	}
+
+	@Override
+	public void delete(User user) throws Exception {
+
+		dao.delete(user);
+
+	}
 }
