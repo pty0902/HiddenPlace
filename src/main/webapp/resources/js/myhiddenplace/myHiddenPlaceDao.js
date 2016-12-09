@@ -344,5 +344,90 @@ function MyHiddenPlaceDao() {
 			alert(isSuccess);
 			return isSuccess;
 		};
+		
+//		내알못 리스트 dao 메서드
+		this.hiddenPlaceSelectAll = function() {
+
+			var myHiddenPlaceAll = [];
+
+			try{
+
+				$.ajax({
+					url: '/myhiddenplace/myhiddenplaceSelectAll', //홈페이지 불러올 주소
+					async : false, //false: 동기, true: 비동기
+					type: 'get', //요청방식 get or post      
+					data: { //보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
+					},
+					dataType: 'json', //서버에서 보내오는 데이터 타입
+					success: function (data) { //서버에서 보내오는 데이터
+							
+							myHiddenPlaceAll = data;
+					}
+				});
+//				var myHiddenPlace = {
+//						
+//						num: 1,
+//						title: "#신촌#맛집#고기", //글제목(해시태그)
+//						userNickName: "toolbee", //작성자 닉네임
+//						writeDate: "2016-12-07", //작성일자
+//						readCount: 2, //조회수
+//						titleImgURL: "images/face1.jpg", //이미지경로
+//						themeCode: 1, //테마별 정렬용
+//						userId:"toobee", //로그인 상태 확인
+//						bookmark: 0
+//						
+//				}			
+//	var myHiddenPlace2 = {
+//						
+//						num: 1,
+//						title: "#신촌#맛집#고기", //글제목(해시태그)
+//						userNickName: "toolbee", //작성자 닉네임
+//						writeDate: "2016-12-07", //작성일자
+//						readCount: 2, //조회수
+//						titleImgURL: "images/face1.jpg", //이미지경로
+//						themeCode: 1, //테마별 정렬용
+//						userId:"toobee", //로그인 상태 확인
+//						bookmark: 0
+//						
+//				}					
+//				myHiddenPlaceAll.push(myHiddenPlace);
+//				myHiddenPlaceAll.push(myHiddenPlace2);
+				
+
+
+			} catch(e) {
+				console.log('내알못Dao 객체 : 내알못 리스트 메서드에서 예외 발생');
+				console.log(e.message);
+			}
+
+			return myHiddenPlaceAll;
+
+		};
+		
+		//테마 카테고리 Dao 
+		this.themeCategory = function() {
+			var themeCategoryAll = [];
+			alert("테마");
+			try{
+				$.ajax({
+					url: '/myhiddenplace/themeList',
+					async : false,
+					type: 'get',               
+					data: {
+					},
+					dataType: 'json', //서버에서 보내오는 데이터 타입
+					success: function (data) { 
+						themeCategoryAll = data;
+					}
+				});
+				
+			}catch(e) {
+				console.log('myHiddenPlaceDao 객체 : 테마 Dao 메서드에서 예외 발생');
+				console.log(e.message);
+			}   
+
+			return themeCategoryAll;
+		};
+
 
 }

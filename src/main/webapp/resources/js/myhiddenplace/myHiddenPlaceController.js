@@ -82,4 +82,20 @@ function MyHiddenPlaceController() {
 
 	};
 	
+	// 내알못 리스트 controller 메서드
+	   this.requestHiddenPlaceSelectAll = function() {
+
+	      var myHiddenPlaceAll  = dao.hiddenPlaceSelectAll();
+	      return myHiddenPlaceAll;
+
+	   };
+	   
+		// 테마 카테고리 요청 controller 메서드
+	   this.requestThemeCategory = function() {
+
+	      var themeCategoryAll  = dao.themeCategory();
+	      return themeCategoryAll;
+
+	   };
+	
 }

@@ -31,5 +31,13 @@ function MyRouteController() {
 		document.location = requestUrl;
 		
 	};
+	
+	// 나만의 루트 목록 요청 controller 메서드
+	this.requestMyRouteSelectAll = function() {
+		
+		var myRouteAll = dao.myRouteSelectAll();
+		
+		return myRouteAll;
+	};
 
 }
