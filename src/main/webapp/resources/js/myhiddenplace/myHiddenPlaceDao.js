@@ -407,7 +407,6 @@ function MyHiddenPlaceDao() {
 		//테마 카테고리 Dao 
 		this.themeCategory = function() {
 			var themeCategoryAll = [];
-			alert("테마");
 			try{
 				$.ajax({
 					url: '/myhiddenplace/themeList',
