@@ -10,12 +10,12 @@
 <![endif]-->
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/headerStyle.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../bootstrap/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="../../bootstrap/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../../bootstrap/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="../../bootstrap/css/headerStyle.css" />
+<link rel="stylesheet" type="text/css" href="../../bootstrap/css/style.css" />
 <script src="javascript/pace.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -24,6 +24,97 @@
 <script src="javascript/animate-on-scroll.js"></script>
 <script src="javascript/script.js"></script>
 
+<!-- 우리가 직접 쓴 CSS -->
+
+<!-- 로그인,회원가입 스타일-->
+<style>
+.home-headmenu {
+  font-size: 12px;
+   margin-bottom: 50px; 
+  text-align: center;
+}
+.home-headmenu .menu-links {
+  display: inline-block;
+  padding: 15px;
+  list-style: none;
+}
+.home-headmenu .menu-links li {
+  float: left;
+  margin-right: 15px;
+}
+li {
+    float: left;
+   font-size: 14px;
+}
+li p, .dropbtn {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li.dropdown {
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.dropdown-content p:hover {background-color: #f1f1f1}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#headmenu-header {
+   margin-top: 0 !important;
+}
+
+.jumbotron {
+   padding: 0;
+   position: fixed;
+   width: 100%;
+   opacity: 0.8;
+   z-index: 3;
+   margin: 0;
+}
+
+section {
+   padding-top: 71px;
+}
+
+.logo {
+   width: 180px;
+   margin: 10px;
+   margin-left: 19%;
+}
+
+#headmenu-div {
+    float: right; 
+    margin: 12px 18% 8px 1%; 
+    
+   /*background-color: #eee;
+            background: #eee;*/
+   z-index: 5;
+}
+
+#headmenu-login, #headmenu-userInsert,
+#headmenu-logout, #headmenu-myInfo,
+#headmenu-bookmark{
+	color: black;
+	/*font-weight: bold;*/
+	font-size: 13px;
+}
+</style>
 </head>
 
 <!-- 홈페이지 head menu 이벤트 핸들링 -->
@@ -31,27 +122,26 @@
    $(document).ready(function() {
       
       //session에 저장되있는 userId값 가져오기
-	  //var loginState = localStorage.getItem('userId');
-      var loginState = "s";
+//        var loginState = localStorage.getItem('userId');
+       var loginState = "s";
       
       var headmenuLink1;
       var headmenuLink2;
+      var headmenuLink3;
       
       if(loginState == null) {
-         headmenuLink1 = $('<li><p id="headmenu-login">로그인</p></li>');
-         headmenuLink2 = $('<li><p id="headmenu-userInsert">회원가입</p></li>');
+         headmenuLink1 = $('<button id="headmenu-login" class="btn btn-default" style="background-color: #eee;" >로그인</button>');
+         headmenuLink2 = $('<button id="headmenu-userInsert" class="btn btn-default" style="background-color: #eee;" >회원가입</button>');
+      
+         $('#headmenu-div').append(headmenuLink1, headmenuLink2);
       } else {
-         headmenuLink1 = $('<li class="dropdown">'
-                     +'     	<p id="headmenu-mypage" class="dropbtn">마이 페이지</p>'
-                     +'     		<div id="link1Div" class="dropdown-content">'
-                     +'     			<p id="submenu-myinfo">회원정보관리</p>'
-                     +'     			<p id="submenu-boormark">즐겨찾기</p>'
-                     +'     		</div>'
-                     +'     </li>');
-         headmenuLink2 = $('<li id="headmenu-logout" class="dropdown"><p class="dropbtn" >로그아웃</p></li>');
+         headmenuLink1 = $('<button id="headmenu-myInfo" class="btn btn-default" style="background-color: #eee;" >회원정보관리</button>');
+         headmenuLink2 = $('<button id="headmenu-bookmark" class="btn btn-default" style="background-color: #eee;" >즐겨찾기</button>');
+         headmenuLink3 = $('<button id="headmenu-logout" class="btn btn-default" style="background-color: #eee;" >로그아웃</button>');
+     
+         $('#headmenu-div').append(headmenuLink1, headmenuLink2, headmenuLink3);
       }
       
-      $('#headmenuLinks').append(headmenuLink1, headmenuLink2);
    });
 </script>
 
@@ -145,25 +235,21 @@ $(document).ready(function() {
 
 <body class="home-page">
 
-<!-- 로그인 & 회원가입 / 로그아웃 & 마이페이지 -->
-   <footer class="home-headmenu">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-9"></div>
-            <div class="col-sm-3" id="headmenu">
-               <ul id="headmenuLinks" class="menu-links">
-               
-                  
-               </ul>
-            </div>
-         </div>
-      </div>
-   </footer>
-
+<!-- 상단 메뉴 헤더 -->
+   <header id="headmenu-header" style="margin-top:0%;">
+         <!-- <div class="container"> -->
+		<div class="jumbotron">
+			<img class="logo" src="../../bootstrap/images/mhp.png" alt="Logo" />
+			<div id="headmenu-div" class="btn-group">
+             
+             
+			</div>
+		</div>
+   </header>
+      
+	<br><br><br>
+   
    <header>
-      <div class="container hidden-xs logo">
-         <a href="index.html"><img class="img-responsive" src="../../bootstrap/images/mhp.png" alt="Logo" /></a>
-      </div>
 
       <div class="navbar-wrapper">
          <div class="container">
@@ -173,11 +259,11 @@ $(document).ready(function() {
                   <ul class="nav navbar-center navbar-nav">
                   
                      <li class="dropdown">
-                        <a id="listMHP" data-toggle="dropdown" class="dropdown-toggle">my hidden place</a>
+                        <a id="listMHP" data-toggle="dropdown" class="dropdown-toggle" href="#">my hidden place</a>
                      </li>
                      
                      <li class="dropdown">
-                        <a id="listMR" data-toggle="dropdown" class="dropdown-toggle">My Route</a>
+                        <a style="cursor:pointer" id="listMR" data-toggle="dropdown" class="dropdown-toggle">My Route</a>
                      </li>
                      
                   </ul>
