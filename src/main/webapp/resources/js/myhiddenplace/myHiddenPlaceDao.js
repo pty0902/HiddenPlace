@@ -1,45 +1,34 @@
 //myHiddenPlace dao 객체
 function MyHiddenPlaceDao() {
 
-//	내알못 best 4 요청 dao 메서드
+//	내알못 best 3 요청 dao 메서드
 	this.bestMHP = function(nowLoginId) {
 		
 		var myHiddenPlaces = [];
 
 		try{
 
-			/*$.ajax({
+			$.ajax({
 				url: '/myhiddenplace/bestMHP' , //홈페이지 불러올 주소
 				async : false, //false: 동기, true: 비동기
 				type: 'get', //요청방식 get or post      
 				data: {
 					userId : nowLoginId//보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
 				},
-				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				dataType: 'json', //서버에서 보내오는 데이터 타입
 				success: function (data) { //서버에서 보내오는 데이터
 				
-					$(data).find('myHiddenPlace').each(function() {
-						var myHiddenPlace = {
-							num:$(this).find('num').text(), //글번호
-							userNickname:$(this).find('userNickname').text(), //작성자
-							writeDate:$(this).find('writeDate').text(), //작성일자
-							readCount:$(this).find('readCount').text(), //추천수
-							imageUrl:$(this).find('imageUrl').text(), //이미지경로
-							bookmark:$(this).find('bookmark').text(), //즐겨찾기 여부 0or1 현재 로그인한 userId가 즐겨찾기한 게시글인경우 1 리턴, userId가 null값(로그인x)이 넘어갈 경우도 생각
-							title:$(this).find('title').text() //글제목
-						}					
-						
-						myHiddenPlaces.push(myHiddenPlace);
-					});
+						myHiddenPlaces = data;
+				
 				}
-			});*/
+			});
 			
-			var myHiddenPlace1 = {
+			/*var myHiddenPlace1 = {
 					num:1, //글번호 hidden으로할거임
 					userNickname:"이동진", //유저닉네임
 					writeDate:20161206, //작성일자
 					readCount:1, //조회수
-					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
+					imageUrl:"../../../resources/customize/images/camera.jpeg", //이미지 경로
 					bookmark:1, //북마크 여부 0or1
 					title:"ㅎㅎㅎ" //글제목
 			}
@@ -49,7 +38,7 @@ function MyHiddenPlaceDao() {
 					userNickname:"이동진", //유저닉네임
 					writeDate:20161206, //작성일자
 					readCount:1, //조회수
-					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
+					imageUrl:"../../../resources/customize/images/beer.jpeg", //이미지 경로
 					bookmark:1, //북마크 여부 0or1
 					title:"ㅎㅎㅎ" //글제목
 			}
@@ -59,26 +48,14 @@ function MyHiddenPlaceDao() {
 					userNickname:"이동진", //유저닉네임
 					writeDate:20161206, //작성일자
 					readCount:1, //조회수
-					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
-					bookmark:1, //북마크 여부 0or1
-					title:"ㅎㅎㅎ" //글제목
-			}
-			
-			var myHiddenPlace4 = {
-					num:4, //글번호 hidden으로할거임
-					userNickname:"이동진", //유저닉네임
-					writeDate:20161206, //작성일자
-					readCount:1, //조회수
-					imageUrl:"../../../resources/bootstrap/img/camera.jpeg", //이미지 경로
+					imageUrl:"../../../resources/customize/images/bookcafe.jpeg", //이미지 경로
 					bookmark:1, //북마크 여부 0or1
 					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			myHiddenPlaces.push(myHiddenPlace1);
 			myHiddenPlaces.push(myHiddenPlace2);
-			myHiddenPlaces.push(myHiddenPlace3);
-			myHiddenPlaces.push(myHiddenPlace4);
-			
+			myHiddenPlaces.push(myHiddenPlace3);*/
 			
 		} catch(e) {
 			console.log('bestMHP Dao 객체 : bestMHP Dao 메서드에서 예외 발생');
@@ -343,6 +320,39 @@ function MyHiddenPlaceDao() {
 			
 			alert(isSuccess);
 			return isSuccess;
+		};
+		
+
+//		내알못 로그인한 유저의 즐겨찾기 목록 요청 dao 메서드
+		this.bestMHP = function(nowLoginId) {
+			
+			var bookmarkAll = [];
+
+			try{
+
+				$.ajax({
+					url: '/myhiddenplace/bookmarkAll' , //홈페이지 불러올 주소
+					async : false, //false: 동기, true: 비동기
+					type: 'get', //요청방식 get or post      
+					data: {
+						userId : nowLoginId//보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
+					},
+					dataType: 'json', //서버에서 보내오는 데이터 타입
+					success: function (data) { //서버에서 보내오는 데이터
+					
+							bookmarkAll = data;
+					
+					}
+					
+				});
+			
+			} catch(e) {
+				console.log('myHiddenPlaceDao 객체 : bookmarkAll Dao 메서드에서 예외 발생');
+				console.log(e.message);
+			}
+
+			return bookmarkAll;
+			
 		};
 
 }

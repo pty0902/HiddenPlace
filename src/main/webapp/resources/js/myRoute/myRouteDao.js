@@ -1,7 +1,7 @@
 //myHiddenPlace dao 객체
 function MyRouteDao() {
 
-//	나만의루트 best 4 요청 dao 메서드
+//	나만의루트 best 3 요청 dao 메서드
 	this.bestMR = function(nowLoginId) {
 		
 		var myRoutes = [];
@@ -35,41 +35,38 @@ function MyRouteDao() {
 			});*/
 			
 			var myRoute1 = {
-					num:1,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
+					num:1, //글번호 hidden으로할거임
+					userNickname:"이동진", //유저닉네임
+					writeDate:20161206, //작성일자
+					readCount:1, //조회수
+					imageUrl:"../../../resources/customize/images/camera.jpeg", //이미지 경로
+					bookmark:1, //북마크 여부 0or1
+					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			var myRoute2 = {
-					num:2,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
+					num:2, //글번호 hidden으로할거임
+					userNickname:"이동진", //유저닉네임
+					writeDate:20161206, //작성일자
+					readCount:1, //조회수
+					imageUrl:"../../../resources/customize/images/camera.jpeg", //이미지 경로
+					bookmark:1, //북마크 여부 0or1
+					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			var myRoute3 = {
-					num:3,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
-			}
-			
-			var myRoute4 = {
-					num:4,
-					userNickname:"이동진",
-					writeDate:20161206,
-					upCount:1,
-					imageUrl:"../../../resources/bootstrap/img/logo.png"
+					num:3, //글번호 hidden으로할거임
+					userNickname:"이동진", //유저닉네임
+					writeDate:20161206, //작성일자
+					readCount:1, //조회수
+					imageUrl:"../../../resources/customize/images/camera.jpeg", //이미지 경로
+					bookmark:1, //북마크 여부 0or1
+					title:"ㅎㅎㅎ" //글제목
 			}
 			
 			myRoutes.push(myRoute1);
 			myRoutes.push(myRoute2);
 			myRoutes.push(myRoute3);
-			myRoutes.push(myRoute4);
 			
 		} catch(e) {
 			console.log('bestMR Dao 객체 : bestMR Dao 메서드에서 예외 발생');

@@ -34,8 +34,8 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 	}
 
 	@Override
-	public List<MyHiddenPlace> bestMHP() throws Exception {
-		return dao.bestMHP(); 
+	public List<MyHiddenPlace> bestMHP(String userId) throws Exception {
+		return dao.bestMHP(userId); 
 	}
 	
 	
@@ -44,6 +44,11 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		// TODO Auto-generated method stub
 		String a = "a";
 		return a;
+	}
+	
+	@Override
+	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
+		return dao.bookmarkAll(userId); 
 	}
 
 }
