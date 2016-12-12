@@ -6,9 +6,9 @@ function MyRouteController() {
 	var dao = new MyRouteDao();	
 
 // 나만의루트 best 3 요청 controller 메서드
-	this.requestBestMR = function(nowLoginId) {
+	this.requestBestMR = function() {
 
-		var myRoutes  = dao.bestMR(nowLoginId);
+		var myRoutes  = dao.bestMR();
 	      
 		return myRoutes;
 
@@ -32,6 +32,7 @@ function MyRouteController() {
 		
 	};
 	
+<<<<<<< HEAD
 	// 나만의 루트 목록 요청 controller 메서드
 	this.requestMyRouteSelectAll = function() {
 		
@@ -39,5 +40,15 @@ function MyRouteController() {
 		
 		return myRouteAll;
 	};
+=======
+//홈페이지 현재 로그인 유저의 내알못 즐겨찾기 목록	
+	this.requestBookmarkAllMR = function(nowLoginId) {
+		
+		var bookmarkAll = dao.bookmarkAll(nowLoginId);
+		
+		return bookmarkAll;
+		
+	}
+>>>>>>> refs/remotes/dongjin1204/master
 
 }

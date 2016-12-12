@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.phoenix.hiddenplace.dao.MyHiddenPlaceDao;
@@ -35,14 +36,13 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 	}
 
 	@Override
-	public List<MyHiddenPlace> bestMHP(String userId) throws Exception {
-		return dao.bestMHP(userId); 
+	public List<MyHiddenPlace> bestMHP() throws Exception {
+		return dao.bestMHP(); 
 	}
-	
 	
 	@Override
 	public String store(MultipartFile file) throws Exception {
-		// TODO Auto-generated method stub
+		
 		String a = "a";
 		return a;
 	}
@@ -51,6 +51,14 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 	public List<Theme> themeList() throws Exception {
 		return dao.themeList();
 =======
+	
+	@Transactional
+	@Override
+	public MyHiddenPlace selectOne(int num) throws Exception {
+		
+		dao.updateReadCount(num);
+		return dao.selectOne(num);
+	}
 	
 	@Override
 	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {

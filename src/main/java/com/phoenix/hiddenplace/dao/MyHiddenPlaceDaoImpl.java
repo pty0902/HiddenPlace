@@ -26,8 +26,17 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 	}
 
 	@Override
-	public MyHiddenPlace selectOne(Integer num) throws Exception {
+	public MyHiddenPlace selectOne(int num) throws Exception {// 내알못 조회
+		
 		return sqlSession.selectOne(namespace + ".selectOne", num);
+		
+	}
+	
+	@Override
+	public void updateReadCount(int num) throws Exception { // 내알못 조회수 증가
+		
+		sqlSession.selectOne(namespace + ".readCountPlus", num);
+		
 	}
 	
 	@Override
@@ -49,8 +58,9 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 	}
 
 	@Override
-	public List<MyHiddenPlace> bestMHP(String userId) throws Exception {
+	public List<MyHiddenPlace> bestMHP() throws Exception {
 		return sqlSession.selectList(namespace + ".bestMHP");
+		
 	}
 <<<<<<< HEAD
 
@@ -61,7 +71,13 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 	
 	@Override
 	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
+<<<<<<< HEAD
 		return sqlSession.bookmarkAll(namespace + ".bookmarkAll");
 >>>>>>> refs/remotes/dongjin1204/master
+=======
+		return sqlSession.selectList(namespace + ".bookmarkAll");
+		
+>>>>>>> refs/remotes/dongjin1204/master
 	}
+
 }

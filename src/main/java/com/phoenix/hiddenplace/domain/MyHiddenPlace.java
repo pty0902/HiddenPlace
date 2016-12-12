@@ -13,11 +13,15 @@ public class MyHiddenPlace {
 	private int readCount;
 	private String storeName;
 	private int code;
-	private double latitude;
-	private double longitude;
+	private double latitude; 
+	private double longitude; 
 	private String detailAddress;
 	private String userNickName; //닉네임 유저
+<<<<<<< HEAD
 	private String titleImgURL;
+=======
+	private String titleImgUrl;
+>>>>>>> refs/remotes/dongjin1204/master
 	
 	public String getTitleImgURL() {
 		return titleImgURL;
@@ -140,6 +144,12 @@ public class MyHiddenPlace {
 		this.detailAddress = detailAddress;
 	}
 	
+	public String getTitleImgUrl() {
+		return titleImgUrl;
+	}
+	public void setTitleImgUrl(String titleImgUrl) {
+		this.titleImgUrl = titleImgUrl;
+	}
 	@Override
 	public String toString() {
 		return "MyHiddenPlace [num=" + num + ", userId=" + userId + ", regionTownCode=" + regionTownCode
