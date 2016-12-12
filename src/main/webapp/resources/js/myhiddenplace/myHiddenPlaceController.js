@@ -82,7 +82,6 @@ function MyHiddenPlaceController() {
 
 	};
 	
-<<<<<<< HEAD
 	// 내알못 리스트 controller 메서드
 	   this.requestHiddenPlaceSelectAll = function() {
 
@@ -99,7 +98,6 @@ function MyHiddenPlaceController() {
 
 	   };
 	
-=======
 //홈페이지 현재 로그인 유저의 내알못 즐겨찾기 목록	
 	this.requestBookmarkAllMHP = function(nowLoginId) {
 		
@@ -108,5 +106,4 @@ function MyHiddenPlaceController() {
 		return bookmarkAll;
 		
 	}
->>>>>>> refs/remotes/dongjin1204/master
 }
