@@ -1,9 +1,12 @@
 package com.phoenix.hiddenplace.dao;
 
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 import com.phoenix.hiddenplace.domain.PageMaker;
 
@@ -56,6 +59,12 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 	@Override
 	public List<MyHiddenPlace> bestMHP(String userId) throws Exception {
 		return sqlSession.selectList(namespace + ".bestMHP");
+		
+	}
+	
+	@Override
+	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
+		return sqlSession.selectList(namespace + ".bookmarkAll");
 		
 	}
 
