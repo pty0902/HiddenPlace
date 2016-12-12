@@ -2,37 +2,39 @@
 <html lang="en">
 
 <head>
-	<title>ZUPA - Responsive Website Template / Home</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<!--[if lt IE 9]>
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<link rel="shortcut icon" href="images/favicon.ico" />
-		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
-		<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
-		<script src="/resources/bootstrap/js/pace.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
-		<script src="/resources/js/page/pageController.js"></script>
-		
-		<style>image1.jpg
-			@font-face {
-				font-family: 'baemin';
-				src: url(fonts/baemin.ttf) format('truetype');
-			}
-			font,
-			button, 
-			button > p, 
-			.category > p {
-				font-family: 'baemin';
-			}
-			
+<title>ZUPA - Responsive Website Template / Home</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
+<script src="/resources/bootstrap/js/pace.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
+<script src="/resources/js/page/pageController.js"></script>
+
+
+<style>
+@font-face {
+	font-family: 'baemin';
+	src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
+}
+*,
+font,
+button, 
+button > p, 
+.category > p {
+	font-family: 'baemin';
+}
+	
 .category {
 	max-width: 45px;
 	width: 100%;
@@ -137,9 +139,30 @@ section {
 	color: black;
 	/*font-weight: bold;*/
 	font-size: 18px;
+	font-family: 'baemin';
+}
+#search_bar {
+	width: 400px;
+	height: 40px;
+	font-size: 20px;
 }
 
-		</style>
+.search_bar:focus + button {
+	z-index: 3;   
+}
+
+#search_bar,
+#search_button {
+	position: absolute;
+	right: 45%;
+	top: 15px;
+	border: 0;
+}
+
+#search_bar:focus {
+	outline: none;
+}
+</style>
 		
 		
 
@@ -178,8 +201,9 @@ $(document).ready(function() {
 <script type="text/javascript">
 	$(document).ready(function selectAllMHP() {
 			
+		var num = 0;
 		var mhpController = new MyHiddenPlaceController();
-		var myHiddenPlaceAll = mhpController.requestHiddenPlaceSelectAll();
+		var myHiddenPlaceAll = mhpController.requestHiddenPlaceSelectAll(num);
 
 		for (var i = 0; i < myHiddenPlaceAll.length; i++) {
 			
@@ -202,6 +226,8 @@ $(document).ready(function() {
 			figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
 			$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
 			}
+		
+		
 		});
 </script>
 
@@ -231,7 +257,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
       $('.figureMHP').click(function() {
-         var num = $(this).children().eq(1).children().eq(3).text();
+         var num = $(this).children().eq(1).children().eq(4).text();
          var mhpController = new MyHiddenPlaceController();
          mhpController.requestSelectOneMHP(num);
       });
@@ -258,9 +284,14 @@ $(document).ready(function() {
 		<header>
 		<div class="jumbotron">
 			<a href="index.html"><img class="logo"
-				src="images/logos/logo.png" alt="Logo" /></a>
+				src="/resources/customize/images/mhp.png" alt="Logo" /></a>
 			<!-- <a href="index.html"><img class="logo" src="images/logos/logoMHP.png" alt="Logo" /></a> -->
-
+			
+			<!-- <input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
+            <button id="search_button" class="btn btn-default" type="button">
+               <span class="glyphicon glyphicon-search"></span>
+            </button> -->
+            
 			<div id="login_button_div" class="btn-group">
 				<button id="login_button" class="btn btn-default"
 					style="background-color: #eee;">로그인</button>
@@ -274,7 +305,7 @@ $(document).ready(function() {
 		<section>
 
 			<div class="swiper-container">
-				<div class="parallax-bg" style="background-image:url(images/slider.jpg)" data-swiper-parallax="-15%"></div>
+				<div class="parallax-bg" style="background-image:url(/resources/customize/images/home.jpg)" data-swiper-parallax="-15%"></div>
 				
 				<!-- Add Pagination -->
 				<div class="swiper-pagination swiper-pagination-white"></div>
@@ -284,10 +315,9 @@ $(document).ready(function() {
 			</div>
 		</section>
 
-
+	<!-- 본문 -->
 		<div class="container">
 			<div class="row">
-				<!-- 선택 탭 -->
 				<div class="col-sm-12 col-md-10 col-md-offset-1">
 
 					<!-- 카테고리 선택 탭 -->
@@ -295,6 +325,7 @@ $(document).ready(function() {
 					<button class="btn btn themeCategory">
 						<img class="category" src="/resources/bootstrap/image/theme0.png" />
 						<p>전체보기</p>
+						<p hidden="hidden">0</p>
 					</button>
 				</div>
 				<br> <br>
@@ -320,11 +351,19 @@ $(document).ready(function() {
 					<div class="portfolio grid-3">
 						
 
-						</div>
 					</div>
 				</div>
+			</div>
 
 			</div>
+			
+			<section>
+				<nav class="text-center">
+					<ul id="page_append" class="pagination">
+						
+					</ul>
+				</nav>
+			</section>
 
 
 			<!-- 푸터 섹션 -->
@@ -334,7 +373,7 @@ $(document).ready(function() {
 						<div class="row-xs-12">
 							<div class="divider"></div>
 							<div class="text-center">
-								<a href="index.html"><img src="images/logos/logo.png" alt="" class="logo">
+								<a href="index.html"><img src="/resources/customize/images/mhp.png" alt="" class="logo">
 								</a>
 							</div>
 						</div>
@@ -383,6 +422,15 @@ $(document).ready(function() {
 
 			</script>
 
+			<!-- 즐겨찾기 등록 이벤트 핸들링 -->
+			<script>
+			//툴팁(말풍선) 넣기
+			$(document).ready(function(){
+				$('[data-toggle="tooltip"]').tooltip();   
+			});
+		</script>
+
+		
 
 <!-- 내알못 / 나만의 루트 버튼 이벤트 핸들링-->
 <script type="text/javascript">
@@ -420,6 +468,7 @@ $(document).ready(function() {
 		
 		 /* 내알못  버튼 이벤트 */		 
 		 $('#figureMHP').on('click', function() {
+			 
 			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
 			
 		var mhpController = new MyHiddenPlaceController();
@@ -448,7 +497,7 @@ $(document).ready(function() {
 			}
 		 });
 		 
-		// 테마별 목록 버튼 이벤트 핸들링
+		 // 테마별 목록 버튼 이벤트 핸들링
 
 		 $('.themeCategory').on('click', function() {
 
@@ -603,13 +652,9 @@ $(document).ready(function() {
                    } 
         	});
         
- 		});
+ });
  
-	});
-
 </script>
-
-<!-- 테마 정렬 버튼 이벤트 핸들링 -->
 </body>
 
 </html>

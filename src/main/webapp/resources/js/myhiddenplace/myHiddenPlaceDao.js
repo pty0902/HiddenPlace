@@ -306,7 +306,7 @@ function MyHiddenPlaceDao() {
 		};
 		
 //		내알못 리스트 dao 메서드
-		this.hiddenPlaceSelectAll = function() {
+		this.hiddenPlaceSelectAll = function(num) {
 
 			var myHiddenPlaceAll = [];
 			

@@ -91,9 +91,9 @@ function MyHiddenPlaceController() {
 	};
 	
 	// 내알못 리스트 controller 메서드
-	   this.requestHiddenPlaceSelectAll = function() {
+	   this.requestHiddenPlaceSelectAll = function(num) {
 
-	      var myHiddenPlaceAll  = dao.hiddenPlaceSelectAll();
+	      var myHiddenPlaceAll  = dao.hiddenPlaceSelectAll(num);
 	      return myHiddenPlaceAll;
 
 	   };
