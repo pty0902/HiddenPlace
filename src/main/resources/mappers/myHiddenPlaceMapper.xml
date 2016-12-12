@@ -49,6 +49,22 @@
 		<!-- <include refid="search"></include> -->
   
 	</select> 
+	
+	<select id="selectOne" resultType="MyHiddenPlace">
+
+		  select TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL, TBL_BOARD.CONTENT, TBL_BOARD.UPCOUNT, TBL_BOARD.STORENAME, TBL_USER.USERNICKNAME, TBL_BOARD.LATITUDE, TBL_BOARD.LONGITUDE, TBL_BOARD.USERID 
+		  from TBL_BOARD, TBL_USER
+		  where TBL_BOARD.NUM = #{num}
+		  
+	</select> 
+	
+	<update id="readCountPlus">
+
+		  update TBL_BOARD set READCOUNT = READCOUNT + 1
+		  where NUM = #{num}
+		  
+	</update> 
+	
 
 	<select id="listCount" resultType="int">
 	
@@ -209,7 +225,7 @@
 	</select> -->
 		<insert id="insert">
 		insert into TBL_BOARD (USERID, STORENAME,TITLEIMGURL,THEMECODE,TITLE,CONTENT,LATITUDE,LONGITUDE)
-		values("qwer522", #{storeName}, "string",#{themeCode},#{title},#{content}, #{latitude}, #{longitude})
+		values("qwer522", #{storeName}, #{titleImgUrl},#{themeCode},#{title},#{content}, #{latitude}, #{longitude})
 		</insert>
 	
 	<select id="bookmarkAll" resultType="MyHiddenPlace">
