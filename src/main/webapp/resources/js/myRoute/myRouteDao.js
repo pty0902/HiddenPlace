@@ -73,7 +73,6 @@ function MyRouteDao() {
 		
 	};
 	
-<<<<<<< HEAD
 this.myRouteSelectAll = function() {
 		
 		alert("나만의 루트 리스트 클라이언트dao 도착");
@@ -154,7 +153,6 @@ var myRoute2 = {
 		return myRouteAll;
 
 	};
-=======
 
 //	내알못 로그인한 유저의 즐겨찾기 목록 요청 dao 메서드
 	this.bookmarkAll = function(nowLoginId) {
@@ -204,5 +202,4 @@ var myRoute2 = {
 		
 	};
 	
->>>>>>> refs/remotes/dongjin1204/master
 }

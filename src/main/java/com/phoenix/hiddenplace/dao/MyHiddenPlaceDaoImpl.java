@@ -47,8 +47,9 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 		}
 		
 		page = (page - 1) * 10;
+		pageMaker.setPage(page);
 		
-		return sqlSession.selectList(namespace + ".list" , page);
+		return sqlSession.selectList(namespace + ".list" , pageMaker);
 	}
 
 	@Override
@@ -62,22 +63,17 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 		return sqlSession.selectList(namespace + ".bestMHP");
 		
 	}
-<<<<<<< HEAD
 
 	@Override
 	public List<Theme> themeList() throws Exception {
 		return sqlSession.selectList(namespace + ".themeList");
-=======
+	}
 	
 	@Override
 	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
-<<<<<<< HEAD
-		return sqlSession.bookmarkAll(namespace + ".bookmarkAll");
->>>>>>> refs/remotes/dongjin1204/master
-=======
+//		return sqlSession.bookmarkAll(namespace + ".bookmarkAll");
 		return sqlSession.selectList(namespace + ".bookmarkAll");
 		
->>>>>>> refs/remotes/dongjin1204/master
 	}
 
 }

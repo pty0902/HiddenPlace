@@ -309,7 +309,32 @@ function MyHiddenPlaceDao() {
 		this.hiddenPlaceSelectAll = function() {
 
 			var myHiddenPlaceAll = [];
+			
+			try{
 
+				$.ajax({
+					url: '/myhiddenplace/myhiddenplaceSelectAll', //홈페이지 불러올 주소
+					async : false, //false: 동기, true: 비동기
+					type: 'get', //요청방식 get or post      
+					data: { //보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
+						
+						num : num
+					},
+					dataType: 'json', //서버에서 보내오는 데이터 타입
+					success: function (data) { //서버에서 보내오는 데이터
+							
+							myHiddenPlaceAll = data;
+					}
+				});
+				
+			} catch(e) {
+				console.log('내알못Dao 객체 : 내알못 리스트 메서드에서 예외 발생');
+				console.log(e.message);
+			}
+			return myHiddenPlaceAll;
+		};
+
+		
 //		내알못 로그인한 유저의 즐겨찾기 목록 요청 dao 메서드
 		this.bookmarkAll = function(nowLoginId) {
 			
@@ -317,7 +342,6 @@ function MyHiddenPlaceDao() {
 
 			try{
 
-<<<<<<< HEAD
 				$.ajax({
 					url: '/myhiddenplace/myhiddenplaceSelectAll', //홈페이지 불러올 주소
 					async : false, //false: 동기, true: 비동기
@@ -361,7 +385,6 @@ function MyHiddenPlaceDao() {
 				
 
 
-=======
 //				$.ajax({
 //					url: '/myhiddenplace/bookmarkAll' , //홈페이지 불러올 주소
 //					async : false, //false: 동기, true: 비동기
@@ -394,7 +417,6 @@ function MyHiddenPlaceDao() {
 				bookmarkAll.push(bookmark2);
 				bookmarkAll.push(bookmark3);
 			
->>>>>>> refs/remotes/dongjin1204/master
 			} catch(e) {
 				console.log('내알못Dao 객체 : 내알못 리스트 메서드에서 예외 발생');
 				console.log(e.message);

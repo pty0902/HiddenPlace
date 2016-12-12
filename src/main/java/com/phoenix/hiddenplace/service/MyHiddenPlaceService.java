@@ -18,14 +18,10 @@ public interface MyHiddenPlaceService {
 
 	String store(MultipartFile file) throws Exception;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	List<Theme> themeList() throws Exception;
-=======
-=======
+
 	public MyHiddenPlace selectOne(int num) throws Exception;
 	
->>>>>>> refs/remotes/dongjin1204/master
-	List<MyHiddenPlace> bookmarkAll(String userId) throws Exception; //내알못 베스트 3
->>>>>>> refs/remotes/dongjin1204/master
+	List<MyHiddenPlace> bookmarkAll(String userId) throws Exception;
+
 }

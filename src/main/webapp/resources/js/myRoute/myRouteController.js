@@ -32,7 +32,6 @@ function MyRouteController() {
 		
 	};
 	
-<<<<<<< HEAD
 	// 나만의 루트 목록 요청 controller 메서드
 	this.requestMyRouteSelectAll = function() {
 		
@@ -40,7 +39,6 @@ function MyRouteController() {
 		
 		return myRouteAll;
 	};
-=======
 //홈페이지 현재 로그인 유저의 내알못 즐겨찾기 목록	
 	this.requestBookmarkAllMR = function(nowLoginId) {
 		
@@ -49,6 +47,5 @@ function MyRouteController() {
 		return bookmarkAll;
 		
 	}
->>>>>>> refs/remotes/dongjin1204/master
 
 }

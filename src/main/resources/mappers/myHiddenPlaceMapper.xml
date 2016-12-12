@@ -51,16 +51,14 @@
   
 	</select> 
 	
-<<<<<<< HEAD
 	<select id="themeList" resultType="Theme">
 
 		  select *
 		  from TBL_THEME
 		  
-		<!-- <include refid="search"></include> -->
   
 	</select> 
-=======
+	
 	<select id="selectOne" resultType="MyHiddenPlace">
 
 		  select TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL, TBL_BOARD.CONTENT, TBL_BOARD.UPCOUNT, TBL_BOARD.STORENAME, TBL_USER.USERNICKNAME, TBL_BOARD.LATITUDE, TBL_BOARD.LONGITUDE, TBL_BOARD.USERID 
@@ -76,7 +74,6 @@
 		  
 	</update> 
 	
->>>>>>> refs/remotes/dongjin1204/master
 
 	<select id="listCount" resultType="int">
 	

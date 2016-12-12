@@ -17,11 +17,8 @@ public class MyHiddenPlace {
 	private double longitude; 
 	private String detailAddress;
 	private String userNickName; //닉네임 유저
-<<<<<<< HEAD
 	private String titleImgURL;
-=======
 	private String titleImgUrl;
->>>>>>> refs/remotes/dongjin1204/master
 	
 	public String getTitleImgURL() {
 		return titleImgURL;

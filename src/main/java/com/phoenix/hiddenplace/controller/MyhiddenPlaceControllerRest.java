@@ -31,7 +31,7 @@ public class MyhiddenPlaceControllerRest {
 		try {
 			
 			pageMaker.setTotalCount(service.listCount(pageMaker));
-			System.out.println(pageMaker.getEndPage());
+
 			entity = new ResponseEntity<PageMaker>(pageMaker, HttpStatus.OK);
 			
 		} catch (Exception e) {

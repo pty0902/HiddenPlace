@@ -46,11 +46,11 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		String a = "a";
 		return a;
 	}
-<<<<<<< HEAD
 	@Override
 	public List<Theme> themeList() throws Exception {
 		return dao.themeList();
-=======
+
+	}
 	
 	@Transactional
 	@Override
@@ -63,7 +63,6 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 	@Override
 	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
 		return dao.bookmarkAll(userId); 
->>>>>>> refs/remotes/dongjin1204/master
 	}
 
 }
