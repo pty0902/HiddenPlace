@@ -98,7 +98,6 @@ public class MyhiddenPlaceControllerRest {
 	      return entity;
 	   }
 	   
-<<<<<<< HEAD
 	   
 	   // 내알못 조회
 	   @RequestMapping(value = "/selectOneMHP", method = RequestMethod.GET)
@@ -117,7 +116,6 @@ public class MyhiddenPlaceControllerRest {
 	      return entity;
 	   }
 	   
-=======
 	 //즐겨찾기 현재 로그인한 유저의 즐겨찾기 목록
 		@RequestMapping(value = "/bookmarkAll", method = RequestMethod.GET)
 		public ResponseEntity<List<MyHiddenPlace>> bookmarkAll(MyHiddenPlace myHiddenPlace) throws Exception {
@@ -140,7 +138,6 @@ public class MyhiddenPlaceControllerRest {
 			
 			return entity;
 		}	
->>>>>>> refs/remotes/dongjin1204/master
 	   
 	}   
 

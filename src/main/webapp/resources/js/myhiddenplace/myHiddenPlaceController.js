@@ -17,13 +17,10 @@ function MyHiddenPlaceController() {
 // 글 조회(홈페이지에서 클릭이벤트) controller 메서드
 	this.requestSelectOneMHP = function(num) {
 		
-<<<<<<< HEAD
 		var myHiddenPlace = dao.selectOneMHP(num);
-=======
 		var requestUrl = 'myHiddenPlaceSelectOne.html/num=' + num;
 		
 		document.location = requestUrl;
->>>>>>> refs/remotes/dongjin1204/master
 		
 		return myHiddenPlace
 	};
@@ -93,9 +90,7 @@ function MyHiddenPlaceController() {
 
 	};
 	
-<<<<<<< HEAD
 	
-=======
 //홈페이지 현재 로그인 유저의 내알못 즐겨찾기 목록	
 	this.requestBookmarkAllMHP = function(nowLoginId) {
 		
@@ -104,5 +99,4 @@ function MyHiddenPlaceController() {
 		return bookmarkAll;
 		
 	}
->>>>>>> refs/remotes/dongjin1204/master
 }

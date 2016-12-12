@@ -54,22 +54,9 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public List<MyHiddenPlace> bestMHP() throws Exception {
-		
-=======
 	public List<MyHiddenPlace> bestMHP(String userId) throws Exception {
->>>>>>> refs/remotes/dongjin1204/master
 		return sqlSession.selectList(namespace + ".bestMHP");
 		
 	}
-<<<<<<< HEAD
 
-=======
-	
-	@Override
-	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
-		return sqlSession.bookmarkAll(namespace + ".bookmarkAll");
-	}
->>>>>>> refs/remotes/dongjin1204/master
 }

@@ -308,9 +308,6 @@ function MyHiddenPlaceDao() {
 			return isSuccess;
 		};
 		
-<<<<<<< HEAD
-		
-=======
 
 //		내알못 로그인한 유저의 즐겨찾기 목록 요청 dao 메서드
 		this.bestMHP = function(nowLoginId) {
@@ -343,6 +340,5 @@ function MyHiddenPlaceDao() {
 			return bookmarkAll;
 			
 		};
->>>>>>> refs/remotes/dongjin1204/master
 
 }
