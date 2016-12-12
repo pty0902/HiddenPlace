@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.phoenix.hiddenplace.dao.MyHiddenPlaceDao;
@@ -38,12 +39,19 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		return dao.bestMHP(userId); 
 	}
 	
-	
 	@Override
 	public String store(MultipartFile file) throws Exception {
-		// TODO Auto-generated method stub
+		
 		String a = "a";
 		return a;
+	}
+	
+	@Transactional
+	@Override
+	public MyHiddenPlace selectOne(int num) throws Exception {
+		
+		dao.updateReadCount(num);
+		return dao.selectOne(num);
 	}
 	
 	@Override

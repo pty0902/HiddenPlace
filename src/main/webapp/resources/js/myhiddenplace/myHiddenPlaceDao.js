@@ -69,48 +69,34 @@ function MyHiddenPlaceDao() {
 //	내알못 조회 dao 메서드
 	this.selectOneMHP = function(num) {
 
-		alert("Dao 도착");
 		var myHiddenPlace;
 		
 		try{
 
 			$.ajax({
-				url: '/',
+				url: '/myhiddenplace/selectOneMHP',
 				async : false,
 				type: 'get',     
 				data:{
 					num: num	
 				},
-
-				dataType: 'xml', //서버에서 보내오는 데이터 타입
-				
+				dataType: 'json', //서버에서 보내오는 데이터 타입
 				success: function (data) { //서버에서 보내오는 데이터
-					
-					$(data).find('myHiddenPlace').each( function(){
-						myHiddenPlace = {
-							title:$(this).find('title').text(), //글제목
-							imageUrl:$(this).find('imageUrl').text(), //이미지경로
-							content:$(this).find('content').text(), //이미지+내용
-							upClick:$(this).find('upClick').text(), //추천수
-							latitude:$(this).find('latitude').text(), //위도
-							longitude:$(this).find('longitude').text(), //경도
-							userNickname:$(this).find('userNickname').text(), 
-							nowLoginId:$(this).find('nowLoginId').text() //현재로그인한 사용자아이디
-							
-						}					
-						
+					//alert(JSON.stringify(data));
+					myHiddenPlace = data;
+				}	
 					});	
 					
+				}catch(e) {
+					console.log('selectOneMHP 객체 : selectOneDao 메서드에서 예외 발생');
+					console.log(e.message);
 				}
-			});
+				
+				return myHiddenPlace;
 
-		} catch(e) {
-			console.log('selectOneMHP 객체 : selectOneDao 메서드에서 예외 발생');
-			console.log(e.message);
-		}	
-		return myHiddenPlace;
+			};
 
-	};
+	
 
 //	추천(좋아요) dao 메서드
 	this.upCount = function(upCountCode) {
@@ -124,7 +110,7 @@ function MyHiddenPlaceDao() {
 				data: {
 					upCountCode : upCountCode
 				},
-				dataType: 'xml', //서버에서 보내오는 데이터 타입
+				dataType: 'json', //서버에서 보내오는 데이터 타입
 				success: function (data) {
 					
 					var messageValue =$(data).find('message').text();
@@ -286,10 +272,9 @@ function MyHiddenPlaceDao() {
 	
 	
 //	내알못 글쓰기 dao
-	this.myHiddenPlaceInsert = function(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema) {
+	this.myHiddenPlaceInsert = function(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema,mhpTitleImg) {
 		
 		var isSuccess;
-		
 			try {
 				$.ajax({
 					url : '/myhiddenplace/insertMHP', // 홈페이지 불러올 주소
@@ -302,7 +287,8 @@ function MyHiddenPlaceDao() {
 						longitude : longitude,
 						storeName : mhpStoreName,
 						title : mhpTitle,
-						themeCode : mhpThema
+						themeCode : mhpThema,
+						titleImgUrl : mhpTitleImg
 						
 					},
 					dataType: 'text', //서버에서 보내오는 데이터 타입

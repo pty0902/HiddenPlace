@@ -13,11 +13,11 @@ public class ControllerTest {
       
    }
    
-   @RequestMapping(value="/myhiddenplace/myHiddenPlaceInsert")
+/*  @RequestMapping(value="/myhiddenplace/myHiddenPlaceInsert")
    public String InsertMHP() {
       
       return "/views/myhiddenplace/myHiddenPlaceInsert";
       
-   }
+   }*/
 
 }

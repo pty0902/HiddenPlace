@@ -1,14 +1,15 @@
 package com.phoenix.hiddenplace.dao;
 
 import java.util.List;
-
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 import com.phoenix.hiddenplace.domain.PageMaker;
 
 public interface MyHiddenPlaceDao {
 	public void insert(MyHiddenPlace myHiddenPlace)throws Exception;
 	
-	public MyHiddenPlace selectOne(Integer num)throws Exception;
+	public MyHiddenPlace selectOne(int num)throws Exception;  //내알못 조회
+	 
+	public void updateReadCount(int num)throws Exception; //조회수 증가
 
 	List<MyHiddenPlace> list(PageMaker pageMaker) throws Exception;//내알못 목록
 	

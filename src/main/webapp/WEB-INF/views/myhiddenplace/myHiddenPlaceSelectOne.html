@@ -4,23 +4,17 @@
 <head>
 <title>inquiry</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css"
-	href="bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
-<script src="javascript/pace.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/> -->
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/style.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../../../resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
-<!--
-<script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=fb44c02e84584e26aef57ba9f3330c6b"></script>
--->
+<script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
+<!-- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=	f617f92098af4b2430be59f43550867c"></script> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
 <style>
@@ -35,10 +29,10 @@
 /* 지도 */
 #map {
 	border: solid 1px #e9e9e9;
-	width: 98%;
+	width: 45%;
 	height: 250px;
 	margin-top: 5%;
-	border: 3px solid #cccccc;
+	margin-left:30%;
 }
 /* 메인사진과 거리 */
 .portfolio-item {
@@ -102,102 +96,174 @@
 #main_hiddenPlace{
 	margin-top: 30px;
 }
+
+.title{
+ text-align: center;
+ color: white;
+}
+
+#btn-delete {
+
+	/* /* margin-left:4%; */
+	margin-right:0%; 
+	
+}
+
+#btn-update {
+
+	 margin-left:79%; 
+     margin-right:-2%; 
+	
+}
+
+#up_count {
+
+ text-align: center;
+ 
+}
+
+#up_count_img {
+
+	margin-left:15.5%;
+}
+
+.title {
+	max-width : 600px;
+	position : absolute;
+	left : 30%;
+	top: 285px;
+}
+
+#title_div {
+	width : 100%;
+	font-size : 35px;
+}
+
+.store_name {
+	max-width : 600px;
+	position : absolute;
+	left : 40%;
+	top:200px;
+	color:white;
+}
+
+#storeName {
+	width : 100%;
+	font-size : 35px;
+}
+
+
+
+
+
 </style>
 <!-- 내알못 조회 이벤트 핸들링 -->
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 
+						
 						var mhpController = new MyHiddenPlaceController();
-						var myHiddenPlace = mhpController
-								.requestSelectOneMHP(1); // 임의에 글번호 1번을 넣어놈(목록에서 받아오면됨)
+						var myHiddenPlace = mhpController.requestSelectOneMHP(14); // 임의에 글번호 1번을 넣어놈(목록에서 받아오면됨)
 						var upClick = 0; //추천구분코드를 DB에서 받아오면됨 예시로 0을 넣어놈
-						var isSuccess = mhpController.requestUpcount(upClick);
+						//var isSuccess = mhpController.requestUpcount(upClick);
 						var upImage;
+					    var latitude = myHiddenPlace.latitude;//위도를 받아서 위도변수에 저장
+						var longitude = myHiddenPlace.longitude;//경도를 받아서 경도변수에 저장
 
-						if (isSuccess == true) {
-							upImage = $('<div class="like_img"><img id="up" class="hiddenPlace_logo" src="images/like.png"></div>'); // 채워진 하트 이미지
-						} else {
-							upImage = $('<div class="like_img"><img id="up" class="hiddenPlace_logo" src="images/unlike.png"></div>'); //안채워진 하트 이미지
-						}
-						$('#upImage').append(upImage);
-
-						//상단 메인 사진과 제목 만드는 코드
-						// 			var image = $('<img class="hiddenPlace_img" src=" '+ myHiddenPlace.imageUrl +' ">'); // 받아오는게 아직 없어서 오류남
-						// 			var title = $('<div class="main_img_text> ' + myHiddenPlace.title + '</div>');		 // 받아오는게 아직 없어서 오류남
-						var image = $('<img class="hiddenPlace_img" src="../../../resources/bootstrap/img/camera.jpeg">');
-						var title = $('<div class="main_img_text"></div>');
-						$('#mainImageAndTitle').append(image, title);
-
+ 					//	if (isSuccess == true) {
+ 					//		upImage = $('<img id="up" class="hiddenPlace_logo" src="/resources/bootstrap/image/like.png"></div>'); // 채워진 하트 이미지
+ 					//	} else {
+ 							upImage = $('<img id="up" class="hiddenPlace_logo" src="/resources/bootstrap/image/unLike.png"></div>'); //안채워진 하트 이미지
+ 					//	}
+						
+						//상단 메인 사진과 제목 만드는 코드L
+						var titleimage = $('<img style="width: 100%; height: 100%" class="hiddenPlace_img" src=" '+ myHiddenPlace.titleImgUrl +' ">'); //타이틀 이미지
+						var title = $('<div id="title_div">' + myHiddenPlace.title + '</div>');		 //제목 내용 들어가는 부분
+						var storeName = $('<div id="storeName">' + myHiddenPlace.storeName + '</div>');		 //상호명 내용 들어가는 부분
+						$('#mainImageAndTitle').append(titleimage);
+						$('.title').append(title);
+						$('.store_name').append(storeName);
+						alert( myHiddenPlace.titleImgUrl);
 						//사진&내용 만드는 코드
 						var content_left = $('<div class="col-sm-2"></div>');
-						// 			var content_mid = $('<div class="col-sm-8">'+ myHiddenPlace.content +'</div>'); // 받아오는게 아직 없어서 오류남
-						var content_mid = $('<div class="col-sm-8"></div>');
+						var content_mid = $('<div class="col-sm-8">'+ myHiddenPlace.content +'</div>'); // 받아오는게 아직 없어서 오류남
 						var content_right = $('<div class="col-sm-2"></div>');
-						$('#hiddenPlaceContent').append(content_left,
-								content_mid, content_right);
+						$('#hiddenPlaceContent').append(content_left, content_mid, content_right);
+						
+						//로그인이 되어있다면 수정버튼이 만들어지고 아니면 수정버튼이 안만들어진다.
+						var LoginId = localStorage.getItem('LoginId');
+						
+						//if(LoginId == myHiddenPlace.userId){ //현재 로그인된 아이디와 글을쓴아이디가 같다면 수정과 삭제버튼 추가
+							var upanddeletebutton= $('<center><button class="btn btn-default" id ="btn-update">수정</button><button class="btn btn-default" id = "btn-delete">삭제</button></center>');
+						//}else {
+						//	var upanddeletebutton= $('<div class="col-sm-5"></div><div class="btn-group filters"></div><div class="col-sm-5"></div>');								
+						//}
 
-						$('#up').click(
-										function() {
+						//수정 삭제 버튼
+						$('#button_group').append(upanddeletebutton);
+						//추천수 만드는 코드
+					    var upcount= $('<div>' + myHiddenPlace.upCount + '</div>');
+					    $('#up_count').append(upcount);
+					    $('#up_count_img').append(upImage);
+					    
+					    //지도 찍어주는 부분
+				 		/* var markerPosition = new daum.maps.LatLng(latitude, longitude);
 
-											var mhpController = new MyHiddenPlaceController();
+						var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 
-											if (isSuccess == true) {
-												alert("이미 좋아요를 눌렀습니다^^");
-												 var upCountCode= 0; 
-											} else {
+						var options = { //지도를 생성할 때 필요한 기본 옵션
+							center : new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+							level : 3
+						//지도의 레벨(확대, 축소 정도)
+						};
+						var marker = new daum.maps.Marker({
+							position : markerPosition
+						});
+						var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+						marker.setMap(map); //지도위에 마커 뿌리기 */
+				    
+						//추천수 버튼 이벤트 발생
+						$('#up').click(function() {
+							alert("추천수 버튼 눌렸습니다.");
 
-												var img1 = document
-														.getElementById("up");
-												img1.src = "images/like.png"
-													 var upCountCode= 1; 
-												isSuccess = mhpController.requestUpcount(upCountCode); //조회수 1증가시키고
-												alert("좋아요!");
-												
-														
-											}
+// 								if (isSuccess == true) {
+// 									alert("이미 좋아요를 눌렀습니다^^");
+// 									 var upCountCode= 0; 
+// 								} else {
 
-										});
+// 									var img1 = document
+// 											.getElementById("up");
+// 									img1.src = "/resources/bootstrap/image/like.png"
+// 										 var upCountCode= 1; 
+// 									isSuccess = mhpController.requestUpcount(upCountCode); //조회수 1증가시키고
+// 									alert("좋아요!");
+											
+// 								}
 
-					});
-</script>
-<!-- 내알못 지도 이벤트 핸들링 -->
-<script type="text/javascript">
-// 	$(document).ready(function() {
+							});
+						
+						//수정 버튼 이벤트 발생
+						$("#btn-update").click(function() {
+							
+							
+						});
+						
+						//삭제 버튼 이벤트 발생
+						$("#btn-delete").click(function() {
+							
+							
+						});
 
-// 		var mhpController = new MyHiddenPlaceController();
-// 		var myHiddenPlace = mhpController.requestSelectOneMHP(1);
 
-// 		//  var latitude = myHiddenPlace.latitude;//위도를 받아서 위도변수에 저장
-// 		//  var longitude = myHiddenPlace.latitude;//경도를 받아서 경도변수에 저장
-// 		var latitude = 37.55010442209935; //위도
-// 		var longitude = 126.92129129093028; //경도
-
-// 		var markerPosition = new daum.maps.LatLng(latitude, longitude);
-
-// 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-
-// 		var options = { //지도를 생성할 때 필요한 기본 옵션
-// 			center : new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
-// 			level : 3
-// 		//지도의 레벨(확대, 축소 정도)
-// 		};
-// 		var marker = new daum.maps.Marker({
-// 			position : markerPosition
-// 		});
-// 		var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-// 		marker.setMap(map); //지도위에 마커 뿌리기
-//	});
+	});
 </script>
 
 <!-- 댓글 이벤트 핸들링 -->
-<script>
-	$(document)
-			.ready(function() {
+ <!-- <script>
+	$(document).ready(function() {
 
 						var mhpController = new MyHiddenPlaceController();
-						// 						var pName = myHiddenPlace.userNickname;
+						// var pName = myHiddenPlace.userNickname;
 						var nickName = "1111";
 
 						var replies = mhpController.requestReplySelectAll(1); // 임의에 글번호 1번을 넣어놈(목록에서 받아오면됨)
@@ -233,22 +299,18 @@
 										+ '</strong><div hidden>'
 										+ replies[i].replyNum
 										+ '</div><p>'
-										+ replies[i].comment.replace(/\n/g,
-												"<br>") // replies[i].comment 를 입력
+										+ replies[i].comment.replace(/\n/g,"<br>") // replies[i].comment 를 입력
 										+ '</p>' + '</td>' + '</tr>';
 								//테이블의 tr자식이 있으면 tr 뒤에 붙인다. 없으면 테이블 안에 tr을 붙인다.
 								if ($('#commentTable').contents().size() == 0) {
-									$('#commentTable')
-											.append(commentParentText);
+									$('#commentTable').append(commentParentText);
 								} else {
-									$('#commentTable tr:last').after(
-											commentParentText);
+									$('#commentTable tr:last').after(commentParentText);
 								}
 							}
 						}
 						//댓글을 다는 이벤트
-						$("#commentParentSubmit").click(
-								function() {
+						$("#commentParentSubmit").click(function() {
 
 									//ajax로 저장하고 성공하면 저장한 데이터를 가져와 넣어야 하는데 여기서는 테스트라 그냥 입력값을 가져옴                       
 									var comment = $("#commentParentText");
@@ -258,9 +320,7 @@
 										comment.focus();
 										return;
 									}
-									var isSuccess = mhpController
-											.requestReplyInsert(nickName,
-													comment); // 서버 댓글번호 증가시켜줘야함.
+									var isSuccess = mhpController.requestReplyInsert(nickName,comment); // 서버 댓글번호 증가시켜줘야함.
 
 									// 테스트하기위한 소스
 									var replyTest = 1;
@@ -279,11 +339,7 @@
 
 								});
 
-						$(document)
-								.on(
-										"click",
-										"#commentUpdateSubmit",
-										function() {
+						$(document).on("click","#commentUpdateSubmit",function() {
 											alert("업데이트버튼 클릭");
 
 											var updateComment = $("#commentUpdateText");
@@ -293,14 +349,10 @@
 												updateComment.focus();
 												return;
 											}
-											var replyNum = $(this).parent()
-													.children().eq(1).text();
+											var replyNum = $(this).parent().children().eq(1).text();
 											alert("댓글 넘버 : " + replyNum);
-											// 							var isSuccess = mhpController.requestReplyUpdate(num ,replyNum, updateComment);
-											var isSuccess = mhpController
-													.requestReplyUpdate(1,
-															replyNum,
-															updateComment);
+											//var isSuccess = mhpController.requestReplyUpdate(num ,replyNum, updateComment);
+											var isSuccess = mhpController.requestReplyUpdate(1,replyNum,updateComment);
 
 											// 테스트하기위한 소스
 											var replyTest = 1;
@@ -321,29 +373,16 @@
 										});
 
 						//답글링크를 눌렀을때 에디터 창을 뿌려주는 이벤트, 삭제링크를 눌렀을때 해당 댓글을 삭제하는 이벤트
-						$(document)
-								.on(
-										"click",
-										"tbody#commentTable a",
-										function() {//동적으로 버튼이 생긴 경우 처리 방식
-
+						$(document).on("click","tbody#commentTable a",function() {//동적으로 버튼이 생긴 경우 처리 방식
 											if ($(this).attr("name") == "Del") {
 												if (confirm("정말 삭제하시겠습니까?") == true) { //확인
-													var replyNum = $(this)
-															.parent()
-															.children().eq(3)
-															.text();
-													alert(replyNum);
+													var replyNum = $(this).parent().children().eq(3).text(); alert(replyNum);
 
-													// 											var isSuccess = mhpController.requestReplyDelete(num, replyNum);
-													var isSuccess = mhpController
-															.requestReplyDelete(
-																	1, replyNum); // 글목록에서 num을 받아옴 테스트로 1을 넣어놈
+													//var isSuccess = mhpController.requestReplyDelete(num, replyNum);
+													var isSuccess = mhpController.requestReplyDelete(1, replyNum); // 글목록에서 num을 받아옴 테스트로 1을 넣어놈
 
 													//추후 삭제할 부분 테스트로 html쪽에서 삭제하는 코드
-													var delComment = $(this)
-															.parent().parent();
-													delComment.remove();
+													var delComment = $(this).parent().parent();delComment.remove();
 													//추후 삭제할 부분 테스트로 html쪽에서 삭제하는 코드 끝
 
 												} else { //취소
@@ -351,8 +390,7 @@
 												}
 											} else if ($(this).attr("name") == "Update") {
 												//자기 부모의 tr을 알아낸다.
-												var parentElement = $(this)
-														.parent().parent();
+												var parentElement = $(this).parent().parent();
 												//댓글달기 창을 없앤다.
 												$("#commentEditor").remove();
 												var commentEditor = '<tr id="commentEditor">'
@@ -363,175 +401,62 @@
 														+ '<div class="form-group">'
 														+ '<button type="button" id="commentUpdateSubmit" name="commentUpdateSubmit" class="btn btn-default">입력</button>'
 														+ '<div hidden>'
-														+ $(this).parent()
-																.children().eq(
-																		3)
-																.text()
+														+ $(this).parent().children().eq(3).text()
 														+ '</div>'
 														+ '</div>'
 														+ '</span>'
 														+ '</td>'
 														+ '</tr>';
 
-												parentElement
-														.after(commentEditor);
+												parentElement.after(commentEditor);
 
 											}
 
 										});
+							});
+</script> --> 
 
-					});
-</script>
-
-<!-- 수정버튼 이벤트 -->
-<script>
-$("#btn-update").click(function() {
-	
-	var mhpController = new MyHiddenPlaceController();
-	
-});
-
-
-</script>
 </head>
 
 <body>
 <body class="home-page">
 
-	<!-- 상단 메뉴 헤더 -->
-	<header>
-		<div class="container hidden-xs logo">
-			<a href="index.html"><img class="img-responsive"
-				src="images/logos/logo.png" alt="Logo" /> </a>
-		</div>
-		<div class="navbar-wrapper">
-			<div class="container">
-				<nav class="navbar navbar-static-top">
-					<div class="navbar-header">
-						<a class="navbar-brand visible-xs" href="index.html"><img
-							class="img-responsive" src="images/logos/logo-xs.png" alt="" />
-						</a>
-						<button type="button" class="navbar-toggle collapsed"
-							data-toggle="collapse" data-target="#navbar"
-							aria-expanded="false" aria-controls="navbar">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-
-					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-center navbar-nav">
-							<li class="dropdown"><a data-toggle="dropdown"
-								class="dropdown-toggle" href="#">Pages</a>
-								<ul class="dropdown-menu">
-									<li class="dropdown-submenu"><a href="index.html">Home</a>
-									</li>
-									<li class="dropdown-submenu"><a data-toggle="dropdown"
-										class="trigger dropdown-toggle" href="#">Pages <span
-											class="pull-right"><i class="fa fa-angle-right"></i></span></a>
-										<ul class="dropdown-menu">
-											<li><a href="page-simple.html">Simple Page</a></li>
-											<li><a href="page-sidebar.html">Right Sidebar</a></li>
-											<li><a href="about-us.html">About Us</a></li>
-											<li><a href="services.html">Services</a></li>
-										</ul></li>
-									<li class="dropdown-submenu"><a data-toggle="dropdown"
-										class="trigger dropdown-toggle" href="#">Blog <span
-											class="pull-right"><i class="fa fa-angle-right"></i></span></a>
-										<ul class="dropdown-menu">
-											<li><a href="blog-index.html">Blog no sidebars</a></li>
-											<li><a href="blog-left-sidebar.html">Blog left
-													sidebar</a></li>
-											<li><a href="blog-right-sidebar.html">Blog right
-													sidebar</a></li>
-											<li><a href="blog-post.html">Blog post</a></li>
-										</ul></li>
-									<li class="dropdown-submenu"><a data-toggle="dropdown"
-										class="trigger dropdown-toggle" href="#">Portfolio /
-											Gallery <span class="pull-right"><i
-												class="fa fa-angle-right"></i></span>
-									</a>
-										<ul class="dropdown-menu">
-											<li><a href="portfolio-2-columns.html">2 columns</a></li>
-											<li><a href="portfolio-3-columns.html">3 columns</a></li>
-											<li><a href="portfolio-4-columns.html">4 columns</a></li>
-											<li><a href="portfolio.html">Portfolio with filter</a></li>
-											<li><a href="portfolio-item.html">Portfolio item</a></li>
-										</ul></li>
-									<li class="dropdown-submenu"><a data-toggle="dropdown"
-										class="trigger dropdown-toggle" href="#">Special <span
-											class="pull-right"><i class="fa fa-angle-right"></i></span></a>
-										<ul class="dropdown-menu">
-											<li><a href="404.html">404</a></li>
-											<li><a href="empty.html">Empty</a></li>
-											<li><a href="login.html">Sign in</a></li>
-										</ul></li>
-
-								</ul></li>
-
-							<li class="dropdown"><a data-toggle="dropdown"
-								class="dropdown-toggle" href="#">Features</a>
-								<ul class="dropdown-menu">
-									<li><a href="typography.html">Typography</a></li>
-									<li><a href="forms.html">Forms</a></li>
-									<li><a href="buttons.html">Buttons</a></li>
-								</ul></li>
-
-							<li><a href="card.html">Menu</a></li>
-
-							<li><a href="contact.html">Contact</a></li>
-
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</header>
+	
 
 	<!-- 메인 사진 섹션 -->
 	<section>
-		<div class="swiper-container">
-			<div class="parallax-bg"
-				style="background-image: url(images/slider.jpg)"
-				data-swiper-parallax="-15%"></div>
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<div class="swiper-caption">
-						<div class="title" data-swiper-parallax="-100"
-							data-animation="fadeInDownBig">#상호명#</div>
-						<div class="text" data-swiper-parallax="-300"
-							data-animation="fadeInUpBig"></div>
-					</div>
-				</div>
-			</div>
+	<!-- 타이틀 사진 들어갈 곳  -->
+		<div class="swiper-container" id = "mainImageAndTitle">
+					<!-- 제목 넣기 -->
+					<div class="title" ></div>
+					<!-- 상호명 넣기 -->
+					<div class="store_name"></div>
 		</div>
 	</section>
 
+	<!-- 내용 들어가는 부분 -->
+	<div class=content id="hiddenPlaceContent"></div>
 
-	<div class="container">
-		<div class="col-md-12">
-			<!-- 내알못 지도 -->
-			<div id="map" class="row"></div>
-		</div>
+	<!-- 지도 들어가는 부분  -->
+	<div class="container" id = "map">
+			
 	</div>
-
-	<!-- 내알못 좋아요 -->
-	<div id="main_hiddenPlace" class="row">
-		<div class="col-sm-5"></div>
-			<div class="btn-group filters">
-					<button class="btn btn-default " id ="btn-update">수정</button>
-					<button class="btn btn-default" id = "btn-delete">삭제</button>
-			</div>
-		<div id="upImage" class="col-sm-2"></div><p>
-		<div class="col-sm-5"></div>
-		<div class="col-sm-12" id="recommended">1,125</div>
-	</div><br><br>
+	
+	<!-- 수정.삭제 버튼 들어가는 부분  -->
+	<div class="col-md-12" id="button_group">
+	
+	</div>
+	
+	
+	<!-- 내알못 추천 -->
+	<div id="up_count_img" class="col-md-12">
+	</div>
+	
+	<!-- 추천수 -->
+	<div id=up_count ></div>
 	
 
-
 	<!-- 내알못 댓글 -->
-
 	<div id="main_hiddenPlace" class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
@@ -543,15 +468,16 @@ $("#btn-update").click(function() {
 			<table class="table table-condensed">
 				<tr>
 					<td>
+					
 						<!-- 페이지 메기기 -->
-						<div class="box-footer">
+					<!-- 	<div class="box-footer">
 							<div class="text-center">
 								<ul class="pagination" id="page_append">
 
 
 								</ul>
 							</div>
-						</div>
+						</div> -->
 					</td>
 				</tr>
 				<tr>
@@ -570,67 +496,6 @@ $("#btn-update").click(function() {
 	</div>
 
 
-
-	<footer class="page-footer">
-		<div class="container">
-			<div class="row">
-				<div class="row-xs-12">
-					<div class="divider"></div>
-					<div class="text-center">
-						<a href="index.html"><img src="images/logos/logo.png" alt=""
-							class="logo"> </a>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-9">
-					<ul class="footer-links">
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="blog-index.html">Blog</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-3">
-					<p>© ZUPA 2016</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../../../resources/bootstrap/js/swiper.jquery.min.js"></script>
-	<script src="../../../resources/bootstrap/js/modernizr-custom.js"></script>
-	<script src="../../../resources/bootstrap/js/script.js"></script>
-	<script>
-		if (Modernizr.cssanimations) {
-			var galleryTop = new Swiper('.gallery-top', {
-				nextButton : '.swiper-button-next',
-				prevButton : '.swiper-button-prev',
-				spaceBetween : 10,
-				effect : 'fade',
-				loop : true,
-				loopedSlides : 4
-			});
-			var galleryThumbs = new Swiper('.gallery-thumbs', {
-				spaceBetween : 10,
-				centeredSlides : true,
-				slidesPerView : 'auto',
-				touchRatio : 0.2,
-				slideToClickedSlide : true,
-				loop : true,
-				loopedSlides : 4
-			});
-			galleryTop.params.control = galleryThumbs;
-			galleryThumbs.params.control = galleryTop;
-		} else {
-			// IE9
-			var galleryTop = new Swiper('.gallery-top', {
-				nextButton : '.swiper-button-next',
-				prevButton : '.swiper-button-prev'
-			});
-		}
-	</script>
 </body>
 
 </html>

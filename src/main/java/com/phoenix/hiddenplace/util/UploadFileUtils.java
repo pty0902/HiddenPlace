@@ -37,13 +37,13 @@ public class UploadFileUtils {
 		File target = new File(uploadPath +savedPath,savedName);
 		FileCopyUtils.copy(fileData, target);
 
-		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
+		//String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 		String uploadedFileName = null;
-		if(MediaUtils.getMediaType(formatName) != null){
-			uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName);
-		}else{
+		//if(MediaUtils.getMediaType(formatName) != null){
+		//	uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName);
+		//}else{
 			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
-		}
+		//}
 
 		return uploadedFileName;
 
@@ -62,7 +62,7 @@ public class UploadFileUtils {
 	}
 
 
-	private static  String makeThumbnail(
+/*	private static  String makeThumbnail(
 			String uploadPath, 
 			String path, 
 			String fileName)throws Exception{
@@ -88,7 +88,7 @@ public class UploadFileUtils {
 		return thumbnailName.substring(
 				uploadPath.length()).replace(File.separatorChar, '/');
 		
-	} 
+	} */
 
 
 	private static String calcPath(String uploadPath){
