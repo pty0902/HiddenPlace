@@ -79,13 +79,19 @@
 	</select>
 	
 	<select id="bestMHP" resultType="MyHiddenPlace">
-
-		  select TBL_BOARD.NUM, TBL_BOARD.WRITEDATE, TBL_USER.USERNICKNAME
+		  select TBL_BOARD.NUM, TBL_BOARD.WRITEDATE, TBL_USER.USERNICKNAME,
+		  TBL_BOARD.READCOUNT, TBL_BOARD.TITLE, TBL_BOARD.타이틀이미지
 		  from TBL_BOARD, TBL_USER
-		  where TBL_BOARD.code > 0 and TBL_BOARD.USERID = TBL_USER.USERID
-		 
+		  where TBL_BOARD.베스트코드 > 0
+		  
 	</select> 
 
+	<select id="bookmark" resultType="int">
+		  select TBL_BOOKMARK.BOOKMARKCODE
+		  from TBL_BOOKMARK
+		  where num = #{num} and userId = #{userId}
+	</select>
+	
 	<!-- <select id="readPage" resultType="org.toolbee.domain.BoardVO">
 		select
 		*
@@ -221,5 +227,11 @@
 		insert into TBL_BOARD (USERID, STORENAME,TITLEIMGURL,THEMECODE,TITLE,CONTENT,LATITUDE,LONGITUDE)
 		values("qwer522", #{storeName}, #{titleImgUrl},#{themeCode},#{title},#{content}, #{latitude}, #{longitude})
 		</insert>
+	
+	<select id="bookmarkAll" resultType="MyHiddenPlace">
+		  select TBL_BOOKMARK.NUM
+		  from TBL_BOOKMARK
+		  where userId = #{userId}
+	</select>
 	
 </mapper>

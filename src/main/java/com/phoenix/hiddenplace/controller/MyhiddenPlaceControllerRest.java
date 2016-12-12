@@ -59,17 +59,24 @@ public class MyhiddenPlaceControllerRest {
 	
 	//내알못 베스트 3
 	@RequestMapping(value = "/bestMHP", method = RequestMethod.GET)
-	public ResponseEntity<List<MyHiddenPlace>> bestMHP() throws Exception {
+	public ResponseEntity<List<MyHiddenPlace>> bestMHP(MyHiddenPlace myHiddenPlace) throws Exception {
 		
 		ResponseEntity<List<MyHiddenPlace>> entity = null;
 		
+		String userId = myHiddenPlace.getUserId();
+		
 		try {
-			entity = new ResponseEntity<List<MyHiddenPlace>>(service.bestMHP(), HttpStatus.OK);
+			
+			entity = new ResponseEntity<List<MyHiddenPlace>>(service.bestMHP(userId), HttpStatus.OK);
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-			System.out.println("목록보기에서 오류");
+			System.out.println("best3 목록보기에서 오류");
 			entity = new ResponseEntity<List<MyHiddenPlace>>(HttpStatus.BAD_REQUEST);
+			
 		}
+		
 		return entity;
 	}	
 	
@@ -91,6 +98,7 @@ public class MyhiddenPlaceControllerRest {
 	      return entity;
 	   }
 	   
+<<<<<<< HEAD
 	   
 	   // 내알못 조회
 	   @RequestMapping(value = "/selectOneMHP", method = RequestMethod.GET)
@@ -109,5 +117,31 @@ public class MyhiddenPlaceControllerRest {
 	      return entity;
 	   }
 	   
+=======
+	 //즐겨찾기 현재 로그인한 유저의 즐겨찾기 목록
+		@RequestMapping(value = "/bookmarkAll", method = RequestMethod.GET)
+		public ResponseEntity<List<MyHiddenPlace>> bookmarkAll(MyHiddenPlace myHiddenPlace) throws Exception {
+			
+			ResponseEntity<List<MyHiddenPlace>> entity = null;
+			
+			String userId = myHiddenPlace.getUserId();
+			
+			try {
+				
+				entity = new ResponseEntity<List<MyHiddenPlace>>(service.bookmarkAll(userId), HttpStatus.OK);
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				System.out.println("즐겨찾기(홈페이지) 목록보기에서 오류");
+				entity = new ResponseEntity<List<MyHiddenPlace>>(HttpStatus.BAD_REQUEST);
+				
+			}
+			
+			return entity;
+		}	
+>>>>>>> refs/remotes/dongjin1204/master
 	   
 	}   
+
+

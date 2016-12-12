@@ -29,32 +29,32 @@
 <!-- 로그인,회원가입 스타일-->
 <style>
 .home-headmenu {
-  font-size: 12px;
-   margin-bottom: 50px; 
-  text-align: center;
+	font-size: 12px;
+	margin-bottom: 50px; 
+	text-align: center;
 }
 .home-headmenu .menu-links {
-  display: inline-block;
-  padding: 15px;
-  list-style: none;
+	display: inline-block;
+	padding: 15px;
+	list-style: none;
 }
 .home-headmenu .menu-links li {
-  float: left;
-  margin-right: 15px;
+	float: left;
+	margin-right: 15px;
 }
 li {
-    float: left;
-   font-size: 14px;
+	float: left;
+	font-size: 14px;
 }
 li p, .dropbtn {
-    display: inline-block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+	display: inline-block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 li.dropdown {
-    display: inline-block;
+	display: inline-block;
 }
 .dropdown-content {
     display: none;
@@ -76,44 +76,100 @@ li.dropdown {
 }
 
 #headmenu-header {
-   margin-top: 0 !important;
+ 	margin-top: 0 !important;
 }
 
 .jumbotron {
-   padding: 0;
-   position: fixed;
-   width: 100%;
-   opacity: 0.8;
-   z-index: 3;
-   margin: 0;
+ 	padding: 0;
+ 	position: fixed;
+ 	width: 100%;
+	height: 71px; 	
+ 	opacity: 0.8;
+ 	z-index: 3;
+ 	margin: 0;
 }
 
 section {
-   padding-top: 71px;
+ 	padding-top: 71px;
 }
 
 .logo {
-   width: 180px;
-   margin: 10px;
-   margin-left: 19%;
+ 	width: 180px;
+ 	margin: 10px;
+ 	margin-left: 19%;
 }
 
 #headmenu-div {
     float: right; 
     margin: 12px 18% 8px 1%; 
-    
-   /*background-color: #eee;
-            background: #eee;*/
-   z-index: 5;
+	z-index: 5;
+}
+
+#headmenu-logout:active{
+	border:0;
+	outline:0;
+}
+
+<!-- 검색바 스타일 -->
+/* 상단 메뉴 헤더*/
+header {
+	margin: 0;
+}
+.jumbotron {
+	padding: 0;
+	position: fixed;
+	width: 100%;
+	opacity: 0.8;
+	z-index: 3;
+	margin: 0;
+}
+
+section {
+	padding-top: 71px; 
+}
+
+.logo {
+	width: 180px;
+	margin: 10px;
+	margin-left: 18%; 
+}
+
+#headmenu_div {
+	float: right;
+	margin: 15px 18% 8px 1%;
+	z-index: 5;
 }
 
 #headmenu-login, #headmenu-userInsert,
 #headmenu-logout, #headmenu-myInfo,
-#headmenu-bookmark{
+#headmenu-bookmark {
 	color: black;
 	/*font-weight: bold;*/
-	font-size: 13px;
+	font-size: 16px;
 }
+
+#search_bar {
+	width: 400px;
+	height: 40px;
+	font-size: 20px;
+}
+
+.search_bar:focus + button {
+	z-index: 3;   
+}
+
+#search_bar,
+#search_button {
+	position: absolute;
+	right: 45%;
+	top: 15px;
+	border: 0;
+}
+
+#search_bar:focus {
+	outline: none;
+}
+
 </style>
 </head>
 
@@ -122,8 +178,8 @@ section {
    $(document).ready(function() {
       
       //session에 저장되있는 userId값 가져오기
-//        var loginState = localStorage.getItem('userId');
-       var loginState = "s";
+//    var loginState = localStorage.getItem('userId');
+      var loginState = "kimsky@gmail.com";
       
       var headmenuLink1;
       var headmenuLink2;
@@ -135,7 +191,7 @@ section {
       
          $('#headmenu-div').append(headmenuLink1, headmenuLink2);
       } else {
-         headmenuLink1 = $('<button id="headmenu-myInfo" class="btn btn-default" style="background-color: #eee;" >회원정보관리</button>');
+         headmenuLink1 = $('<button id="headmenu-myInfo" class="btn btn-default" style="background-color: #eee;" >'+loginState+'</button>');
          headmenuLink2 = $('<button id="headmenu-bookmark" class="btn btn-default" style="background-color: #eee;" >즐겨찾기</button>');
          headmenuLink3 = $('<button id="headmenu-logout" class="btn btn-default" style="background-color: #eee;" >로그아웃</button>');
      
@@ -233,13 +289,18 @@ $(document).ready(function() {
 </script>
 
 
+
 <body class="home-page">
 
 <!-- 상단 메뉴 헤더 -->
    <header id="headmenu-header" style="margin-top:0%;">
          <!-- <div class="container"> -->
 		<div class="jumbotron">
-			<img class="logo" src="../../bootstrap/images/mhp.png" alt="Logo" />
+			<a href="index.html"><img class="logo" src="../../bootstrap/images/mhp.png" alt="Logo" /></a>
+			<input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
+            <button id="search_button" class="btn btn-default" type="button">
+               <span class="glyphicon glyphicon-search"></span>
+            </button>
 			<div id="headmenu-div" class="btn-group">
              
              

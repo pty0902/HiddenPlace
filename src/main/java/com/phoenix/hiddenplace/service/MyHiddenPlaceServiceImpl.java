@@ -35,9 +35,14 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<MyHiddenPlace> bestMHP() throws Exception {
 		
 		return dao.bestMHP(); 
+=======
+	public List<MyHiddenPlace> bestMHP(String userId) throws Exception {
+		return dao.bestMHP(userId); 
+>>>>>>> refs/remotes/dongjin1204/master
 	}
 	
 	@Override
@@ -47,6 +52,7 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		return a;
 	}
 	
+<<<<<<< HEAD
 	@Transactional
 	@Override
 	public MyHiddenPlace selectOne(int num) throws Exception {
@@ -54,6 +60,11 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		dao.updateReadCount(num);
 		return dao.selectOne(num);
 		
+=======
+	@Override
+	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
+		return dao.bookmarkAll(userId); 
+>>>>>>> refs/remotes/dongjin1204/master
 	}
 
 }

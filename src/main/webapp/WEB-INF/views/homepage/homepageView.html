@@ -29,6 +29,17 @@
 <script src="../../../resources/js/myhiddenplace/myHiddenPlace.js"></script>
 <script src="../../../resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
 <style>
+
+@font-face {
+   font-family: 'baemin';
+   src: url(../../../resources/bootstrap/fonts/baemin.ttf) format('truetype');
+}
+
+.bestTitle {
+   font-family: 'baemin';
+   font-size: 50px;
+}
+
 .bookmark_star {
   position: absolute !important; 
   right: 3%;
@@ -40,35 +51,51 @@
 }
 
 .figureMHP figcaption > p {
-	margin-left: -50px;
+	margin-left: -200px;
+	font-size: 15px;
 }
 
 .figureMR figcaption > p {
-	margin-left: -50px;
+	margin-left: -200px;
+	font-size: 15px;
 }
 
 .hTextLine {
     white-space: nowrap; 
-    width: 17em;
+    width: 25em;
     text-align: right;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 .imgSize {
-	height: 267.43px;
+ 	height: 360px;
 }
+
+
+
+hr {
+	border: solid 1px #f7f5f0;
+}
+
 </style>
 </head>
 
-<!-- 홈페이지 MyHiddenPlace best4 이벤트 핸들링 -->
+<!-- 홈페이지 MyHiddenPlace best3 이벤트 핸들링 -->
 <script type="text/javascript">
 	$(document).ready(function() {
 
 			var nowLoginId = localStorage.getItem('userId');
+			nowLoginId="ss";
 			
 			var mhpController = new MyHiddenPlaceController();
-			var myHiddenPlaces = mhpController.requestBestMHP(nowLoginId);
+			var myHiddenPlaces = mhpController.requestBestMHP();
+			
+			var bestNum1 = myHiddenPlace[0].num;
+			var bestNum2 = myHiddenPlace[1].num;
+			var bestNum3 = myHiddenPlace[2].num;
+			
+			var bookmarkAll = mhpController.requestBookmarkAllMHP(nowLoginId);
 			
 			if(nowLoginId == null) {
 				
@@ -85,7 +112,7 @@
 					
 					figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
 					figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-					$('#bestMHP4').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
+					$('#bestMHP3').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
 
 				}
 				
@@ -102,15 +129,19 @@
 					var pReadCountMHP = $('<p></p>').html(myHiddenPlaces[i].readCount); //추천수
 					var pNumMHP = $('<p hidden></p>').html(myHiddenPlaces[i].num); //글번호
 				
-					if(myHiddenPlaces[i].bookmark == 1) {
-						var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
-					} else {
-						var	imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')						
-					}
+					for(var i = 0; i < bookmarkAll.length; i++) {
+						
+						if(bookmarkAll[i].num == bestNum1 || bookmarkAll[i].num == bestNum2 || bookmarkAll[i].num == bestNum3) {
+							var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')	
+						} else {
+							var	imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="../../../resources/bootstrap/img/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')						
+						}
 
+					}	
+						
 					figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
 					figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-					$('#bestMHP4').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
+					$('#bestMHP3').append(figureMHP); //내알못 div에 bestMHP[i] 게시글 append
 					
 				}
 				
@@ -143,7 +174,7 @@
 				
 				figcaptionMR.append(hTitle, pUserNicknameMR, pDateMR, pReadCountMR, pNumMR); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
 				figureMR.append(imgMR, figcaptionMR); // figure태그에 이미지, figcaption append
-				$('#bestMR4').append(figureMR); //나만의루트 div에 bestMR[i] 게시글 append
+				$('#bestMR3').append(figureMR); //내알못 div에 bestMHP[i] 게시글 append
 
 			}
 			
@@ -168,7 +199,7 @@
 
 				figcaptionMR.append(hTitle, pUserNicknameMR, pDateMR, pReadCountMR, pNumMR, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
 				figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-				$('#bestMR4').append(figureMR); //나만의루트 div에 bestMR[i] 게시글 append
+				$('#bestMR3').append(figureMR); //내알못 div에 bestMHP[i] 게시글 append
 				
 			}
 			
@@ -230,23 +261,27 @@ $(document).ready(function() {
 	</section>
 
 	<section>
-		<div class="container">
-			<h3>내알못 베스트</h3>
-			<div id="bestMHP4" class="portfolio grid-4">
-
+		<div class="row" style="margin:0 5% 0 5%;">
+			<div class="col-sm-12 col-md-12 col-md-offset-1" style="margin:0;"> 
+				<p class="bestTitle">★내알못 베스트★</p>
+				<div id="bestMHP3" class="portfolio grid-3">
 
 				
+				</div>
 			</div>
 		</div>
 	</section>
 
+	<hr>
+	
 	<section>
-		<div class="container">
-			<h3>나만의 루트 베스트</h3>
-			<div ID="bestMR4" class="portfolio grid-4">
-				
+		<div class="row" style="margin:0 5% 0 5%;">
+			<div class="col-sm-12 col-md-12 col-md-offset-1" style="margin:0;"> 
+				<p class="bestTitle">★나만의루트 베스트★</p>
+				<div id="bestMR3" class="portfolio grid-3">
 
 				
+				</div>
 			</div>
 		</div>
 	</section>
