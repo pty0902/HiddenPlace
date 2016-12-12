@@ -14,11 +14,15 @@ public interface MyHiddenPlaceService {
 
 	List<MyHiddenPlace> list(PageMaker pageMaker) throws Exception; //내알못 목록
 	
-	List<MyHiddenPlace> bestMHP() throws Exception; //내알못 베스트 3
+	List<MyHiddenPlace> bestMHP(String userId) throws Exception; //내알못 베스트 3
 	
 	int listCount(PageMaker pageMaker) throws Exception;
 
 	String store(MultipartFile file) throws Exception;
 	
+<<<<<<< HEAD
 	List<Theme> themeList() throws Exception;
+=======
+	List<MyHiddenPlace> bookmarkAll(String userId) throws Exception; //내알못 베스트 3
+>>>>>>> refs/remotes/dongjin1204/master
 }

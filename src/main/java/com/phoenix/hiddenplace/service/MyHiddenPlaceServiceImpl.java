@@ -35,8 +35,8 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 	}
 
 	@Override
-	public List<MyHiddenPlace> bestMHP() throws Exception {
-		return dao.bestMHP(); 
+	public List<MyHiddenPlace> bestMHP(String userId) throws Exception {
+		return dao.bestMHP(userId); 
 	}
 	
 	
@@ -46,9 +46,16 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		String a = "a";
 		return a;
 	}
+<<<<<<< HEAD
 	@Override
 	public List<Theme> themeList() throws Exception {
 		return dao.themeList();
+=======
+	
+	@Override
+	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
+		return dao.bookmarkAll(userId); 
+>>>>>>> refs/remotes/dongjin1204/master
 	}
 
 }
