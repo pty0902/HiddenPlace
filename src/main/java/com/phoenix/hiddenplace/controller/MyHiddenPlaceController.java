@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 import com.phoenix.hiddenplace.service.MyHiddenPlaceService;
 
@@ -29,21 +28,20 @@ public class MyHiddenPlaceController {
 
 	}
 	
-	//request insert 컨트롤러 post 메서드
-	@RequestMapping(value ="/insert", method = RequestMethod.POST)
-	public String insertPOST(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
+	//내알못 글쓰기 컨트롤러
+	@RequestMapping(value ="/myHiddenPlaceInsert", method = RequestMethod.GET)
+	public String inertMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
 
-		logger.info("insert post ............");
-		logger.info(myHiddenPlace.toString());
-
-		service.insert(myHiddenPlace);
-
-		//		model.addAttribute("result", "success");
-		rttr.addFlashAttribute("msg", "SUCCESS");
-
-		//		return "/board/success";
-		return "redirect:/hiddenplace/hiddenPlaceSelectAll";
+		return "/views/myhiddenplace/myHiddenPlaceInsert";
 
 	}
+	
+	//request 내알못 조회 컨트롤러
+	@RequestMapping(value ="/myHiddenPlaceSelectOne", method = RequestMethod.GET)
+	public String selectOneMHP() throws Exception {
+
+		return "/views/myhiddenplace/myHiddenPlaceSelectOne";
+
+	}      
 
 }

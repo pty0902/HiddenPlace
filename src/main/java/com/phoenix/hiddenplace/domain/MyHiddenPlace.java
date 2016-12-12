@@ -13,10 +13,11 @@ public class MyHiddenPlace {
 	private int readCount;
 	private String storeName;
 	private int code;
-	private double latitude;
-	private double longitude;
+	private double latitude; 
+	private double longitude; 
 	private String detailAddress;
 	private String userNickName; //닉네임 유저
+	private String titleImgUrl;
 	
 	public String getUserNickName() {
 		return userNickName;
@@ -133,6 +134,12 @@ public class MyHiddenPlace {
 		this.detailAddress = detailAddress;
 	}
 	
+	public String getTitleImgUrl() {
+		return titleImgUrl;
+	}
+	public void setTitleImgUrl(String titleImgUrl) {
+		this.titleImgUrl = titleImgUrl;
+	}
 	@Override
 	public String toString() {
 		return "Domain [num=" + num + ", userId=" + userId + ", regionTownCode=" + regionTownCode + ", themeCode="

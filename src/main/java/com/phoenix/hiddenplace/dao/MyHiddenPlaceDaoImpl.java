@@ -1,12 +1,9 @@
 package com.phoenix.hiddenplace.dao;
 
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 import com.phoenix.hiddenplace.domain.PageMaker;
 
@@ -25,8 +22,17 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 	}
 
 	@Override
-	public MyHiddenPlace selectOne(Integer num) throws Exception {
+	public MyHiddenPlace selectOne(int num) throws Exception {// 내알못 조회
+		
 		return sqlSession.selectOne(namespace + ".selectOne", num);
+		
+	}
+	
+	@Override
+	public void updateReadCount(int num) throws Exception { // 내알못 조회수 증가
+		
+		sqlSession.selectOne(namespace + ".readCountPlus", num);
+		
 	}
 	
 	@Override
@@ -49,6 +55,9 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 
 	@Override
 	public List<MyHiddenPlace> bestMHP() throws Exception {
+		
 		return sqlSession.selectList(namespace + ".bestMHP");
+		
 	}
+
 }
