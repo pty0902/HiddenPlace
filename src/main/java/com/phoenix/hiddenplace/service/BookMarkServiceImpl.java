@@ -4,27 +4,25 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.phoenix.hiddenplace.dao.BookMarkDao;
+import com.phoenix.hiddenplace.dao.BookmarkDao;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 
 @Service
-public class BookMarkServiceImpl implements BookMarkService {
+public class BookmarkServiceImpl implements BookmarkService {
 
 	@Inject
-	private BookMarkDao dao;
+	private BookmarkDao dao;
 
 	
 
 	@Override
-	public void bookMarkDelete(String nums) throws Exception {
-		System.out.println("서비스출력");
-		dao.bookMarkDelete(nums);
+	public void bookmarkDelete(String nums) throws Exception {
+		dao.bookmarkDelete(nums);
 	}
 	
 	//즐겨찾기 등록(홈페이지)
 	@Override
 	public void bookmarkInsertMHP(MyHiddenPlace myHiddenPlace) throws Exception {
-		System.out.println("insert ServiceImpl까지 온다~~");
 		dao.bookmarkInsertMHP(myHiddenPlace);
 	}
 	

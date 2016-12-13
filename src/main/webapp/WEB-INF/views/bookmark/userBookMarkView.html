@@ -36,7 +36,7 @@
 <script src="../../../resources/js/user/user.js"></script>
 <script src="../../../resources/js/user/userController.js"></script>
 
-      <script src="../../../resources/js/bookmark/bookMarkController.js"></script>
+      <script src="../../../resources/js/bookmark/bookmarkController.js"></script>
 
       <style>
          @font-face {
@@ -209,17 +209,17 @@
 				var checked = mhps.eq(i).children().eq(0).prop('checked');
 				if(checked) {
 					
-					var mhpBookMark_delete_num = mhps.eq(i).children().eq(2).children().eq(2).text();
-					delete_nums += mhpBookMark_delete_num +',';
+					var mhpBookmark_delete_num = mhps.eq(i).children().eq(2).children().eq(2).text();
+					delete_nums += mhpBookmark_delete_num +',';
 				}
 				
 			}
 			
-			var bookMarkController = new BookMarkController();
+			var bookmarkController = new BookmarkController();
 			
 			 var length = delete_nums.length;
 			  
-			 bookMarkController.requestSelectedDeleteMHP(delete_nums.substring(0, length-1));
+			 bookmarkController.requestSelectedDeleteMHP(delete_nums.substring(0, length-1));
 	          
 		});
 

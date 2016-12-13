@@ -8,35 +8,29 @@ import org.springframework.stereotype.Repository;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 
 @Repository
-public class BookMarkDaoImpl implements BookMarkDao {
+public class BookmarkDaoImpl implements BookmarkDao {
 
 	@Inject	
 	private SqlSession sqlSession;
 
-	private static String namespace = "com.phoenix.hiddenplace.mapper.BookMarkMapper";
+	private static String namespace = "com.phoenix.hiddenplace.mapper.bookmarkMapper";
 
 
 	@Override
-	public void bookMarkDelete(String nums) throws Exception {
-		System.out.println("Dao출력");
-		sqlSession.delete(namespace + ".bookMarkDelete", nums);
-		
+	public void bookmarkDelete(String nums) throws Exception {
+		sqlSession.delete(namespace + ".bookmarkDelete", nums);
 	}
 	
 	//즐겨찾기 등록(홈페이지)
 	@Override
 	public void bookmarkInsertMHP(MyHiddenPlace myHiddenPlace) throws Exception {
-		System.out.println("DaoImpl까지 온다~~");
 		sqlSession.insert(namespace + ".bookmarkInsertMHP", myHiddenPlace);
-		
 	}
 	
 	//즐겨찾기 해제(홈페이지)
 	@Override
 	public void bookmarkDeleteMHP(MyHiddenPlace myHiddenPlace) throws Exception {
-		
 		sqlSession.delete(namespace + ".bookmarkDeleteMHP", myHiddenPlace);
-		
 	}
 
 

@@ -3,10 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.phoenix.hiddenplace.mapper.BookMarkMapper">
+<mapper namespace="com.phoenix.hiddenplace.mapper.bookmarkMapper">
 
-
-	<delete id="bookMarkDelete" parameterType="string">
+	<!-- 즐겨찾기페이지 선택삭제 -->
+	<delete id="bookmarkDelete" parameterType="string">
 		DELETE
 		FROM
 		TBL_BOOKMARK
@@ -15,11 +15,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</delete>
 
+	<!-- 내알못 즐겨찾기 등록(홈페이지) -->
 	<insert id="bookmarkInsertMHP">
 		insert into TBL_BOOKMARK(NUM, USERID)
 		values(#{num}, #{userId})
 	</insert>
 	
+	<!-- 내알못 즐겨찾기 해제(홈페이지) -->
 	<delete id="bookmarkDeleteMHP">
 		delete from TBL_BOOKMARK
 		where userId = #{userId}

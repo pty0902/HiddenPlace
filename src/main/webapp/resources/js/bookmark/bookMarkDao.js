@@ -1,6 +1,6 @@
 
 //bookmark dao 객체
-function BookMarkDao() {
+function BookmarkDao() {
 
 	this.selectedDeleteMHP = function(delete_nums) {
 
@@ -18,7 +18,7 @@ function BookMarkDao() {
 			});
 
 		} catch(e) {
-			console.log('BookMarkDao 객체 : selectedDeleteDao 메서드에서 예외 발생');
+			console.log('BookmarkDao 객체 : selectedDeleteDao 메서드에서 예외 발생');
 			console.log(e.message);
 		}
 
