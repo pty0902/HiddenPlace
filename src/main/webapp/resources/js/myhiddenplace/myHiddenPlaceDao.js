@@ -46,7 +46,7 @@ function MyHiddenPlaceDao() {
 					userNickname:"이동진",
 					writeDate:20161206,
 					readCount:1,
-					imageUrl:"../../../resources/customize/imagesg/bookcafe.jpeg",
+					imageUrl:"../../../resources/customize/images/bookcafe.jpeg",
 					title:"#가산디지털단지 #여기는 어디인가요"
 			}
 			
@@ -272,7 +272,9 @@ function MyHiddenPlaceDao() {
 	this.myHiddenPlaceInsert = function(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema,mhpTitleImg) {
 		
 		var isSuccess;
+		
 			try {
+				
 				$.ajax({
 					url : '/myhiddenplace/insertMHP', // 홈페이지 불러올 주소
 					async : false, // false: 동기, true: 비동기
@@ -354,4 +356,39 @@ function MyHiddenPlaceDao() {
 			
 		};
 
+
+//		즐겨찾기 등록 dao 메서드
+		this.insertBookmark = function(nowLoginId, num) {
+			
+			var isSuccess;
+
+			try{
+
+				$.ajax({
+					url: '/bookmark/insertBookmarkMHP' , //홈페이지 불러올 주소
+					async : false, //false: 동기, true: 비동기
+					type: 'get', //요청방식 get or post      
+					data: {
+						userId : nowLoginId,//보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
+						num : num
+					},
+					dataType: 'json', //서버에서 보내오는 데이터 타입
+					success: function (data) { //서버에서 보내오는 데이터
+					
+							isSuccess = data;
+					
+					}
+					
+				});
+				
+		
+			} catch(e) {
+				console.log('myHiddenPlaceDao 객체 : insertBookmark Dao 메서드에서 예외 발생');
+				console.log(e.message);
+			}
+
+			return isSuccess;
+			
+		};
+		
 }

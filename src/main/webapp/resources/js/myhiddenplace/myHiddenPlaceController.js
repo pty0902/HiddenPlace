@@ -99,4 +99,15 @@ function MyHiddenPlaceController() {
 		return bookmarkAll;
 		
 	}
+	
+	
+//즐겨찾기 등록	
+	this.reestInsertBookmark = function(nowLoginId, num) {
+			
+		var isSuccess = dao.insertBookmark(nowLoginId, num);
+			
+		return isSuccess;
+			
+	}
+	
 }
