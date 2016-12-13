@@ -36,23 +36,45 @@ public class BookMarkControllerRest {
 		return entity;
 	}
 	
-	//즐겨찾기 등록
+	//즐겨찾기 등록(홈페이지)
 	@RequestMapping(value = "/insertBookmarkMHP", method = RequestMethod.GET)
-	public ResponseEntity<String> insertBookmark(MyHiddenPlace myHiddenPlace) throws Exception {
-		
+	public ResponseEntity<String> insertBookmarkMHP(MyHiddenPlace myHiddenPlace) throws Exception {
+
 		ResponseEntity<String> entity = null;
-			
+		
 		try {
-			service.bookmarkInsert(myHiddenPlace);
+			service.bookmarkInsertMHP(myHiddenPlace);
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("insertBookmarkMHP에서 오류");
 			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;
 		
 	}
+	
+	//즐겨찾기 해제(홈페이지)
+		@RequestMapping(value = "/deleteBookmarkMHP", method = RequestMethod.GET)
+		public ResponseEntity<String> deleteBookmarkMHP(MyHiddenPlace myHiddenPlace) throws Exception {
+
+			ResponseEntity<String> entity = null;
+			
+			try {
+				service.bookmarkDeleteMHP(myHiddenPlace);
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("deleteBookmarkMHP에서 오류");
+				entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;
+			
+		}
 
 }
 

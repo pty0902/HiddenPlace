@@ -22,6 +22,6 @@ public interface MyHiddenPlaceService {
 
 	public MyHiddenPlace selectOne(int num) throws Exception;
 	
-	List<MyHiddenPlace> bookmarkAll(String userId) throws Exception;
+	List<MyHiddenPlace> bookmarkAll(String userId) throws Exception; //내알못 로그인한 유저의 즐겨찾기 목록 불러오기(홈페이지)
 
 }

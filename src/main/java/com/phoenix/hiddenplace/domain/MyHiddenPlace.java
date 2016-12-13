@@ -18,7 +18,6 @@ public class MyHiddenPlace {
 	private String detailAddress;
 	private String userNickName; //닉네임 유저
 	private String titleImgURL;
-	private String titleImgUrl;
 	
 	public String getTitleImgURL() {
 		return titleImgURL;
@@ -141,12 +140,6 @@ public class MyHiddenPlace {
 		this.detailAddress = detailAddress;
 	}
 	
-	public String getTitleImgUrl() {
-		return titleImgUrl;
-	}
-	public void setTitleImgUrl(String titleImgUrl) {
-		this.titleImgUrl = titleImgUrl;
-	}
 	@Override
 	public String toString() {
 		return "MyHiddenPlace [num=" + num + ", userId=" + userId + ", regionTownCode=" + regionTownCode

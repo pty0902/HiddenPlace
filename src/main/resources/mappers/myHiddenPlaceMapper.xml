@@ -89,17 +89,11 @@
 	
 	<select id="bestMHP" resultType="MyHiddenPlace">
 		  select TBL_BOARD.NUM, TBL_BOARD.WRITEDATE, TBL_USER.USERNICKNAME,
-		  TBL_BOARD.READCOUNT, TBL_BOARD.TITLE, TBL_BOARD.타이틀이미지
+		  TBL_BOARD.READCOUNT, TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL
 		  from TBL_BOARD, TBL_USER
-		  where TBL_BOARD.베스트코드 > 0
+		  where TBL_BOARD.MHPBESTCODE = 1
 	</select> 
 
-	<select id="bookmark" resultType="int">
-		  select TBL_BOOKMARK.BOOKMARKCODE
-		  from TBL_BOOKMARK
-		  where num = #{num} and userId = #{userId}
-	</select>
-	
 	<!-- <select id="readPage" resultType="org.toolbee.domain.BoardVO">
 		select
 		*

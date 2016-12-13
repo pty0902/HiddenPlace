@@ -137,13 +137,10 @@ public class MyhiddenPlaceControllerRest {
 		public ResponseEntity<List<MyHiddenPlace>> bookmarkAll(MyHiddenPlace myHiddenPlace) throws Exception {
 			
 			ResponseEntity<List<MyHiddenPlace>> entity = null;
-			
 			String userId = myHiddenPlace.getUserId();
-			
+
 			try {
-				
 				entity = new ResponseEntity<List<MyHiddenPlace>>(service.bookmarkAll(userId), HttpStatus.OK);
-				
 			} catch (Exception e) {
 				
 				e.printStackTrace();

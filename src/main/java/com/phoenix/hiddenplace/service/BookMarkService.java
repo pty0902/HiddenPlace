@@ -9,6 +9,9 @@ public interface BookMarkService {
 	public void bookMarkDelete(String nums) throws Exception;
 
 	// 즐겨찾기 등록
-	public void bookmarkInsert(MyHiddenPlace myHiddenPlace) throws Exception;
+	public void bookmarkInsertMHP(MyHiddenPlace myHiddenPlace) throws Exception;
+	
+	// 즐겨찾기 해제
+	public void bookmarkDeleteMHP(MyHiddenPlace myHiddenPlace) throws Exception;
 	
 }

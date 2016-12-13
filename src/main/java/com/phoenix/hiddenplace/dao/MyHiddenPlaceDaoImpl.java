@@ -71,9 +71,7 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 	
 	@Override
 	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
-//		return sqlSession.bookmarkAll(namespace + ".bookmarkAll");
-		return sqlSession.selectList(namespace + ".bookmarkAll");
-		
+		return sqlSession.selectList(namespace + ".bookmarkAll", userId);
 	}
 
 }

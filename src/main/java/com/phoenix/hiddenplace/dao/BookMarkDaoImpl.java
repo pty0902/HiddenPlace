@@ -23,9 +23,21 @@ public class BookMarkDaoImpl implements BookMarkDao {
 		
 	}
 	
+	//즐겨찾기 등록(홈페이지)
 	@Override
-	public void bookmarkInsert(MyHiddenPlace myHiddenPlace) throws Exception {
-		sqlSession.insert(namespace + ".bookmarkInsert", myHiddenPlace);
+	public void bookmarkInsertMHP(MyHiddenPlace myHiddenPlace) throws Exception {
+		System.out.println("DaoImpl까지 온다~~");
+		sqlSession.insert(namespace + ".bookmarkInsertMHP", myHiddenPlace);
+		
 	}
+	
+	//즐겨찾기 해제(홈페이지)
+	@Override
+	public void bookmarkDeleteMHP(MyHiddenPlace myHiddenPlace) throws Exception {
+		
+		sqlSession.delete(namespace + ".bookmarkDeleteMHP", myHiddenPlace);
+		
+	}
+
 
 }

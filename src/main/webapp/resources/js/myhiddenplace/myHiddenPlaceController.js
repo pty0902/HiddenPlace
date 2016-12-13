@@ -117,9 +117,18 @@ function MyHiddenPlaceController() {
 	
 	
 //즐겨찾기 등록	
-	this.reestInsertBookmark = function(nowLoginId, num) {
+	this.requestInsertBookmark = function(nowLoginId, num) {
 			
 		var isSuccess = dao.insertBookmark(nowLoginId, num);
+			
+		return isSuccess;
+			
+	}
+	
+//즐겨찾기 해제
+	this.requestDeleteBookmark = function(nowLoginId, num) {
+			
+		var isSuccess = dao.deleteBookmark(nowLoginId, num);
 			
 		return isSuccess;
 			

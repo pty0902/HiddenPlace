@@ -207,7 +207,7 @@ section {
   max-width: 25px;
   height: auto;
   margin: 0;
-  z-index: 3;
+  z-index: 5;
 }
 
 .figureMHP figcaption > p {
@@ -247,7 +247,7 @@ hr {
       
       //session에 저장되있는 userId값 가져오기
 //    var loginState = localStorage.getItem('userId');
-      var loginState = "kimsky@gmail.com";
+      var loginState = "qwer522";
       
       var headmenuLink1;
       var headmenuLink2;
@@ -275,7 +275,7 @@ hr {
 	$(document).ready(function() {
 
 			var nowLoginId = localStorage.getItem('userId');
-			nowLoginId = "kimsky@gmail.com";
+			nowLoginId = "qwer522";
 			var mhpController = new MyHiddenPlaceController();
 			var myHiddenPlaces = mhpController.requestBestMHP();
 			var bookmarkAll = mhpController.requestBookmarkAllMHP(nowLoginId);
@@ -304,10 +304,10 @@ hr {
 				for (var i = 0; i < myHiddenPlaces.length; i++) {
 
 					var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
-					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].imageUrl + '"/>'); //이미지
+					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].titleImgURL + '"/>'); //이미지
 					var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
 					var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaces[i].title);
-					var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickname); //작성자
+					var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickName); //작성자
 					var pDateMHP = $('<p></p>').html(myHiddenPlaces[i].writeDate); //작성일자
 					var pReadCountMHP = $('<p></p>').html(myHiddenPlaces[i].readCount); //추천수
 					var pNumMHP = $('<p hidden></p>').html(myHiddenPlaces[i].num); //글번호
@@ -345,7 +345,7 @@ hr {
 	$(document).ready(function() {
 
 		var nowLoginId = localStorage.getItem('userId');
- 		nowLoginId = "kimsky@gmail.com";
+ 		nowLoginId = "qwer522";
 		var mrController = new MyRouteController();
 		var myRoutes = mrController.requestBestMR();
 		var bookmarkAll = mrController.requestBookmarkAllMR(nowLoginId);
@@ -381,7 +381,7 @@ hr {
 				var pDateMR = $('<p></p>').html(myRoutes[i].writeDate); //작성일자
 				var pReadCountMR = $('<p></p>').html(myRoutes[i].readCount); //추천수
 				var pNumMR = $('<p hidden></p>').html(myRoutes[i].num); //글번호
-			
+				
 				if(bookmarkAll.length > 0) {
 					for(var j = 0; j < bookmarkAll.length; j++) {
 					
@@ -435,22 +435,33 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
 	$('.bookmark_star').click(function() {
+		$('.figureMHP').unbind("click");
 		
-		var nowLoginId = localStorage.getItem('userId');
-   		var num = $(this).parent().children().eq(4).text();
+		var nowLoginId = localStorage.getItem('userId'); //현재 로그인한 사용자 아이디 가져오기
+		nowLoginId = "qwer522";
+   		var num = $(this).parent().children().eq(4).text();	//현재 클릭한 게시글의 글번호 가져오기
    		alert(num);
-   		
-   		var mhpController = new MyHiddenPlaceController();
-   		var isSuccess = mhpController.requestInsertBookmark(nowLoginId, num);
-   		alert(isSuccess);
-   		
-   	 	if(isSuccess == true) {
-	   	 	$(this).attr("src","../../../resources/customize/images/bookmark_success_star.png");
-		   	 alert("즐겨찾기에 등록되었습니다!");
-   		} else {
-   			$(this).attr("src","../../../resources/customize/images/bookmark_star.png");
-   			alert("즐겨찾기가 해제되었습니다!");
-   		}
+   		var mhpController = new MyHiddenPlaceController(); 
+		var bookmarkAll = mhpController.requestBookmarkAllMHP(nowLoginId); //현재 로그인한 유저의 즐겨찾기 목록을 가져오기
+		var isSuccess = false;
+		
+			for(i = 0; i < bookmarkAll.length; i++) {
+				
+   				if(num == bookmarkAll[i].num) {
+   					
+   					var deleteBookmarkState = mhpController.requestDeleteBookmark(nowLoginId, num);
+   		   			$(this).attr("src","../../../resources/customize/images/bookmark_star.png");
+   		   	   		alert("즐겨찾기가 해제되었습니다!");
+   		   	   		isSuccess = true;
+   				}
+   			}
+		
+			if(isSuccess == false) {
+				
+				var insertBookmarkState = mhpController.requestInsertBookmark(nowLoginId, num);
+		   		$(this).attr("src","../../../resources/customize/images/bookmark_success_star.png");
+		   		alert("즐겨찾기에 등록되었습니다!");
+			}
 			
 	});	
 });

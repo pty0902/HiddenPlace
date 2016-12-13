@@ -16,8 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<insert id="bookmarkInsertMHP">
-		insert into TBL_BOOKMARK (NUM, USERID)
+		insert into TBL_BOOKMARK(NUM, USERID)
 		values(#{num}, #{userId})
 	</insert>
+	
+	<delete id="bookmarkDeleteMHP">
+		delete from TBL_BOOKMARK
+		where userId = #{userId}
+		and num = #{num}
+	</delete>
 
 </mapper>

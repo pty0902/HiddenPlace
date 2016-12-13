@@ -20,10 +20,18 @@ public class BookMarkServiceImpl implements BookMarkService {
 		System.out.println("서비스출력");
 		dao.bookMarkDelete(nums);
 	}
-
+	
+	//즐겨찾기 등록(홈페이지)
 	@Override
-	public void bookmarkInsert(MyHiddenPlace myHiddenPlace) throws Exception {
-		dao.bookmarkInsert(myHiddenPlace);
+	public void bookmarkInsertMHP(MyHiddenPlace myHiddenPlace) throws Exception {
+		System.out.println("insert ServiceImpl까지 온다~~");
+		dao.bookmarkInsertMHP(myHiddenPlace);
+	}
+	
+	//즐겨찾기 해제(홈페이지)
+	@Override
+	public void bookmarkDeleteMHP(MyHiddenPlace myHiddenPlace) throws Exception {
+		dao.bookmarkDeleteMHP(myHiddenPlace);
 	}
 	
 }
