@@ -192,7 +192,7 @@ section {
 
 @font-face {
    font-family: 'baemin';
-   src: url(../../../resources/bootstrap/fonts/baemin.ttf) format('truetype');
+   src: url(../../../resources/bootstrap/fonts/배달의민족주아체.ttf) format('truetype');
 }
 
 .bestTitle {
@@ -269,7 +269,7 @@ hr {
    });
 </script>
 
-<!-- 홈페이지 MyHiddenPlace best4 이벤트 핸들링 -->
+<!-- 홈페이지 MyHiddenPlace best3 이벤트 핸들링 -->
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -345,6 +345,7 @@ hr {
 	$(document).ready(function() {
 
 		var nowLoginId = localStorage.getItem('userId');
+ 		nowLoginId = "kimsky@gmail.com";
 		var mrController = new MyRouteController();
 		var myRoutes = mrController.requestBestMR();
 		var bookmarkAll = mrController.requestBookmarkAllMR(nowLoginId);
@@ -397,7 +398,7 @@ hr {
 				}
 
 				figcaptionMR.append(hTitle, pUserNicknameMR, pDateMR, pReadCountMR, pNumMR, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
-				figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+				figureMR.append(imgMR, figcaptionMR); // figure태그에 이미지, figcaption append
 				$('#bestMR3').append(figureMR); //내알못 div에 bestMHP[i] 게시글 append
 				
 			}
@@ -430,16 +431,18 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- 즐겨찾기 등록 이벤트 핸들링 -->
+<!-- MHP 즐겨찾기 등록 이벤트 핸들링 -->
 <script>
 $(document).ready(function() {
 	$('.bookmark_star').click(function() {
 		
-		userId = localStorage.getItem('userId');
+		var nowLoginId = localStorage.getItem('userId');
    		var num = $(this).parent().children().eq(4).text();
+   		alert(num);
    		
    		var mhpController = new MyHiddenPlaceController();
-   		var isSuccess = mhpController.requestInsertBookmark(userId, num);
+   		var isSuccess = mhpController.requestInsertBookmark(nowLoginId, num);
+   		alert(isSuccess);
    		
    	 	if(isSuccess == true) {
 	   	 	$(this).attr("src","../../../resources/customize/images/bookmark_success_star.png");

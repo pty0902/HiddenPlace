@@ -34,7 +34,7 @@ function MyRouteDao() {
 			});*/
 			
 			var myRoute1 = {
-					num:1, //글번호 hidden으로할거임
+					num:4, //글번호 hidden으로할거임
 					userNickname:"이동진", //유저닉네임
 					writeDate:20161206, //작성일자
 					readCount:1, //조회수
@@ -43,7 +43,7 @@ function MyRouteDao() {
 			}
 			
 			var myRoute2 = {
-					num:2, //글번호 hidden으로할거임
+					num:5, //글번호 hidden으로할거임
 					userNickname:"이동진", //유저닉네임
 					writeDate:20161206, //작성일자
 					readCount:1, //조회수
@@ -52,7 +52,7 @@ function MyRouteDao() {
 			}
 			
 			var myRoute3 = {
-					num:3, //글번호 hidden으로할거임
+					num:6, //글번호 hidden으로할거임
 					userNickname:"이동진", //유저닉네임
 					writeDate:20161206, //작성일자
 					readCount:1, //조회수
@@ -178,15 +178,15 @@ var myRoute2 = {
 //			});
 			
 			var bookmark1 = {
-					num:"2" //글번호 hidden으로할거임
+					num:2 //글번호 hidden으로할거임
 			}
 			
 			var bookmark2 = {
-					num:"3"
+					num:3
 			}
 			
 			var bookmark3 = {
-					num:"4"
+					num:4
 			}
 			
 			bookmarkAll.push(bookmark1);

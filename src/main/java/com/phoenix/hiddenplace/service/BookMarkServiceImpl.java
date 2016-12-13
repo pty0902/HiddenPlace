@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.phoenix.hiddenplace.dao.BookMarkDao;
+import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 
 @Service
 public class BookMarkServiceImpl implements BookMarkService {
@@ -20,4 +21,9 @@ public class BookMarkServiceImpl implements BookMarkService {
 		dao.bookMarkDelete(nums);
 	}
 
+	@Override
+	public void bookmarkInsert(MyHiddenPlace myHiddenPlace) throws Exception {
+		dao.bookmarkInsert(myHiddenPlace);
+	}
+	
 }

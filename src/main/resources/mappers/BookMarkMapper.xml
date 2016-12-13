@@ -15,4 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</delete>
 
+	<insert id="bookmarkInsertMHP">
+		insert into TBL_BOOKMARK (NUM, USERID)
+		values(#{num}, #{userId})
+	</insert>
+
 </mapper>
