@@ -15,16 +15,11 @@ public class PageMaker {
 	private int perPageNum = 12;
 	private int themeCode = 0;
 	private int displayPageNum = 10;
+	private String keyWord;
 	
 	public PageMaker() {
 		
 	}
-//	private Criteria cri;
-//
-//
-//	public void setCri(Criteria cri) {
-//		this.cri = cri;
-//	}
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
@@ -85,7 +80,6 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 
-
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
@@ -107,11 +101,6 @@ public class PageMaker {
 	}	
 	
 	public void setPage(int page){
-
-		if(page <= 0){
-			this.page = 1;
-			return;
-		}
 
 		this.page = page;
 	}
@@ -151,5 +140,12 @@ public class PageMaker {
 		this.themeCode = themeCode;
 	}
 
+	public String getKeyWord() {
+		return keyWord;
+	}
+
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
 	
 }

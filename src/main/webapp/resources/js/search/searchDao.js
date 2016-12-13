@@ -1,14 +1,14 @@
-function PageDao() {
+function SearchDao() {
 
-	//최초의 페이지 번호 불러오기
-	this.pageIng = function(themeCode, page, keyWord) {
+	//내알못 목록 불러오기
+	this.search = function(themeCode, page, keyWord) {
 		
-		var pageMaker;
+		var myHiddenPlaceAll = [];
 		var pageNum = page;
 		try{
 
 			$.ajax({
-				url: '/myhiddenplace/page' , //홈페이지 불러올 주소
+				url: '/myhiddenplace/myhiddenplaceSelectAll' , //홈페이지 불러올 주소
 				async : false, //false: 동기, true: 비동기
 				type: 'get', //요청방식 get or post      
 				data: {
@@ -18,7 +18,7 @@ function PageDao() {
 				},
 				dataType: 'json', //서버에서 보내오는 데이터 타입
 				success: function (data) { //서버에서 보내오는 데이터
-					pageMaker = data;
+					myHiddenPlaceAll = data;
 				}
 			});
 			
@@ -27,8 +27,8 @@ function PageDao() {
 			console.log(e.message);
 		}
 
-		return pageMaker;
+		return myHiddenPlaceAll;
 		
 	};
-
+	
 }

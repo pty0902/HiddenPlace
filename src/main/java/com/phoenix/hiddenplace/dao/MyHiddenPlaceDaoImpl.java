@@ -46,7 +46,7 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 			page = 1;
 		}
 		
-		page = (page - 1) * 10;
+		page = (page - 1) * 12;
 		pageMaker.setPage(page);
 		
 		return sqlSession.selectList(namespace + ".list" , pageMaker);

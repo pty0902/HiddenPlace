@@ -10,17 +10,17 @@
 	<![endif]-->
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/style.css" />
 <script src="/resources/bootstrap/js/pace.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
 <script src="/resources/js/page/pageController.js"></script>
-
+<script src="/resources/js/search/searchController.js"></script>
 
 <style>
 @font-face {
@@ -197,42 +197,6 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- 내알못 글목록 불러오기 이벤트 핸들링-->
-<script type="text/javascript">
-	$(document).ready(function selectAllMHP() {
-			
-		var num = 0;
-		var mhpController = new MyHiddenPlaceController();
-		var myHiddenPlaceAll = mhpController.requestHiddenPlaceSelectAll(num);
-
-		for (var i = 0; i < myHiddenPlaceAll.length; i++) {
-			
-			var figureMHP = $('<figure class="figureMHP"></figure>'); //figure태그
-			var imgMHP = $('<img src="' + myHiddenPlaceAll[i].titleImgURL + '"/>'); //이미지
-			var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
-			var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaceAll[i].title);
-			var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaceAll[i].userNickName); //작성자(닉네임)
-			var pDateMHP = $('<p></p>').html(myHiddenPlaceAll[i].writeDate); //작성일자
-			var pReadCountMHP = $('<p></p>').html(myHiddenPlaceAll[i].readCount); //조회수
-			var pNumMHP = $('<p hidden="hidden"></p>').html(myHiddenPlaceAll[i].num); //글번호
-			
-			if(myHiddenPlaceAll[i].bookmark == 1){
-               var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
-            } else {
-               var   imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')                  
-            }
-
-			figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
-			figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-			$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
-			}
-		
-		
-		});
-</script>
-
-
-
 <!-- 테마 카테고리 불러오기  이벤트 핸들링-->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -250,7 +214,9 @@ $(document).ready(function() {
 			buttonTheme.append(imgTheme, pThemeName, pThemeCode); //buttonTheme태그에 이미지 append
 			$('#theme_category').append(buttonTheme); //테마 카테고리 div에 themeCategoryAll[i] 카테고리 append
 		}
+		
 	});
+	
 </script>
 
 <!-- 글조회 (MHP) 이벤트 핸들링 -->
@@ -287,10 +253,11 @@ $(document).ready(function() {
 				src="/resources/customize/images/mhp.png" alt="Logo" /></a>
 			<!-- <a href="index.html"><img class="logo" src="images/logos/logoMHP.png" alt="Logo" /></a> -->
 			
-			<!-- <input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
+		<!--검색창 -->
+			<input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
             <button id="search_button" class="btn btn-default" type="button">
                <span class="glyphicon glyphicon-search"></span>
-            </button> -->
+            </button> 
             
 			<div id="login_button_div" class="btn-group">
 				<button id="login_button" class="btn btn-default"
@@ -436,7 +403,7 @@ $(document).ready(function() {
 <script type="text/javascript">
 
 	$(document).ready(function() {
-/* 나만의 루트 버튼 이벤트 */
+		/* 나만의 루트 버튼 이벤트 */
 		 $('#figureMR').on('click', function() {
 			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
 			 
@@ -497,161 +464,129 @@ $(document).ready(function() {
 			}
 		 });
 		 
-		 // 테마별 목록 버튼 이벤트 핸들링
-
-		 $('.themeCategory').on('click', function() {
-
-			 var num = $(this).children().eq(2).text();
-			 alert(num);
-		 	 
-			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
-		 	 
-		 var mhpController = new MyHiddenPlaceController();
-		 var myHiddenPlaceTheme = mhpController.requestHiddenPlaceSelectAll(num);
-		 
-		 for (var i = 0; i < myHiddenPlaceTheme.length; i++) {
-				
-				var figureMHP = $('<figure class="figureMHP"></figure>'); //figure태그
-				var imgMHP = $('<img src="' + myHiddenPlaceTheme[i].titleImgURL + '"/>'); //이미지
-				var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
-				var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaceTheme[i].title);
-				var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaceTheme[i].userNickName); //작성자(닉네임)
-				var pDateMHP = $('<p></p>').html(myHiddenPlaceTheme[i].writeDate); //작성일자
-				var pReadCountMHP = $('<p></p>').html(myHiddenPlaceTheme[i].readCount); //조회수
-				var pNumMHP = $('<p hidden="hidden"></p>').html(myHiddenPlaceTheme[i].num); //글번호
-				
-				if(myHiddenPlaceTheme[i].bookmark == 1){
-	               var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
-	            } else {
-	               var   imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')                  
-	            }
-
-				figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
-				figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-				$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
-				}
-			 });
 	});
 </script>
 
-<!-- 페이지 번호 이벤트 핸들링 -->
+<!-- 내알못 목록 호출 핸들링(페이징 검색 테마 포함) -->
 <script>
 
 $(document).ready(function() {
    
 	var pageController  = new PageController();
-  	var endPage;
-  	var startPage;   
-  	var pageMaker = pageController.requestPage(1);
- 
-  	endPage = pageMaker.endPage;
-  	startPage = pageMaker.startPage;     
-    
-       if(pageMaker.prev == true) {//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
-           var laquo_link =  $('<li><a id = "laquo" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
-           $('#page_append').append(laquo_link); //최종 append 
-       }
-       
-         for(var i = 0 ; pageMaker.startPage < pageMaker.endPage + 1  ; pageMaker.startPage++ ){
-           
-           if(0 == i){ //클릭이 됬을때는 a링크 없애고 버튼 활성화  이걸로 다시 바꾸기 pageMaker.cri.page
-                 
-                 var displayPageNum_active =  $('<li class = "active"><a>'+pageMaker.startPage+'</a></li>');
-                 $('#page_append').append(displayPageNum_active); //최종 append 
-                 
-           }else{  //우리는 active 클래스 정의된게 없어서 클래스만 추가됨 해당 번호에 
-        	 
-           var displayPageNum_nonActive =  $('<li><a>'+pageMaker.startPage+'</a></li>'); //누르면 서치이벤트 페이지 전환되야함
-           
-           $('#page_append').append(displayPageNum_nonActive); //최종 append 
-          
-           }
-           i++; 
-           
-           }
-
-        if(pageMaker.next > 0 && pageMaker.endPage > 0) {//오른쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
-            var raquo_link =  $(' <li><a aria-label="Next" id = "raquo" ><span aria-hidden="true">&raquo;</span></a></li>');
-           //pageMaker.makeSearch(pageMaker.endPage +1)
-            $('#page_append').append(raquo_link); //최종 append 
-        } 
+  	var mhpController = new MyHiddenPlaceController();
+  	var searchController = new SearchController();
+	var endPage;
+  	var startPage; 
+  	var themeCode = 0;
+  	var keyWord = "";
+  	var page = 1;
+  	
+  	mhpSelectAll();
         
+        // 페이지 버튼 클릭시
         $(document).on("click","#page_append a", function(){
-        //$('.pagenum').click(function() { //페이지 전환
         	
-            var page = $(this).text(); //내가 클릭한 페이지의 번호를 가져온다.
-            
+            page = $(this).text(); //내가 클릭한 페이지의 번호를 가져온다.
             
             if(page == $("#laquo").text()){ //왼쪽 그림 클릭 했을시
-             	page = startPage - 1
+             	page = startPage - 1;
              } 
             
             if(page == $("#raquo").text()){ //오른쪽 그림 클릭 했을시
-             	page = endPage + 1
+             	page = endPage + 1;
              } 
             
-               var myHiddenPlaceAll = pageController.requestMhpPageingSelectAll(page);
-               var pageMaker = pageController.requestPage(page);
+            mhpSelectAll();
 
-               endPage = pageMaker.endPage;
-               startPage = pageMaker.startPage;   
-               
-               $('.portfolio *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
-               $('#page_append *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
-               
-               for (var i = 0; i < myHiddenPlaceAll.length; i++) {
-        			
-        			var figureMHP = $('<figure class="figureMHP"></figure>'); //figure태그
-        			var imgMHP = $('<img src="' + myHiddenPlaceAll[i].titleImgURL + '"/>'); //이미지
-        			var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
-        			var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaceAll[i].title);
-        			var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaceAll[i].userNickName); //작성자(닉네임)
-        			var pDateMHP = $('<p></p>').html(myHiddenPlaceAll[i].writeDate); //작성일자
-        			var pReadCountMHP = $('<p></p>').html(myHiddenPlaceAll[i].readCount); //조회수
-        			var pNumMHP = $('<p hidden="hidden"></p>').html(myHiddenPlaceAll[i].num); //글번호
-        			
-        			if(myHiddenPlaceAll[i].bookmark == 1){
-                      var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
-                   } else {
-                      var   imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')                  
-                   }
-
-        			figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
-        			figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-        			$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
-        			}
-               
-                  //페이지 번호 처리
-                  if(pageMaker.prev == true) {//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
-                      var laquo_link =  $('<li><a id = "laquo" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
-                      $('#page_append').append(laquo_link); //최종 append 
-                  }
-                  
-                    for(var i = 0 ; pageMaker.startPage < pageMaker.endPage + 1  ; pageMaker.startPage++ ){
-                      //var displayPageNum =  $('');
-                      if(page == pageMaker.startPage){ //클릭이 됬을때는 a링크 없애고 버튼 활성화  이걸로 다시 바꾸기 pageMaker.cri.page
-                      
-                      var displayPageNum_active =  $('<li class = "active"><a>'+pageMaker.startPage+'</a></li>');
-                      $('#page_append').append(displayPageNum_active); //최종 append 
-                      
-                      }else{  //우리는 active 클래스 정의된게 없어서 클래스만 추가됨 해당 번호에 
-                      
-                      var displayPageNum_nonActive =  $('<li><a>'+pageMaker.startPage+'</a></li>'); //누르면 서치이벤트 페이지 전환되야함
-                      
-                      $('#page_append').append(displayPageNum_nonActive); //최종 append 
-                      
-                      }
-                      i++; 
-                      
-                      }
-
-                   if(pageMaker.next > 0 && pageMaker.endPage > 0) {//오른쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
-                       var raquo_link =  $(' <li><a aria-label="Next" id = "raquo"><span aria-hidden="true">&raquo;</span></a></li>');
-                      //pageMaker.makeSearch(pageMaker.endPage +1)
-                       $('#page_append').append(raquo_link); //최종 append 
-                   } 
-        	});
+        });
         
+        // 테마별 목록 버튼 이벤트 핸들링
+		$(document).on("click","#theme_category button", function(){
+
+			 var num = $(this).children().eq(2).text();
+			 themeCode = num;//테마 코드 담기
+			 page = 1;
+			 mhpSelectAll();
+		 
+		});
+        
+	    // 검색시 이벤트 핸들링
+	    $('#search_button').click(function() {
+		 
+	    	keyWord = $('#search_bar').val();
+	    	themeCode = 0;
+	    	page = 1;
+	    	mhpSelectAll();
+	    	
+	    });
+	    
+	    //목록 호출
+	    function mhpSelectAll() {
+
+	      	var myHiddenPlaceAll = searchController.requestSearch(themeCode, page, keyWord);
+	    	var pageMaker = pageController.requestPage(themeCode, page, keyWord);
+	    	 
+	    	endPage = pageMaker.endPage;
+	      	startPage = pageMaker.startPage; 
+	    	
+	    	$('.portfolio *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
+            $('#page_append *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
+            
+            //내알못 목록 호출
+            for (var i = 0; i < myHiddenPlaceAll.length; i++) {
+     			
+     			var figureMHP = $('<figure class="figureMHP"></figure>'); //figure태그
+     			var imgMHP = $('<img src="' + myHiddenPlaceAll[i].titleImgURL + '"/>'); //이미지
+     			var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
+     			var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaceAll[i].title);
+     			var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaceAll[i].userNickName); //작성자(닉네임)
+     			var pDateMHP = $('<p></p>').html(myHiddenPlaceAll[i].writeDate); //작성일자
+     			var pReadCountMHP = $('<p></p>').html(myHiddenPlaceAll[i].readCount); //조회수
+     			var pNumMHP = $('<p hidden="hidden"></p>').html(myHiddenPlaceAll[i].num); //글번호
+     			
+     			if(myHiddenPlaceAll[i].bookmark == 1){
+                   var imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_success_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')
+                } else {
+                   var   imgBookmark = $('<img class="bookmark_star" style="opacity:1" src="/resources/bootstrap/image/bookmark_star.png" data-toggle="tooltip" data-placement="left" title="즐겨찾기 추가하기" />')                  
+                }
+
+     			figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP, imgBookmark); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+     			figureMHP.append(imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+     			$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
+     			
+     		}
+            
+            //페이지 번호 처리
+			   if(pageMaker.prev == true) {//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+		           var laquo_link =  $('<li><a id = "laquo" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
+		           $('#page_append').append(laquo_link); //최종 append 
+		       }
+		       
+		         for(var i = 0 ; pageMaker.startPage < pageMaker.endPage + 1  ; pageMaker.startPage++ ){
+		           
+		           if(page == pageMaker.startPage){ //클릭이 됬을때는 a링크 없애고 버튼 활성화  이걸로 다시 바꾸기 pageMaker.cri.page
+		                 
+		                 var displayPageNum_active =  $('<li class = "active"><a>'+pageMaker.startPage+'</a></li>');
+		                 $('#page_append').append(displayPageNum_active); //최종 append 
+		                 
+		           }else{  //우리는 active 클래스 정의된게 없어서 클래스만 추가됨 해당 번호에 
+		        	 
+		           var displayPageNum_nonActive =  $('<li><a>'+pageMaker.startPage+'</a></li>'); //누르면 서치이벤트 페이지 전환되야함
+		           
+		           $('#page_append').append(displayPageNum_nonActive); //최종 append 
+		          
+		           }
+		           i++; 
+		           
+		           }
+
+		        if(pageMaker.next > 0 && pageMaker.endPage > 0) {//오른쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+		            var raquo_link =  $(' <li><a aria-label="Next" id = "raquo" ><span aria-hidden="true">&raquo;</span></a></li>');
+		            $('#page_append').append(raquo_link); //최종 append 
+		        } 
+		      
+		   }
+         
  });
  
 </script>

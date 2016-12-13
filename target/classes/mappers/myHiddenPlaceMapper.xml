@@ -5,38 +5,17 @@
 
 <mapper namespace="com.phoenix.hiddenplace.mapper.MyHiddenPlaceMapper">
 
-<!-- <sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">
-				and title like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'c'.toString()">
-				and content like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'w'.toString()">
-				and writer like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'tc'.toString()">
-				and ( title like CONCAT('%', #{keyword}, '%') OR content
-				like
-				CONCAT('%', #{keyword}, '%'))
-			</if>
-			<if test="searchType == 'cw'.toString()">
-				and ( content like CONCAT('%', #{keyword}, '%') OR writer
-				like
-				CONCAT('%', #{keyword}, '%'))
-			</if>
-			<if test="searchType == 'tcw'.toString()">
-				and ( title like CONCAT('%', #{keyword}, '%')
-				OR
-				content
-				like CONCAT('%', #{keyword}, '%')
-				OR
-				writer like CONCAT('%',
-				#{keyword}, '%'))
-			</if>
+	<sql id="themeSearch">
+		<if test="themeCode != 0">
+				and THEMECODE = #{themeCode}
 		</if>
-	</sql> -->
+	</sql>
+	
+	<sql id="search">
+		<if test="keyWord != null">
+				and TITLE like CONCAT('%', #{keyWord}, '%')
+		</if>
+	</sql>
 
  	<select id="list" resultType="MyHiddenPlace">
 
@@ -44,18 +23,27 @@
 		  TBL_BOARD.TITLEIMGURL, TBL_BOARD.THEMECODE
 		  from TBL_BOARD, TBL_USER
 		  where TBL_BOARD.NUM > 0 and TBL_BOARD.USERID = TBL_USER.USERID
+		  <include refid="themeSearch"></include>
+		  <include refid="search"></include>
 		  order by TBL_BOARD.NUM DESC  
 		  limit #{page}, 12
-		  
-		<!-- <include refid="search"></include> -->
   
 	</select> 
+	
+	<select id="listCount" resultType="int">
+	
+		  select count(NUM) 
+		  from tbl_board 
+		  where NUM > 0 
+		  <include refid="themeSearch"></include>
+		  <include refid="search"></include>
+		
+	</select>
 	
 	<select id="themeList" resultType="Theme">
 
 		  select *
 		  from TBL_THEME
-		  
   
 	</select> 
 	
@@ -73,19 +61,6 @@
 		  where NUM = #{num}
 		  
 	</update> 
-	
-
-	<select id="listCount" resultType="int">
-	
-			<![CDATA[  
-		  select count(NUM) 
-		  from tbl_board 
-		  where NUM > 0 
-		]]>
-		
-	<!-- 	<include refid="search"></include> -->
-
-	</select>
 	
 	<select id="bestMHP" resultType="MyHiddenPlace">
 		  select TBL_BOARD.NUM, TBL_BOARD.WRITEDATE, TBL_USER.USERNICKNAME,

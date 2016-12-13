@@ -17,7 +17,8 @@ public class MyHiddenPlace {
 	private double longitude; 
 	private String detailAddress;
 	private String userNickName; //닉네임 유저
-	private String titleImgURL;
+	private String titleImgURL; //타이틀 이미지
+	private String keyWord;
 	
 	public String getTitleImgURL() {
 		return titleImgURL;
@@ -139,14 +140,11 @@ public class MyHiddenPlace {
 	public void setDetailAddress(String detailAddress) {
 		this.detailAddress = detailAddress;
 	}
-	
-	@Override
-	public String toString() {
-		return "MyHiddenPlace [num=" + num + ", userId=" + userId + ", regionTownCode=" + regionTownCode
-				+ ", themeCode=" + themeCode + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
-				+ ", upCount=" + upCount + ", readCount=" + readCount + ", storeName=" + storeName + ", code=" + code
-				+ ", latitude=" + latitude + ", longitude=" + longitude + ", detailAddress=" + detailAddress
-				+ ", userNickName=" + userNickName + ", titleImgURL=" + titleImgURL + "]";
+	public String getKeyWord() {
+		return keyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
 	}
 	
 }
