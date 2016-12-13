@@ -90,7 +90,7 @@ li.dropdown {
    opacity: 0.8;
    z-index: 3;
    margin: 0;
-   background-color: #25d2d2;
+   background-color: white;
 }
 
 section {
@@ -119,7 +119,8 @@ section {
 	/*font-weight: bold;*/
 	font-size: 13px;
 	border:none;
-	background-color: #25d2d2;
+	background-color: white;
+	//#25d2d2
 }
 
 #headmenu-logout:hover,#headmenu-login:hover,
@@ -211,7 +212,7 @@ section {
 }
 
 .figureMHP figcaption > p {
-	margin-left: -200px;
+	margin-left: -150px;
 	font-size: 15px;
 }
 
@@ -246,7 +247,7 @@ hr {
    $(document).ready(function() {
       
       //session에 저장되있는 userId값 가져오기
-//    var loginState = localStorage.getItem('userId');
+	  var loginState = localStorage.getItem('userId');
       var loginState = "qwer522";
       
       var headmenuLink1;
@@ -440,26 +441,24 @@ $(document).ready(function() {
 		var nowLoginId = localStorage.getItem('userId'); //현재 로그인한 사용자 아이디 가져오기
 		nowLoginId = "qwer522";
    		var num = $(this).parent().children().eq(4).text();	//현재 클릭한 게시글의 글번호 가져오기
-   		alert(num);
    		var mhpController = new MyHiddenPlaceController(); 
 		var bookmarkAll = mhpController.requestBookmarkAllMHP(nowLoginId); //현재 로그인한 유저의 즐겨찾기 목록을 가져오기
 		var isSuccess = false;
 		
 			for(i = 0; i < bookmarkAll.length; i++) {
-				
    				if(num == bookmarkAll[i].num) {
-   					
    					var deleteBookmarkState = mhpController.requestDeleteBookmark(nowLoginId, num);
    		   			$(this).attr("src","../../../resources/customize/images/bookmark_star.png");
+   		   			$(this).attr("title","즐겨찾기 추가하기");
    		   	   		alert("즐겨찾기가 해제되었습니다!");
    		   	   		isSuccess = true;
    				}
    			}
 		
 			if(isSuccess == false) {
-				
 				var insertBookmarkState = mhpController.requestInsertBookmark(nowLoginId, num);
 		   		$(this).attr("src","../../../resources/customize/images/bookmark_success_star.png");
+		   		$(this).attr("title","즐겨찾기 삭제하기");
 		   		alert("즐겨찾기에 등록되었습니다!");
 			}
 			
