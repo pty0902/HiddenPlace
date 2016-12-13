@@ -1,10 +1,13 @@
 package com.phoenix.hiddenplace.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.phoenix.hiddenplace.domain.Bookmark;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
 
 @Repository
@@ -16,9 +19,13 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	private static String namespace = "com.phoenix.hiddenplace.mapper.bookmarkMapper";
 
 
+
 	@Override
 	public void bookmarkDelete(String nums) throws Exception {
+
 		sqlSession.delete(namespace + ".bookmarkDelete", nums);
+
+		
 	}
 	
 	//즐겨찾기 등록(홈페이지)
@@ -31,6 +38,19 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	@Override
 	public void bookmarkDeleteMHP(MyHiddenPlace myHiddenPlace) throws Exception {
 		sqlSession.delete(namespace + ".bookmarkDeleteMHP", myHiddenPlace);
+	}
+	
+	@Override
+	public List<Bookmark> bookmarkMHPAll(String userId) throws Exception {
+	
+		return sqlSession.selectList(namespace + ".bookmarkMHPAll", userId);
+	}
+
+
+	@Override
+	public List<Bookmark> bookmarkMRAll(String userId) throws Exception {
+
+		return sqlSession.selectList(namespace + ".bookmarkMRAll", userId);
 	}
 
 

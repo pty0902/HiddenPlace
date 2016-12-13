@@ -142,39 +142,6 @@
 
 
       </style>
-<!-- 글목록 불러오기 이벤트 핸들링-->
-<!-- <script type="text/javascript">
-   $(document)
-         .ready(
-               function() {
-
-                  var mhpController = new MyHiddenPlaceController();
-                  var myHiddenPlaceAll = mhpController
-                        .requestHiddenPlaceSelectAll();
-
-                  for (var i = 0; i < myHiddenPlaceAll.length; i++) {
-
-                     var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
-                     var checkBoxMHP = $('<input class="checking" type="checkbox" name="" />'); //체크박스
-                     var imgMHP = $('<img src="' + myHiddenPlaceAll[i].imageUrl + '"/>'); //이미지
-                     var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
-                     var pUserNicknameMHP = $('<p></p>').html(
-                           myHiddenPlaceAll[i].userNickname); //작성자(닉네임)
-                     var pDateMHP = $('<p></p>').html(
-                           myHiddenPlaceAll[i].writeDate); //작성일자
-                     var pReadCountMHP = $('<p></p>').html(
-                           myHiddenPlaceAll[i].readCount); //조회수
-                     var pNumMHP = $('<p hidden="hidden"></p>').html(
-                           myHiddenPlaceAll[i].num); //글번호
-
-                     figcaptionMHP.append(pUserNicknameMHP, pDateMHP,
-                           pReadCountMHP, pNumMHP); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
-                     figureMHP
-                           .append(checkBoxMHP, imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
-                     $('#selectAllMHP').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
-                  }
-               });
-</script> -->
 
 <!-- 검색결과에 따른 내알못/나만의 루트 전환 탭 버튼 이벤트 -->
 <script>
@@ -192,38 +159,109 @@
    });
 </script>
 
-<!-- 선택 삭제 이벤트 핸들링 -->
+<!-- 내알못 글목록 불러오기 이벤트 핸들링-->
 <script type="text/javascript">
-	$(document).ready(function() {
-		
+	$(document).ready(function selectAllMHP() {
 
-	
-		$('#delete_button').click(function(){
-		alert("delete작동");
-			var delete_nums = [];
-			
-			var mhps = $('#selectAllMHP').children();
+		 localStorage.setItem('userId', 'qwer522');
+         var userId = localStorage.getItem('userId');
+		var bookmarkController = new BookmarkController();
+		var myHiddenPlace = bookmarkController.requestHiddenPlaceBookmarkSelectAll(userId);
 		
-			for(var i = 0 ; i < mhps.length ; i++) {
-				
-				var checked = mhps.eq(i).children().eq(0).prop('checked');
-				if(checked) {
-					
-					var mhpBookmark_delete_num = mhps.eq(i).children().eq(2).children().eq(2).text();
-					delete_nums += mhpBookmark_delete_num +',';
-				}
-				
+		for (var i = 0; i < myHiddenPlace.length; i++) {
+			var figureMHP = $('<figure class="figureMHP"></figure>'); //figure태그
+			var checkBoxMHP = $('<input class="checking" type="checkbox" name="" />'); //체크박스
+			var imgMHP = $('<img src="' + myHiddenPlace[i].titleImgURL + '"/>'); //이미지
+			var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
+			var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlace[i].title);
+			var pUserNicknameMHP = $('<p></p>').html(myHiddenPlace[i].userNickName); //작성자(닉네임)
+			var pDateMHP = $('<p></p>').html(myHiddenPlace[i].writeDate); //작성일자
+			var pReadCountMHP = $('<p></p>').html(myHiddenPlace[i].readCount); //조회수
+			var pNumMHP = $('<p hidden="hidden"></p>').html(myHiddenPlace[i].bookmarkNum); //북마크번호
+		   
+			figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+			figureMHP.append(checkBoxMHP,imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+			$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
 			}
-			
-			var bookmarkController = new BookmarkController();
-			
-			 var length = delete_nums.length;
-			  
-			 bookmarkController.requestSelectedDeleteMHP(delete_nums.substring(0, length-1));
-	          
 		});
+</script>
 
+<!-- 내알못 / 나만의 루트 버튼 이벤트 핸들링-->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+/* 나만의 루트 버튼 이벤트 */
+		 $('#figureMR').on('click', function() {
+			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
+
+		 localStorage.setItem('userId', 'qwer522');
+     var userId = localStorage.getItem('userId');
+		var bookmarkController = new BookmarkController();
+		var myRouteAll = bookmarkController.requestMyRouteBookmarkSelectAll(userId);
+	
+		for (var i = 0; i < myRouteAll.length; i++) {
+			
+			var figureMR = $('<figure class="figureMR"></figure>'); //figure태그
+			var checkBoxMR = $('<input class="checking" type="checkbox" name="" />'); //체크박스
+			var imgMR = $('<img src="' + myRouteAll[i].mrTitleImgURL + '"/>'); //이미지
+			var figcaptionMR = $('<figcaption></figcaption>'); //figcaption태그
+			var hTitle = $('<h2 class="hTextLine"></h2>').html(myRouteAll[i].title);
+			var pUserNicknameMR = $('<p></p>').html(myRouteAll[i].userNickName); //작성자(닉네임)
+			var pDateMR = $('<p></p>').html(myRouteAll[i].writeDate); //작성일자
+			var pReadCountMR = $('<p></p>').html(myRouteAll[i].readCount); //조회수
+			var pNumMR = $('<p hidden="hidden"></p>').html(myRouteAll[i].bookmarkNum); //글번호
+			
+	
+
+			figcaptionMR.append(hTitle, pUserNicknameMR, pDateMR, pReadCountMR, pNumMR); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+			figureMR.append(checkBoxMR,imgMR, figcaptionMR); // figure태그에 이미지, figcaption append
+			$('.portfolio').append(figureMR); //나만의 루트 div에 selectAllMR[i] 게시글 append
+			}
+		}); 
+		
+		 /* 내알못  버튼 이벤트 */		 
+		 $('#figureMHP').on('click', function() {
+			 
+			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
+		localStorage.setItem('userId', 'qwer522');
+         var userId = localStorage.getItem('userId');
+		var bookmarkController = new BookmarkController();
+		var myHiddenPlace = bookmarkController.requestHiddenPlaceBookmarkSelectAll(userId);
+		
+		for (var i = 0; i < myHiddenPlace.length; i++) {
+			var figureMHP = $('<figure class="figureMHP"></figure>'); //figure태그
+			var checkBoxMHP = $('<input class="checking" type="checkbox" name="" />'); //체크박스
+			var imgMHP = $('<img src="' + myHiddenPlace[i].titleImgURL + '"/>'); //이미지
+			var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
+			var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlace[i].title);
+			var pUserNicknameMHP = $('<p></p>').html(myHiddenPlace[i].userNickName); //작성자(닉네임)
+			var pDateMHP = $('<p></p>').html(myHiddenPlace[i].writeDate); //작성일자
+			var pReadCountMHP = $('<p></p>').html(myHiddenPlace[i].readCount); //조회수
+			var pNumMHP = $('<p hidden="hidden"></p>').html(myHiddenPlace[i].bookmarkNum); //북마크번호
+		   
+			figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
+			figureMHP.append(checkBoxMHP,imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
+			$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
+			}
+		 });
+		 
 	});
+	</script>	 
+
+<!-- 검색결과에 따른 내알못/나만의 루트 전환 탭 버튼 이벤트 -->
+<script>
+   $('.portfolio').isotope({
+      itemSelector : 'figure',
+      layoutMode : 'masonry'
+   });
+   $('.filters').on('click', 'button', function() {
+      var filterValue = $(this).attr('data-filter');
+      $('.filters').find('.is-checked').removeClass('is-checked');
+      $(this).addClass('is-checked');
+      $('.portfolio').isotope({
+         filter : filterValue
+      });
+   });
 </script>
 
 <script type="text/javascript">
@@ -242,6 +280,42 @@
       })
    })
 </script>
+
+<!-- 선택 삭제 이벤트 핸들링 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+
+	
+		$('#delete_button').click(function(){
+	
+			var delete_nums = [];
+			
+			var mhps = $('#selectAll').children();
+		
+			for(var i = 0 ; i < mhps.length ; i++) {
+				
+				var checked = mhps.eq(i).children().eq(0).prop('checked');
+				if(checked) {
+					var mhpBookMark_delete_num = mhps.eq(i).children().eq(2).children().eq(4).text();
+					delete_nums += mhpBookMark_delete_num +',';
+					
+				}
+				
+			}
+		
+			var bookmarkController = new BookmarkController();
+			
+			 var length = delete_nums.length;
+			  
+			 bookmarkController.requestSelectedDeleteMHP(delete_nums.substring(0, length-1));
+			 window.location.reload(true);
+	          
+		});
+
+	});
+</script>
+
    </head>
 
    <body class="home-page">
@@ -290,66 +364,50 @@
       </section>
 
       
+     <!-- 본문 -->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-10 col-md-offset-1">
 
-      <div class="container">
-         <div class="row">
-            <!-- 선택 탭 -->
-            <div class="col-sm-12 col-md-10 col-md-offset-1">
-
-            <div id="navbar" class="navbar-collapse collapse">
-                  <ul class="nav navbar-center navbar-nav">
-                     <li class="dropdown"><a><h3><font>즐겨찾기</font></h3></a> 
-                     </li>
-                     </ul>
-                     </div>
-
-               <!-- 내알못/나만의 루트 선택 탭 -->
-               <div class="btn-group filters">
-                  <button class="btn btn-default is-checked" data-filter="*"><font>전체보기</font></button>
-                  <button class="btn btn-default" data-filter=".appetizers"><font>내 알 못</font></button>
-                  <button class="btn btn-default" data-filter=".entrees"><font>나만의 루트</font></button>
-               </div>
-
-               <!-- 전체선택 및 삭제 버튼 -->
+					<!-- 카테고리 선택 탭 -->
+					<div class="btn-group" id="theme_category">
+					<button class="btn btn themeCategory">
+						<img class="category" src="/resources/bootstrap/image/theme0.png" />
+						<p>전체보기</p>
+						<p hidden="hidden">0</p>
+					</button>
+				</div>
+				  <!-- 전체선택 및 삭제 버튼 -->
                <div id="delete_checking" class="btn-group">
                   <input id="checkingAll" type="checkbox" class="btn btn-default" name="" value="" /><font id="checkingAll_word">전체선택</font>
                   <button id="delete_button" class="btn btn-default"><font>삭제</font></button>
                </div>
             </div>
+				<br> <br>
 
+					<!-- 내알못/나만의 루트 선택 탭 -->
+					<div class="btn-group">
+					<button class="btn btn-default" id="figureMHP">
+						<font>내 알 못</font>
+					</button>
+					<button class="btn btn-default" id="figureMR">
+						<font>나만의 루트</font>
+					</button>
+				</div>
+				
+				
+				</div>
 
-            <div class="col-sm-12 col-md-10 col-md-offset-1">
-               <div class="portfolio grid-3" id="selectAllMHP">
-                  <figure class="entrees">
-                     <input class="checking" type="checkbox" name="">
-                     <img src="images/portfolio/1.jpg" alt="" />
-                     <figcaption>
-                        <h2><font>부자피자</font></h2>
-                        <p><font>2016-12-06</font><br><font>유지은</font><br><font>조회수</font></p>
-                        <p class="bookmarkNum" hidden="">1</p>
-                        <a href="portfolio-item.html">View more</a>
+				
+				<div class="col-sm-12 col-md-10 col-md-offset-1">
+					<div class="portfolio grid-3" id="selectAll">
+						
 
+						</div>
+					</div>
+				</div>
+      
 
-                     </figcaption>
-                  </figure>
-                  <figure class="entrees">
-                     <input class="checking" type="checkbox" name="">
-                     <img src="images/portfolio/1.jpg" alt="" />
-                     <figcaption>
-                        <h2><font>부자피자</font></h2>
-                        <p><font>2016-12-06</font><br><font>유지은</font><br><font>조회수</font></p>
-                        <p class="bookmarkNum" hidden="">2</p>
-                        <a href="portfolio-item.html">View more</a>
-
-
-                     </figcaption>
-                  </figure>
-                
-               </div>
-            </div>
-         </div>
-
-      </div>
 
 
       <!-- 푸터 섹션 -->

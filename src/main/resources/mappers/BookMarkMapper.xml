@@ -5,15 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.phoenix.hiddenplace.mapper.bookmarkMapper">
 
-	<!-- 즐겨찾기페이지 선택삭제 -->
-	<delete id="bookmarkDelete" parameterType="string">
-		DELETE
-		FROM
-		TBL_BOOKMARK
-		<where>
-			FIND_IN_SET(BOOKMARKNUM, #{nums})
-		</where>
-	</delete>
 
 	<!-- 내알못 즐겨찾기 등록(홈페이지) -->
 	<insert id="bookmarkInsertMHP">
@@ -27,5 +18,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userId = #{userId}
 		and num = #{num}
 	</delete>
+	
+	<!-- 즐겨찾기페이지 선택삭제 -->
+	<delete id="bookmarkDelete" parameterType="string">
+		DELETE
+		FROM
+		TBL_BOOKMARK
+		<where>
+			FIND_IN_SET(BOOKMARKNUM, #{nums})
+		</where>
+	</delete>
+
+	<select id="bookmarkMHPAll" resultType="Bookmark">
+		  select TBL_BOOKMARK.BOOKMARKNUM, TBL_BOARD.TITLEIMGURL, TBL_BOARD.TITLE, TBL_BOARD.WRITEDATE, TBL_BOARD.READCOUNT, TBL_USER.USERNICKNAME
+		  from TBL_BOOKMARK, TBL_BOARD, TBL_USER
+		  where TBL_BOOKMARK.userId = #{userId} AND TBL_BOARD.NUM = TBL_BOOKMARK.NUM
+	</select>
+	
+	<select id="bookmarkMRAll" resultType="Bookmark">
+		  select TBL_MYROUTE.MRTITLEIMGURL, TBL_MYROUTE.TITLE, TBL_MYROUTE.WRITEDATE, TBL_MYROUTE.READCOUNT,
+		  TBL_BOOKMARK.BOOKMARKNUM, TBL_USER.USERNICKNAME
+		  from TBL_BOOKMARK, TBL_MYROUTE, TBL_USER
+		  where TBL_BOOKMARK.userId = #{userId} AND TBL_MYROUTE.ROUTENUM = TBL_BOOKMARK.ROUTENUM
+	</select>
 
 </mapper>
