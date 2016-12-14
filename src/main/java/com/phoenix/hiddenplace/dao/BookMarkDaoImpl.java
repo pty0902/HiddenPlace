@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.phoenix.hiddenplace.domain.Bookmark;
+import com.phoenix.hiddenplace.domain.BookmarkPageMaker;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
-import com.phoenix.hiddenplace.domain.PageMaker;
 
 @Repository
 public class BookmarkDaoImpl implements BookmarkDao {
@@ -42,13 +42,13 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	}
 	
 	@Override
-	public List<Bookmark> bookmarkMHPAll(PageMaker pageMaker) throws Exception {
+	public List<Bookmark> bookmarkMHPAll(BookmarkPageMaker pageMaker) throws Exception {
 		int page = pageMaker.getPage();
 		
 		if(page <= 0) {
 			page = 1;
 		}
-		page = (page - 1) * 12;
+		page = (page - 1) * 6;
 		pageMaker.setPage(page);
 		return sqlSession.selectList(namespace + ".bookmarkMHPAll", pageMaker);
 	}
@@ -61,10 +61,9 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	}
 
 	@Override
-	public int listCount(PageMaker pageMaker) {
+	public int listCount(BookmarkPageMaker pageMaker) {
 		
 		return sqlSession.selectOne(namespace + ".listCount", pageMaker);
 	}
-
 
 }

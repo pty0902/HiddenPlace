@@ -8,7 +8,7 @@ function MyRouteDao() {
 		
 		try{
 
-			$.ajax({
+			/*$.ajax({
 				url: '/myroute/bestMR' , //홈페이지 불러올 주소
 				async : false, //false: 동기, true: 비동기
 				type: 'get', //요청방식 get or post      
@@ -22,7 +22,7 @@ function MyRouteDao() {
 						
 				}
 				
-			});
+			});*/
 			
 			
 		} catch(e) {

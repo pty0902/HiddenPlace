@@ -27,7 +27,7 @@ public class MyHiddenPlaceController {
 		return "/views/myhiddenplace/myHiddenPlaceSelectAll";
 
 	}
-	
+
 	//내알못 글쓰기 컨트롤러
 	@RequestMapping(value ="/myHiddenPlaceInsert", method = RequestMethod.GET)
 	public String inertMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
@@ -35,15 +35,15 @@ public class MyHiddenPlaceController {
 		return "/views/myhiddenplace/myHiddenPlaceInsert";
 
 	}
-	
+
 	//내알못 글쓰기 컨트롤러
-		@RequestMapping(value ="/myHiddenPlaceUpdate", method = RequestMethod.GET)
-		public String updateMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value ="/myHiddenPlaceUpdate", method = RequestMethod.GET)
+	public String updateMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
 
-			return "/views/myhiddenplace/myHiddenPlaceUpdate";
+		return "/views/myhiddenplace/myHiddenPlaceUpdate";
 
-		}
-	
+	}
+
 	//request 내알못 조회 컨트롤러
 	@RequestMapping(value ="/myHiddenPlaceSelectOne", method = RequestMethod.GET)
 	public String selectOneMHP() throws Exception {
@@ -51,5 +51,5 @@ public class MyHiddenPlaceController {
 		return "/views/myhiddenplace/myHiddenPlaceSelectOne";
 
 	}      
-	
+
 }

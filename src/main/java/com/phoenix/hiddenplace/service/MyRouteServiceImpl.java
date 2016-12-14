@@ -1,4 +1,4 @@
-package com.phoenix.hiddenplace.service;
+/*package com.phoenix.hiddenplace.service;
 
 import java.util.List;
 
@@ -21,3 +21,4 @@ public class MyRouteServiceImpl implements MyRouteService {
 	}
 
 }
+*/

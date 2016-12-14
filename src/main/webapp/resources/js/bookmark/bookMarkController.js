@@ -1,6 +1,5 @@
 $('head').append('<script src=\'../../../resources/js/bookmark/bookmarkDao.js\'><\/script>');
 
-
 //bookmark controller 객체
 function BookmarkController() {
 

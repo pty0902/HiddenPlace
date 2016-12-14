@@ -20,7 +20,7 @@ function HomepageController() {
 //	where 즐겨찾기 from header
 	this.requestBookmarkUrl = function() {
 
-		var requestUrl = "/views/bookmark/userBookmarkView.html";
+		var requestUrl = "/bookmark/userBookmarkView";
 
 		document.location = requestUrl;
 

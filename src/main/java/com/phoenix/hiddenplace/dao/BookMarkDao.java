@@ -3,8 +3,8 @@ package com.phoenix.hiddenplace.dao;
 import java.util.List;
 
 import com.phoenix.hiddenplace.domain.Bookmark;
+import com.phoenix.hiddenplace.domain.BookmarkPageMaker;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
-import com.phoenix.hiddenplace.domain.PageMaker;
 
 public interface BookmarkDao {
 
@@ -19,11 +19,11 @@ public interface BookmarkDao {
 	 public void bookmarkDelete(String nums) throws Exception;
 	 
 	 // 내알못 즐겨찾기 리스트 소환
-	 public List<Bookmark> bookmarkMHPAll(PageMaker pageMaker) throws Exception;
+	 public List<Bookmark> bookmarkMHPAll(BookmarkPageMaker pageMaker) throws Exception;
 	 
 	 // 마이루트 즐겨찾기 리스트 소환
 	 public List<Bookmark> bookmarkMRAll(String userId) throws Exception;
 	 
-	//즐겨찾기 페이징
-	public int listCount(PageMaker pageMaker);
+	////즐겨찾기 페이징
+	public int listCount(BookmarkPageMaker pageMaker);
 }
