@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
+<meta charset="UTF-8">
 <title>회원 정보 관리</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<!--[if lt IE 9]>
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+
 <link rel="shortcut icon"
 	href="/resources/bootstrap/HTML/images/favicon.ico" />
 <link
@@ -54,10 +49,16 @@
 		   var userController = new UserController();
 		   var nicknameCheckSuccess = false;
 		   
-		   var email = "pty0902@naver.com";// 임시데이터 (로그인 되어져 있는 상태의 아이디를 가져올 것)
-		   var nickname = "박태양님 짱"; //임시데이터 (로그인 되어져 있는 상태의 닉네임을 가져올 것)
-		   $('#now_id').attr('value', email); // 임시데이터
-		 	$('#now_nickname').attr('value', nickname); // 임시데이터
+		   var userId = localStorage.getItem('userId'); // 로컬세션에 들어있는 아이디를 가져옴
+<<<<<<< HEAD
+		   var nickname = userController.requestNickname(userId);
+=======
+		   var nickname = userController.requestGetNickname(userId);
+>>>>>>> refs/remotes/origin/master
+		   
+		   
+		   $('#now_id').attr('value', userId); 
+		 	$('#now_nickname').attr('value', nickname); 
 		 	
 		   <!-- 취소 버튼 이벤트 -->
 		   $('#cancel').click(function() {
@@ -176,7 +177,6 @@
 					} else if (chkNick.test(nickname) || chkNull.test(nickname)) {
 						alert("닉네임에 특수문자나 공백은 들어갈 수 없습니다.");
 						$('#now_nickname').focus();
-						$('#now_nickname').attr("value", "");
 					} else {
 						nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
 						if (!nicknameCheckSuccess) {
@@ -204,6 +204,19 @@
 </script>
 
 <style>
+@font-face {
+	font-family: 'baemin';
+<<<<<<< HEAD
+	src: url(/resources/bootstrap/fonts/baemin.ttf) format('truetype');
+=======
+	src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
+>>>>>>> refs/remotes/origin/master
+}
+
+button, h2, a, input, label {
+	font-family: 'baemin';
+}
+
 #update, #delete, #cancel {
 	width: 100%;
 }
@@ -221,18 +234,15 @@
 				<article class="content">
 					<section>
 
-						<!-- 정보수정 & 회원탈퇴 탭 -->
+						<!-- 						정보수정 & 회원탈퇴 탭 -->
 						<ul class="nav nav-tabs">
 							<li class="active"><a data-toggle="tab" href="#userUpdate">회원정보수정</a>
 							</li>
-
 							<li><a data-toggle="tab" href="#userDelete">회원탈퇴</a></li>
-
 						</ul>
-						<!-- 정보수정 & 회원탈퇴 탭 end -->
 
-						<br> <br> <br>
 
+						<br> <br>
 
 						<div class="tab-content">
 							<!-- 정보수정 + 회원탈퇴 -->
@@ -254,6 +264,17 @@
 
 									</div>
 
+									<!-- 닉네임 -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">닉네임</label>
+										<div class="col-sm-6 animated-form-control">
+											<input type="text" name="name" class="text form-control"
+												id="now_nickname" required="required" aria-required="true" />
+										</div>
+										<div class="col-sm-3 animated-form-control">
+											<button id="nickname_check" class="btn btn-primary">중복확인</button>
+										</div>
+									</div>
 
 									<!-- 현재비밀번호 -->
 									<div class="form-group">
@@ -273,8 +294,8 @@
 												class="text form-control" id="new_pw" required="required"
 												aria-required="true" />
 										</div>
-
 									</div>
+
 									<!-- 변경비밀번호 확인 -->
 									<div class="form-group">
 										<label class="col-sm-3 control-label">변경비밀번호 확인</label>
@@ -292,19 +313,7 @@
 												입력 가능 (6~12자리, 특수문자 가능)</span>
 										</div>
 									</div>
-
-									<!-- 닉네임 -->
-									<div class="form-group">
-										<label class="col-sm-3 control-label">닉네임</label>
-										<div class="col-sm-6 animated-form-control">
-											<input type="text" name="name" class="text form-control"
-												id="now_nickname" required="required" aria-required="true" />
-										</div>
-										<div class="col-sm-3 animated-form-control">
-											<button id="nickname_check" class="btn btn-primary">중복확인</button>
-										</div>
-
-									</div>
+									<br>
 									<!-- 변경확인 버튼 -->
 									<div class="form-group">
 										<label class="col-sm-3 control-label"></label>
@@ -360,7 +369,7 @@
 										</div>
 									</div>
 
-									<!-- 변경확인 버튼 -->
+									<!-- 탈퇴하기 버튼 -->
 									<div class="form-group">
 										<label class="col-sm-3 control-label"></label>
 										<div class="col-sm-3 animated-form-control">
