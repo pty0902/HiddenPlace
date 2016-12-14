@@ -29,5 +29,7 @@ public interface MyHiddenPlaceService {
 	public Integer upCountCheck(MyHiddenPlace myHiddenPlace)throws Exception; // 추천코드 뽑기
 	
 	public void upCount(MyHiddenPlace myHiddenPlace) throws Exception; // 추천수 증가 및 저장
+	
+	public void updateMHP(MyHiddenPlace myHiddenPlace)throws Exception; //내알못 수정
 
 }

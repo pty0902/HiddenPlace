@@ -240,6 +240,11 @@
 		  
 	</update> 
 	
-	
+	<!--내알못 수정 -->
+	<update id="update">
+      update TBL_BOARD 
+      set STORENAME = #{storeName}, TITLEIMGURL = #{titleImgUrl}, THEMECODE = #{themeCode}, TITLE = #{title}, CONTENT = #{content}, address =  #{address}
+      where NUM = #{num}
+   </update>
 	
 </mapper>

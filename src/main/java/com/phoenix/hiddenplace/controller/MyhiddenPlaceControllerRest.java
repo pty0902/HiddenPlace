@@ -196,5 +196,22 @@ public class MyhiddenPlaceControllerRest {
 		return entity;
 
 	}
+	
+	// 내알못 수정 
+    @RequestMapping(value = "/updateMHP", method = RequestMethod.POST)
+    public ResponseEntity<String> update(MyHiddenPlace myHiddenPlace) {
+       
+       ResponseEntity<String> entity = null;
+
+       try {
+          service.updateMHP(myHiddenPlace);
+          entity = new ResponseEntity<String>("success", HttpStatus.OK);
+       } catch (Exception e) {
+          e.printStackTrace();
+          entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+       }
+
+       return entity;
+    }
 
 }

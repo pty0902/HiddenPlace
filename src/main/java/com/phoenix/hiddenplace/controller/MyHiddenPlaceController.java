@@ -36,7 +36,7 @@ public class MyHiddenPlaceController {
 
 	}
 
-	//내알못 글쓰기 컨트롤러
+	//내알못 수정 컨트롤러
 	@RequestMapping(value ="/myHiddenPlaceUpdate", method = RequestMethod.GET)
 	public String updateMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
 
@@ -50,6 +50,6 @@ public class MyHiddenPlaceController {
 
 		return "/views/myhiddenplace/myHiddenPlaceSelectOne";
 
-	}         
-
+	}      
+	
 }

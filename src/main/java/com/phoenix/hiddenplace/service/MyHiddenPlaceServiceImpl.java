@@ -83,5 +83,10 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 		dao.upCount(myHiddenPlace);
 		
 	}
+	
+	@Override
+    public void updateMHP(MyHiddenPlace myHiddenPlace) throws Exception {
+       dao.updateMHP(myHiddenPlace);      
+    }
 
 }

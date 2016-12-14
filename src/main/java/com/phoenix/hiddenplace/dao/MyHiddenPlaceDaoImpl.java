@@ -106,5 +106,12 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 		sqlSession.update(namespace + ".upCount", myHiddenPlace);
 		
 	}
+	
+   @Override
+    public void updateMHP(MyHiddenPlace myHiddenPlace) throws Exception { //내알못 수정
+	   
+       sqlSession.update(namespace + ".update", myHiddenPlace);
+       
+    }
 
 }

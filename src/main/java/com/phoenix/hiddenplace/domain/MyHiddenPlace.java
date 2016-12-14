@@ -2,23 +2,20 @@ package com.phoenix.hiddenplace.domain;
 
 public class MyHiddenPlace {
 
-	private int num;
-	private String userId;
-	private int regionTownCode;
-	private int themeCode;
-	private String title;
-	private String content;
-	private String writeDate;
-	private int upCount;
-	private int readCount;
-	private String storeName;
-	private int code;
-	private double latitude; 
-	private double longitude; 
-	private String detailAddress;
+	private int num; //글번호
+	private String userId;//회원아이디
+	private int themeCode;//테마 코드
+	private String title;//제목
+	private String content;//내용
+	private String writeDate;//글쓴 날짜
+	private int upCount;//추천수
+	private int readCount;//조회수
+	private String storeName;//상호명
+	private int mhpBestCode;//베스트코드
 	private String userNickName; //닉네임 유저
-	private String titleImgURL;
-	private int upCountCode;
+	private String titleImgURL; //타이틀이미지 URL
+	private int upCountCode; //추천수 코드
+	private String address; //검색한 주소
 	
 	public int getUpCountCode() {
 		return upCountCode;
@@ -51,14 +48,6 @@ public class MyHiddenPlace {
 	
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-	
-	public int getRegionTownCode() {
-		return regionTownCode;
-	}
-	
-	public void setRegionTownCode(int regionTownCode) {
-		this.regionTownCode = regionTownCode;
 	}
 	
 	public int getThemeCode() {
@@ -115,48 +104,20 @@ public class MyHiddenPlace {
 		this.storeName = storeName;
 	}
 	
-	public int getCode() {
-		return code;
+	public int getMhpBestCode() {
+		return mhpBestCode;
 	}
 	
-	public void setCode(int code) {
-		this.code = code;
+	public void setMhpBestCode(int mhpBestCode) {
+		this.mhpBestCode = mhpBestCode;
 	}
 	
-	public double getLatitude() {
-		return latitude;
+	public String getAddress() {
+		return address;
 	}
 	
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	
-	public double getLongitude() {
-		return longitude;
-	}
-	
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-	
-	public String getDetailAddress() {
-		return detailAddress;
-	}
-	
-	public void setDetailAddress(String detailAddress) {
-		this.detailAddress = detailAddress;
-	}
-	
-	@Override
-	public String toString() {
-		return "MyHiddenPlace [num=" + num + ", userId=" + userId + ", regionTownCode=" + regionTownCode
-				+ ", themeCode=" + themeCode + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
-				+ ", upCount=" + upCount + ", readCount=" + readCount + ", storeName=" + storeName + ", code=" + code
-				+ ", latitude=" + latitude + ", longitude=" + longitude + ", detailAddress=" + detailAddress
-				+ ", userNickName=" + userNickName + ", titleImgURL=" + titleImgURL + ", upCountCode=" + upCountCode
-				+ "]";
-	}
-	
-	
 	
 }

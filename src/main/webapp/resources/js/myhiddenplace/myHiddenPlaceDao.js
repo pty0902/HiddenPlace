@@ -400,5 +400,45 @@ function MyHiddenPlaceDao() {
 		return isSuccess;
 
 	};
+	
+	//내알못 수정 dao
+   this.myHiddenPlaceUpdate = function(content, address, mhpStoreName, mhpTitle, mhpThema, mhpTitleImg, num) {
+      
+      var isSuccess;
+      
+         try {
+            
+            $.ajax({
+               url : '/myhiddenplace/updateMHP', // 홈페이지 불러올 주소
+               async : false, // false: 동기, true: 비동기
+               type : 'post', // 요청방식 get or post
+               data : {
+                  
+                  content : content,
+                  address : address,
+                  storeName : mhpStoreName,
+                  title : mhpTitle,
+                  themeCode : mhpThema,
+                  titleImgUrl : mhpTitleImg,
+                  num : num
+                  
+               },
+               dataType: 'text', //서버에서 보내오는 데이터 타입
+               success: function (data) {
+
+                  isSuccess = data; // success
+                  
+               }
+            });
+
+         }catch(e) {
+            console.log('ArticleDao 객체 : selectOneDao 메서드에서 예외 발생');
+            console.log(e.message);
+         }   
+         
+         alert(isSuccess);
+         return isSuccess;
+      };
+	   
 
 }

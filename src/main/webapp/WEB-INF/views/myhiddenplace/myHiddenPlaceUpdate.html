@@ -17,70 +17,70 @@
 <!-- <script src="../bootstrap/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/style.css" />
 <link rel="stylesheet" type="text/css"href="/resources/bootstrap/css/swiper.min.css" />
- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=	f617f92098af4b2430be59f43550867c"></script>
+ <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=   f617f92098af4b2430be59f43550867c"></script>
 <script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
 
 
 <style>
 
 #icon-background {
-	background-color: #f5f5f5;
+   background-color: #f5f5f5;
 }
 
 #title-img {
-	width: 53px;
-	height: 34px;
-	margin-left: 38%;
-	margin-top: 3%;
-	margin-bottom: 3%;
+   width: 53px;
+   height: 34px;
+   margin-left: 38%;
+   margin-top: 3%;
+   margin-bottom: 3%;
 }
 
 #map {
-	border: solid 1px #e9e9e9;
-	width: 100%;
-	height: 250px;
+   border: solid 1px #e9e9e9;
+   width: 100%;
+   height: 250px;
 }
 
 #title_img_box {
-	border: solid 1px #e9e9e9;
-	width: 210px;
-	height: 175px;
+   border: solid 1px #e9e9e9;
+   width: 210px;
+   height: 175px;
 }
 
 #search_map {
-	margin-top: 0px;
-	margin-left: 5px;
+   margin-top: 0px;
+   margin-left: 5px;
 }
 
 #mhp_select {
-	padding: 0;
-	margin-top: -1%;
+   padding: 0;
+   margin-top: -1%;
 }
 
 #map_search_button {
-	margin-top: -11%;
-	margin-right:35%;
+   margin-top: -11%;
+   margin-right:35%;
 }
 
 #title_name{
-	width: 81%;
+   width: 81%;
 }
 
 #store_name{
-	margin-top: 15%;
-	margin-bottom:3%;
+   margin-top: 15%;
+   margin-bottom:3%;
 }
 
 #store_name_grid{
-	padding:0;
+   padding:0;
 }
 
 #thema_select{
- 	margin-top:26%;
+    margin-top:26%;
 }
 
 #title_img_box{
-	margin-bottom:20%;
+   margin-bottom:20%;
 }
 
 </style>
@@ -88,200 +88,240 @@
 <!-- 글쓰기 에디터 이미지 업로드 포함 -->
 <script type="text/javascript">
 $(document).ready(function() {
-	
-	var myHiddenPlaceInsertController = new MyHiddenPlaceController(); 
-	
-	$('#summernote').summernote({
+   
+	var mhpController = new MyHiddenPlaceController(); 
+   
+	var content ="<p>데이터 불러오기</p><br><p>성공하였습니다.</p><span class='mailbox-attachment-icon has-img'><img id='titleImg' src='/resources/bootstrap/image/titleImg.jpg' alt='Attachment' style='width: 180px; height: 165px;'></span>"; //글자수
+	var StoreName = "달아달아";
+	var Title = "#서울";
+	var Thema = "2";
+	var TitleImg = "/resources/bootstrap/image/titleImg.jpg";
+	var address = "경기도 부천시 원미구 심곡1동 ks건영 아느칸빌";
+	var keyWord = address;
+	var latitude; //위도
+	var longitude; //경도
+   
+	//받아온 타이틀 이미지 찍기
+	keyWord = encodeURIComponent(address);
+    
+	var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
+   
+	$.getJSON(url + "&callback=?" , function(json){
+       
+        // json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
+        var items = json.channel.item;
+		
+        // 반복문을 통해 원하는 json값을 뽑아내는 단계. 지금은 위도와 경도를 받기 위해...
+        $.each(items, function(i, it){
+           
+			// 위도와 경도의 변수를 저장
+        	latitude = it.latitude;
+        	longitude = it.longitude;
+        
+       		var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
+              
+       		if(i == 0) {
+				var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+				var options = { //지도를 생성할 때 필요한 기본 옵션
+					center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+               		level: 3 //지도의 레벨(확대, 축소 정도)
+				};
+              
+			var marker = new daum.maps.Marker({
+				position: markerPosition
+			});
+
+			var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+			marker.setMap(map); //지도위에 마커 뿌리기
+			$("#keyWord").val(address);
+			}
+        
+		}); 
+                
+	});    
+    
+	//받아온 타이틀 이미지 찍기
+	var titleimg = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + TitleImg + '" alt="Attachment" style="width: 180px; height: 165px;"></span>';
+	$("#title_img_box").append(titleimg);
+     
+	//받아온 상호명 찍기
+	$("#store_name").val(StoreName);
+     
+	//받아온 타이틀 찍기
+	$("#title_name").val(Title);
+     
+	//받아온 테마 찍기
+	$("#thema_select").val(Thema);
+    
+	//받아온 내용 찍기
+	$("#summernote").val(content);
+     
+	// 버튼 클릭시 콜백함수 호출 
+	$("#map_search_button").click(function(){
+      
+ 	// input 에 입력하는 검색어의 값을 keyWord변수에 담고 한글처리
+	address = $("#keyWord").val();         
+	keyWord = encodeURIComponent(address);
+    
+	// 입력된 keyWord변수의 값으로 결과를 내기 위해 URL 끝에 +keyWord 삽입과 url변수 선언
+	var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
+   
+	$.getJSON(url + "&callback=?" , function(json){
+		
+		// json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
+		var items = json.channel.item;
+		
+		// 반복문을 통해 원하는 json값을 뽑아내는 단계. 지금은 위도와 경도를 받기 위해...
+		$.each(items, function(i, it){
+		
+			// 위도와 경도의 변수를 저장
+			latitude = it.latitude;
+			longitude = it.longitude;
+			var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
+               
+				if(i == 0){
+					var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+					var options = { //지도를 생성할 때 필요한 기본 옵션
+						center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+						level: 3 //지도의 레벨(확대, 축소 정도)
+					};
+               
+					var marker = new daum.maps.Marker({
+						position: markerPosition
+					});
+
+					var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+					marker.setMap(map); //지도위에 마커 뿌리기
+				
+				}
+		});   
+	});            
+	}); 
+
+   $("#success_button").click(function(){
+      
+      var content = $("#summernote").val();
+      var mhpStoreName = $("#store_name").val();
+      var mhpTitle = $("#title_name").val();
+      var mhpThema = $("#thema_select").val();
+      var mhpTitleImg = $('#titleImg').attr("src");
+      
+      mhpController.requestUpdateMHP(content, address, mhpStoreName, mhpTitle, mhpThema, mhpTitleImg, num);
+      
+   });
+
+   $('#summernote').summernote({
         height: 300,
         minHeight: null,
         focus: true,
         callbacks: {
-        	  onImageUpload: function(files, editor, welEditable) {
-        	 
-        	  sendFile(files, this);
+             onImageUpload: function(files, editor, welEditable) {
+            
+             sendFile(files, this);
               
-        	  }
+             }
         } 
     });
-	
-	  function sendFile(files, el) {
-		  
-		  var file = files[0];
-		  
+   
+     function sendFile(files, el) {
+        
+        var file = files[0];
+        
           var formData = new FormData();
-          	
-        	formData.append("file", file);	
-       	
-        	$.ajax({
-       		  url: '/uploadAjax',
-       		  data: formData,
-       		  dataType:'text',
-       		  processData: false,
-       		  contentType: false,
-       		  type: 'POST',
-       		  success: function(data){
-       			  
-       			  var fileInfo = getFileInfo(data);//원본파일주소, 썸네일된이미지주소, 파일이름, 풀네임 저장시키기 
-       			//imgsrc
-       			  $(el).summernote('editor.insertImage', fileInfo.imgsrc);
-       			  
-       	          $('#imageBoard > ul').append('<li><img src="'+fileInfo.imgsrc+'" width="480" height="auto"/></li>');
-       	          
-       		   }
-       		 });	
-		  }
+             
+           formData.append("file", file);   
+          
+           $.ajax({
+               url: '/uploadAjax',
+               data: formData,
+               dataType:'text',
+               processData: false,
+               contentType: false,
+               type: 'POST',
+               success: function(data){
+                  
+                  var fileInfo = getFileInfo(data);//원본파일주소, 썸네일된이미지주소, 파일이름, 풀네임 저장시키기 
+                //imgsrc
+                  $(el).summernote('editor.insertImage', fileInfo.imgsrc);
+                  
+                    $('#imageBoard > ul').append('<li><img src="'+fileInfo.imgsrc+'" width="480" height="auto"/></li>');
+                    
+                }
+              });   
+        }
      
-	
-	function checkImageType(fileName){
+   
+   function checkImageType(fileName){
 
-		var pattern = /jpg|gif|png|jpeg/i;
+      var pattern = /jpg|gif|png|jpeg/i;
 
-		return fileName.match(pattern);
+      return fileName.match(pattern);
 
-	}
+   }
 
-	function getFileInfo(fullName){
+   function getFileInfo(fullName){
 
-		var fileName,imgsrc, getLink;
+      var fileName,imgsrc, getLink;
 
-		var fileLink;
+      var fileLink;
 
-		if(checkImageType(fullName)){
-			imgsrc = "/displayFile?fileName="+fullName;
-			fileLink = fullName.substr(14);
+      if(checkImageType(fullName)){
+         imgsrc = "/displayFile?fileName="+fullName;
+         fileLink = fullName.substr(14);
 
-			var front = fullName.substr(0,12); // /2015/07/01/ 
-			var end = fullName.substr(14);
+         var front = fullName.substr(0,12); // /2015/07/01/ 
+         var end = fullName.substr(14);
 
-			getLink = "/displayFile?fileName="+front + end;
+         getLink = "/displayFile?fileName="+front + end;
 
-		}else{
-			imgsrc ="/resources/bootstrap/image/upcount.png";
-			fileLink = fullName.substr(12);
-			getLink = "/displayFile?fileName="+fullName;
-		}
-		
-		fileName = fileLink.substr(fileLink.indexOf("_")+1);
+      }else{
+         imgsrc ="/resources/bootstrap/image/upcount.png";
+         fileLink = fullName.substr(12);
+         getLink = "/displayFile?fileName="+fullName;
+      }
+      
+      fileName = fileLink.substr(fileLink.indexOf("_")+1);
 
-		return  {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
+      return  {fileName:fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
 
-	}
-	
-	//타이틀 사진 버튼
-	$("#title_img_box").on("dragenter dragover", function(event){
-	   event.preventDefault();
-	});
+   }
+   
+   //타이틀 사진 버튼
+   $("#title_img_box").on("dragenter dragover", function(event){
+      event.preventDefault();
+   });
 
 
-	$("#title_img_box").on("drop", function(event){
-	   event.preventDefault();
-	   
-	   var files = event.originalEvent.dataTransfer.files;
-	   
-	   var file = files[0];
+   $("#title_img_box").on("drop", function(event){
+      event.preventDefault();
+      
+      var files = event.originalEvent.dataTransfer.files;
+      
+      var file = files[0];
 
-	   var formData = new FormData();
-	   
-	   formData.append("file", file);   
-	   
-	   $.ajax({
-	        url: '/uploadAjax',
-	        data: formData,
-	        dataType:'text',
-	        processData: false,
-	        contentType: false,
-	        type: 'POST',
-	        success: function(data){
-	        	
-	           var fileInfo = getFileInfo(data);
-	           var html = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + fileInfo.imgsrc + '" alt="Attachment" style="width: 180px; height: 165px;"></span>';
-	          
-	           $("#title_img_box").append(html);
-	        }
-	      });   
-	});
- 	
+      var formData = new FormData();
+      
+      formData.append("file", file);   
+      
+      $.ajax({
+           url: '/uploadAjax',
+           data: formData,
+           dataType:'text',
+           processData: false,
+           contentType: false,
+           type: 'POST',
+           success: function(data){
+              
+              var fileInfo = getFileInfo(data);
+              var html = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + fileInfo.imgsrc + '" alt="Attachment" style="width: 180px; height: 165px;"></span>';
+             
+              $("#title_img_box").append(html);
+           }
+         });   
+   });
+    
 });
 </script>
-
- <script type="text/javascript">
-
-		 $(document).ready(function(){
-			 
-			 var myHiddenPlaceInsertController = new MyHiddenPlaceController(); 
-      
-     		 var latitude;//위도
-      
-     		 var longitude;//경도
-      
-          // 버튼 클릭시 콜백함수 호출 
-         $("#map_search_button").click(function(){
-            // input 에 입력하는 검색어의 값을 keyWord변수에 담고 한글처리
-         var keyWord = $("#keyWord").val();         
-         keyWord = encodeURIComponent(keyWord);
-         
-          
-         // 입력된 keyWord변수의 값으로 결과를 내기 위해 URL 끝에 +keyWord 삽입과 url변수 선언
-         var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
-
-
-             $.getJSON(url + "&callback=?" , function(json){
-
-                  // json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
-
-                  var items = json.channel.item;
-
-                               // 반복문을 통해 원하는 json값을 뽑아내는 단계. 지금은 위도와 경도를 받기 위해...
-
-                  $.each(items, function(i, it){
-                                   // 위도와 경도의 변수를 저장
-                     latitude = it.latitude;
-                     longitude = it.longitude;
-                     var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
-                        
-                     if(i == 0){
-                        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-                        var options = { //지도를 생성할 때 필요한 기본 옵션
-                           center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
-                           level: 3 //지도의 레벨(확대, 축소 정도)
-                        
-                        };
-                        var marker = new daum.maps.Marker({
-                            position: markerPosition
-                        });
-         
-                        var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-                        marker.setMap(map); //지도위에 마커 뿌리기
-                        
-                         $("#keyWord").val("");
-                        
-                        }
-                     });   
-                  });            
-               }); 
-       
-			$("#success_button").click(function(){
-		 		
-		 		var mhpStoreName; //상호명
-				var mhpThema; //테마선탱
-				var mhpTitle; //제목(해쉬태그)
-		 		var mhpTitleImg;
-		 		var content = $("#summernote").val(); //글자수
-		 		mhpStoreName = $("#store_name").val();
-				mhpTitle = $("#title_name").val();
-				mhpThema = $("#thema_select").val();
-				mhpTitleImg = $('#titleImg').attr("src");
-				
-				alert(mhpTitleImg);
-				
-				myHiddenPlaceInsertController.requestInsertMHP(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema,mhpTitleImg);
-		 		
-			});
-
-		 });
-
-</script> 
-
 
 </head>
 
@@ -289,83 +329,81 @@ $(document).ready(function() {
 
 <body>
 
-	<div class="row"></div>
+   <div class="row"></div>
 
-	<div class="col-md-2"></div>
-	<div class="col-md-8">
+   <div class="col-md-2"></div>
+   <div class="col-md-8">
 
-		<!-- 타이틀 사진 추가하는곳 -->
-		<div class="col-md-3">
-			<div class="col-md-1"></div>
-			
-			<div id="title_img_box" class="col-md-4"></div>
-			<!-- <textarea class="col-md-3 form-control" id="title_img_box" 
-				placeholder="타이틀 사진을 첨부하세요." rows="8" readonly="readonly"></textarea> -->
+      <!-- 타이틀 사진 추가하는곳 -->
+      <div class="col-md-3">
+         <div class="col-md-1"></div>
+         
+         <div id="title_img_box" class="col-md-4"></div>
 
-		</div>
+      </div>
 
-		<!-- 타이틀 부분 들어가는곳 -->
-		<div class="col-md-9">
-			<div class="col-md-6" id="store_name_grid">
-				<input type="text" class="form-control" id="store_name" name="subject" placeholder="상호명을 입력하세요" required>
-			</div>
-			<div class="col-md-4">
-				<select class="form-control" id="thema_select"> 
-   					 <option value="0">테마선택</option>
-    				 <option value="1">맛집</option>
-   					 <option value="2">카페</option>
-  					 <option value="3">비오는날에</option>
-  					 <option value="4">여행지</option>
-  					 <option value="5">공원</option>
-  					 <option value="6">문화</option>
-				</select>	
-				
-				</div>	
-			<input type="text" class="form-control"  id="title_name" placeholder="#서울맛집#또가고싶은곳#카페#영화관" required>
-				
-			<!-- 지도 검색 창 만드는 부분 -->
-			    
-			<div class="col-md-6" id="mhp_select">
-				     <input id="keyWord" placeholder="주소를 입력하세요."
-					class="form-control input-md">
-			</div>
-			<div class="col-md-2">
-				   
-				<button id="map_search_button" type="button"
-					class="btn btn-primary pull-right">검색</button>
-			</div>
+      <!-- 타이틀 부분 들어가는곳 -->
+      <div class="col-md-9">
+         <div class="col-md-6" id="store_name_grid">
+            <input type="text" class="form-control" id="store_name" name="subject" placeholder="상호명을 입력하세요" required>
+         </div>
+         <div class="col-md-4">
+            <select class="form-control" id="thema_select"> 
+                   <option value="0">테마선택</option>
+                 <option value="1">맛집</option>
+                   <option value="2">카페</option>
+                  <option value="3">비오는날에</option>
+                  <option value="4">여행지</option>
+                  <option value="5">공원</option>
+                  <option value="6">문화</option>
+            </select>   
+            
+            </div>   
+         <input type="text" class="form-control"  id="title_name" placeholder="#서울맛집#또가고싶은곳#카페#영화관" required>
+            
+         <!-- 지도 검색 창 만드는 부분 -->
+             
+         <div class="col-md-6" id="mhp_select">
+                 <input id="keyWord" placeholder="주소를 입력하세요."
+               class="form-control input-md">
+         </div>
+         <div class="col-md-2">
+               
+            <button id="map_search_button" type="button"
+               class="btn btn-primary pull-right">검색</button>
+         </div>
 
-		</div>
+      </div>
 
 
 
-	</div>
+   </div>
 
-	<!-- 지도 맵 들어가는부분 -->
-	<div class="row"></div>
-	 
-	<div class="col-md-2"></div>
-	    
-	<div class="col-md-8">
-		<div id="map" class="col-md-4"></div>
-	</div>
+   <!-- 지도 맵 들어가는부분 -->
+   <div class="row"></div>
+    
+   <div class="col-md-2"></div>
+       
+   <div class="col-md-8">
+      <div id="map" class="col-md-4"></div>
+   </div>
 
-	<div class="row"></div>
-	                                                                  
+   <div class="row"></div>
+                                                                     
 
 
-	<div class="form-group">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<textarea class="form-control" id="summernote" name="content"
-				placeholder="content" maxlength="140" rows="7"></textarea>
-		</div>
-	</div>
-	<div class="row"></div>
-	<div class="col-md-3"></div>
-	<div class="col-md-7">
-		<button type="submit" id="success_button" name="submit"
-			class="btn btn-primary pull-right">Submit Form</button>
-	</div>
+   <div class="form-group">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+         <textarea class="form-control" id="summernote" name="content"
+            placeholder="content" maxlength="140" rows="7"></textarea>
+      </div>
+   </div>
+   <div class="row"></div>
+   <div class="col-md-3"></div>
+   <div class="col-md-7">
+      <button type="submit" id="success_button" name="submit"
+         class="btn btn-primary pull-right">Submit Form</button>
+   </div>
 </body>
 </html>

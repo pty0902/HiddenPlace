@@ -15,7 +15,7 @@ function MyHiddenPlaceController() {
 		return myHiddenPlaces;
 
 	};
-
+	
 	// 글 조회(홈페이지에서 클릭이벤트) controller 메서드
 	this.requestSelectOneMHP = function(num) {
 
@@ -152,5 +152,17 @@ function MyHiddenPlaceController() {
 		return isSuccess;
 
 	};
+	
+	//내알못 수정 메서드
+   this.requestUpdateMHP = function(content, address, mhpStoreName, mhpTitle, mhpThema, mhpTitleImg, num) {
+      
+      var isSuccess  = dao.myHiddenPlaceUpdate(content, address, mhpStoreName, mhpTitle, mhpThema, mhpTitleImg, num);
+      var requestUrl = '/myhiddenplace/myHiddenPlaceSelectAll';
+      if (isSuccess == true){
+           document.location = requestUrl;
+      }else {
+      }
+
+   };
 
 }

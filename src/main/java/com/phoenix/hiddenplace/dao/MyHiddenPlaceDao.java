@@ -29,4 +29,6 @@ public interface MyHiddenPlaceDao {
 	public void upCountInsert(MyHiddenPlace myHiddenPlace) throws Exception; // 추천한 사람 등록
 	
 	public void upCount(MyHiddenPlace myHiddenPlace) throws Exception; // 추천수 증가
+	
+	public void updateMHP(MyHiddenPlace myHiddenPlace)throws Exception; //내알못 수정
 }

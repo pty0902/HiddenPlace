@@ -27,105 +27,160 @@
 
 <style>
 @font-face {
-	font-family: 'baemin';
-	src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
+   font-family: 'baemin';
+   src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
 }
-
-font, input, button, button>p, .category>p {
-	font-family: 'baemin';
+*,
+font,
+button, 
+button > p, 
+.category > p {
+   font-family: 'baemin';
 }
-
+   
 .category {
-	width: 45px;
-	height: 45px;
+   max-width: 45px;
+   width: 100%;
+   height: auto;
 }
 
-.theme_category {
-	width: 90%;
-	margin-left: 17%;
-}
-
-.theme_category>button {
-	background-color: white;
-}
 
 .portfolio figure>figcaption>p {
-	margin-left: -80px;
-	margin-top: -20px;
+   margin-left: -80px;
+   margin-top: -20px;
 }
 
-.theme_category button:hover {
-	opacity: 0.5;
-	transform: rotateY(180deg);
-	backface-visibility: hidden;
-	-webkit-transform: scale(1.12);
-	transform: scale(1.12);
+header {
+   margin: 0;
 }
 
-.btn-default {
-	color: black;
-	background-color: white;
+.jumbotron {
+   padding: 0;
+   position: fixed;
+   width: 100%;
+   opacity: 0.8;
+   z-index: 3;
+   margin: 0;
 }
 
-.btn-default:focus, .btn-default.focus {
-	color: #ffffff;
-	background-color: #9d9da6;
+section {
+   padding-top: 71px;
 }
 
-.btn-default:hover {
-	opacity: 0.5;
-	color: white;
-	background-color: black;
+.logo {
+   width: 180px;
+   margin: 10px;
+   margin-left: 26%;
 }
 
-.btn-default.is-checked {
-	color: white;
-	background-color: black;
+#login_button_div {
+   float: right;
+   margin: 13px 25% 8px 1%;
+   
+   /*background-color: #eee;
+            background: #eee;*/
+   z-index: 5;
 }
+
+#login_button, #userInsert_button {
+   color: black;
+   /*font-weight: bold;*/
+   font-size: 18px;
+   font-family: 'baemin';
+}
+#search_bar {
+   width: 400px;
+   top: 15px;
+   height: 40px;
+   font-size: 20px;
+   margin-top: 13px;
+   margin-left: 2.6%;
+}
+
+.search_bar:focus + button {
+   z-index: 3;   
+}
+
+#search_bar,
+#search_button {
+   
+   right: 45%;
+   top: 15px;
+   border: 0;
+}
+
+#search_bar:focus {
+   outline: none;
+}
+
+/* .btn-default { */
+/*    color: black; */
+/*    background-color: white; */
+/* } */
+
+/* .btn-default:focus, .btn-default.focus { */
+/*    color: #ffffff; */
+/*    background-color: #9d9da6; */
+/* } */
+
+/* .btn-default:hover { */
+/*    opacity: 0.5; */
+/*    color: white; */
+/*    background-color: black; */
+/* } */
+
+/* .btn-default.is-checked { */
+/*    color: white; */
+/*    background-color: black; */
+/* } */
 
 #delete_button {
-	float: right;
-	color: white;
-	background-color: black;
+   float: right;
+   color: white;
+   background-color: black;
 }
+#figureMHP{
 
+}
 #delete_checking {
-	float: right;
+   float: right;
 }
 
 .checking {
-	position: absolute;
-	right: 5%;
-	top: 7%;
-	transform: scale(3);
-	opacity: 0;
-	transition: opacity 0.35s border: none;
-	z-index: 3;
-	background-color: white;
+   position: absolute;
+   right: 5%;
+   top: 7%;
+   transform: scale(3);
+   opacity: 0;
+   transition: opacity 0.35s border: none;
+   z-index: 3;
+   background-color: white;
 }
 
 .portfolio figure:hover input {
-	opacity: 1;
+   opacity: 1;
 }
 
 input:checked {
-	opacity: 1;
+   opacity: 1;
 }
 
 #checkingAll {
-	transform: scale(3);
-	position: absolute;
-	margin: auto;
-	left: -140%;
-	top: 40%;
+   transform: scale(3);
+   position: absolute;
+   margin: auto;
+   left: -140%;
+   top: 40%;
 }
 
 #checkingAll_word {
-	position: absolute;
-	margin: auto;
-	left: -100%;
-	top: 25%;
+   position: absolute;
+   margin: auto;
+   left: -100%;
+   top: 25%;
 }
+
+
 </style>
 
 <!-- 내알못 글목록 불러오기 이벤트 핸들링-->
@@ -328,9 +383,13 @@ input:checked {
 			
 			 var length = delete_nums.length;
 			  
-			 bookmarkController.requestSelectedDeleteMHP(delete_nums.substring(0, length-1));
-			 window.location.reload(true);
-	          
+			 if(delete_nums.length>0){
+		          bookmarkController.requestSelectedDeleteMHP(delete_nums.substring(0, length-1));
+		          window.location.reload(true);
+		          }else{
+		             alert("선택된 목록이없습니다.");
+		          }
+		          
 		});
 
 	});
@@ -340,7 +399,34 @@ input:checked {
 
 <body class="home-page">
 
+<!-- 상단 메뉴 헤더 -->
+      <header>
+      
+      <div class="jumbotron">
+      
+         <a href="index.html"><img class="logo"
+            src="/resources/customize/images/mhp.png" alt="Logo" /></a>
+         <!-- <a href="index.html"><img class="logo" src="images/logos/logoMHP.png" alt="Logo" /></a> -->
+         
 
+      <!--검색창 -->
+         
+         <input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
+            <button id="search_button" class="btn btn-default" type="button">
+               <span class="glyphicon glyphicon-search"></span>
+            </button> 
+               
+         <div id="login_button_div" class="btn-group">
+            <button id="login_button" class="btn btn-default"
+               style="background-color: #eee;">로그인</button>
+            <button id="userInsert_button" class="btn btn-default"
+               style="background-color: #eee;">회원가입</button>
+         </div>
+         </div>
+      
+   </header>
+   
+  
 	<!-- 메인 사진 섹션 -->
 	<section>
 		<div class="swiper-container">
@@ -398,47 +484,39 @@ input:checked {
 
 
 	<!-- 본문 -->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-10 col-md-offset-1">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
 
-				<!-- 카테고리 선택 탭 -->
-				<div class="btn-group" id="theme_category">
-					<button class="btn btn themeCategory">
-						<img class="category" src="/resources/bootstrap/image/theme0.png" />
-						<p>전체보기</p>
-						<p hidden="hidden">0</p>
-					</button>
-				</div>
-				<!-- 전체선택 및 삭제 버튼 -->
-				<div id="delete_checking" class="btn-group">
-					<input id="checkingAll" type="checkbox" class="btn btn-default"
-						name="" value="" /><font id="checkingAll_word">전체선택</font>
-					<button id="delete_button" class="btn btn-default">
-						<font>삭제</font>
-					</button>
-				</div>
-			</div>
-			<br> <br>
+               <!-- 전체선택 및 삭제 버튼 -->
+            <div id="delete_checking" class="btn-group">
+               <input id="checkingAll" type="checkbox" class="btn btn-default"
+                  name="" value="" /><font id="checkingAll_word">전체선택</font>
+               <button id="delete_button" class="btn btn-default">
+                  <font>삭제</font>
+               </button>
+            </div>
+         
+     
 
-			<!-- 내알못/나만의 루트 선택 탭 -->
-			<div class="btn-group">
-				<button class="btn btn-default" id="figureMHP">
-					<font>내 알 못</font>
-				</button>
-				<button class="btn btn-default" id="figureMR">
-					<font>나만의 루트</font>
-				</button>
-			</div>
+               <!-- 내알못/나만의 루트 선택 탭 -->
+               <div class="btn-group">
+               <button class="btn btn-default" id="figureMHP">
+                  <font>내 알 못</font>
+               </button>
+               <button class="btn btn-default" id="figureMR">
+                  <font>나만의 루트</font>
+               </button>
+            </div>
+   
+            </div>
 
-
-		</div>
-
-
-		<div class="col-sm-12 col-md-10 col-md-offset-1">
-			<div class="portfolio grid-3" id="selectAll"></div>
-		</div>
-	</div>
+            
+         <div class="col-sm-12 col-md-10 col-md-offset-1">
+         <div class="portfolio grid-3" id="selectAll"></div>
+      </div>
+            </div>
+         </div>
 
 	<section>
 		<nav class="text-center">
