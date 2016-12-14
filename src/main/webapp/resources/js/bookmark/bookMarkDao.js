@@ -1,4 +1,3 @@
-
 //bookmark dao 객체
 function BookmarkDao() {
 
@@ -28,10 +27,10 @@ function BookmarkDao() {
 	
 	
 //	내알못 북마크 리스트 dao 메서드
-	this.hiddenPlaceBookmarkSelectAll = function(userId) {
-	
+	this.hiddenPlaceBookmarkSelectAll = function(userId, page) {
+		
 		var myHiddenPlace = [];
-
+		
 		try{
 
 			$.ajax({
@@ -39,7 +38,8 @@ function BookmarkDao() {
 				async : false, //false: 동기, true: 비동기
 				type: 'get', //요청방식 get or post      
 				data: { //보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
-					userId : userId//유저아이디 보내야함...
+					userId : userId, //유저아이디 보내야함...
+					page : page
 				},
 				dataType: 'json', //서버에서 보내오는 데이터 타입
 				success: function (data) { //서버에서 보내오는 데이터

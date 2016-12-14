@@ -15,9 +15,9 @@ function BookmarkController() {
 
 	};
 	// 내알못 즐겨찾기 리스트 controller 메서드
-	   this.requestHiddenPlaceBookmarkSelectAll = function(userId) {
-
-	      var myHiddenPlace  = dao.hiddenPlaceBookmarkSelectAll(userId);
+	   this.requestHiddenPlaceBookmarkSelectAll = function(userId, page) {
+		 
+	      var myHiddenPlace  = dao.hiddenPlaceBookmarkSelectAll(userId, page);
 	      return myHiddenPlace;
 
 	   };	
