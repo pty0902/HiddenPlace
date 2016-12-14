@@ -17,9 +17,15 @@ public class MyHiddenPlace {
 	private double longitude; 
 	private String detailAddress;
 	private String userNickName; //닉네임 유저
-	private String titleImgURL; //타이틀 이미지
-	private String keyWord;
+	private String titleImgURL;
+	private int upCountCode;
 	
+	public int getUpCountCode() {
+		return upCountCode;
+	}
+	public void setUpCountCode(int upCountCode) {
+		this.upCountCode = upCountCode;
+	}
 	public String getTitleImgURL() {
 		return titleImgURL;
 	}
@@ -140,11 +146,17 @@ public class MyHiddenPlace {
 	public void setDetailAddress(String detailAddress) {
 		this.detailAddress = detailAddress;
 	}
-	public String getKeyWord() {
-		return keyWord;
+	
+	@Override
+	public String toString() {
+		return "MyHiddenPlace [num=" + num + ", userId=" + userId + ", regionTownCode=" + regionTownCode
+				+ ", themeCode=" + themeCode + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
+				+ ", upCount=" + upCount + ", readCount=" + readCount + ", storeName=" + storeName + ", code=" + code
+				+ ", latitude=" + latitude + ", longitude=" + longitude + ", detailAddress=" + detailAddress
+				+ ", userNickName=" + userNickName + ", titleImgURL=" + titleImgURL + ", upCountCode=" + upCountCode
+				+ "]";
 	}
-	public void setKeyWord(String keyWord) {
-		this.keyWord = keyWord;
-	}
+	
+	
 	
 }

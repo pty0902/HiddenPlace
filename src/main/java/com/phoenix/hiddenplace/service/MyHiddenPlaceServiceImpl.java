@@ -64,5 +64,24 @@ public class MyHiddenPlaceServiceImpl implements MyHiddenPlaceService {
 	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
 		return dao.bookmarkAll(userId); 
 	}
+	
+	@Override
+	public void delete(int num) throws Exception {
+			dao.delete(num);
+	}
+	@Override
+	public Integer upCountCheck(MyHiddenPlace myHiddenPlace) throws Exception {
+
+		return dao.upCountCheck(myHiddenPlace);
+	}
+	
+	@Transactional
+	@Override
+	public void upCount(MyHiddenPlace myHiddenPlace) throws Exception {
+		
+		dao.upCountInsert(myHiddenPlace);
+		dao.upCount(myHiddenPlace);
+		
+	}
 
 }

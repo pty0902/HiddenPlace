@@ -21,4 +21,12 @@ public interface MyHiddenPlaceDao {
 	public List<Theme> themeList() throws Exception; //목록페이지에 테마 버튼 호출
 	
 	List<MyHiddenPlace> bookmarkAll(String userId) throws Exception;//현재 로그인 유저의 즐겨찾기 목록
+	
+	public void delete(int num) throws Exception; //내알못 삭제
+	
+	public Integer upCountCheck(MyHiddenPlace myHiddenPlace) throws Exception; // 추천코드
+	
+	public void upCountInsert(MyHiddenPlace myHiddenPlace) throws Exception; // 추천한 사람 등록
+	
+	public void upCount(MyHiddenPlace myHiddenPlace) throws Exception; // 추천수 증가
 }

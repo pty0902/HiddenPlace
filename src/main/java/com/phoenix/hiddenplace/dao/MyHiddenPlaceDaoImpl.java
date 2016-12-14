@@ -60,18 +60,51 @@ public class MyHiddenPlaceDaoImpl implements MyHiddenPlaceDao {
 
 	@Override
 	public List<MyHiddenPlace> bestMHP() throws Exception {
+		
 		return sqlSession.selectList(namespace + ".bestMHP");
 		
 	}
 
 	@Override
 	public List<Theme> themeList() throws Exception {
+		
 		return sqlSession.selectList(namespace + ".themeList");
+		
 	}
 	
 	@Override
 	public List<MyHiddenPlace> bookmarkAll(String userId) throws Exception {
+		
 		return sqlSession.selectList(namespace + ".bookmarkAll", userId);
+		
+	}
+	
+	@Override
+	public void delete(int num) throws Exception { //내알못 삭제
+		
+		 sqlSession.delete(namespace + ".delete", num);
+		 
+	}
+
+	@Override
+	public Integer upCountCheck(MyHiddenPlace myHiddenPlace) throws Exception {//추천수 받아오기 
+		
+		return sqlSession.selectOne(namespace + ".upCountCheck", myHiddenPlace);
+
+	}
+
+	@Override
+	public void upCountInsert(MyHiddenPlace myHiddenPlace) throws Exception { //추천수 증가를 위한 정보 저장
+		
+		sqlSession.insert(namespace + ".upCountInsert", myHiddenPlace);
+		
+	}
+
+	@Override
+	public void upCount(MyHiddenPlace myHiddenPlace) throws Exception { //추천수 증가
+		
+		sqlSession.update(namespace + ".upCount", myHiddenPlace);
+		
 	}
 
 }
