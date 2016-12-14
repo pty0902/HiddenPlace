@@ -51,5 +51,5 @@ public class MyHiddenPlaceController {
 		return "/views/myhiddenplace/myHiddenPlaceSelectOne";
 
 	}      
-
+	
 }

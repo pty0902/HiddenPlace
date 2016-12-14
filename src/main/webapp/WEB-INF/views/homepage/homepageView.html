@@ -28,6 +28,7 @@
 <script src="../../../resources/js/myroute/myRouteController.js"></script>
 <script src="../../../resources/js/myhiddenplace/myHiddenPlace.js"></script>
 <script src="../../../resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
+<script src="../../../resources/js/homepage/homepageController.js"></script>
 
 <!-- 로그인,회원가입 스타일-->
 <style>
@@ -241,8 +242,6 @@ hr {
 </style>
 </head>
 
-
-
 <!-- 홈페이지 head menu 이벤트 핸들링 -->
 <script type="text/javascript">
    $(document).ready(function() {
@@ -272,7 +271,6 @@ hr {
 </script>
 
 <!-- 홈페이지 MyHiddenPlace best3 이벤트 핸들링 -->
-
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -342,7 +340,6 @@ hr {
 </script>
 
 <!-- 홈페이지 MyRoute best3 이벤트 핸들링 -->
-
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -463,7 +460,44 @@ $(document).ready(function() {
 		   		alert("즐겨찾기에 등록되었습니다!");
 			}
 			
+		window.location.reload();
 	});	
+});
+</script>
+
+<!-- 로고(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('.logo').click(function() {
+	
+		var homepageController = new HomepageController;
+		homepageController.requestHomepageUrl();
+		
+	});
+});
+</script>
+
+<!-- 마이페이지(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-myInfo').click(function() {
+	
+		var homepageController = new HomepageController;
+		homepageController.requestMypageUrl();
+		
+	});
+});
+</script>
+
+<!-- 즐겨찾기(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-bookmark').click(function() {
+	
+		var homepageController = new HomepageController;
+		homepageController.requestBookmarkUrl();
+		
+	});
 });
 </script>
 
@@ -474,7 +508,7 @@ $(document).ready(function() {
    <header id="headmenu-header" style="margin-top:0%;">
          <!-- <div class="container"> -->
 			<div class="jumbotron">
-			<a href="index.html"><img class="logo" src="../../../resources/customize/images/mhp.png" alt="Logo" /></a>
+			<a><img class="logo" src="../../../resources/customize/images/mhp.png" alt="Logo" style="cursor:pointer"/></a>
 			<input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
             <button id="search_button" class="btn btn-default" type="button">
                <span class="glyphicon glyphicon-search"></span>

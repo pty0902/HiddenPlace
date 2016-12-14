@@ -22,7 +22,7 @@ function MyHiddenPlaceController() {
 		
 		document.location = requestUrl;
 		
-		return myHiddenPlace
+		return myHiddenPlace;
 	};
 	
 // 글 목록 페이지요청 controller 메서드
@@ -133,5 +133,14 @@ function MyHiddenPlaceController() {
 		return isSuccess;
 			
 	}
+	
+	// 홈페이지요청 (로고 클릭) controller 메서드
+	this.requestHomepageUrl = function() {
+
+		var requestUrl = "myhiddenplace/myHiddenPlaceSelectAll";
+
+		document.location = requestUrl;
+
+	};
 	
 }
