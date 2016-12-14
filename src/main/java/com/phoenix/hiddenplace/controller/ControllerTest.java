@@ -12,12 +12,13 @@ public class ControllerTest {
       return "/views/homepage/homeView";
       
    }
-   
-/*  @RequestMapping(value="/myhiddenplace/myHiddenPlaceInsert")
+
+   //즐겨찾기 목록 호출
+  @RequestMapping(value="/bookmark/userBookmarkView")
    public String InsertMHP() {
       
-      return "/views/myhiddenplace/myHiddenPlaceInsert";
+      return "/views/bookmark/userBookmarkView";
       
-   }*/
+   }
 
 }
