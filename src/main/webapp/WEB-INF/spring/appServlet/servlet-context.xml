@@ -50,5 +50,36 @@
    </beans:bean> -->
    
    <context:component-scan base-package="com.phoenix.hiddenplace" />
+   
+   <context:component-scan base-package="com.phoenix.hiddenplace" />
+
+		<beans:bean id="LoginInterceptor"
+		class="com.phoenix.hiddenplace.interceptor.LoginInterceptor">
+	</beans:bean>
+
+	<beans:bean id="AuthInterceptor"
+		class="com.phoenix.hiddenplace.interceptor.AuthInterceptor">
+	</beans:bean>
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/externalLogin" />
+			<mapping path="/user/login" />
+			<beans:ref bean="LoginInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/user/mypageView" />
+			
+			
+			
+			
+			
+			
+			
+			
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
+	</interceptors>
 
 </beans:beans>

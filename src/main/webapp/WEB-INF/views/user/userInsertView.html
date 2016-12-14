@@ -43,8 +43,7 @@
 
 		// 취소 버튼
 		$('#cancel').click(function() {
-
-			location.href = "views/homepage/homeView"; // 메인 홈페이지 url
+// 			location.href = "views/homepage/homeView"; // 메인 홈페이지 url
 
 		});
 
@@ -182,7 +181,6 @@
 			} else if (chkNick.test(nickname) || chkNull.test(nickname)) {
 				alert("닉네임에 특수문자나 공백은 들어갈 수 없습니다.");
 				$('#nickname').focus();
-				$('#nickname').attr("value", "");
 			} else {
 				nicknameCheckSuccess = userController.requestNicknameCheck(nickname);
 				if (!nicknameCheckSuccess) {
@@ -233,6 +231,15 @@
 </script>
 
 <style>
+@font-face {
+	font-family: 'baemin';
+	src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
+}
+
+button, h2, a, input, label, select{
+	font-family: 'baemin';
+}
+
 #join, #cancel {
 	width: 100%;
 }

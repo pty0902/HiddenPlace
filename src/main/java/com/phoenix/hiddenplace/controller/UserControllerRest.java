@@ -1,5 +1,8 @@
 package com.phoenix.hiddenplace.controller;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -7,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +45,7 @@ public class UserControllerRest {
 
 		try {
 			user.setUserPw(passwordEncoder.encode(user.getUserPw()));
-			service.create(user);
+			service.create(user); // 유저 테이블에 정보 insert, 로그인 테이블에 정보 insert
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,8 +107,6 @@ public class UserControllerRest {
 
 	}
 
-	//
-
 	// 비밀번호 찾기 이메일 인증번호 발송
 	@RequestMapping(value = "/forgetEmailSend", method = RequestMethod.POST)
 	@ResponseBody
@@ -159,26 +160,67 @@ public class UserControllerRest {
 
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void login(Login login, HttpSession session, Model model) throws Exception {
+	public ResponseEntity<String> login(Login login, HttpSession session) {
 
-		System.out.println(login.getUserId());
-		System.out.println(login.getUserPw());
+		ResponseEntity<String> entity = null;
 
-		User user = service.login(login); // 로그인된 user
+		try {
+			User searchUser = service.login(login); // 입력한 아이디가 존재하는지 확인
 
-		if (user == null) {
-			return;
+			if (searchUser != null && passwordEncoder.matches(login.getUserPw(), searchUser.getUserPw())) { // 아이디, 비밀번호 모두 일치
+				service.loginConnect(searchUser); // 로그인 테이블에 로그인 상태, 계정 상태 update(일반회원)
+
+				session.setAttribute("login", searchUser); // 세션에 로그인 성공한 유저 정보를 login이라는 이름으로 저장
+				System.out.println("세션에 login 속성 생성함.");
+
+				Object dest = session.getAttribute("dest"); // 세션에서 dest를 가져옴
+				System.out.println("돌아갈 페이지 : " + (String) dest); // dest = /user/mypageView
+
+				if (dest != null) {
+					entity = new ResponseEntity<String>((String) dest, HttpStatus.OK);
+				} else {
+					entity = new ResponseEntity<String>("/", HttpStatus.OK);
+				}
+
+				System.out.println("세션에서 dest 속성을 삭제함.");
+				session.removeAttribute("dest");
+
+			} else if (searchUser == null) { // 아이디 불일치
+				entity = new ResponseEntity<String>("idFail", HttpStatus.OK);
+			} else if (!passwordEncoder.matches(login.getUserPw(), searchUser.getUserPw())) { // 비밀번호 불일치
+				entity = new ResponseEntity<String>("pwFail", HttpStatus.OK);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); // HttpStatus.BAD_REQUEST == 400
 		}
+		return entity;
+	}
 
-		System.out.println("로그인된 ID : " + user.getUserId());
-		System.out.println("로그인된 PW : " + user.getUserPw());
+	// 로그아웃
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public ResponseEntity<String> logout(Login login, HttpSession session) {
 
-		model.addAttribute("user", user);
+		ResponseEntity<String> entity = null;
+
+		try {
+			service.logout(login); // 로그인 테이블에 로그아웃 상태 update
+
+			System.out.println("세션에서 login 속성을 삭제함.");
+			session.removeAttribute("login");
+
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 
 	// 회원수정
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
-	public ResponseEntity<String> userUpdate(String email, String nowPw, String newPw, String newNickname) throws Exception {
+	public ResponseEntity<String> userUpdate(String email, String nowPw, String newPw, String newNickname) {
 
 		ResponseEntity<String> entity = null;
 		try {
@@ -189,15 +231,37 @@ public class UserControllerRest {
 			if (searchUser != null && passwordEncoder.matches(nowPw, searchUser.getUserPw())) { // 비밀번호 일치
 				searchUser.setUserNickname(newNickname); // 현재 입력되어 있는 닉네임
 				if (newPw == null) { // 닉네임만 변경하였을 경우
-					service.modify(searchUser);
+					service.update(searchUser);
 				} else { // 닉네임, 비밀번호 변경
 					searchUser.setUserPw(passwordEncoder.encode(newPw)); // 변경할 비밀번호
-					service.modify(searchUser);
+					service.update(searchUser);
 				}
 				entity = new ResponseEntity<String>("success", HttpStatus.OK);
 			} else { // 비밀번호 불일치
 				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	// 마이페이지 화면 요청
+	@RequestMapping(value = "/mypageAuth", method = RequestMethod.POST)
+	public ResponseEntity<String> mypageAuth(String userId) {
+
+		ResponseEntity<String> entity = null;
+		int loginConnectCode = 0;
+		try {
+			loginConnectCode = service.mypageAuth(userId);
+
+			if (loginConnectCode == 1) { // 일반계정
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			} else if (loginConnectCode == 2) { // 페이스북 계정
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -227,6 +291,79 @@ public class UserControllerRest {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+
+	// 닉네임 가져오기
+	@RequestMapping(value = "/getNickname", method = RequestMethod.POST)
+	public ResponseEntity<String> getNickname(String userId) {
+
+		ResponseEntity<String> entity = null;
+		String getNickname = null;
+		try {
+
+			getNickname = service.getNickname(userId);
+			entity = new ResponseEntity<String>(getNickname, HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	@RequestMapping(value = "/state", method = RequestMethod.GET)
+	public String requestNaverLoginState(HttpSession session) {
+
+		SecureRandom random = new SecureRandom();
+		String state = new BigInteger(130, random).toString(32); // 토큰을 생성합니다.
+		session.setAttribute("state", state); // 세션에 토큰을 저장합니다.
+
+		return state;
+
+	}
+
+	// 페이스북 로그인
+	@RequestMapping(value = "/externalLogin", method = RequestMethod.POST)
+	public ResponseEntity<String> externalLogin(@RequestBody User user, HttpSession session) {
+
+		ResponseEntity<String> entity = null;
+		User fbUser = user;
+
+		try {
+			fbUser = service.externalLogin(user); // 페이스북 계정이 이미 존재하는 회원인지 확인 (신규회원이라면 null)
+
+			if (fbUser == null) { // 신규 회원이면 DB에 회원 정보 저장
+
+				service.create(user);
+
+				service.loginConnectF(user); // 로그인 테이블에 로그인 상태, 계정 상태 update(페이스북)
+
+			} else {
+
+				service.loginConnectF(user); // 로그인 테이블에 로그인 상태, 계정 상태 update(페이스북)
+
+			}
+
+			session.setAttribute("login", user);
+			System.out.println("세션에 login 속성 생성함.");
+
+			Object dest = session.getAttribute("dest"); // 세션에서 dest를 가져옴
+			System.out.println("돌아갈 페이지 : " + (String) dest); // ex) dest = /user/mypageView
+
+			if (dest != null) {
+				entity = new ResponseEntity<String>((String) dest, HttpStatus.OK);
+			} else {
+				entity = new ResponseEntity<String>("/", HttpStatus.OK);
+			}
+			System.out.println("세션에서 dest 속성을 삭제함.");
+			session.removeAttribute("dest");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+
 	}
 
 }

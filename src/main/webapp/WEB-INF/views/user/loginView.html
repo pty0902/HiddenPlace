@@ -31,71 +31,26 @@
 <script src="/resources/js/user/user.js"></script>
 <script src="/resources/js/user/userController.js"></script>
 </head>
+
+
 <script>
 
-window.fbAsyncInit = function() {
-    FB.init({
-       appId :'548366072035004',
-       cookie : true, 
-       xfbml : true, // parse social plugins on this page
-       version : 'v2.0' 
-    });
-
- };
- 
-//sdk
- (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id))
-       return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/ko_KR/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
- }(document, 'script', 'facebook-jssdk'));
-
-
- function facebookLogin() {
-     
-    FB.login(function(response){
-       if (response.status === 'connected') {
-              FB.api('/me?fields=name,email',function(user) {
-              console.log(user.name);
-              console.log(user.id);
-              console.log(user.email);
-              },{scope : 'public_profile,email,user_birthday,user_likes'});
-           } else if (response.status === 'not_authorized') {
-              
-           } else {
-              
-           }
-    });
-    
- }
- 
- 
-</script>
-
-<script>
 $(document).ready(function() {
 	
 	 var userController = new UserController();
 	
      <!-- 로그인 버튼클릭 -->
      $('#login').click(function() {
-          
-    
-     
-     var id = $('#id').val();
-     var pw = $('#pw').val();
-     var user = new User(id, pw);
-     userController.requestLogin(user);
-
+    	 
+	     var id = $('#id').val();
+	     var pw = $('#pw').val();
+	     var user = new User(id, pw);
+	     userController.requestLogin(user);
      });
      
      <!-- 회원가입 페이지 요청 -->
      $('#userInsert').click(function() {
-    	 
+
     	 userController.requestUserInsertUrl();
     	 
      });
@@ -105,16 +60,62 @@ $(document).ready(function() {
     	 userController.requestForgetPwUrl();
     	 
      });
-      
      
+     $('#naver_login').on("click", function() { //Naver button click
+
+    	 userController.requestNVLogin(remember); 
+     });
+
+     $('#facebook_login').on("click", function(event) { //facebook button click
+			userController.requestFBLogin(); 
+     });
      
      
   });
 </script>
 
 <style>
-#login, #facebook_login, #google_login {
+@font-face {
+	font-family: 'baemin';
+	src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
+}
+
+button, h2, a, input, label {
+	font-family: 'baemin';
+}
+
+#login {
+	background-image: url("/resources/customize/images/login.png");
+	background-size: 100%;
 	width: 100%;
+	height: 100%;
+}
+
+#facebook_login {
+	background-image: url("/resources/customize/images/facebook.png");
+	background-size: 100%;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+#login_btn {
+	width: 355px;
+	height: 42px;
+	margin-bottom: -5px;
+}
+
+#userInsert {
+	margin-right: 100px;
+}
+
+#id, #pw, #input_div {
+	width: 325px;
+	height: 45px;
+}
+
+#input_div {
+	width: 355px;
 }
 </style>
 <body>
@@ -125,24 +126,26 @@ $(document).ready(function() {
 				<article class="content">
 
 					<section>
-						<h2>로그인</h2>
+						<h2>로그인(임시)</h2>
 
 						<div id="contact_form" class="form-horizontal">
-
 
 							<!-- 아이디(이메일) -->
 							<div class="form-group">
 								<label class="col-sm-3 control-label">아이디(E-mail)</label>
-								<div class="col-sm-6 animated-form-control" id="input_div">
+								<div class="col-sm-7 animated-form-control" id="input_div">
+
 									<input id="id" placeholder="E-mail" type="text" name="name"
 										class="text form-control" required="required"
-										aria-required="true" />
+										aria-required="true">
+
 								</div>
 							</div>
+
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="col-sm-3 control-label">비밀번호</label>
-								<div class="col-sm-6 animated-form-control" id="input_div">
+								<div class="col-sm-7 animated-form-control" id="input_div">
 									<input id="pw" placeholder="Password" type="password"
 										name="name" class="text form-control" required="required"
 										aria-required="true" />
@@ -152,12 +155,10 @@ $(document).ready(function() {
 							<!-- 회원가입 / 비밀번호 찾기-->
 							<div class="form-group">
 								<div class="col-sm-3"></div>
-								<div class="col-sm-3">
+								<div class="col-sm-7">
 									<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<a
-										id="userInsert">회원가입</a>
-								</div>
-								<div class="col-sm-3">
-									<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<a
+										id="userInsert">회원가입</a> <span
+										class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<a
 										id="forgetPw">비밀번호 찾기</a>
 								</div>
 							</div>
@@ -165,24 +166,21 @@ $(document).ready(function() {
 							<!-- 로그인 버튼 -->
 							<div class="form-group">
 								<div class="col-sm-3"></div>
-								<div class="col-sm-6">
-									<button id="login" type="button" class="btn btn-primary btn-md">로그인</button>
+								<div class="col-sm-7" id="login_btn">
+									<button id="login" type="button" class="btn btn-primary btn-md">
+									</button>
 								</div>
 							</div>
 
-							<!-- 구글, 페이스북 로그인 버튼 -->
+							<!-- 페이스북 -->
 							<div class="form-group">
 								<div class="col-sm-3"></div>
-								<div class="col-sm-3">
+								<div class="col-sm-7" id="login_btn">
 									<button id="facebook_login" name="singlebutton"
-										class="btn btn-primary Login_button" onclick="facebookLogin()">Facebook
-										Login</button>
-								</div>
-								<div class="col-sm-3">
-									<button id="google_login" name="singlebutton"
-										class="btn btn-primary Login_button">Google Login</button>
+										class="btn btn-primary "></button>
 								</div>
 							</div>
+
 						</div>
 					</section>
 				</article>
