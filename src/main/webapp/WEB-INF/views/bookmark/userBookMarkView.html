@@ -4,171 +4,176 @@
 <head>
 <title>ZUPA - Responsive Website Template / Portfolio</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-<link rel="shortcut icon"
-	href="../../../resources/HTML/images/favicon.ico" />
-<link
-	href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css"
-	href="../../../resources/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="../../../resources/bootstrap/css/animate.css" />
-<link rel="stylesheet" type="text/css"
-	href="../../../resources/bootstrap/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="../../../resources/bootstrap/css/swiper.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="../../../resources/bootstrap/css/style.css" />
+<link rel="shortcut icon" href="../../../resources/HTML/images/favicon.ico" />
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
 <script src="../../../resources/bootstrap/js/pace.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../../resources/bootstrap/js/modernizr-custom.js"></script>
 <script src="../../../resources/bootstrap/js/script.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
 <script src="../../../resources/js/user/user.js"></script>
 <script src="../../../resources/js/user/userController.js"></script>
+<script src="../../../resources/js/bookmark/bookmarkController.js"></script>
+<script src="/resources/js/page/pageController.js"></script>
 
-      <script src="../../../resources/js/bookmark/bookmarkController.js"></script>
+<style>
+@font-face {
+	font-family: 'baemin';
+	src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
+}
 
-      <style>
-         @font-face {
-            font-family: 'baemin';
-            src: url(fonts/baemin.ttf) format('truetype');
-         }
-         font,
-         input,
-         button, 
-         button > p, 
-         .category > p {
-            font-family: 'baemin';
-         }
-         
-         .category{
-            width: 45px;
-            height: 45px;
-         }
-         .theme_category {
-            width: 90%;
-            margin-left: 17%;
-         }
-         .theme_category > button {
+font, input, button, button>p, .category>p {
+	font-family: 'baemin';
+}
 
-            background-color: white;
-         }
+.category {
+	width: 45px;
+	height: 45px;
+}
 
-         .portfolio figure > figcaption > p {
-            margin-left: -80px;
-            margin-top: -20px;
-         }
+.theme_category {
+	width: 90%;
+	margin-left: 17%;
+}
 
-         .theme_category button:hover {
-            opacity: 0.5;
-            transform: rotateY(180deg);
-            backface-visibility: hidden;
-            -webkit-transform: scale(1.12);
-            transform: scale(1.12);
-         }
-         
-         .btn-default {
-            color: black;
-            background-color: white;
-         }
+.theme_category>button {
+	background-color: white;
+}
 
-         .btn-default:focus, .btn-default.focus {
-            color: #ffffff;
-            background-color: #9d9da6;
-         }
+.portfolio figure>figcaption>p {
+	margin-left: -80px;
+	margin-top: -20px;
+}
 
-         .btn-default:hover {
-            opacity: 0.5;
-            color: white;
-            background-color: black;
-         }
+.theme_category button:hover {
+	opacity: 0.5;
+	transform: rotateY(180deg);
+	backface-visibility: hidden;
+	-webkit-transform: scale(1.12);
+	transform: scale(1.12);
+}
 
-         .btn-default.is-checked {
-            color: white;
-            background-color: black;
-         }
+.btn-default {
+	color: black;
+	background-color: white;
+}
 
-         #delete_button {
-            float: right;
-            color: white;
-            background-color: black;
-         }
-         #delete_checking {   
-            float: right;   
-         }
+.btn-default:focus, .btn-default.focus {
+	color: #ffffff;
+	background-color: #9d9da6;
+}
 
-         .checking {
-            position: absolute;
-            right: 5%;
-            top: 7%;
-            transform: scale(3);
-            opacity: 0;
-            transition: opacity 0.35s
-            border: none;
-            z-index: 3;
-            background-color: white;
-         }
-         .portfolio figure:hover input {
-            opacity: 1;
-         }
-         input:checked {
-            opacity: 1;
-         }
-         #checkingAll {
-            transform: scale(3);
-            position: absolute;
-            margin: auto;
-            left: -140%;
-            top: 40%;
-         }
+.btn-default:hover {
+	opacity: 0.5;
+	color: white;
+	background-color: black;
+}
 
-         #checkingAll_word {
-            position: absolute;
-            margin: auto;
-            left: -100%;
-            top: 25%;
-         }
+.btn-default.is-checked {
+	color: white;
+	background-color: black;
+}
 
+#delete_button {
+	float: right;
+	color: white;
+	background-color: black;
+}
 
+#delete_checking {
+	float: right;
+}
 
-      </style>
+.checking {
+	position: absolute;
+	right: 5%;
+	top: 7%;
+	transform: scale(3);
+	opacity: 0;
+	transition: opacity 0.35s border: none;
+	z-index: 3;
+	background-color: white;
+}
 
-<!-- 검색결과에 따른 내알못/나만의 루트 전환 탭 버튼 이벤트 -->
-<script>
-   $('.portfolio').isotope({
-      itemSelector : 'figure',
-      layoutMode : 'masonry'
-   });
-   $('.filters').on('click', 'button', function() {
-      var filterValue = $(this).attr('data-filter');
-      $('.filters').find('.is-checked').removeClass('is-checked');
-      $(this).addClass('is-checked');
-      $('.portfolio').isotope({
-         filter : filterValue
-      });
-   });
-</script>
+.portfolio figure:hover input {
+	opacity: 1;
+}
+
+input:checked {
+	opacity: 1;
+}
+
+#checkingAll {
+	transform: scale(3);
+	position: absolute;
+	margin: auto;
+	left: -140%;
+	top: 40%;
+}
+
+#checkingAll_word {
+	position: absolute;
+	margin: auto;
+	left: -100%;
+	top: 25%;
+}
+</style>
 
 <!-- 내알못 글목록 불러오기 이벤트 핸들링-->
 <script type="text/javascript">
 	$(document).ready(function selectAllMHP() {
 
-		 localStorage.setItem('userId', 'qwer522');
-         var userId = localStorage.getItem('userId');
+		localStorage.setItem('userId', 'qwer522');
+        var userId = localStorage.getItem('userId');
 		var bookmarkController = new BookmarkController();
-		var myHiddenPlace = bookmarkController.requestHiddenPlaceBookmarkSelectAll(userId);
+		var pageController  = new PageController();
+		var page = 1;
+		var endPage;
+	  	var startPage; 
 		
+      	mhpSelectAll();
+      	
+        // 페이지 버튼 클릭시
+        $(document).on("click","#page_append a", function(){
+        	
+            page = $(this).text(); //내가 클릭한 페이지의 번호를 가져온다.
+           
+            if(page == $("#laquo").text()){ //왼쪽 그림 클릭 했을시
+             	page = startPage - 1;
+             } 
+            
+            if(page == $("#raquo").text()){ //오른쪽 그림 클릭 했을시
+             	page = endPage + 1;
+             } 
+            
+            mhpSelectAll();
+
+        });
+      	
+      	//즐겨찾기 목록 and 페이지 호출
+      	function mhpSelectAll() {
+      		
+   		var myHiddenPlace = bookmarkController.requestHiddenPlaceBookmarkSelectAll(userId, page);
+ 		var pageMaker = pageController.requestBookmarkPage(page); //북마크 컨트롤러에 연결
+ 		
+ 		$('.portfolio *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
+        $('#page_append *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
+    	 
+     	endPage = pageMaker.endPage;
+       	startPage = pageMaker.startPage; 
+          	
+      	//즐겨찾기 목록 호출
 		for (var i = 0; i < myHiddenPlace.length; i++) {
+			
 			var figureMHP = $('<figure class="figureMHP"></figure>'); //figure태그
 			var checkBoxMHP = $('<input class="checking" type="checkbox" name="" />'); //체크박스
 			var imgMHP = $('<img src="' + myHiddenPlace[i].titleImgURL + '"/>'); //이미지
@@ -182,7 +187,38 @@
 			figcaptionMHP.append(hTitle, pUserNicknameMHP, pDateMHP, pReadCountMHP, pNumMHP); //figcaption태그에 작성자, 작성일자, 추천수, 글번호
 			figureMHP.append(checkBoxMHP,imgMHP, figcaptionMHP); // figure태그에 이미지, figcaption append
 			$('.portfolio').append(figureMHP); //내알못 div에 selectAllMHP[i] 게시글 append
-			}
+			
+		}
+		
+		  //페이지 번호 처리
+		   if(pageMaker.prev == true) {//왼쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+	           var laquo_link =  $('<li><a id = "laquo" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
+	           $('#page_append').append(laquo_link); //최종 append 
+	       }
+	       
+	         for(var i = 0 ; pageMaker.startPage < pageMaker.endPage + 1  ; pageMaker.startPage++ ){
+	           
+	           if(page == pageMaker.startPage){ //클릭이 됬을때는 a링크 없애고 버튼 활성화  이걸로 다시 바꾸기 pageMaker.cri.page
+	                 
+	                var displayPageNum_active =  $('<li class = "active"><a>'+pageMaker.startPage+'</a></li>');
+	                $('#page_append').append(displayPageNum_active); //최종 append 
+	                 
+	           }else{  //우리는 active 클래스 정의된게 없어서 클래스만 추가됨 해당 번호에 
+	        	 
+	           		var displayPageNum_nonActive =  $('<li><a>'+pageMaker.startPage+'</a></li>'); //누르면 서치이벤트 페이지 전환되야함
+		            $('#page_append').append(displayPageNum_nonActive); //최종 append 
+	          
+	           }
+	           i++; 
+	           
+	           }
+
+	        if(pageMaker.next > 0 && pageMaker.endPage > 0) {//오른쪽그림 링크/ 링크 누르면 필요한것 startPage- 1, page,perPageNum,searchType,keyword
+	            var raquo_link =  $(' <li><a aria-label="Next" id = "raquo" ><span aria-hidden="true">&raquo;</span></a></li>');
+	            $('#page_append').append(raquo_link); //최종 append 
+	        } 
+      	}
+      	
 		});
 </script>
 
@@ -195,7 +231,7 @@
 			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
 
 		 localStorage.setItem('userId', 'qwer522');
-     var userId = localStorage.getItem('userId');
+        var userId = localStorage.getItem('userId');
 		var bookmarkController = new BookmarkController();
 		var myRouteAll = bookmarkController.requestMyRouteBookmarkSelectAll(userId);
 	
@@ -246,23 +282,7 @@
 		 });
 		 
 	});
-	</script>	 
-
-<!-- 검색결과에 따른 내알못/나만의 루트 전환 탭 버튼 이벤트 -->
-<script>
-   $('.portfolio').isotope({
-      itemSelector : 'figure',
-      layoutMode : 'masonry'
-   });
-   $('.filters').on('click', 'button', function() {
-      var filterValue = $(this).attr('data-filter');
-      $('.filters').find('.is-checked').removeClass('is-checked');
-      $(this).addClass('is-checked');
-      $('.portfolio').isotope({
-         filter : filterValue
-      });
-   });
-</script>
+	</script>
 
 <script type="text/javascript">
    $(function(){
@@ -316,136 +336,154 @@
 	});
 </script>
 
-   </head>
+</head>
 
-   <body class="home-page">
+<body class="home-page">
 
-    
-      <!-- 메인 사진 섹션 -->
-      <section>
 
-         <div class="swiper-container">
-            <div class="parallax-bg" style="background-image:url(images/slider.jpg)" data-swiper-parallax="-15%"></div>
-            <div class="swiper-wrapper">
-               <div class="swiper-slide">
-                  <div class="swiper-caption">
-                     <div class="title" data-swiper-parallax="-100" data-animation="fadeInDownBig">Zupa - Responsive Template</div>
-                     <div class="subtitle" data-swiper-parallax="-200" data-animation="fadeIn">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                     <div class="text" data-swiper-parallax="-300" data-animation="fadeInUpBig">
-                        <a href="card.html" class="btn btn-custom btn-lg">read more</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="swiper-slide">
-                  <div class="swiper-caption">
-                     <div class="title" data-swiper-parallax="-100" data-animation="fadeInDownBig">New Menu</div>
-                     <div class="subtitle" data-swiper-parallax="-200" data-animation="fadeIn">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                     <div class="text" data-swiper-parallax="-300" data-animation="fadeInUpBig">
-                        <a href="card.html" class="btn btn-custom btn-lg">read more</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="swiper-slide">
-                  <div class="swiper-caption">
-                     <div class="title" data-swiper-parallax="-100" data-animation="fadeInDownBig">Lorem ipsum dolor sit</div>
-                     <div class="subtitle" data-swiper-parallax="-200" data-animation="fadeIn">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                     <div class="text" data-swiper-parallax="-300" data-animation="fadeInUpBig">
-                        <a href="card.html" class="btn btn-custom btn-lg">read more</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination swiper-pagination-white"></div>
-            <!-- Add Navigation -->
-            <div class="swiper-button-prev swiper-button-white"></div>
-            <div class="swiper-button-next swiper-button-white"></div>
-         </div>
-      </section>
+	<!-- 메인 사진 섹션 -->
+	<section>
+		<div class="swiper-container">
+			<div class="parallax-bg"
+				style="background-image: url(/resources/customize/images/home.jpg)"
+				data-swiper-parallax="-15%"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="swiper-caption">
+						<div class="title" data-swiper-parallax="-100"
+							data-animation="fadeInDownBig">Zupa - Responsive Template</div>
+						<div class="subtitle" data-swiper-parallax="-200"
+							data-animation="fadeIn">Lorem ipsum dolor sit amet,
+							consectetur adipiscing elit.</div>
+						<div class="text" data-swiper-parallax="-300"
+							data-animation="fadeInUpBig">
+							<a href="card.html" class="btn btn-custom btn-lg">read more</a>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="swiper-caption">
+						<div class="title" data-swiper-parallax="-100"
+							data-animation="fadeInDownBig">New Menu</div>
+						<div class="subtitle" data-swiper-parallax="-200"
+							data-animation="fadeIn">Lorem ipsum dolor sit amet,
+							consectetur adipiscing elit.</div>
+						<div class="text" data-swiper-parallax="-300"
+							data-animation="fadeInUpBig">
+							<a href="card.html" class="btn btn-custom btn-lg">read more</a>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="swiper-caption">
+						<div class="title" data-swiper-parallax="-100"
+							data-animation="fadeInDownBig">Lorem ipsum dolor sit</div>
+						<div class="subtitle" data-swiper-parallax="-200"
+							data-animation="fadeIn">Lorem ipsum dolor sit amet,
+							consectetur adipiscing elit.</div>
+						<div class="text" data-swiper-parallax="-300"
+							data-animation="fadeInUpBig">
+							<a href="card.html" class="btn btn-custom btn-lg">read more</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Add Pagination -->
+			<div class="swiper-pagination swiper-pagination-white"></div>
+			<!-- Add Navigation -->
+			<div class="swiper-button-prev swiper-button-white"></div>
+			<div class="swiper-button-next swiper-button-white"></div>
+		</div>
+	</section>
 
-      
-     <!-- 본문 -->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-md-10 col-md-offset-1">
 
-					<!-- 카테고리 선택 탭 -->
-					<div class="btn-group" id="theme_category">
+	<!-- 본문 -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+
+				<!-- 카테고리 선택 탭 -->
+				<div class="btn-group" id="theme_category">
 					<button class="btn btn themeCategory">
 						<img class="category" src="/resources/bootstrap/image/theme0.png" />
 						<p>전체보기</p>
 						<p hidden="hidden">0</p>
 					</button>
 				</div>
-				  <!-- 전체선택 및 삭제 버튼 -->
-               <div id="delete_checking" class="btn-group">
-                  <input id="checkingAll" type="checkbox" class="btn btn-default" name="" value="" /><font id="checkingAll_word">전체선택</font>
-                  <button id="delete_button" class="btn btn-default"><font>삭제</font></button>
-               </div>
-            </div>
-				<br> <br>
-
-					<!-- 내알못/나만의 루트 선택 탭 -->
-					<div class="btn-group">
-					<button class="btn btn-default" id="figureMHP">
-						<font>내 알 못</font>
-					</button>
-					<button class="btn btn-default" id="figureMR">
-						<font>나만의 루트</font>
+				<!-- 전체선택 및 삭제 버튼 -->
+				<div id="delete_checking" class="btn-group">
+					<input id="checkingAll" type="checkbox" class="btn btn-default"
+						name="" value="" /><font id="checkingAll_word">전체선택</font>
+					<button id="delete_button" class="btn btn-default">
+						<font>삭제</font>
 					</button>
 				</div>
-				
-				
-				</div>
+			</div>
+			<br> <br>
 
-				
-				<div class="col-sm-12 col-md-10 col-md-offset-1">
-					<div class="portfolio grid-3" id="selectAll">
-						
+			<!-- 내알못/나만의 루트 선택 탭 -->
+			<div class="btn-group">
+				<button class="btn btn-default" id="figureMHP">
+					<font>내 알 못</font>
+				</button>
+				<button class="btn btn-default" id="figureMR">
+					<font>나만의 루트</font>
+				</button>
+			</div>
 
-						</div>
+
+		</div>
+
+
+		<div class="col-sm-12 col-md-10 col-md-offset-1">
+			<div class="portfolio grid-3" id="selectAll"></div>
+		</div>
+	</div>
+
+	<section>
+		<nav class="text-center">
+			<ul id="page_append" class="pagination">
+				
+			</ul>
+		</nav>
+	</section>
+
+
+	<!-- 푸터 섹션 -->
+	<footer class="page-footer">
+		<div class="container">
+			<div class="row">
+				<div class="row-xs-12">
+					<div class="divider"></div>
+					<div class="text-center">
+						<a href="index.html"><img
+							src="/resources/customize/images/mhp.png" alt="" class="logo">
+						</a>
 					</div>
 				</div>
-      
-
-
-
-      <!-- 푸터 섹션 -->
-      <footer class="page-footer">
-         <div class="container">
-            <div class="row">
-               <div class="row-xs-12">
-                  <div class="divider"></div>
-                  <div class="text-center">
-                     <a href="index.html"><img src="images/logos/logo.png" alt="" class="logo">
-                     </a>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-sm-9">
-                  <ul class="footer-links">
-                     <li><a href="#">Privacy Policy</a>
-                     </li>
-                     <li><a href="blog-index.html">Blog</a>
-                     </li>
-                     <li><a href="contact.html">Contact</a>
-                     </li>
-                  </ul>
-               </div>
-               <div class="col-sm-3">
-                  <p>© ZUPA 2016</p>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-         <script src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
-         <script src="../../../resources/bootstrap/js/swiper.jquery.min.js"></script>
-         <script src="../../../resources/bootstrap/js/animate-on-scroll.js"></script>
-         <script src="../../../resources/bootstrap/js/script.js"></script>
-         <script src="../../../resources/bootstrap/js/isotope.min.js"></script>
-      <script>
+			</div>
+			<div class="row">
+				<div class="col-sm-9">
+					<ul class="footer-links">
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="blog-index.html">Blog</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-3">
+					<p>© ZUPA 2016</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../../resources/bootstrap/js/swiper.jquery.min.js"></script>
+	<script src="../../../resources/bootstrap/js/animate-on-scroll.js"></script>
+	<script src="../../../resources/bootstrap/js/script.js"></script>
+	<script src="../../../resources/bootstrap/js/isotope.min.js"></script>
+	<script>
          var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
             paginationClickable: true,
@@ -465,8 +503,8 @@
          });
 
       </script>
-      <!-- 검색결과에 따른 내알못/나만의 루트 전환 탭 버튼 이벤트 -->
-      <script>
+	<!-- 검색결과에 따른 내알못/나만의 루트 전환 탭 버튼 이벤트 -->
+	<script>
          $('.portfolio').isotope({
             itemSelector: 'figure',
             layoutMode: 'masonry'
@@ -482,6 +520,6 @@
 
       </script>
 
-   </body>
+</body>
 
-   </html>
+</html>

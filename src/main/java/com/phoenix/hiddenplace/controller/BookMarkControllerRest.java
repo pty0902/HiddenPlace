@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.phoenix.hiddenplace.domain.Bookmark;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
+import com.phoenix.hiddenplace.domain.PageMaker;
 import com.phoenix.hiddenplace.service.BookmarkService;
 
 @RestController
@@ -21,8 +22,6 @@ public class BookmarkControllerRest {
 	@Inject
 	private BookmarkService service;
 
-
-	
 	//즐겨찾기 등록(홈페이지)
 	@RequestMapping(value = "/insertBookmarkMHP", method = RequestMethod.GET)
 	public ResponseEntity<String> insertBookmarkMHP(MyHiddenPlace myHiddenPlace) throws Exception {
@@ -60,12 +59,12 @@ public class BookmarkControllerRest {
 		}
 		//즐겨찾기 내알못 출력
 			@RequestMapping(value = "/bookmarkMHPAll", method = RequestMethod.GET)
-			public ResponseEntity<List<Bookmark>> bookmarkMHPAll(String userId) throws Exception {
+			public ResponseEntity<List<Bookmark>> bookmarkMHPAll(PageMaker pageMaker) throws Exception {
 
 				ResponseEntity<List<Bookmark>> entity = null;
 				
 				try {
-					entity = new ResponseEntity<List<Bookmark>>(service.bookmarkMHPAll(userId), HttpStatus.OK);
+					entity = new ResponseEntity<List<Bookmark>>(service.bookmarkMHPAll(pageMaker), HttpStatus.OK);
 				} catch (Exception e) {
 					e.printStackTrace();
 					entity = new ResponseEntity<List<Bookmark>>(HttpStatus.BAD_REQUEST);
@@ -103,6 +102,26 @@ public class BookmarkControllerRest {
 			}
 			return entity;
 		}
+		
+		//즐겨찾기 페이지 전환
+		@RequestMapping(value = "/bookmarkPage", method = RequestMethod.GET)
+		public ResponseEntity<PageMaker> listPage(PageMaker pageMaker) throws Exception {
+			
+			ResponseEntity<PageMaker> entity = null;
+			
+			try {
+				
+				pageMaker.setTotalCount(service.listCount(pageMaker));
+
+				entity = new ResponseEntity<PageMaker>(pageMaker, HttpStatus.OK);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<PageMaker>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}	
+		
 
 
 }

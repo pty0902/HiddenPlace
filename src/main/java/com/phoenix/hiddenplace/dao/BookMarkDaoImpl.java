@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.phoenix.hiddenplace.domain.Bookmark;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
+import com.phoenix.hiddenplace.domain.PageMaker;
 
 @Repository
 public class BookmarkDaoImpl implements BookmarkDao {
@@ -41,9 +42,15 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	}
 	
 	@Override
-	public List<Bookmark> bookmarkMHPAll(String userId) throws Exception {
-	
-		return sqlSession.selectList(namespace + ".bookmarkMHPAll", userId);
+	public List<Bookmark> bookmarkMHPAll(PageMaker pageMaker) throws Exception {
+		int page = pageMaker.getPage();
+		
+		if(page <= 0) {
+			page = 1;
+		}
+		page = (page - 1) * 12;
+		pageMaker.setPage(page);
+		return sqlSession.selectList(namespace + ".bookmarkMHPAll", pageMaker);
 	}
 
 
@@ -51,6 +58,12 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	public List<Bookmark> bookmarkMRAll(String userId) throws Exception {
 
 		return sqlSession.selectList(namespace + ".bookmarkMRAll", userId);
+	}
+
+	@Override
+	public int listCount(PageMaker pageMaker) {
+		
+		return sqlSession.selectOne(namespace + ".listCount", pageMaker);
 	}
 
 

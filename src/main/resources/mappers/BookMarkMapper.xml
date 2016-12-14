@@ -33,6 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  select TBL_BOOKMARK.BOOKMARKNUM, TBL_BOARD.TITLEIMGURL, TBL_BOARD.TITLE, TBL_BOARD.WRITEDATE, TBL_BOARD.READCOUNT, TBL_USER.USERNICKNAME
 		  from TBL_BOOKMARK, TBL_BOARD, TBL_USER
 		  where TBL_BOOKMARK.userId = #{userId} AND TBL_BOARD.NUM = TBL_BOOKMARK.NUM
+		  order by TBL_BOOKMARK.BOOKMARKNUM DESC  
+		  limit #{page}, 12
 	</select>
 	
 	<select id="bookmarkMRAll" resultType="Bookmark">
@@ -40,6 +42,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  TBL_BOOKMARK.BOOKMARKNUM, TBL_USER.USERNICKNAME
 		  from TBL_BOOKMARK, TBL_MYROUTE, TBL_USER
 		  where TBL_BOOKMARK.userId = #{userId} AND TBL_MYROUTE.ROUTENUM = TBL_BOOKMARK.ROUTENUM
+	</select>
+	
+	<!-- 즐겨찾기 페이징 -->
+	<select id="listCount" resultType="int">
+	
+		  select count(BOOKMARKNUM) 
+		  from tbl_bookmark 
+		  where NUM > 0 
+		  
 	</select>
 
 </mapper>

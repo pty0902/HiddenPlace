@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.phoenix.hiddenplace.dao.BookmarkDao;
 import com.phoenix.hiddenplace.domain.Bookmark;
 import com.phoenix.hiddenplace.domain.MyHiddenPlace;
+import com.phoenix.hiddenplace.domain.PageMaker;
 
 @Service
 public class BookmarkServiceImpl implements BookmarkService {
@@ -37,9 +38,9 @@ public class BookmarkServiceImpl implements BookmarkService {
 		dao.bookmarkDeleteMHP(myHiddenPlace);
 	}
 	@Override
-	public List<Bookmark> bookmarkMHPAll(String userId) throws Exception {
+	public List<Bookmark> bookmarkMHPAll(PageMaker pageMaker) throws Exception {
 
-		return dao.bookmarkMHPAll(userId);
+		return dao.bookmarkMHPAll(pageMaker);
 		
 	}
 	@Override
@@ -47,6 +48,13 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 		return dao.bookmarkMRAll(userId);
 		
+	}
+
+
+	@Override
+	public int listCount(PageMaker pageMaker) {
+		
+		return dao.listCount(pageMaker);
 	}
 	
 }

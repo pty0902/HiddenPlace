@@ -16,6 +16,7 @@ public class PageMaker {
 	private int themeCode = 0;
 	private int displayPageNum = 10;
 	private String keyWord;
+	private String userId;
 	
 	public PageMaker() {
 		
@@ -27,7 +28,7 @@ public class PageMaker {
 		this.calcData();
 	}
 
-	private void calcData() {
+	private void calcData() { //페이징계산
 		
 		this.endPage = (int)(Math.ceil(getPage() / (double)displayPageNum ) * displayPageNum);
 
@@ -39,7 +40,7 @@ public class PageMaker {
 			this.endPage = tempEndPage;
 		}
 
-		this.prev = startPage ==1 ? false : true;
+		this.prev = startPage == 1 ? false : true;
 		
 		this.next = endPage * getPerPageNum() >= totalCount ? false : true;
 		
@@ -147,5 +148,14 @@ public class PageMaker {
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
 	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	
 }

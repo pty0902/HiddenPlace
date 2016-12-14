@@ -22,7 +22,7 @@ public class MyhiddenPlaceControllerRest {
 	@Inject
 	private MyHiddenPlaceService service;
 
-	//페이지 전환
+	//내알못 페이지 전환
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<PageMaker> listPage(PageMaker pageMaker) throws Exception {
 		
