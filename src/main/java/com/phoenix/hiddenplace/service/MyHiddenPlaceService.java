@@ -20,8 +20,14 @@ public interface MyHiddenPlaceService {
 	
 	List<Theme> themeList() throws Exception;
 
-	public MyHiddenPlace selectOne(int num) throws Exception;
+	public MyHiddenPlace selectOne(int num) throws Exception; //내알못 조회
 	
 	List<MyHiddenPlace> bookmarkAll(String userId) throws Exception; //내알못 로그인한 유저의 즐겨찾기 목록 불러오기(홈페이지)
+	
+	public void delete(int num) throws Exception; //내알못 삭제
+	
+	public Integer upCountCheck(MyHiddenPlace myHiddenPlace)throws Exception; // 추천코드 뽑기
+	
+	public void upCount(MyHiddenPlace myHiddenPlace) throws Exception; // 추천수 증가 및 저장
 
 }

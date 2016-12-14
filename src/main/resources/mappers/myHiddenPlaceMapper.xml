@@ -49,7 +49,7 @@
 	
 	<select id="selectOne" resultType="MyHiddenPlace">
 
-		  select TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL, TBL_BOARD.CONTENT, TBL_BOARD.UPCOUNT, TBL_BOARD.STORENAME, TBL_USER.USERNICKNAME, TBL_BOARD.LATITUDE, TBL_BOARD.LONGITUDE, TBL_BOARD.USERID 
+		  select TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL, TBL_BOARD.CONTENT, TBL_BOARD.UPCOUNT, TBL_BOARD.STORENAME, TBL_USER.USERNICKNAME, TBL_BOARD.LATITUDE, TBL_BOARD.LONGITUDE, TBL_BOARD.USERID, TBL_BOARD.THEMECODE 
 		  from TBL_BOARD, TBL_USER
 		  where TBL_BOARD.NUM = #{num}
 		  
@@ -211,5 +211,35 @@
 		  from TBL_BOOKMARK
 		  where userId = #{userId}
 	</select>
+	
+	<!-- 내알못 삭제 -->
+	<delete id="delete">
+	
+		delete from TBL_BOARD
+		where NUM = #{num}
+	</delete>
+	
+	<!-- 추천수구분코드 가져오기 -->
+	<select id="upCountCheck" resultType="Integer">
+		  select UPCOUNTCODE
+		  from TBL_UPCOUNTCONNECT
+		  where userId = #{userId} and NUM = #{num}
+	</select>
+	
+	<!-- 추천한 아이디 저장 -->
+	<insert id="upCountInsert">
+		insert into TBL_UPCOUNTCONNECT (UPCOUNTCODE, USERID, NUM)
+		values(#{upCountCode}, #{userId}, #{num})
+	</insert>
+	
+	<!-- 추천수 증가 -->
+	<update id="upCount">
+
+		  update TBL_BOARD set UPCOUNT = UPCOUNT + 1
+		  where NUM = #{num} and USERID = #{userId}
+		  
+	</update> 
+	
+	
 	
 </mapper>
