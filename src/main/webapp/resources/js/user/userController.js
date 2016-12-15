@@ -6,28 +6,21 @@ function UserController() {
 	var dao = new UserDao();
 
 	// 로그아웃 controller 메서드
-	this.requestLogout = function() {
+	this.requestLogout = function(userId) {
 
-		var userId = localStorage.getItem("userId");
+		// var userId = localStorage.getItem("userId");
 		// var userId = "pty0902@naver.com";
 		var isSuccess = dao.logout(userId);
 
+		return isSuccess;
+		/*
 		if (isSuccess === "success") {
 			alert("로그아웃되었습니다.");
 			localStorage.clear(); // 클라이언트 세션 초기화
 			this.requestLoginUrl();
 		}
-
+*/
 		// 홈 URL 메서드 자리
-
-	};
-
-	// 로그인 페이지요청 controller 메서드
-	this.requestLoginUrl = function() {
-
-		var requestUrl = "loginView";
-
-		document.location = requestUrl;
 
 	};
 
@@ -77,13 +70,8 @@ function UserController() {
 	this.requestUserInsert = function(newUser) {
 
 		var isSuccess = dao.userInsert(newUser);
-
-		if (isSuccess === "success") {
-			alert("회원가입 성공");
-			this.requestLoginUrl(); // 로그인 페이지로 이동
-		} else {
-			alert("회원가입 실패");
-		}
+		
+		return isSuccess;
 	};
 	// 회원가입
 	this.requestUserInsertModal = function(newUser) {

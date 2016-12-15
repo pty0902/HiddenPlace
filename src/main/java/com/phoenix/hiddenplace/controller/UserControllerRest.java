@@ -210,7 +210,7 @@ public class UserControllerRest {
 	public ResponseEntity<String> logout(Login login, HttpSession session) {
 
 		ResponseEntity<String> entity = null;
-
+		System.out.println(login);
 		try {
 			service.logout(login); // 로그인 테이블에 로그아웃 상태 update
 
