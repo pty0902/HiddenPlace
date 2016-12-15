@@ -66,7 +66,7 @@
 		  select TBL_BOARD.NUM, TBL_BOARD.WRITEDATE, TBL_USER.USERNICKNAME,
 		  TBL_BOARD.READCOUNT, TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL
 		  from TBL_BOARD, TBL_USER
-		  where TBL_BOARD.MHPBESTCODE = 1
+		  where TBL_BOARD.MHPBESTCODE = 1 and TBL_BOARD.USERID = TBL_USER.USERID;
 	</select> 
 
 	<!-- <select id="readPage" resultType="org.toolbee.domain.BoardVO">

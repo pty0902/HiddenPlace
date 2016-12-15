@@ -30,6 +30,7 @@
 <script src="/resources/js/myhiddenplace/myHiddenPlace.js"></script>
 <script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
 <script src="/resources/js/homepage/homepageController.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 
 <!-- 로그인,회원가입 스타일-->
 <style>
@@ -88,16 +89,14 @@ hr {
       
       //session에 저장되있는 userId값 가져오기
 	  var loginState = localStorage.getItem('userId');
-      var loginState = "qwer522"; //연결 완료후 삭제할 것
       var headmenuLink1;
       var headmenuLink2;
       var headmenuLink3;
 
       if(loginState == null) {
          headmenuLink1 = $('<button id="headmenu-login" class="btn btn-default">로그인</button>');
-         headmenuLink2 = $('<button id="headmenu-userInsert" class="btn btn-default">회원가입</button>');
       
-         $('#headmenu-div').append(headmenuLink1, headmenuLink2);
+         $('#headmenu-div').append(headmenuLink1);
       } else {
          headmenuLink1 = $('<button id="headmenu-myInfo" class="btn btn-default">'+loginState+'</button>');
          headmenuLink2 = $('<button id="headmenu-bookmark" class="btn btn-default">즐겨찾기</button>');
@@ -114,17 +113,15 @@ hr {
 	$(document).ready(function() {
 
 			var nowLoginId = localStorage.getItem('userId');
-			nowLoginId = "qwer522"; //연결 완료 후 삭제할 것
 			var mhpController = new MyHiddenPlaceController();
 			var myHiddenPlaces = mhpController.requestBestMHP();
 			var bookmarkAll = mhpController.requestBookmarkAllMHP(nowLoginId);
-
 			if(nowLoginId == null) {
 				
 				for (var i = 0; i < myHiddenPlaces.length; i++) {
 
 					var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
-					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].imageUrl + '"/>'); //이미지
+					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].titleImgURL + '"/>'); //이미지
 					var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
 					var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaces[i].title);
 					var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickname); //작성자
@@ -180,15 +177,13 @@ hr {
 </script>
 
 <!-- 홈페이지 MyRoute best3 이벤트 핸들링 -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 
 		var nowLoginId = localStorage.getItem('userId');
- 		nowLoginId = "qwer522"; //연결 완료 후 삭제할 것
 		var mrController = new MyRouteController();
 		var myRoutes = mrController.requestBestMR();
 		var bookmarkAll = mrController.requestBookmarkAllMR(nowLoginId);
-		
 		if(nowLoginId == null) {
 			
 			for (var i = 0; i < myRoutes.length; i++) {
@@ -248,7 +243,7 @@ hr {
 
 });
 </script>
-
+ -->
 <!-- 글조회 (MHP) 이벤트 핸들링 -->
 <script>
 $(document).ready(function() {
@@ -278,7 +273,6 @@ $(document).ready(function() {
 		$('.figureMHP').unbind("click");
 		
 		var nowLoginId = localStorage.getItem('userId'); //현재 로그인한 사용자 아이디 가져오기
-		nowLoginId = "qwer522"; //연결 완료 후 삭제할 것
    		var num = $(this).parent().children().eq(4).text();	//현재 클릭한 게시글의 글번호 가져오기
    		var mhpController = new MyHiddenPlaceController(); 
 		var bookmarkAll = mhpController.requestBookmarkAllMHP(nowLoginId); //현재 로그인한 유저의 즐겨찾기 목록을 가져오기
@@ -336,6 +330,33 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- head menu 로그아웃 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+   $('#headmenu-logout').click(function() {
+
+      var userId = localStorage.getItem('userId');
+      var userController = new UserController();
+      var isSuccess = userController.requestLogout(userId);
+      if (isSuccess == "success") {
+         alert("로그아웃 되었습니다.")
+         localStorage.clear();
+         window.location.reload(); //새로고침(f5), 즐겨찾기 아이콘 클릭시 글조회 이벤트가 삭제되므로 되살리기 위해 사용
+      }
+
+   });
+});
+</script>
+
+<!-- 로그인 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-login').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestLoginUrl();
+	});
+});
+</script>
 <body>
 	
 <!-- 상단 메뉴 헤더 -->
@@ -386,6 +407,7 @@ $(document).ready(function() {
 		</div>
 	</section>
 -->
+
 </body>
 
 </html>

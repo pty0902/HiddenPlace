@@ -26,4 +26,13 @@ function HomepageController() {
 
 	};
 	
+//	where 로그인페이지 from header
+	this.requestLoginUrl = function() {
+
+		var requestUrl = "/user/loginView";
+
+		document.location = requestUrl;
+
+	};
+	
 }
