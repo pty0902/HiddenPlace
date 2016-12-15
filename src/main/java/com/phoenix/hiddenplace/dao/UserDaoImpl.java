@@ -88,7 +88,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public String getNickname(String userId) throws Exception {
+	public User getNickname(String userId) throws Exception {
 
 		return session.selectOne(namespace + ".getNickname", userId);
 

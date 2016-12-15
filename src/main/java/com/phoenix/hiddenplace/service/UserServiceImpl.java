@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getNickname(String userId) throws Exception {
+	public User getNickname(String userId) throws Exception {
 
 		return dao.getNickname(userId);
 

@@ -36,7 +36,7 @@ public interface UserDao {
 	public void delete(User user) throws Exception;
 
 	// 닉네임 가져오기
-	public String getNickname(String userId) throws Exception;
+	public User getNickname(String userId) throws Exception;
 
 	// 페이스북 로그인
 	public User externalLogin(User user) throws Exception;
