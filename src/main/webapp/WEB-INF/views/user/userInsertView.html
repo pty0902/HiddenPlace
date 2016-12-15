@@ -31,6 +31,7 @@
 
 <script src="/resources/js/user/user.js"></script>
 <script src="/resources/js/user/userController.js"></script>
+<script src="/resources/js/homepage/homepageController.js"></script>
 
 </head>
 <script>
@@ -43,8 +44,10 @@
 
 		// 취소 버튼
 		$('#cancel').click(function() {
-// 			location.href = "views/homepage/homeView"; // 메인 홈페이지 url
 
+			var homepageController = new HomepageController;
+			homepageController.requestLoginUrl();
+			
 		});
 
 		// 회원가입 버튼 
@@ -57,7 +60,16 @@
 				var nickname = $('#nickname').val();
 				var phoneNum = $('#phoneNum_1').val() + $('#phoneNum_2').val() + $('#phoneNum_3').val();
 				var newUser = new User(id, pw, nickname, phoneNum);
-				userController.requestUserInsert(newUser);
+				var isSuccess = userController.requestUserInsert(newUser);
+				
+				if (isSuccess === "success") {
+					alert("회원가입 성공");
+					var homepageController = new HomepageController;
+					homepageController.requestLoginUrl();
+				} else {
+					alert("회원가입 실패");
+				}
+				
 			}
 
 		});

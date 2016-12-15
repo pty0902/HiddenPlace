@@ -50,13 +50,9 @@
 		   var nicknameCheckSuccess = false;
 		   
 		   var userId = localStorage.getItem('userId'); // 로컬세션에 들어있는 아이디를 가져옴
-<<<<<<< HEAD
-		   var nickname = userController.requestNickname(userId);
-=======
+
 		   var nickname = userController.requestGetNickname(userId);
->>>>>>> refs/remotes/origin/master
-		   
-		   
+		   alert(nickname);
 		   $('#now_id').attr('value', userId); 
 		 	$('#now_nickname').attr('value', nickname); 
 		 	
@@ -206,11 +202,7 @@
 <style>
 @font-face {
 	font-family: 'baemin';
-<<<<<<< HEAD
-	src: url(/resources/bootstrap/fonts/baemin.ttf) format('truetype');
-=======
 	src: url(/resources/customize/fonts/배달의민족주아체.ttf) format('truetype');
->>>>>>> refs/remotes/origin/master
 }
 
 button, h2, a, input, label {

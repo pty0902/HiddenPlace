@@ -190,7 +190,7 @@ input:checked {
 <script type="text/javascript">
 	$(document).ready(function selectAllMHP() {
 
-		localStorage.setItem('userId', 'qwer522');
+// 		localStorage.setItem('userId', 'qwer522');
         var userId = localStorage.getItem('userId');
 		var bookmarkController = new BookmarkController();
 		var pageController  = new PageController();
@@ -287,7 +287,7 @@ input:checked {
 		 $('#figureMR').on('click', function() {
 			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
 
-		localStorage.setItem('userId', 'qwer522');
+// 		localStorage.setItem('userId', 'qwer522');
         var userId = localStorage.getItem('userId');
 		var bookmarkController = new BookmarkController();
 		var myRouteAll = bookmarkController.requestMyRouteBookmarkSelectAll(userId);
@@ -316,7 +316,7 @@ input:checked {
 		 $('#figureMHP').on('click', function() {
 			 
 			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
- 		localStorage.setItem('userId', 'qwer522');
+ 		//localStorage.setItem('userId', 'qwer522');
         var userId = localStorage.getItem('userId');
 		var bookmarkController = new BookmarkController();
 		var myHiddenPlace = bookmarkController.requestHiddenPlaceBookmarkSelectAll(userId);
@@ -411,7 +411,6 @@ input:checked {
 
       if(loginState == null) {
          headmenuLink1 = $('<button id="headmenu-login" class="btn btn-default">로그인</button>');
-         headmenuLink2 = $('<button id="headmenu-userInsert" class="btn btn-default">회원가입</button>');
       
          $('#headmenu-div').append(headmenuLink1, headmenuLink2);
       } else {
@@ -455,6 +454,34 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- head menu 로그아웃 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+   $('#headmenu-logout').click(function() {
+
+      var userId = localStorage.getItem('userId');
+      var userController = new UserController();
+      var isSuccess = userController.requestLogout(userId);
+      if (isSuccess == "success") {
+      	alert("로그아웃 되었습니다.")
+        localStorage.clear();
+        var homepageController = new HomepageController;
+ 		homepageController.requestHomepageUrl();
+      }
+
+   });
+});
+</script>
+
+<!-- 로그인 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-login').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestLoginUrl();
+	});
+});
+</script>
 </head>
 
 <body class="home-page">
