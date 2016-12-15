@@ -305,18 +305,17 @@ public class UserControllerRest {
 
 	// 닉네임 가져오기
 	@RequestMapping(value = "/getNickname", method = RequestMethod.POST)
-	public ResponseEntity<String> getNickname(String userId) {
+	public ResponseEntity<User> getNickname(String userId) {
 
-		ResponseEntity<String> entity = null;
-		String getNickname = null;
+		ResponseEntity<User> entity = null;
+		User user = new User();
 		try {
-
-			getNickname = service.getNickname(userId);
-			entity = new ResponseEntity<String>(getNickname, HttpStatus.OK);
+			user = service.getNickname(userId);
+			entity = new ResponseEntity<User>(user, HttpStatus.OK);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
