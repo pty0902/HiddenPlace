@@ -105,8 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 닉네임 가져오기 -->
-	<select id="getNickname" resultType="String">
-		select USERNICKNAME
+	<select id="getNickname" resultType="User">
+		select *
 		from
 		TBL_USER
 		where USERID = #{userId}
