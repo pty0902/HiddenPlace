@@ -63,12 +63,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	public void pwUpdate(User user) throws Exception {
-
-		dao.pwUpdate(user);
-
-	}
 
 	@Override
 	public void update(User user) throws Exception {

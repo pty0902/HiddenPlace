@@ -14,9 +14,6 @@ public interface UserService {
 	// 이메일 중복확인
 	public String emailCheck(String email) throws Exception;
 
-	// 비밀번호 변경
-	public void pwUpdate(User user) throws Exception;
-
 	// 로그인
 	public User login(Login login) throws Exception;
 

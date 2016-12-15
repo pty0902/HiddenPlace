@@ -37,12 +37,6 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-	@Override
-	public void pwUpdate(User user) throws Exception {
-
-		session.update(namespace + ".pwUpdate", user);
-
-	}
 
 	@Override
 	public User login(Login login) throws Exception {
