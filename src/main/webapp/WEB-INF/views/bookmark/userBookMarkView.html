@@ -15,15 +15,18 @@
 <link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/swiper.min.css" />
 <link rel="stylesheet" type="text/css" href="../../../resources/bootstrap/css/style.css" />
-<script src="../../../resources/bootstrap/js/pace.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../resources/customize/css/header.css" />
+
+<script src="/resources/bootstrap/js/pace.min.js"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../../resources/bootstrap/js/modernizr-custom.js"></script>
-<script src="../../../resources/bootstrap/js/script.js"></script>
-<script src="../../../resources/js/user/user.js"></script>
-<script src="../../../resources/js/user/userController.js"></script>
-<script src="../../../resources/js/bookmark/bookmarkController.js"></script>
+<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/js/modernizr-custom.js"></script>
+<script src="/resources/bootstrap/js/script.js"></script>
+<script src="/resources/js/user/user.js"></script>
+<script src="/resources/js/user/userController.js"></script>
 <script src="/resources/js/page/pageController.js"></script>
+<script src="/resources/js/homepage/homepageController.js"></script>
+<script src="/resources/js/bookmark/bookmarkController.js"></script>
 
 <style>
 @font-face {
@@ -219,7 +222,6 @@ input:checked {
       		
    		var myHiddenPlace = bookmarkController.requestHiddenPlaceBookmarkSelectAll(userId, page);
  		var pageMaker = pageController.requestBookmarkPage(page); //북마크 컨트롤러에 연결
- 		alert(myHiddenPlace);
  		$('.portfolio *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
         $('#page_append *').remove(); //기존에 어펜드되있던 목록들을 싹다 지운다.
     	 
@@ -285,7 +287,7 @@ input:checked {
 		 $('#figureMR').on('click', function() {
 			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
 
-		 localStorage.setItem('userId', 'qwer522');
+		localStorage.setItem('userId', 'qwer522');
         var userId = localStorage.getItem('userId');
 		var bookmarkController = new BookmarkController();
 		var myRouteAll = bookmarkController.requestMyRouteBookmarkSelectAll(userId);
@@ -314,8 +316,8 @@ input:checked {
 		 $('#figureMHP').on('click', function() {
 			 
 			 $('.portfolio *').remove(); //기존에 append 되었던 것 전부 삭제 
-		localStorage.setItem('userId', 'qwer522');
-         var userId = localStorage.getItem('userId');
+ 		localStorage.setItem('userId', 'qwer522');
+        var userId = localStorage.getItem('userId');
 		var bookmarkController = new BookmarkController();
 		var myHiddenPlace = bookmarkController.requestHiddenPlaceBookmarkSelectAll(userId);
 		
@@ -395,37 +397,83 @@ input:checked {
 	});
 </script>
 
+<!-- head menu 이벤트 핸들링 -->
+<script type="text/javascript">
+   $(document).ready(function() {
+      
+      //session에 저장되있는 userId값 가져오기
+	  var loginState = localStorage.getItem('userId');
+//	  var loginState = "qwer522"; //연결 완료후 삭제할 것
+      
+      var headmenuLink1;
+      var headmenuLink2;
+      var headmenuLink3;
+
+      if(loginState == null) {
+         headmenuLink1 = $('<button id="headmenu-login" class="btn btn-default">로그인</button>');
+         headmenuLink2 = $('<button id="headmenu-userInsert" class="btn btn-default">회원가입</button>');
+      
+         $('#headmenu-div').append(headmenuLink1, headmenuLink2);
+      } else {
+         headmenuLink1 = $('<button id="headmenu-myInfo" class="btn btn-default">'+loginState+'</button>');
+         headmenuLink2 = $('<button id="headmenu-bookmark" class="btn btn-default">즐겨찾기</button>');
+         headmenuLink3 = $('<button id="headmenu-logout" class="btn btn-default">로그아웃</button>');
+     
+         $('#headmenu-div').append(headmenuLink1, headmenuLink2, headmenuLink3);
+      }
+      
+   });
+</script>
+
+<!-- 로고(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('.logo').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestHomepageUrl();
+	});
+});
+</script>
+
+<!-- 마이페이지(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-myInfo').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestMypageUrl();
+	});
+});
+</script>
+
+<!-- 즐겨찾기(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-bookmark').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestBookmarkUrl();
+	});
+});
+</script>
+
 </head>
 
 <body class="home-page">
 
 <!-- 상단 메뉴 헤더 -->
-      <header>
-      
-      <div class="jumbotron">
-      
-         <a href="index.html"><img class="logo"
-            src="/resources/customize/images/mhp.png" alt="Logo" /></a>
-         <!-- <a href="index.html"><img class="logo" src="images/logos/logoMHP.png" alt="Logo" /></a> -->
-         
-
-      <!--검색창 -->
-         
-         <input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
-            <button id="search_button" class="btn btn-default" type="button">
-               <span class="glyphicon glyphicon-search"></span>
-            </button> 
-               
-         <div id="login_button_div" class="btn-group">
-            <button id="login_button" class="btn btn-default"
-               style="background-color: #eee;">로그인</button>
-            <button id="userInsert_button" class="btn btn-default"
-               style="background-color: #eee;">회원가입</button>
-         </div>
-         </div>
-      
-   </header>
-   
+<header id="headmenu-header" style="margin-top:0%;">
+<!-- <div class="container"> -->
+	<div class="jumbotron">
+		<a><img class="logo" src="../../../resources/customize/images/mhp.png" alt="Logo" style="cursor:pointer"/></a>
+		<input id="search_bar" type="text" placeholder="#가산 #내가알지못한곳" />
+		<button id="search_button" class="btn btn-default" type="button">
+			<span class="glyphicon glyphicon-search"></span>
+		</button>
+		<div id="headmenu-div" class="btn-group">
+             
+             
+		</div>
+	</div>
+</header>
   
 	<!-- 메인 사진 섹션 -->
 	<section>
