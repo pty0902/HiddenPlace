@@ -14,9 +14,6 @@ public interface UserDao {
 	// 이메일 중복확인
 	public String emailCheck(String email) throws Exception;
 
-	// 비밀번호 변경
-	public void pwUpdate(User user) throws Exception;
-
 	// 로그인
 	public User login(Login login) throws Exception;
 
@@ -39,7 +36,7 @@ public interface UserDao {
 	public void delete(User user) throws Exception;
 
 	// 닉네임 가져오기
-	public String getNickname(String userId) throws Exception;
+	public User getNickname(String userId) throws Exception;
 
 	// 페이스북 로그인
 	public User externalLogin(User user) throws Exception;

@@ -37,12 +37,6 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-	@Override
-	public void pwUpdate(User user) throws Exception {
-
-		session.update(namespace + ".pwUpdate", user);
-
-	}
 
 	@Override
 	public User login(Login login) throws Exception {
@@ -94,7 +88,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public String getNickname(String userId) throws Exception {
+	public User getNickname(String userId) throws Exception {
 
 		return session.selectOne(namespace + ".getNickname", userId);
 

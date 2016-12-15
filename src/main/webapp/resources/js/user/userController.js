@@ -1,4 +1,4 @@
-$("head").append("<script src=\"/resources/js/user/userDao.js\"><\/script>");
+﻿$("head").append("<script src=\"/resources/js/user/userDao.js\"><\/script>");
 
 // user controller 객체
 function UserController() {
@@ -73,7 +73,18 @@ function UserController() {
 		
 		return isSuccess;
 	};
+	// 회원가입
+	this.requestUserInsertModal = function(newUser) {
 
+		var isSuccess = dao.userInsert(newUser);
+
+		if (isSuccess === "success") {
+			alert("회원가입 성공");
+			modalAnimate($formLogin, $formRegister); // 회원가입 성공시 로그인 모달로 이동
+		} else {
+			alert("회원가입 실패");
+		}
+	};
 	// 닉네임 중복확인
 	this.requestNicknameCheck = function(nickname) {
 
@@ -124,6 +135,32 @@ function UserController() {
 		if (isSuccess === "success") {
 			alert("비밀번호가 변경되었습니다.");
 			requestLoginUrl(); // 로그인 페이지로 이동
+		} else {
+			alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
+		}
+	}
+
+
+	// 비밀번호 찾기(변경) 페이지요청 controller 메서드
+	this.requestForgetPwUpdateModalUrl = function(email) {
+
+		localStorage.setItem("email", email); // 비밀번호 찾기 인증 성공시 다음 모달 페이지로 넘기는 이메일을 로컬세션에 저장
+		modalAnimate($formLost, $formLostUpdate); // 다음 모달 페이지로 전환
+
+	};
+
+	// 비밀번호 찾기 (변경)
+	this.requestForgetPwUpdateModal = function(newPw) {
+		
+		var email = localStorage.getItem("email"); // 이전 페이지에서 가져오는 email
+		
+		var isSuccess = dao.forgetPwUpdate(email, newPw);
+		if (isSuccess === "success") {
+			alert("비밀번호가 변경되었습니다.");
+			localStorage.removeItem('email');
+			localStorage.clear();
+			modalAnimate($formLostUpdate, $formLogin); // 로그인 모달 페이지로 전환
+
 		} else {
 			alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
 		}
@@ -224,5 +261,28 @@ function UserController() {
 		dao.FBLoginDao();
 
 	};
+
+// Modal 페이지 전환을 위한 변수, 함수
+	var $formLogin = $('#login-form');
+	var $formLost = $('#lost-form');
+	var $formLostUpdate = $('#lostUpdate-form');
+	var $formRegister = $('#register-form');
+	var $divForms = $('#div-forms');
+	var $modalAnimateTime = 300;
+	var $msgAnimateTime = 150;
+	var $msgShowTime = 2000;
+
+	function modalAnimate($oldForm, $newForm) {
+		var $oldH = $oldForm.height();
+		var $newH = $newForm.height();
+		$divForms.css("height", $oldH);
+		$oldForm.fadeToggle($modalAnimateTime, function() {
+			$divForms.animate({
+				height : $newH
+			}, $modalAnimateTime, function() {
+				$newForm.fadeToggle($modalAnimateTime);
+			});
+		});
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.phoenix.hiddenplace.controller;
+﻿package com.phoenix.hiddenplace.controller;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -145,12 +145,19 @@ public class UserControllerRest {
 		System.out.println(newPw);
 		ResponseEntity<String> entity = null;
 		try {
-			String updatePw = passwordEncoder.encode(newPw); // 비밀번호 암호화(변경할 비밀번호)
-			User user = new User();
-			user.setUserId(email);
-			user.setUserPw(updatePw);
-			service.pwUpdate(user);
-			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			Login login = new Login();
+			login.setUserId(email); // 현재 로그온 상태의 아이디
+			User searchUser = service.login(login); // 비밀번호를 변경하려는 아이디의 유저 정보를 가져옴(id,pw) 없다면 null
+
+			if (searchUser != null && passwordEncoder.matches(newPw, searchUser.getUserPw())) { // 비밀번호 일치시 비밀번호 변경
+				searchUser.setUserPw(passwordEncoder.encode(newPw)); // 변경할 비밀번호
+				service.update(searchUser);
+
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			} else {
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -229,10 +236,13 @@ public class UserControllerRest {
 			User searchUser = service.login(login); // 현재 로그인한 아이디의 유저 정보를 가져옴(id,pw) 없다면 null
 
 			if (searchUser != null && passwordEncoder.matches(nowPw, searchUser.getUserPw())) { // 비밀번호 일치
-				searchUser.setUserNickname(newNickname); // 현재 입력되어 있는 닉네임
-				if (newPw == null) { // 닉네임만 변경하였을 경우
+				if (newPw == null) { // 닉네임만 변경
+					searchUser.setUserNickname(newNickname); // 현재 입력되어 있는 닉네임
+					service.update(searchUser);
+				} else if (newNickname == null) { // 비밀번호만 변경
 					service.update(searchUser);
 				} else { // 닉네임, 비밀번호 변경
+					searchUser.setUserNickname(newNickname); // 현재 입력되어 있는 닉네임
 					searchUser.setUserPw(passwordEncoder.encode(newPw)); // 변경할 비밀번호
 					service.update(searchUser);
 				}
@@ -295,18 +305,17 @@ public class UserControllerRest {
 
 	// 닉네임 가져오기
 	@RequestMapping(value = "/getNickname", method = RequestMethod.POST)
-	public ResponseEntity<String> getNickname(String userId) {
+	public ResponseEntity<User> getNickname(String userId) {
 
-		ResponseEntity<String> entity = null;
-		String getNickname = null;
+		ResponseEntity<User> entity = null;
+		User user = new User();
 		try {
-
-			getNickname = service.getNickname(userId);
-			entity = new ResponseEntity<String>(getNickname, HttpStatus.OK);
+			user = service.getNickname(userId);
+			entity = new ResponseEntity<User>(user, HttpStatus.OK);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}

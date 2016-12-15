@@ -63,12 +63,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	public void pwUpdate(User user) throws Exception {
-
-		dao.pwUpdate(user);
-
-	}
 
 	@Override
 	public void update(User user) throws Exception {
@@ -92,7 +86,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getNickname(String userId) throws Exception {
+	public User getNickname(String userId) throws Exception {
 
 		return dao.getNickname(userId);
 

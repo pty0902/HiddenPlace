@@ -320,11 +320,10 @@ function UserDao() {
 				data : {
 					userId : userId
 				},
-				dataType : 'text', // 서버에서 보내오는 데이터 타입
-				success : function(data) {
-					
-					nickname = data; // nickname
-
+				dataType : 'json', // 서버에서 보내오는 데이터 타입
+				success : function(data) { // user
+					user = data; // nickname
+					nickname = user.userNickname;
 				}
 			});
 		} catch (e) {

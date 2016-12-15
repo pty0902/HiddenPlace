@@ -52,7 +52,6 @@
 		   var userId = localStorage.getItem('userId'); // 로컬세션에 들어있는 아이디를 가져옴
 
 		   var nickname = userController.requestGetNickname(userId);
-		   alert(nickname);
 		   $('#now_id').attr('value', userId); 
 		 	$('#now_nickname').attr('value', nickname); 
 		 	
