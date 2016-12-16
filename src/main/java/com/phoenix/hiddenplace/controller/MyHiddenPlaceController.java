@@ -36,20 +36,26 @@ public class MyHiddenPlaceController {
 
 	}
 
-	//내알못 수정 컨트롤러
-	@RequestMapping(value ="/myHiddenPlaceUpdate", method = RequestMethod.GET)
-	public String updateMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
-
-		return "/views/myhiddenplace/myHiddenPlaceUpdate";
-
-	}
-
 	//request 내알못 조회 컨트롤러
 	@RequestMapping(value ="/myHiddenPlaceSelectOne", method = RequestMethod.GET)
 	public String selectOneMHP() throws Exception {
 
 		return "/views/myhiddenplace/myHiddenPlaceSelectOne";
 
-	}      
+	}   
+	
+	// 조회에 숫자 보내기
+	@RequestMapping(value = "/myHiddenPlaceSelectOne/{num}")
+	public String forgetPwUpdateGET() throws Exception {
+
+		return "/views/myhiddenplace/myHiddenPlaceSelectOne";
+	} 
+	
+	// 조회에 숫자 보내기
+	@RequestMapping(value = "/myHiddenPlaceUpdate/{num}")
+	public String updateMHP() throws Exception {
+
+		return "/views/myhiddenplace/myHiddenPlaceUpdate";
+	} 
 	
 }

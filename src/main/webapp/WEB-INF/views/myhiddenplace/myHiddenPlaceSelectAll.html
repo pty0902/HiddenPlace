@@ -85,8 +85,148 @@
 	margin: 0;
 	z-index: 3;
 }
+/* 
+.btn-default {
+	color: black;
+	background-color: white;
+}
 
+.btn-default:focus, .btn-default.focus {
+	color: #ffffff;
+	background-color: #9d9da6;
+}
+
+.btn-default:hover {
+	opacity: 0.5;
+	color: white;
+	background-color: black;
+}
+
+.btn-default.is-checked {
+	color: white;
+	background-color: black;
+}
+ */
+/* 아래 임시주석 */
+/* #insert_button_div {
+	float: right;
+}
+
+#insert_button {
+	color: black;
+	background-color: #F4F4F4;
+}
+
+header {
+	margin: 0;
+}
+
+.jumbotron {
+	padding: 0;
+	position: fixed;
+	width: 100%;
+	opacity: 0.8;
+	z-index: 3;
+	margin: 0;
+}
+
+section {
+	padding-top: 71px;
+}
+
+.logo {
+	width: 180px;
+	margin: 10px;
+	margin-left: 19%;
+}
+
+#login_button_div {
+	float: right;
+	margin: 8px 18% 8px 1%;
+	z-index: 5;
+}
+
+#login_button, #userInsert_button {
+	color: black;
+	font-size: 18px;
+	font-family: 'baemin';
+}
+#search_bar {
+	width: 400px;
+	height: 40px;
+	font-size: 20px;
+}
+
+.search_bar:focus + button {
+	z-index: 3;   
+}
+
+#search_bar,
+#search_button {
+	position: absolute;
+	right: 45%;
+	top: 15px;
+	border: 0;
+}
+
+#search_bar:focus {
+	outline: none;
+} */
 </style>
+
+<!-- head menu 이벤트 핸들링 -->
+<script type="text/javascript">
+   $(document).ready(function() {
+      
+      //session에 저장되있는 userId값 가져오기
+	  var loginState = localStorage.getItem('userId');
+      
+      var headmenuLink1;
+      var headmenuLink2;
+      var headmenuLink3;
+
+      if(loginState == null) {
+         headmenuLink1 = $('<button id="headmenu-login" class="btn btn-default">로그인</button>');
+      
+         $('#headmenu-div').append(headmenuLink1, headmenuLink2);
+      } else {
+         headmenuLink1 = $('<button id="headmenu-myInfo" class="btn btn-default">'+loginState+'</button>');
+         headmenuLink2 = $('<button id="headmenu-bookmark" class="btn btn-default">즐겨찾기</button>');
+         headmenuLink3 = $('<button id="headmenu-logout" class="btn btn-default">로그아웃</button>');
+     
+         $('#headmenu-div').append(headmenuLink1, headmenuLink2, headmenuLink3);
+      }
+      
+   });
+</script>
+
+<!-- head menu 로그아웃 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+   $('#headmenu-logout').click(function() {
+
+      var userId = localStorage.getItem('userId');
+      var userController = new UserController();
+      var isSuccess = userController.requestLogout(userId);
+      if (isSuccess == "success") {
+         alert("로그아웃 되었습니다.")
+         localStorage.clear();
+         window.location.reload(); //새로고침(f5), 즐겨찾기 아이콘 클릭시 글조회 이벤트가 삭제되므로 되살리기 위해 사용
+      }
+
+   });
+});
+</script>
+
+<!-- 로그인 이벤트 핸들링 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-login').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestLoginUrl();
+	});
+});
+</script>
 
 <!-- 글조회 (MHP) 이벤트 핸들링 -->
 <script>
@@ -94,20 +234,38 @@ $(document).ready(function() {
       $('.figureMHP').click(function() {
          var num = $(this).children().eq(1).children().eq(4).text();
          var mhpController = new MyHiddenPlaceController();
-         mhpController.requestSelectOneMHP(num);
+         mhpController.requestSelectOneMhpPage(num);
       });
 });
 </script>
 
-<!-- 글조회 (MR) 이벤트 핸들링 -->
+<!-- 로고(header) 클릭이벤트 -->
 <script>
 $(document).ready(function() {
-      $('.figureMR').click(function() {
-         var num = $(this).children().eq(1).children().eq(4).text();
-         
-         var mrController = new MyRouteController();
-         mrController.requestSelectOneMR(num);
-      });
+	$('.logo').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestHomepageUrl();
+	});
+});
+</script>
+
+<!-- 마이페이지(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-myInfo').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestMypageUrl();
+	});
+});
+</script>
+
+<!-- 즐겨찾기(header) 클릭이벤트 -->
+<script>
+$(document).ready(function() {
+	$('#headmenu-bookmark').click(function() {
+		var homepageController = new HomepageController;
+		homepageController.requestBookmarkUrl();
+	});
 });
 </script>
 
@@ -145,18 +303,20 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- 글쓰기 (MHP) 이벤트 핸들링 -->
 <script>
 $(document).ready(function() {
-	$("#headerDiv").load("/resources/js/include/header.html");
+      $('#insert_button').click(function() {
+    	 var mhpController = new MyHiddenPlaceController();
+         mhpController.requestInsertView();
+      });
 });
 </script>
 
 </head>
 
 <body class="home-page">
-	
-	<!-- 상단 메뉴 헤더 -->
-	<div id="headerDiv"></div>
+
 
 	<!-- 상단 메뉴 헤더 -->
 	<header id="headmenu-header" style="margin-top: 0%;">
@@ -531,6 +691,7 @@ $(document).ready(function() {
  });
  
 </script>
+
 
 	<!-- 즐겨찾기 등록 이벤트 핸들링 -->
 	<script>

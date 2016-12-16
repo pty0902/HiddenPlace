@@ -24,6 +24,8 @@
 <script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
 <!-- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=	f617f92098af4b2430be59f43550867c"></script> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="/resources/js/user/userController.js"></script>
+<script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=	f617f92098af4b2430be59f43550867c"></script>
 
 <style>
 .menu-explain {
@@ -193,15 +195,18 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 						
-						
-						var nickName = "qwer522";
-						var num = 6; //글번호 받아오기
+						var url = unescape(location.href); // url = http://localhost:8080/user/forgetPwUpdateView/pty0902@naver.com
+						var numUrl = url.split('='); // pm[0] = http: , pm[1] = , 
+						var num = numUrl[1];
+
+						var userController = new UserController();
+ 						var userId = localStorage.getItem('userId');  
+// 						var user = userController.requestGetNickname(userId);
+// 						var nickname = user.userNickname;
 						var mhpController = new MyHiddenPlaceController();
 						var myHiddenPlace = mhpController.requestSelectOneMHP(num); // 임의에 글번호 14번을 넣어놈(목록에서 받아오면됨)
-						var upCountCode = mhpController.requestUpCountCode(nickName,num);
+						var upCountCode = mhpController.requestUpCountCode(userId,num);
 						var upImage;
-					    var latitude = myHiddenPlace.latitude;//위도를 받아서 위도변수에 저장
-						var longitude = myHiddenPlace.longitude;//경도를 받아서 경도변수에 저장
 						
  						if (upCountCode == 1) {
   							upImage = $('<img id="up" class="hiddenPlace_logo" src="/resources/customize/images/like.png"></div>'); // 채워진 하트 이미지
@@ -238,21 +243,44 @@
 					    $('#up_count').append(upcount);
 					    $('#up_count_img').append(upImage);
 					    
-					    //지도 찍어주는 부분
-				 		/* var markerPosition = new daum.maps.LatLng(latitude, longitude);
+					    //지도 찍어주기
+					    var keyWord = encodeURIComponent(myHiddenPlace.address);
+					    
+						var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
+					   
+						$.getJSON(url + "&callback=?" , function(json){
+					       
+					        // json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
+					        var items = json.channel.item;
+							
+					        // 반복문을 통해 원하는 json값을 뽑아내는 단계. 지금은 위도와 경도를 받기 위해...
+					        $.each(items, function(i, it){
+					           
+								// 위도와 경도의 변수를 저장
+					        	var latitude = it.latitude;
+					        	var longitude = it.longitude;
+					        
+					       		var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
+					              
+					       		if(i == 0) {
+									var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+									var options = { //지도를 생성할 때 필요한 기본 옵션
+										center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+					               		level: 3 //지도의 레벨(확대, 축소 정도)
+									};
+					              
+								var marker = new daum.maps.Marker({
+									position: markerPosition
+								});
 
-						var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-
-						var options = { //지도를 생성할 때 필요한 기본 옵션
-							center : new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
-							level : 3
-						//지도의 레벨(확대, 축소 정도)
-						};
-						var marker = new daum.maps.Marker({
-							position : markerPosition
-						});
-						var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-						marker.setMap(map); //지도위에 마커 뿌리기 */
+								var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+								marker.setMap(map); //지도위에 마커 뿌리기
+								
+								}
+					        
+							}); 
+					                
+						});    
 				    
 						//추천수 버튼 이벤트 발생
 						$('#up').click(function() {
@@ -264,7 +292,7 @@
 									var likeImg = document.getElementById("up");
 									likeImg.src = "/resources/customize/images/like.png"
 
-									var isSuccess = mhpController.requestUpCount(1,nickName,num); //추천수 1증가시키고, db에 저장 
+									var isSuccess = mhpController.requestUpCount(1,userId,num); //추천수 1증가시키고, db에 저장 
 									
 									if (isSuccess == "success") {
 										window.location.reload();
@@ -276,29 +304,26 @@
 						
 						//수정 버튼 이벤트 발생
 						$("#btn-update").click(function() {
-							
+							mhpController.requestUpdateMhpPage(num);
 							
 						});
 						
 						//삭제 버튼 이벤트 발생
 						$("#btn-delete").click(function() {
 							
-							var isSuccess = mhpController.requestMyHiddenPlaceDelete(num);
-							if (isSuccess = "success") {
-								
-							}
+							mhpController.requestMyHiddenPlaceDelete(num);
 							
 						});
 						// var nickName = myHiddenPlace.userNickname;
 						
 						var replies = mhpController.requestReplySelectAll(num); // 임의에 글번호 1번을 넣어놈(목록에서 받아오면됨)
 						for (var i = 0; i < replies.length; i++) {
-							if (replies[i].userId == nickName) {
+							if (replies[i].userId == userId) {
 
 								var commentParentText = '<tr id="r1" name="commentParentCode">'
 										+ '<td colspan=2>'
 										+ '<strong>'
-										+ replies[i].userId
+										+ replies[i].userNickname
 										+ '</strong><a style="cursor:pointer;" name="Update"> 수정</a> | <a style="cursor:pointer;" name="Del">삭제</a><div hidden>'
 										+ replies[i].replyNum
 										+ '</div><p>'
@@ -317,7 +342,7 @@
 								var commentParentText = '<tr id="r1" name="commentParentCode">'
 										+ '<td colspan=2>'
 										+ '<strong>'
-										+ replies[i].userId // replies[i].userNickname 를 입력
+										+ replies[i].userNickname // replies[i].userNickname 를 입력
 										+ '</strong><div hidden>'
 										+ replies[i].replyNum
 										+ '</div><p>'
@@ -343,7 +368,7 @@
 										$("#commentParentText").focus();
 										return;
 									} 
-									var isSuccess = mhpController.requestReplyInsert(nickName, comment, num); // 서버 댓글번호 증가시켜줘야함.
+									var isSuccess = mhpController.requestReplyInsert(userId, comment, num); // 서버 댓글번호 증가시켜줘야함.
 									if (isSuccess == "success") {
 
 										$("#commentParentText").val("");

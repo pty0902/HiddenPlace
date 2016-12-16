@@ -7,7 +7,7 @@ public class Reply {
 	private int routeNum;
 	private String replyComment;
 	private String userId;
-	
+	private String userNickName; //닉네임 유저
 	
 	public int getReplyNum() {
 		return replyNum;
@@ -39,11 +39,21 @@ public class Reply {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	public String getUserNickName() {
+		return userNickName;
+	}
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
+	}
+	
 	@Override
 	public String toString() {
 		return "Reply [replyNum=" + replyNum + ", num=" + num + ", routeNum=" + routeNum + ", replyComment="
-				+ replyComment + ", userId=" + userId + "]";
+				+ replyComment + ", userId=" + userId + ", userNickName=" + userNickName + "]";
 	}
+
+	
 	
 	
 }
