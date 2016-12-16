@@ -319,12 +319,18 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+$(document).ready(function() {
+	$("#footerDiv").load("/resources/js/include/footer.html");
+});
+</script>
+
 </head>
 
 <body class="home-page">
 
-<!-- 상단 메뉴 헤더 -->
-<div id="headerDiv"></div>
+	<!-- 상단 메뉴 헤더 -->
+	<div id="headerDiv"></div>
   
 	<!-- 메인 사진 섹션 -->
 	<section>
@@ -425,34 +431,9 @@ $(document).ready(function() {
 		</nav>
 	</section>
 
-
-	<!-- 푸터 섹션 -->
-	<footer class="page-footer">
-		<div class="container">
-			<div class="row">
-				<div class="row-xs-12">
-					<div class="divider"></div>
-					<div class="text-center">
-						<a href="index.html"><img
-							src="/resources/customize/images/mhp.png" alt="" class="logo">
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-9">
-					<ul class="footer-links">
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="blog-index.html">Blog</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-3">
-					<p>© ZUPA 2016</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<!-- 하단 메뉴 푸터 -->
+	<div id="footerDiv"></div>
+	
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="/resources/bootstrap/js/bootstrap.min.js"></script>

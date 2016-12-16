@@ -30,6 +30,12 @@ $(document).ready(function() {
 </script>
 
 <script>
+$(document).ready(function() {
+	$("#footerDiv").load("/resources/js/include/footer.html");
+});
+</script>
+
+<script>
 
 	function selectReason() {
 		if (document.getElementById("sel1").value == "write") {
@@ -214,8 +220,8 @@ button, h2, a, input, label {
 </style>
 
 <body>
-<!-- header DIV -->
-<div id="headerDiv"></div>
+	<!-- 상단 메뉴 헤더 -->
+	<div id="headerDiv"></div>
 
 	<div class="container">
 		<div class="row">
@@ -382,7 +388,8 @@ button, h2, a, input, label {
 		</div>
 	</div>
 
-
+	<!-- 하단 메뉴 푸터 -->
+	<div id="footerDiv"></div>
 
 </body>
 

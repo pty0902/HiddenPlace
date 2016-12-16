@@ -280,3 +280,7 @@ button, h2, a, input, label, span, text, div, form, p, font {
 	line-height: 1.2;
 	font-size: 12px;
 }
+
+.modal-backdrop.in {
+   opacity: .3;
+}

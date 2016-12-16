@@ -442,13 +442,24 @@
 							});
 </script>
 
-</head>
+<script>
+$(document).ready(function() {
+	$("#headerDiv").load("/resources/js/include/header.html");
+});
+</script>
 
-<body>
+<script>
+$(document).ready(function() {
+	$("#footerDiv").load("/resources/js/include/footer.html");
+});
+</script>
+
+</head>
 
 <body class="home-page">
 
-
+	<!-- 상단 메뉴 헤더 -->
+	<div id="headerDiv"></div>
 
 	<!-- 메인 사진 섹션 -->
 	<section>
@@ -516,6 +527,9 @@
 			</table>
 		</div>
 	</div>
+
+	<!-- 하단 메뉴 푸터 -->
+	<div id="footerDiv"></div>
 
 
 </body>

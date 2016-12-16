@@ -28,20 +28,6 @@ function UserController() {
 
    };
 
-   // 마이페이지 페이지요청 controller 메서드
-   this.requestMypageUrl = function() {
-
-      var userId = localStorage.getItem("userId");
-      var requestUrl = "mypageView";
-
-      var isSuccess = dao.mypageAuth(userId);
-
-      if (isSuccess === "success") {
-         document.location = requestUrl;
-      } else if (isSuccess === "fail") {
-         alert("일반 회원가입 사용자만 회원 정보를 수정할 수 있습니다.");
-      }
-   };
 
    // 즐겨찾기 페이지요청 controller 메서드
    this.requestBookmarkUrl = function() {
@@ -140,7 +126,6 @@ function UserController() {
 
       localStorage.setItem("email", email); // 비밀번호 찾기 인증 성공시 다음 모달 페이지로 넘기는 이메일을 로컬세션에 저장
       modalAnimate($formLost, $formLostUpdate); // 다음 모달 페이지로 전환
-
    };
 
    // 비밀번호 찾기 (변경)
@@ -154,7 +139,6 @@ function UserController() {
          localStorage.removeItem('email');
          localStorage.clear();
          modalAnimate($formLostUpdate, $formLogin); // 로그인 모달 페이지로 전환
-
       } else {
          alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
       }

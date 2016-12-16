@@ -74,11 +74,12 @@
 
          var userId = localStorage.getItem('userId');
          var userController = new UserController();
+         var homepageController = new HomepageController();
          var isSuccess = userController.requestLogout(userId);
          if (isSuccess == "success") {
             alert("로그아웃 되었습니다.")
             localStorage.clear();
-            window.location.reload(); //새로고침(f5), 즐겨찾기 아이콘 클릭시 글조회 이벤트가 삭제되므로 되살리기 위해 사용
+            homepageController.requestHomepageUrl(); //홈페이지로 이동
          }
 
       });
@@ -100,27 +101,28 @@
       var $msgShowTime = 2000;
 
       $('#userInsert').click(function() { // 로그인 -> 회원가입
-         modalAnimate($formLogin, $formRegister)
-      });
-      $('#forgetPw').click(function() { // 로그인 -> 회원가입
-         modalAnimate($formLogin, $formLost);
-      });
-      $('#lost_login').click(function() { // 비밀번호찾기 -> 로그인
-         modalAnimate($formLost, $formLogin);
-      });
-      $('#lost_userInsert').click(function() { // 비밀번호찾기 -> 회원가입
-         modalAnimate($formLost, $formRegister);
-      });
-      $('#register_forgetPw').click(function() { // 회원가입 -> 비밀번호 찾기
-         modalAnimate($formRegister, $formLost);
-      });
-      $('#register_login').click(function() { // 회원가입 -> 로그인 버튼
-         modalAnimate($formRegister, $formLogin);
-      });
+          modalAnimate($formLogin, $formRegister)
+       });
+       $('#forgetPw').click(function() { // 로그인 -> 비밀번호찾기
+          modalAnimate($formLogin, $formLost);
+       });
+       $('#lost_login').click(function() { // 비밀번호찾기 -> 로그인
+          modalAnimate($formLost, $formLogin);
+       });
+       $('#lost_userInsert').click(function() { // 비밀번호찾기 -> 회원가입
+          modalAnimate($formLost, $formRegister);
+       });
+       $('#register_forgetPw').click(function() { // 회원가입 -> 비밀번호 찾기
+          modalAnimate($formRegister, $formLost);
+       });
+       $('#register_login').click(function() { // 회원가입 -> 로그인 버튼
+          modalAnimate($formRegister, $formLogin);
+       });
 
       function modalAnimate($oldForm, $newForm) {
          var $oldH = $oldForm.height();
          var $newH = $newForm.height();
+         $('input').val("");
          $divForms.css("height", $oldH);
          $oldForm.fadeToggle($modalAnimateTime, function() {
             $divForms.animate({
@@ -131,6 +133,10 @@
          });
       }
 
+      
+      $('#login-modal').on('show.bs.modal', function () {
+          $('input').val("");
+       });
    });
 </script>
 
@@ -175,7 +181,7 @@
          var status = checkValue(); // 입력한 상황 체크
          if (status) {
             var id = $('#register_id').val();
-            var pw = $('#register_id').val();
+            var pw = $('#register_pw').val();
             var nickname = $('#nickname').val();
             var phoneNum = $('#phoneNum_1').val() + $('#phoneNum_2').val() + $('#phoneNum_3').val();
             var newUser = new User(id, pw, nickname, phoneNum);
