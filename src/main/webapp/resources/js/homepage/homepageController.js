@@ -1,5 +1,6 @@
 function HomepageController() {
-//	where 홈페이지 from header
+	
+	// where 홈페이지
 	this.requestHomepageUrl = function() {
 
 		var requestUrl = "/";
@@ -8,16 +9,16 @@ function HomepageController() {
 
 	};
 	
-//	where 회원정보관리 from header
-	this.requestMypageUrl = function() {
+	// where 글목록
+	this.requestSelectAllUrl = function() {
 
-		var requestUrl = "/user/mypageView";
+		var requestUrl = '/myhiddenplace/myHiddenPlaceSelectAll';
 
 		document.location = requestUrl;
 
 	};
-	
-//	where 즐겨찾기 from header
+
+	// where 즐겨찾기
 	this.requestBookmarkUrl = function() {
 
 		var requestUrl = "/bookmark/userBookmarkView";
@@ -25,8 +26,8 @@ function HomepageController() {
 		document.location = requestUrl;
 
 	};
-	
-//	where 로그인페이지 from header
+
+	// where 로그인페이지
 	this.requestLoginUrl = function() {
 
 		var requestUrl = "/user/loginView";
@@ -34,5 +35,5 @@ function HomepageController() {
 		document.location = requestUrl;
 
 	};
-	
+
 }

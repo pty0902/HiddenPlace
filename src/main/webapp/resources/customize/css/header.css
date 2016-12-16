@@ -274,5 +274,10 @@ button, h2, a, input, label, span, text, div, form, p, font {
 }
 
 .modal-backdrop.in {
+<<<<<<< HEAD
 	opacity: .5;
 }
+=======
+   opacity: .3;
+}
+>>>>>>> refs/remotes/dongjin1204/master

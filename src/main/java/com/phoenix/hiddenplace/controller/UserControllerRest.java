@@ -141,8 +141,8 @@ public class UserControllerRest {
    // 비밀번호 찾기 (변경)
    @RequestMapping(value = "/forgetPwUpdateView", method = RequestMethod.POST)
    public ResponseEntity<String> forgetPwUpdate(String email, String newPw) {
-      System.out.println(email); // 인증 성공한 아이디
-      System.out.println(newPw); // 새로 입력한 비밀번호
+      System.out.println(email);
+      System.out.println(newPw);
       ResponseEntity<String> entity = null;
       try {
          Login login = new Login();
@@ -163,7 +163,7 @@ public class UserControllerRest {
 
    // 로그인
    @RequestMapping(value = "/login", method = RequestMethod.POST)
-   public ResponseEntity<String> login(Login login, HttpSession session) {
+   public ResponseEntity<String> login(Login login) {
 
       ResponseEntity<String> entity = null;
 
@@ -172,21 +172,7 @@ public class UserControllerRest {
 
          if (searchUser != null && passwordEncoder.matches(login.getUserPw(), searchUser.getUserPw())) { // 아이디, 비밀번호 모두 일치
             service.loginConnect(searchUser); // 로그인 테이블에 로그인 상태, 계정 상태 update(일반회원)
-
-            session.setAttribute("login", searchUser); // 세션에 로그인 성공한 유저 정보를 login이라는 이름으로 저장
-            System.out.println("세션에 login 속성 생성함.");
-
-            Object dest = session.getAttribute("dest"); // 세션에서 dest를 가져옴
-            System.out.println("돌아갈 페이지 : " + (String) dest); // dest = /user/mypageView
-
-            if (dest != null) {
-               entity = new ResponseEntity<String>((String) dest, HttpStatus.OK);
-            } else {
-               entity = new ResponseEntity<String>("/", HttpStatus.OK);
-            }
-
-            System.out.println("세션에서 dest 속성을 삭제함.");
-            session.removeAttribute("dest");
+            entity = new ResponseEntity<String>("success", HttpStatus.OK);
 
          } else if (searchUser == null) { // 아이디 불일치
             entity = new ResponseEntity<String>("idFail", HttpStatus.OK);
@@ -203,15 +189,15 @@ public class UserControllerRest {
 
    // 로그아웃
    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-   public ResponseEntity<String> logout(Login login, HttpSession session) {
+   public ResponseEntity<String> logout(Login login) {
 
       ResponseEntity<String> entity = null;
       System.out.println(login);
       try {
          service.logout(login); // 로그인 테이블에 로그아웃 상태 update
 
-         System.out.println("세션에서 login 속성을 삭제함.");
-         session.removeAttribute("login");
+         // System.out.println("세션에서 login 속성을 삭제함.");
+         // session.removeAttribute("login");
 
          entity = new ResponseEntity<String>("success", HttpStatus.OK);
       } catch (Exception e) {
@@ -261,7 +247,7 @@ public class UserControllerRest {
       int loginConnectCode = 0;
       try {
          loginConnectCode = service.mypageAuth(userId);
-
+         System.out.println("로그인계정코드"+loginConnectCode);
          if (loginConnectCode == 1) { // 일반계정
             entity = new ResponseEntity<String>("success", HttpStatus.OK);
          } else if (loginConnectCode == 2) { // 페이스북 계정
@@ -329,7 +315,7 @@ public class UserControllerRest {
 
    // 페이스북 로그인
    @RequestMapping(value = "/externalLogin", method = RequestMethod.POST)
-   public ResponseEntity<String> externalLogin(@RequestBody User user, HttpSession session) {
+   public ResponseEntity<String> externalLogin(@RequestBody User user) {
 
       ResponseEntity<String> entity = null;
       User fbUser = user;
@@ -338,30 +324,12 @@ public class UserControllerRest {
          fbUser = service.externalLogin(user); // 페이스북 계정이 이미 존재하는 회원인지 확인 (신규회원이라면 null)
 
          if (fbUser == null) { // 신규 회원이면 DB에 회원 정보 저장
-
             service.create(user);
-
             service.loginConnectF(user); // 로그인 테이블에 로그인 상태, 계정 상태 update(페이스북)
-
          } else {
-
             service.loginConnectF(user); // 로그인 테이블에 로그인 상태, 계정 상태 update(페이스북)
-
          }
-
-         session.setAttribute("login", user);
-         System.out.println("세션에 login 속성 생성함.");
-
-         Object dest = session.getAttribute("dest"); // 세션에서 dest를 가져옴
-         System.out.println("돌아갈 페이지 : " + (String) dest); // ex) dest = /user/mypageView
-
-         if (dest != null) {
-            entity = new ResponseEntity<String>((String) dest, HttpStatus.OK);
-         } else {
-            entity = new ResponseEntity<String>("/", HttpStatus.OK);
-         }
-         System.out.println("세션에서 dest 속성을 삭제함.");
-         session.removeAttribute("dest");
+         entity = new ResponseEntity<String>("success", HttpStatus.OK);
 
       } catch (Exception e) {
          e.printStackTrace();

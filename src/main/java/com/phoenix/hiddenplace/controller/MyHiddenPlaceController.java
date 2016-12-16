@@ -22,15 +22,23 @@ public class MyHiddenPlaceController {
 
 	//request 내알못 목록 컨트롤러
 	@RequestMapping(value ="/myHiddenPlaceSelectAll", method = RequestMethod.GET)
-	public String selectAllMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
+	public String selectAllMHP() throws Exception {
 
+		return "/views/myhiddenplace/myHiddenPlaceSelectAll";
+
+	}
+	
+	//request 내알못 목록 컨트롤러
+	@RequestMapping(value ="/selectAllKeyWordUrl/{keyWord}", method = RequestMethod.GET)
+	public String selectAllKeyWordUrl() throws Exception {
+		System.out.println("ddddddddddddddddddddd");
 		return "/views/myhiddenplace/myHiddenPlaceSelectAll";
 
 	}
 
 	//내알못 글쓰기 컨트롤러
 	@RequestMapping(value ="/myHiddenPlaceInsert", method = RequestMethod.GET)
-	public String inertMHP(MyHiddenPlace myHiddenPlace, RedirectAttributes rttr) throws Exception {
+	public String inertMHP() throws Exception {
 
 		return "/views/myhiddenplace/myHiddenPlaceInsert";
 
