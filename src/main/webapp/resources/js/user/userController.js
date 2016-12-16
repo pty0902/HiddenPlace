@@ -5,106 +5,6 @@ function UserController() {
 
 	var dao = new UserDao();
 
-<<<<<<< HEAD
-	// 로그아웃 controller 메서드
-	this.requestLogout = function(userId) {
-
-		// var userId = localStorage.getItem("userId");
-		// var userId = "pty0902@naver.com";
-		var isSuccess = dao.logout(userId);
-
-		return isSuccess;
-		/*
-		 * if (isSuccess === "success") { alert("로그아웃되었습니다."); localStorage.clear(); // 클라이언트 세션 초기화 this.requestLoginUrl(); }
-		 */
-		// 홈 URL 메서드 자리
-	};
-
-	// 회원가입 페이지요청 controller 메서드
-	this.requestUserInsertUrl = function() {
-
-		var requestUrl = "userInsertView";
-
-		document.location = requestUrl;
-
-	};
-
-	// 마이페이지 페이지요청 controller 메서드
-	this.requestMypageUrl = function() {
-
-		var userId = localStorage.getItem("userId");
-		var requestUrl = "mypageView";
-
-		var isSuccess = dao.mypageAuth(userId);
-
-		if (isSuccess === "success") {
-			document.location = requestUrl;
-		} else if (isSuccess === "fail") {
-			alert("일반 회원가입 사용자만 회원 정보를 수정할 수 있습니다.");
-		}
-	};
-
-	// 즐겨찾기 페이지요청 controller 메서드
-	this.requestBookmarkUrl = function() {
-
-		var requestUrl = "userBookMarkView";
-
-		document.location = requestUrl;
-
-	};
-
-	// 비밀번호 찾기 페이지요청 controller 메서드
-	this.requestForgetPwUrl = function() {
-
-		var requestUrl = "forgetPwView";
-
-		document.location = requestUrl;
-
-	};
-
-	// 회원가입
-	this.requestUserInsert = function(newUser) {
-
-		var isSuccess = dao.userInsert(newUser);
-
-		return isSuccess;
-	};
-	// 회원가입
-	this.requestUserInsertModal = function(newUser) {
-
-		var isSuccess = dao.userInsert(newUser);
-
-		if (isSuccess === "success") {
-			alert("회원가입 성공");
-			modalAnimate($formRegister, $formLogin); // 회원가입 성공시 로그인 모달로 이동
-		} else {
-			alert("회원가입 실패");
-		}
-	};
-	// 닉네임 중복확인
-	this.requestNicknameCheck = function(nickname) {
-
-		var nicknameCheck = dao.nicknameCheck(nickname);
-		var isSuccess = false;
-
-		if (nicknameCheck === "success") {
-			alert("사용가능한 닉네임입니다.");
-			isSuccess = true;
-		}
-		if (nicknameCheck === "fail") {
-			alert("이미 사용중인 닉네임입니다.");
-			isSuccess = false;
-		}
-		return isSuccess;
-	}
-
-	// 회원가입 이메일 인증번호 전송
-	this.requestEmailSend = function(email, certificationNum) {
-
-		var emailSendCheck = dao.emailSend(email, certificationNum);
-		var isSuccess = false;
-
-=======
 	// where 회원정보관리
 	this.requestMypageUrl = function() {
 		
@@ -205,7 +105,6 @@ function UserController() {
 		var emailSendCheck = dao.emailSend(email, certificationNum);
 		var isSuccess = false;
 
->>>>>>> refs/remotes/dongjin1204/master
 		if (emailSendCheck === "success") {
 			alert("인증번호가 전송되었습니다.");
 			isSuccess = true;
@@ -241,15 +140,9 @@ function UserController() {
 	// 비밀번호 찾기(변경) 페이지요청 controller 메서드
 	this.requestForgetPwUpdateModalUrl = function(email) {
 
-<<<<<<< HEAD
-		localStorage.setItem("email", email); // 비밀번호 찾기 인증 성공시 다음 모달 페이지로 넘기는 이메일을 로컬세션에 저장
-		modalAnimate($formLost, $formLostUpdate); // 다음 모달 페이지로 전환
-
-=======
 		localStorage.setItem("email", email); // 비밀번호 찾기 인증 성공시 다음 모달 페이지로 넘기는
 												// 이메일을 로컬세션에 저장
 		modalAnimate($formLost, $formLostUpdate); // 다음 모달 페이지로 전환
->>>>>>> refs/remotes/dongjin1204/master
 	};
 
 	// 비밀번호 찾기 (변경)
@@ -263,10 +156,6 @@ function UserController() {
 			localStorage.removeItem('email');
 			localStorage.clear();
 			modalAnimate($formLostUpdate, $formLogin); // 로그인 모달 페이지로 전환
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/dongjin1204/master
 		} else {
 			alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
 		}
@@ -305,12 +194,8 @@ function UserController() {
 			alert("비밀번호가 일치하지 않습니다.");
 		} else {
 			alert("로그인 성공");
-<<<<<<< HEAD
-			localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인 성공한 ID를 저장시킴
-=======
 			localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인
 															// 성공한 ID를 저장시킴
->>>>>>> refs/remotes/dongjin1204/master
 			document.location = isSuccess; // ex) user/mypageView
 		}
 	};
@@ -329,12 +214,8 @@ function UserController() {
 			alert("비밀번호가 일치하지 않습니다.");
 		} else if (isSuccess === "success") {
 			alert("로그인 성공");
-<<<<<<< HEAD
-			localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인 성공한 ID를 저장시킴
-=======
 			localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인
 															// 성공한 ID를 저장시킴
->>>>>>> refs/remotes/dongjin1204/master
 			window.location.reload(); // 페이지 새로고침
 		}
 	};

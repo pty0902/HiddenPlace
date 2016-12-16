@@ -185,32 +185,6 @@ $(document).ready(function(){
       var $msgShowTime = 5000;
 
       $('#userInsert').click(function() { // 로그인 -> 회원가입
-<<<<<<< HEAD
-         modalAnimate($formLogin, $formRegister);
-      });
-      $('#forgetPw').click(function() { // 로그인 -> 회원가입
-         modalAnimate($formLogin, $formLost);
-      });
-      $('#lost_login').click(function() { // 비밀번호찾기 -> 로그인
-         modalAnimate($formLost, $formLogin);
-      });
-      $('#lost_userInsert').click(function() { // 비밀번호찾기 -> 회원가입
-         modalAnimate($formLost, $formRegister);
-      });
-      $('#register_forgetPw').click(function() { // 회원가입 -> 비밀번호 찾기
-         modalAnimate($formRegister, $formLost);
-      });
-      $('#register_login').click(function() { // 회원가입 -> 로그인 버튼
-         modalAnimate($formRegister, $formLogin);
-         
-      });
-
-      function modalAnimate($oldForm, $newForm) {
-         var $oldH = $oldForm.height(); // 이전 폼
-         var $newH = $newForm.height(); // 다음 폼 
-         $('input').val("");
-         $divForms.css("height", $oldH); 
-=======
           modalAnimate($formLogin, $formRegister)
        });
        $('#forgetPw').click(function() { // 로그인 -> 비밀번호찾기
@@ -234,7 +208,6 @@ $(document).ready(function(){
          var $newH = $newForm.height();
          $('input').val("");
          $divForms.css("height", $oldH);
->>>>>>> refs/remotes/dongjin1204/master
          $oldForm.fadeToggle($modalAnimateTime, function() {
             $divForms.animate({ // 이전 폼의 높이로 css조정
                height : $newH
@@ -244,16 +217,10 @@ $(document).ready(function(){
          });
       }
 
-<<<<<<< HEAD
-      $('#login-modal').on('show.bs.modal', function () {
-    	  $('input').val("");
-      });
-=======
       
       $('#login-modal').on('show.bs.modal', function () {
           $('input').val("");
        });
->>>>>>> refs/remotes/dongjin1204/master
    });
    
    
@@ -280,17 +247,6 @@ $(document).ready(function(){
         	}
       });
 
-<<<<<<< HEAD
-        	   var status = checkValue(); // 입력한 상황 체크
-               if (status) {
-        	   
-              var id = $('#id').val();
-              var pw = $('#pw').val();
-              var user = new User(id, pw);
-              userController.requestLoginModal(user);
-               }
-           });
-=======
       function checkValue() {
          
           if (!$("#id").val()) {
@@ -305,7 +261,6 @@ $(document).ready(function(){
            }
           return true;
       }
->>>>>>> refs/remotes/dongjin1204/master
 
            function checkValue() {
         	   
@@ -747,276 +702,6 @@ $(document).ready(function() {
 
 <!-- 상단 메뉴 헤더 -->
 <header id="headmenu-header" style="margin-top: 0%;">
-<<<<<<< HEAD
-	<div class="jumbotron">
-		<a><img class="logo"
-			src="../../../resources/customize/images/mhp.png" alt="Logo"
-			style="cursor: pointer" /></a> <input id="search_bar" type="text"
-			placeholder="#가산 #내가알지못한곳" />
-		<button id="search_button" class="btn btn-default" type="button">
-			<span class="glyphicon glyphicon-search"></span>
-		</button>
-		<div id="headmenu-div" class="btn-group"></div>
-
-		<div id="dialog-message" title="dialog 타이틀" style="display: none;">
-			<p>
-				<span class="ui-icon ui-icon-circle-check"
-					style="float: left; margin: 0 7px 50px 0;"></span> <span
-					id="alert-msg"></span>
-			</p>
-		</div>
-
-
-	</div>
-	<!-- BEGIN # MODAL LOGIN -->
-	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true"
-		style="display: none;">
-
-		<div class="modal-dialog">
-
-			<div class="modal-content">
-
-				<!-- 헤더, 로고 이미지 -->
-				<div class="modal-header" align="center">
-					<img class="img-circle" id="img_logo"
-						src="/resources/customize/images/logo.png">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
-				</div>
-
-				<!-- Begin # DIV Form -->
-				<div id="div-forms">
-
-					<!-- Begin # 로그인 Form -->
-					<div id="login-form">
-
-						<div class="modal-body">
-							<div id="div-login-msg">
-								<div id="icon-login-msg"
-									class="glyphicon glyphicon-chevron-right"></div>
-								<span id="text-login-msg">로그인</span>
-							</div>
-							<div class="animated-form-control ">
-								<input id="id" class="form-control" type="text"
-									placeholder="E-mail" required><span
-									class="glyphicon glyphicon-envelope form-control-feedback"></span>
-							</div>
-							<div class="animated-form-control has-feedback">
-								<input id="pw" class="form-control" type="password"
-									placeholder="Password" required> <span
-									class="glyphicon glyphicon-lock form-control-feedback"></span>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<div>
-								<button id="login" type="submit"
-									class="btn btn-primary btn-md btn-block">로그인</button>
-							</div>
-							<div>
-								<button id="facebook_login" type="submit" name="singlebutton"
-									class="btn btn-primary btn-md btn-block ">
-									<i class="fa fa-facebook"></i> &nbsp;<font>페이스북 계정으로 로그인</font>
-								</button>
-							</div>
-							<div>
-								<button id="userInsert" type="button" class="btn btn-link">회원가입</button>
-								<button id="forgetPw" type="button" class="btn btn-link">비밀번호
-									찾기</button>
-							</div>
-						</div>
-
-					</div>
-					<!-- End # Login Form -->
-
-
-
-					<!-- Begin | 회원가입 Form -->
-					<div id="register-form" style="display: none;">
-						<div class="modal-body">
-							<div id="div-register-msg">
-								<div id="icon-register-msg"
-									class="glyphicon glyphicon-chevron-right"></div>
-								<span id="text-register-msg">회원가입</span>
-							</div>
-
-							<!-- 아이디이메일 -->
-							<table class="animated-form-control has-feedback">
-								<tr>
-									<td class="has-feedback" width="225px;"><input
-										placeholder="E-mail" type="text" name="name"
-										class="text form-control" id="register_id" required="required"
-										aria-required="true"><span
-										class="glyphicon glyphicon-envelope form-control-feedback"
-										id="input_span"></span></td>
-									<td>
-										<button id="email_send" class="btn btn-primary ">인증요청</button>
-									</td>
-								</tr>
-							</table>
-							<!-- 인증확인 -->
-							<table class="animated-form-control has-feedback">
-								<tr>
-									<td class="has-feedback" width="225px;"><input
-										placeholder="Confirm Number" id="email_confirm" type="text"
-										name="name" class="text form-control" required="required" />
-										<span class="glyphicon glyphicon-check form-control-feedback"></span></td>
-									<td>
-										<button id="email_check" class="btn btn-primary ">인증확인</button>
-									</td>
-							</table>
-							<!-- 닉네임 -->
-							<table class="animated-form-control has-feedback">
-								<tr>
-									<td class="has-feedback" width="225px;"><input
-										placeholder="Nickname" id="nickname" type="text" name="email"
-										class="text form-control" required="required" /><span
-										class="glyphicon glyphicon-user form-control-feedback"></span></td>
-									<td>
-										<button id="nickname_check" class="btn btn-primary ">중복확인</button>
-									</td>
-								</tr>
-							</table>
-							<!-- 비밀번호 -->
-							<div class="animated-form-control has-feedback"
-								style="width: 225px;">
-								<input placeholder="Password " id="register_pw" type="password"
-									name="email" class="text form-control" required="required" />
-								<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-							</div>
-							<div class="animated-form-control has-feedback"
-								style="width: 225px;">
-								<input placeholder="Password Check" id="register_pw_check"
-									type="password" name="email" class="text form-control"
-									required="required" /> <span
-									class="glyphicon glyphicon-lock form-control-feedback"></span>
-							</div>
-							<p class="pw_p">
-								<span style="color: gray;">* </span>비밀번호는 공백없이 문자, 숫자를 조합하여 입력
-								가능 <br>(6~12자리, 특수문자 가능)
-							</p>
-							<select id="phoneNum_1" class="text form-control">
-								<option>010</option>
-								<option>019</option>
-								<option>011</option>
-							</select> -<input id="phoneNum_2" class="text form-control"> -<input
-								id="phoneNum_3" class="text form-control">
-							<p class="ph_p">
-								<span style="color: gray;">* </span>핸드폰 번호는 선택 입력사항입니다.
-							</p>
-						</div>
-						<div class="modal-footer">
-							<div>
-								<button id="join" type="submit"
-									class="btn btn-primary btn-md btn-block">가입하기</button>
-							</div>
-							<div>
-								<button id="register_login" type="button" class="btn btn-link">로그인</button>
-								<button id="register_forgetPw" type="button"
-									class="btn btn-link">비밀번호 찾기</button>
-							</div>
-						</div>
-					</div>
-					<!-- End | Register Form -->
-
-
-					<!-- Begin | Lost Password Form -->
-					<div id="lost-form" style="display: none;">
-						<div class="modal-body">
-							<div id="div-lost-msg">
-								<div id="icon-lost-msg"
-									class="glyphicon glyphicon-chevron-right"></div>
-								<span id="text-lost-msg">비밀번호 찾기</span>
-							</div>
-
-							<!-- 아이디이메일 -->
-							<table class="animated-form-control has-feedback">
-								<tr>
-									<td class="has-feedback" width="225px;"><input
-										placeholder="E-mail" type="text" name="name"
-										class="text form-control" id="lost_id" required="required"
-										aria-required="true"><span
-										class="glyphicon glyphicon-envelope form-control-feedback"
-										id="input_span"></span></td>
-									<td>
-										<button id="lost_email_send" class="btn btn-primary ">인증요청</button>
-									</td>
-								</tr>
-							</table>
-							<!-- 인증확인 -->
-							<table class="animated-form-control has-feedback">
-								<tr>
-									<td class="has-feedback" width="225px;"><input
-										placeholder="Confirm Number" type="text" name="name"
-										class="text form-control" id="lost_email_confirm"
-										required="required" aria-required="true" /> <span
-										class="glyphicon glyphicon-check form-control-feedback"></span></td>
-									<td>
-										<button id="lost_email_check" class="btn btn-primary ">인증확인</button>
-									</td>
-							</table>
-
-
-						</div>
-
-						<div class="modal-footer">
-
-							<div>
-								<button id="lost_userInsert" type="button" class="btn btn-link">회원가입</button>
-								<button id="lost_login" type="button" class="btn btn-link">로그인</button>
-							</div>
-
-						</div>
-					</div>
-					<!-- End | Lost Password Form -->
-
-					<!-- Begin | Lost Update Password Form -->
-					<div id="lostUpdate-form" style="display: none;">
-						<div class="modal-body">
-							<div id="div-lost-msg">
-								<div id="icon-lost-msg"
-									class="glyphicon glyphicon-chevron-right"></div>
-								<span id="text-lost-msg">비밀번호 변경</span>
-							</div>
-							<!-- 비밀번호 -->
-							<div class="animated-form-control has-feedback">
-								<input placeholder="Password " id="lost_pw" type="password"
-									name="email" class="text form-control" required="required" />
-								<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-							</div>
-							<div class="animated-form-control has-feedback">
-								<input placeholder="Password Check" id="lost_pw_check"
-									type="password" name="email" class="text form-control"
-									required="required" /> <span
-									class="glyphicon glyphicon-lock form-control-feedback"></span>
-							</div>
-							<p class="pw_p">
-								<span style="color: gray;">* </span> 비밀번호는 공백없이 문자, 숫자를 조합하여 입력
-								가능 <br>(6~12자리, 특수문자 가능)
-							</p>
-
-						</div>
-
-						<div class="modal-footer">
-							<div>
-								<button id="enter" type="submit"
-									class="btn btn-primary btn-md btn-block">변경하기</button>
-							</div>
-						</div>
-					</div>
-					<!-- End | Lost Update Password Form -->
-
-				</div>
-				<!-- End # DIV Form -->
-
-			</div>
-		</div>
-	</div>
-	<!-- END # MODAL LOGIN -->
-=======
    <div class="jumbotron">
       <a><img class="logo"
          src="../../../resources/customize/images/mhp.png" alt="Logo"
@@ -1276,7 +961,6 @@ $(document).ready(function() {
       </div>
    </div>
    <!-- END # MODAL LOGIN -->
->>>>>>> refs/remotes/dongjin1204/master
 
 </header>
 
