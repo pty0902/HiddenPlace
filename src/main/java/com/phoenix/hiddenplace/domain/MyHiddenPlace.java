@@ -12,7 +12,7 @@ public class MyHiddenPlace {
 	private int readCount;//조회수
 	private String storeName;//상호명
 	private int mhpBestCode;//베스트코드
-	private String userNickName; //닉네임 유저
+	private String userNickname; //닉네임 유저
 	private String titleImgURL; //타이틀이미지 URL
 	private int upCountCode; //추천수 코드
 	private String address; //검색한 주소
@@ -29,11 +29,11 @@ public class MyHiddenPlace {
 	public void setTitleImgURL(String titleImgURL) {
 		this.titleImgURL = titleImgURL;
 	}
-	public String getUserNickName() {
-		return userNickName;
+	public String getUserNickname() {
+		return userNickname;
 	}
-	public void setUserNickName(String userNickName) {
-		this.userNickName = userNickName;
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
 	}
 	public int getNum() {
 		return num;

@@ -97,10 +97,10 @@ $(document).ready(function() {
 			var mhpController = new MyHiddenPlaceController();
 			var myHiddenPlaces = mhpController.requestBestMHP();
 			var bookmarkAll = mhpController.requestBookmarkAllMHP(nowLoginId);
+			
 			if(nowLoginId == null) {
 				
 				for (var i = 0; i < myHiddenPlaces.length; i++) {
-
 					var figureMHP = $('<figure class="figureMHP" data-animation="fadeIn"></figure>'); //figure태그
 					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].titleImgURL + '"/>'); //이미지
 					var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
@@ -124,7 +124,7 @@ $(document).ready(function() {
 					var imgMHP = $('<img class="imgSize" src="' + myHiddenPlaces[i].titleImgURL + '"/>'); //이미지
 					var figcaptionMHP = $('<figcaption></figcaption>'); //figcaption태그
 					var hTitle = $('<h2 class="hTextLine"></h2>').html(myHiddenPlaces[i].title);
-					var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickName); //작성자
+					var pUserNicknameMHP = $('<p></p>').html(myHiddenPlaces[i].userNickname); //작성자
 					var pDateMHP = $('<p></p>').html(myHiddenPlaces[i].writeDate); //작성일자
 					var pReadCountMHP = $('<p></p>').html(myHiddenPlaces[i].readCount); //추천수
 					var pNumMHP = $('<p hidden></p>').html(myHiddenPlaces[i].num); //글번호

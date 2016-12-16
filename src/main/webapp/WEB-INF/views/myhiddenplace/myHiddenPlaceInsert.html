@@ -75,7 +75,7 @@
 	padding:0;
 }
 
-#thema_select{
+#theme_select{
  	margin-top:26%;
 }
 
@@ -209,7 +209,7 @@ $(document).ready(function() {
 		 $(document).ready(function(){
 			 
 			 var myHiddenPlaceInsertController = new MyHiddenPlaceController(); 
-      
+      		var address = "";
      		 var latitude;//위도
       
      		 var longitude;//경도
@@ -217,8 +217,8 @@ $(document).ready(function() {
           // 버튼 클릭시 콜백함수 호출 
          $("#map_search_button").click(function(){
             // input 에 입력하는 검색어의 값을 keyWord변수에 담고 한글처리
-         var keyWord = $("#keyWord").val();         
-         keyWord = encodeURIComponent(keyWord);
+         address = $("#keyWord").val();         
+         keyWord = encodeURIComponent(address);
          
           
          // 입력된 keyWord변수의 값으로 결과를 내기 위해 URL 끝에 +keyWord 삽입과 url변수 선언
@@ -253,8 +253,6 @@ $(document).ready(function() {
                         var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
                         marker.setMap(map); //지도위에 마커 뿌리기
                         
-                         $("#keyWord").val("");
-                        
                         }
                      });   
                   });            
@@ -262,19 +260,13 @@ $(document).ready(function() {
        
 			$("#success_button").click(function(){
 		 		
-		 		var mhpStoreName; //상호명
-				var mhpThema; //테마선탱
-				var mhpTitle; //제목(해쉬태그)
-		 		var mhpTitleImg;
-		 		var content = $("#summernote").val(); //글자수
-		 		mhpStoreName = $("#store_name").val();
-				mhpTitle = $("#title_name").val();
-				mhpThema = $("#thema_select").val();
-				mhpTitleImg = $('#titleImg').attr("src");
+		 		var content = $("#summernote").val(); 		 //글자수
+		 		var mhpStoreName = $("#store_name").val();	 //상호명
+				var mhpTitle = $("#title_name").val(); 		 //제목(해쉬태그)
+				var mhpTheme = $("#theme_select").val();	 //테마코드
+				var mhpTitleImg = $('#titleImg').attr("src");//타이틀 이미지
 				
-				alert(mhpTitleImg);
-				
-				myHiddenPlaceInsertController.requestInsertMHP(content,latitude, longitude,mhpStoreName,mhpTitle,mhpThema,mhpTitleImg);
+				myHiddenPlaceInsertController.requestInsertMHP(content, address, mhpStoreName, mhpTitle, mhpTheme, mhpTitleImg);
 		 		
 			});
 
@@ -309,7 +301,7 @@ $(document).ready(function() {
 				<input type="text" class="form-control" id="store_name" name="subject" placeholder="상호명을 입력하세요" required>
 			</div>
 			<div class="col-md-4">
-				<select class="form-control" id="thema_select"> 
+				<select class="form-control" id="theme_select"> 
    					 <option value="0">테마선택</option>
     				 <option value="1">맛집</option>
    					 <option value="2">카페</option>

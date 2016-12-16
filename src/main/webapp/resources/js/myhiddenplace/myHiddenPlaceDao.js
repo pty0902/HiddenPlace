@@ -64,7 +64,7 @@ function MyHiddenPlaceDao() {
 	};
 
 	//	추천(좋아요) dao 메서드
-	this.upCountCode = function(nickName, num) {
+	this.upCountCode = function(userId, num) {
 		var upCountCode;
 		try {
 			$.ajax({
@@ -72,7 +72,7 @@ function MyHiddenPlaceDao() {
 				async : false, //false: 동기, true: 비동기
 				type : 'get', //요청방식 get or post              
 				data : {
-					userId : nickName,
+					userId : userId,
 					num : num
 				},
 				dataType : 'json', //서버에서 보내오는 데이터 타입
@@ -92,7 +92,7 @@ function MyHiddenPlaceDao() {
 	};
 
 	//   댓글 추가 dao 메서드
-	this.replyInsert = function(nickName, comment, num) {
+	this.replyInsert = function(userId, comment, num) {
 		var isSuccess;
 		try {
 
@@ -101,7 +101,7 @@ function MyHiddenPlaceDao() {
 				async : false, //false: 동기, true: 비동기
 				type : 'post', //요청방식 get or post      
 				data : {
-					userId : nickName,
+					userId : userId,
 					replyComment : comment,
 					num : num
 				},
@@ -210,11 +210,11 @@ function MyHiddenPlaceDao() {
 	};
 
 	//	내알못 글쓰기 dao
-	this.myHiddenPlaceInsert = function(content, latitude, longitude,
-			mhpStoreName, mhpTitle, mhpThema, mhpTitleImg) {
+	this.myHiddenPlaceInsert = function(content, address, mhpStoreName, mhpTitle, mhpTheme, mhpTitleImg) {
 
 		var isSuccess;
-
+		var userId = localStorage.getItem('userId');
+		
 		try {
 
 			$.ajax({
@@ -224,12 +224,12 @@ function MyHiddenPlaceDao() {
 				data : {
 
 					content : content,
-					latitude : latitude,
-					longitude : longitude,
+					address : address,
 					storeName : mhpStoreName,
 					title : mhpTitle,
-					themeCode : mhpThema,
-					titleImgUrl : mhpTitleImg
+					themeCode : mhpTheme,
+					titleImgURL : mhpTitleImg,
+					userId : userId
 
 				},
 				dataType : 'text', //서버에서 보내오는 데이터 타입
@@ -245,7 +245,6 @@ function MyHiddenPlaceDao() {
 			console.log(e.message);
 		}
 
-		alert(isSuccess);
 		return isSuccess;
 	};
 
@@ -419,7 +418,7 @@ function MyHiddenPlaceDao() {
                   storeName : mhpStoreName,
                   title : mhpTitle,
                   themeCode : mhpThema,
-                  titleImgUrl : mhpTitleImg,
+                  titleImgURL : mhpTitleImg,
                   num : num
                   
                },
@@ -436,9 +435,76 @@ function MyHiddenPlaceDao() {
             console.log(e.message);
          }   
          
-         alert(isSuccess);
+         
          return isSuccess;
       };
-	   
+      
+      
+      //추천수  dao 메서드
+      this.upCount = function(upCountCode,userId,num) {
+         var isSuccess;
 
+         try{
+
+            $.ajax({
+               url: '/myhiddenplace/upCount' , //홈페이지 불러올 주소
+               async : false, //false: 동기, true: 비동기
+               type: 'get', //요청방식 get or post      
+               data: {
+            	   upCountCode : upCountCode,//보내줄 데이터 없으면 비어둬도되고 data 아에 없애도 되고
+            	   userId : userId,
+            	   num : num
+               },
+               dataType: 'text', //서버에서 보내오는 데이터 타입
+               success: function (data) { //서버에서 보내오는 데이터
+               
+                     isSuccess = data;
+               
+               }
+               
+            });
+            
+      
+         } catch(e) {
+            console.log('upcount 객체 : upcount Dao 메서드에서 예외 발생');
+            console.log(e.message);
+         }
+
+         return isSuccess;
+         
+      };
+      
+     
+      //내알못 삭제
+      this.myHiddenPlaceDelete = function(num) {
+
+  		var isSuccess;
+
+  		try {
+
+  			$.ajax({
+  				url : '/myhiddenplace/deleteMHP', 
+  				async : false, //false: 동기, true: 비동기
+  				type : 'get', //요청방식 get or post      
+  				data : {
+  					num : num
+  				},
+  				dataType : 'text', //서버에서 보내오는 데이터 타입
+  				success : function(data) { //서버에서 보내오는 데이터
+
+  					isSuccess = data;
+
+  				}
+
+  			});
+
+  		} catch (e) {
+  			console.log('myHiddenPlaceDao 객체 : deleteBookmark Dao 메서드에서 예외 발생');
+  			console.log(e.message);
+  		}
+
+  		return isSuccess;
+
+  	};
+  	
 }

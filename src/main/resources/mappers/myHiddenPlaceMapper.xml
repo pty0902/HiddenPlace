@@ -49,8 +49,8 @@
 	
 	<select id="selectOne" resultType="MyHiddenPlace">
 
-		  select TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL, TBL_BOARD.CONTENT, TBL_BOARD.UPCOUNT, TBL_BOARD.STORENAME, TBL_USER.USERNICKNAME, TBL_BOARD.LATITUDE, TBL_BOARD.LONGITUDE, TBL_BOARD.USERID, TBL_BOARD.THEMECODE 
-		  from TBL_BOARD, TBL_USER
+		  select TBL_BOARD.TITLE, TBL_BOARD.TITLEIMGURL, TBL_BOARD.CONTENT, TBL_BOARD.UPCOUNT, TBL_BOARD.STORENAME, TBL_BOARD.THEMECODE, TBL_BOARD.ADDRESS
+		  from TBL_BOARD
 		  where TBL_BOARD.NUM = #{num}
 		  
 	</select> 
@@ -201,8 +201,8 @@
 		]]>
 	</select> -->
 		<insert id="insert">
-		insert into TBL_BOARD (USERID, STORENAME,TITLEIMGURL,THEMECODE,TITLE,CONTENT,LATITUDE,LONGITUDE)
-		values("qwer522", #{storeName}, #{titleImgUrl},#{themeCode},#{title},#{content}, #{latitude}, #{longitude})
+		insert into TBL_BOARD (USERID, STORENAME, TITLEIMGURL, THEMECODE, TITLE, CONTENT, ADDRESS)
+		values(#{userId}, #{storeName}, #{titleImgURL},#{themeCode},#{title},#{content}, #{address})
 		</insert>
 	
 	<!-- 로그인한 유저의 즐겨찾기 목록 -->
@@ -243,7 +243,7 @@
 	<!--내알못 수정 -->
 	<update id="update">
       update TBL_BOARD 
-      set STORENAME = #{storeName}, TITLEIMGURL = #{titleImgUrl}, THEMECODE = #{themeCode}, TITLE = #{title}, CONTENT = #{content}, address =  #{address}
+      set STORENAME = #{storeName}, TITLEIMGURL = #{titleImgURL}, THEMECODE = #{themeCode}, TITLE = #{title}, CONTENT = #{content}, address =  #{address}
       where NUM = #{num}
    </update>
 	

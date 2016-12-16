@@ -34,18 +34,18 @@ function MyHiddenPlaceController() {
 	};
 
 	//	내알못 추천코드 메서드
-	this.requestUpCountCode = function(nickName, num) {
+	this.requestUpCountCode = function(userId, num) {
 
-		var isSuccess = dao.upCountCode(nickName, num);
+		var isSuccess = dao.upCountCode(userId, num);
 
 		return isSuccess;
 
 	};
 
 	//	내알못 댓글추가 메서드
-	this.requestReplyInsert = function(nickName, comment, num) {
+	this.requestReplyInsert = function(userId, comment, num) {
 
-		var upCountCode = dao.replyInsert(nickName, comment, num);
+		var upCountCode = dao.replyInsert(userId, comment, num);
 		return upCountCode;
 
 	};
@@ -72,15 +72,13 @@ function MyHiddenPlaceController() {
 	};
 
 	//내알못 글쓰기 메서드
-	this.requestInsertMHP = function(content, latitude, longitude,
-			mhpStoreName, mhpTitle, mhpThema, mhpTitleImg) {
+	this.requestInsertMHP = function(content, address, mhpStoreName, mhpTitle, mhpTheme, mhpTitleImg) {
 
-		var isSuccess = dao.myHiddenPlaceInsert(content, latitude, longitude,
-				mhpStoreName, mhpTitle, mhpThema, mhpTitleImg);
+		var isSuccess = dao.myHiddenPlaceInsert(content, address, mhpStoreName, mhpTitle, mhpTheme, mhpTitleImg);
 
 		var requestUrl = '/myhiddenplace/myHiddenPlaceSelectAll';
 
-		if (isSuccess == true) {
+		if (isSuccess == "success") {
 			document.location = requestUrl;
 		} else {
 			return;
@@ -145,9 +143,9 @@ function MyHiddenPlaceController() {
 	};
 
 	//	내알못 추천등록 메서드
-	this.requestUpCount = function(upCountCode, nickName, num) {
+	this.requestUpCount = function(upCountCode, userId, num) {
 
-		var isSuccess = dao.upCount(upCountCode, nickName, num);
+		var isSuccess = dao.upCount(upCountCode, userId, num);
 
 		return isSuccess;
 
@@ -157,12 +155,36 @@ function MyHiddenPlaceController() {
    this.requestUpdateMHP = function(content, address, mhpStoreName, mhpTitle, mhpThema, mhpTitleImg, num) {
       
       var isSuccess  = dao.myHiddenPlaceUpdate(content, address, mhpStoreName, mhpTitle, mhpThema, mhpTitleImg, num);
-      var requestUrl = '/myhiddenplace/myHiddenPlaceSelectAll';
-      if (isSuccess == true){
+      var requestUrl = '/myhiddenplace/myHiddenPlaceSelectOne/num='+num;
+      if (isSuccess == "success"){
            document.location = requestUrl;
       }else {
       }
 
    };
+   
+   //내알못 수정 호출
+   this.requestUpdateMhpPage = function(num) {
+	      
+	      var requestUrl = '/myhiddenplace/myHiddenPlaceUpdate/num='+num;
+	      
+	      document.location = requestUrl;
+	      
+	   };
+   
+	//조회 넘버 보내주기
+	this.requestSelectOneMhpPage = function(num) {
+		
+		document.location = "myHiddenPlaceSelectOne/num =" + num;
+		
+	}
+	
+	//글쓰기 View 호출
+	this.requestInsertView = function(num) {
+		
+		document.location = "/myhiddenplace/myHiddenPlaceInsert";
+		
+	}
+
 
 }

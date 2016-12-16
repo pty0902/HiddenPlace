@@ -17,7 +17,7 @@
 <!-- <script src="../bootstrap/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/style.css" />
 <link rel="stylesheet" type="text/css"href="/resources/bootstrap/css/swiper.min.css" />
- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=   f617f92098af4b2430be59f43550867c"></script>
+ <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=	f617f92098af4b2430be59f43550867c"></script>
 <script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
 
 
@@ -89,15 +89,16 @@
 <script type="text/javascript">
 $(document).ready(function() {
    
-	var mhpController = new MyHiddenPlaceController(); 
-   
-	var content ="<p>데이터 불러오기</p><br><p>성공하였습니다.</p><span class='mailbox-attachment-icon has-img'><img id='titleImg' src='/resources/bootstrap/image/titleImg.jpg' alt='Attachment' style='width: 180px; height: 165px;'></span>"; //글자수
-	var StoreName = "달아달아";
-	var Title = "#서울";
-	var Thema = "2";
-	var TitleImg = "/resources/bootstrap/image/titleImg.jpg";
-	var address = "경기도 부천시 원미구 심곡1동 ks건영 아느칸빌";
+	var url = unescape(location.href); // url = http://localhost:8080/user/forgetPwUpdateView/pty0902@naver.com
+	var numUrl = url.split('='); // pm[0] = http: , pm[1] = , 
+	var num = numUrl[1];
+	
+	var mhpController = new MyHiddenPlaceController();
+	var myHiddenPlace = mhpController.requestSelectOneMHP(num);
+	
+	var address = myHiddenPlace.address;
 	var keyWord = address;
+	
 	var latitude; //위도
 	var longitude; //경도
    
@@ -106,6 +107,8 @@ $(document).ready(function() {
     
 	var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
    
+	$("#keyWord").val(address);
+	
 	$.getJSON(url + "&callback=?" , function(json){
        
         // json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
@@ -133,7 +136,7 @@ $(document).ready(function() {
 
 			var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 			marker.setMap(map); //지도위에 마커 뿌리기
-			$("#keyWord").val(address);
+			
 			}
         
 		}); 
@@ -141,20 +144,20 @@ $(document).ready(function() {
 	});    
     
 	//받아온 타이틀 이미지 찍기
-	var titleimg = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + TitleImg + '" alt="Attachment" style="width: 180px; height: 165px;"></span>';
+	var titleimg = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + myHiddenPlace.titleImgURL + '" alt="Attachment" style="width: 180px; height: 165px;"></span>';
 	$("#title_img_box").append(titleimg);
      
 	//받아온 상호명 찍기
-	$("#store_name").val(StoreName);
+	$("#store_name").val(myHiddenPlace.storeName);
      
 	//받아온 타이틀 찍기
-	$("#title_name").val(Title);
+	$("#title_name").val(myHiddenPlace.title);
      
 	//받아온 테마 찍기
-	$("#thema_select").val(Thema);
+	$("#thema_select").val(myHiddenPlace.themeCode);
     
 	//받아온 내용 찍기
-	$("#summernote").val(content);
+	$("#summernote").val(myHiddenPlace.content);
      
 	// 버튼 클릭시 콜백함수 호출 
 	$("#map_search_button").click(function(){
