@@ -3,281 +3,300 @@
 // user controller 객체
 function UserController() {
 
-   var dao = new UserDao();
+	var dao = new UserDao();
 
-   // 로그아웃 controller 메서드
-   this.requestLogout = function(userId) {
+	// where 회원정보관리
+	this.requestMypageUrl = function() {
+		
+		var userId = localStorage.getItem("userId");
+		var requestUrl = "/user/mypageView";
 
-      // var userId = localStorage.getItem("userId");
-      // var userId = "pty0902@naver.com";
-      var isSuccess = dao.logout(userId);
+		var isSuccess = dao.mypageAuth(userId);
 
-      return isSuccess;
-      /*
-       * if (isSuccess === "success") { alert("로그아웃되었습니다."); localStorage.clear(); // 클라이언트 세션 초기화 this.requestLoginUrl(); }
-       */
-      // 홈 URL 메서드 자리
-   };
+		if (isSuccess === "success") {
+			document.location = requestUrl;
+		} else if (isSuccess === "fail") {
+			alert("일반 회원가입 사용자만 회원 정보를 수정할 수 있습니다.");
+		}
 
-   // 회원가입 페이지요청 controller 메서드
-   this.requestUserInsertUrl = function() {
+	};
+	
+	// 로그아웃 controller 메서드
+	this.requestLogout = function(userId) {
 
-      var requestUrl = "userInsertView";
+		// var userId = localStorage.getItem("userId");
+		// var userId = "pty0902@naver.com";
+		var isSuccess = dao.logout(userId);
 
-      document.location = requestUrl;
+		return isSuccess;
+		/*
+		 * if (isSuccess === "success") { alert("로그아웃되었습니다.");
+		 * localStorage.clear(); // 클라이언트 세션 초기화 this.requestLoginUrl(); }
+		 */
+		// 홈 URL 메서드 자리
+	};
 
-   };
+	// 회원가입 페이지요청 controller 메서드
+	this.requestUserInsertUrl = function() {
 
+		var requestUrl = "userInsertView";
 
-   // 즐겨찾기 페이지요청 controller 메서드
-   this.requestBookmarkUrl = function() {
+		document.location = requestUrl;
 
-      var requestUrl = "userBookMarkView";
+	};
 
-      document.location = requestUrl;
+	// 즐겨찾기 페이지요청 controller 메서드
+	this.requestBookmarkUrl = function() {
 
-   };
+		var requestUrl = "userBookMarkView";
 
-   // 비밀번호 찾기 페이지요청 controller 메서드
-   this.requestForgetPwUrl = function() {
+		document.location = requestUrl;
 
-      var requestUrl = "forgetPwView";
+	};
 
-      document.location = requestUrl;
+	// 비밀번호 찾기 페이지요청 controller 메서드
+	this.requestForgetPwUrl = function() {
 
-   };
+		var requestUrl = "forgetPwView";
 
-   // 회원가입
-   this.requestUserInsert = function(newUser) {
+		document.location = requestUrl;
 
-      var isSuccess = dao.userInsert(newUser);
+	};
 
-      return isSuccess;
-   };
-   // 회원가입
-   this.requestUserInsertModal = function(newUser) {
+	// 회원가입
+	this.requestUserInsert = function(newUser) {
 
-      var isSuccess = dao.userInsert(newUser);
+		var isSuccess = dao.userInsert(newUser);
 
-      if (isSuccess === "success") {
-         alert("회원가입 성공");
-         modalAnimate($formLogin, $formRegister); // 회원가입 성공시 로그인 모달로 이동
-      } else {
-         alert("회원가입 실패");
-      }
-   };
-   // 닉네임 중복확인
-   this.requestNicknameCheck = function(nickname) {
+		return isSuccess;
+	};
+	// 회원가입
+	this.requestUserInsertModal = function(newUser) {
 
-      var nicknameCheck = dao.nicknameCheck(nickname);
-      var isSuccess = false;
+		var isSuccess = dao.userInsert(newUser);
 
-      if (nicknameCheck === "success") {
-         alert("사용가능한 닉네임입니다.");
-         isSuccess = true;
-      }
-      if (nicknameCheck === "fail") {
-         alert("이미 사용중인 닉네임입니다.");
-         isSuccess = false;
-      }
-      return isSuccess;
-   }
+		if (isSuccess === "success") {
+			alert("회원가입 성공");
+			modalAnimate($formRegist, $formLogin); // 회원가입 성공시 로그인 모달로 이동
+		} else {
+			alert("회원가입 실패");
+		}
+	};
+	// 닉네임 중복확인
+	this.requestNicknameCheck = function(nickname) {
 
-   // 회원가입 이메일 인증번호 전송
-   this.requestEmailSend = function(email, certificationNum) {
+		var nicknameCheck = dao.nicknameCheck(nickname);
+		var isSuccess = false;
 
-      var emailSendCheck = dao.emailSend(email, certificationNum);
-      var isSuccess = false;
+		if (nicknameCheck === "success") {
+			alert("사용가능한 닉네임입니다.");
+			isSuccess = true;
+		}
+		if (nicknameCheck === "fail") {
+			alert("이미 사용중인 닉네임입니다.");
+			isSuccess = false;
+		}
+		return isSuccess;
+	}
 
-      if (emailSendCheck === "success") {
-         alert("인증번호가 전송되었습니다.");
-         isSuccess = true;
-      } else if (emailSendCheck === "fail") {
-         alert("이미 사용중인 이메일입니다.");
-         isSuccess = false;
-      }
-      return isSuccess;
+	// 회원가입 이메일 인증번호 전송
+	this.requestEmailSend = function(email, certificationNum) {
 
-   }
+		var emailSendCheck = dao.emailSend(email, certificationNum);
+		var isSuccess = false;
 
-   // 비밀번호 찾기(변경) 페이지요청 controller 메서드
-   this.requestForgetPwUpdateUrl = function(email) {
+		if (emailSendCheck === "success") {
+			alert("인증번호가 전송되었습니다.");
+			isSuccess = true;
+		} else if (emailSendCheck === "fail") {
+			alert("이미 사용중인 이메일입니다.");
+			isSuccess = false;
+		}
+		return isSuccess;
 
-      var requestUrl = "forgetPwUpdateView/" + email;
+	}
 
-      document.location = requestUrl;
+	// 비밀번호 찾기(변경) 페이지요청 controller 메서드
+	this.requestForgetPwUpdateUrl = function(email) {
 
-   };
+		var requestUrl = "forgetPwUpdateView/" + email;
 
-   // 비밀번호 찾기 (변경)
-   this.requestForgetPwUpdate = function(email, newPw) {
+		document.location = requestUrl;
 
-      var isSuccess = dao.forgetPwUpdate(email, newPw);
-      if (isSuccess === "success") {
-         alert("비밀번호가 변경되었습니다.");
-         requestLoginUrl(); // 로그인 페이지로 이동
-      } else {
-         alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
-      }
-   }
+	};
 
-   // 비밀번호 찾기(변경) 페이지요청 controller 메서드
-   this.requestForgetPwUpdateModalUrl = function(email) {
+	// 비밀번호 찾기 (변경)
+	this.requestForgetPwUpdate = function(email, newPw) {
 
-      localStorage.setItem("email", email); // 비밀번호 찾기 인증 성공시 다음 모달 페이지로 넘기는 이메일을 로컬세션에 저장
-      modalAnimate($formLost, $formLostUpdate); // 다음 모달 페이지로 전환
-   };
+		var isSuccess = dao.forgetPwUpdate(email, newPw);
+		if (isSuccess === "success") {
+			alert("비밀번호가 변경되었습니다.");
+			requestLoginUrl(); // 로그인 페이지로 이동
+		} else {
+			alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
+		}
+	}
 
-   // 비밀번호 찾기 (변경)
-   this.requestForgetPwUpdateModal = function(newPw) {
+	// 비밀번호 찾기(변경) 페이지요청 controller 메서드
+	this.requestForgetPwUpdateModalUrl = function(email) {
 
-      var email = localStorage.getItem("email"); // 이전 페이지에서 가져오는 email
+		localStorage.setItem("email", email); // 비밀번호 찾기 인증 성공시 다음 모달 페이지로 넘기는
+												// 이메일을 로컬세션에 저장
+		modalAnimate($formLost, $formLostUpdate); // 다음 모달 페이지로 전환
+	};
 
-      var isSuccess = dao.forgetPwUpdate(email, newPw);
-      if (isSuccess === "success") {
-         alert("비밀번호가 변경되었습니다.");
-         localStorage.removeItem('email');
-         localStorage.clear();
-         modalAnimate($formLostUpdate, $formLogin); // 로그인 모달 페이지로 전환
-      } else {
-         alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
-      }
-   }
+	// 비밀번호 찾기 (변경)
+	this.requestForgetPwUpdateModal = function(newPw) {
 
-   // 비밀번호 찾기 이메일 인증번호 전송
-   this.requestForgetPwEmailSend = function(email, certificationNum) {
+		var email = localStorage.getItem("email"); // 이전 페이지에서 가져오는 email
 
-      var emailSendCheck = dao.forgetEmailSend(email, certificationNum);
-      var isSuccess = false;
+		var isSuccess = dao.forgetPwUpdate(email, newPw);
+		if (isSuccess === "success") {
+			alert("비밀번호가 변경되었습니다.");
+			localStorage.removeItem('email');
+			localStorage.clear();
+			modalAnimate($formLostUpdate, $formLogin); // 로그인 모달 페이지로 전환
+		} else {
+			alert("비밀번호를 변경하는데 오류가 발생하였습니다.");
+		}
+	}
 
-      if (emailSendCheck === "success") {
-         alert("인증번호가 전송되었습니다.");
-         isSuccess = true;
-      } else if (emailSendCheck === "fail") {
-         alert("존재하지 않는 이메일입니다.");
-         isSuccess = false;
-      }
+	// 비밀번호 찾기 이메일 인증번호 전송
+	this.requestForgetPwEmailSend = function(email, certificationNum) {
 
-      return isSuccess;
+		var emailSendCheck = dao.forgetEmailSend(email, certificationNum);
+		var isSuccess = false;
 
-   }
+		if (emailSendCheck === "success") {
+			alert("인증번호가 전송되었습니다.");
+			isSuccess = true;
+		} else if (emailSendCheck === "fail") {
+			alert("존재하지 않는 이메일입니다.");
+			isSuccess = false;
+		}
 
-   // 로그인
-   this.requestLogin = function(user) {
+		return isSuccess;
 
-      var isSuccess = dao.login(user);
+	}
 
-      if (isSuccess === "idFail") {
-         $("#pw").prop("value", "");
-         $("#id").focus();
-         alert("존재하지 않는 아이디입니다.");
-      } else if (isSuccess === "pwFail") {
-         $("#pw").prop("value", "");
-         $("#pw").focus();
-         alert("비밀번호가 일치하지 않습니다.");
-      } else {
-         alert("로그인 성공");
-         localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인 성공한 ID를 저장시킴
-         document.location = isSuccess; // ex) user/mypageView
-      }
-   };
-   // 로그인
-   this.requestLoginModal = function(user) {
+	// 로그인
+	this.requestLogin = function(user) {
 
-      var isSuccess = dao.login(user);
+		var isSuccess = dao.login(user);
 
-      if (isSuccess === "idFail") {
-         $("#pw").prop("value", "");
-         $("#id").focus();
-         alert("존재하지 않는 아이디입니다.");
-      } else if (isSuccess === "pwFail") {
-         $("#pw").prop("value", "");
-         $("#pw").focus();
-         alert("비밀번호가 일치하지 않습니다.");
-      } else if (isSuccess === "success") {
-         alert("로그인 성공");
-         localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인 성공한 ID를 저장시킴
-         window.location.reload(); // 페이지 새로고침
-      }
-   };
-   // 회원정보 수정 (닉네임만 변경)
-   this.requestUserUpdateN = function(email, nowPw, newNickname) {
+		if (isSuccess === "idFail") {
+			$("#pw").prop("value", "");
+			$("#id").focus();
+			alert("존재하지 않는 아이디입니다.");
+		} else if (isSuccess === "pwFail") {
+			$("#pw").prop("value", "");
+			$("#pw").focus();
+			alert("비밀번호가 일치하지 않습니다.");
+		} else {
+			alert("로그인 성공");
+			localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인
+															// 성공한 ID를 저장시킴
+			document.location = isSuccess; // ex) user/mypageView
+		}
+	};
+	// 로그인
+	this.requestLoginModal = function(user) {
 
-      var isSuccess = dao.userUpdateN(email, nowPw, newNickname);
-      if (isSuccess === "success") {
-         alert("회원 정보 수정이 완료되었습니다.(N)");
-         window.location.reload(); // 페이지 새로고침
-      } else if (isSuccess === "fail") {
-         alert("회원님의 비밀번호가 일치하지 않습니다.");
-         window.location.reload();
-      }
-      return isSuccess;
-   };
+		var isSuccess = dao.login(user);
 
-   // 회원정보 수정 (패스워드도 변경)
-   this.requestUserUpdateP = function(email, nowPw, newPw, newNickname) {
+		if (isSuccess === "idFail") {
+			$("#pw").prop("value", "");
+			$("#id").focus();
+			alert("존재하지 않는 아이디입니다.");
+		} else if (isSuccess === "pwFail") {
+			$("#pw").prop("value", "");
+			$("#pw").focus();
+			alert("비밀번호가 일치하지 않습니다.");
+		} else if (isSuccess === "success") {
+			alert("로그인 성공");
+			localStorage.setItem("userId", user.userId); // 로그인 성공시 로컬세션에 로그인
+															// 성공한 ID를 저장시킴
+			window.location.reload(); // 페이지 새로고침
+		}
+	};
+	// 회원정보 수정 (닉네임만 변경)
+	this.requestUserUpdateN = function(email, nowPw, newNickname) {
 
-      var isSuccess = dao.userUpdateP(email, nowPw, newPw, newNickname);
-      if (isSuccess === "success") {
-         alert("회원 정보 수정이 완료되었습니다.(P)");
-         // 메인홈페이지 url 메서드
-         window.location.reload(); // 페이지 새로고침
-      } else if (isSuccess === "fail") {
-         alert("회원님의 비밀번호가 일치하지 않습니다.");
-      }
-      return isSuccess;
-   };
+		var isSuccess = dao.userUpdateN(email, nowPw, newNickname);
+		if (isSuccess === "success") {
+			alert("회원 정보 수정이 완료되었습니다.(N)");
+			window.location.reload(); // 페이지 새로고침
+		} else if (isSuccess === "fail") {
+			alert("회원님의 비밀번호가 일치하지 않습니다.");
+			window.location.reload();
+		}
+		return isSuccess;
+	};
 
-   // 회원탈퇴
-   this.requestUserDelete = function(email, pw) {
+	// 회원정보 수정 (패스워드도 변경)
+	this.requestUserUpdateP = function(email, nowPw, newPw, newNickname) {
 
-      var isSuccess = dao.userDelete(email, pw);
+		var isSuccess = dao.userUpdateP(email, nowPw, newPw, newNickname);
+		if (isSuccess === "success") {
+			alert("회원 정보 수정이 완료되었습니다.(P)");
+			// 메인홈페이지 url 메서드
+			window.location.reload(); // 페이지 새로고침
+		} else if (isSuccess === "fail") {
+			alert("회원님의 비밀번호가 일치하지 않습니다.");
+		}
+		return isSuccess;
+	};
 
-      if (isSuccess === "success") {
-         alert("회원 탈퇴가 완료되었습니다.");
-         this.requestLoginUrl(); // 로그인페이지
-      } else if (isSuccess === "fail") {
-         alert("회원님의 비밀번호가 일치하지 않습니다.");
-      }
+	// 회원탈퇴
+	this.requestUserDelete = function(email, pw) {
 
-   };
+		var isSuccess = dao.userDelete(email, pw);
 
-   // 서버에서 닉네임 가져오기
-   this.requestGetNickname = function(userId) {
+		if (isSuccess === "success") {
+			alert("회원 탈퇴가 완료되었습니다.");
+			this.requestLoginUrl(); // 로그인페이지
+		} else if (isSuccess === "fail") {
+			alert("회원님의 비밀번호가 일치하지 않습니다.");
+		}
 
-      var nickname = dao.getNickname(userId);
+	};
 
-      return nickname;
-   }
+	// 서버에서 닉네임 가져오기
+	this.requestGetNickname = function(userId) {
 
-   // Facebook login controller
-   this.requestFBLogin = function() {
+		var nickname = dao.getNickname(userId);
 
-      dao.FBLoginDao();
+		return nickname;
+	}
 
-   };
+	// Facebook login controller
+	this.requestFBLogin = function() {
 
-   // Modal 페이지 전환을 위한 변수, 함수
-   var $formLogin = $('#login-form');
-   var $formLost = $('#lost-form');
-   var $formLostUpdate = $('#lostUpdate-form');
-   var $formRegister = $('#register-form');
-   var $divForms = $('#div-forms');
-   var $modalAnimateTime = 300;
-   var $msgAnimateTime = 150;
-   var $msgShowTime = 2000;
+		dao.FBLoginDao();
 
-   function modalAnimate($oldForm, $newForm) {
-      var $oldH = $oldForm.height();
-      var $newH = $newForm.height();
-      $divForms.css("height", $oldH);
-      $oldForm.fadeToggle($modalAnimateTime, function() {
-         $divForms.animate({
-            height : $newH
-         }, $modalAnimateTime, function() {
-            $newForm.fadeToggle($modalAnimateTime);
-         });
-      });
-   }
+	};
+
+	// Modal 페이지 전환을 위한 변수, 함수
+	var $formLogin = $('#login-form');
+	var $formLost = $('#lost-form');
+	var $formLostUpdate = $('#lostUpdate-form');
+	var $formRegister = $('#register-form');
+	var $divForms = $('#div-forms');
+	var $modalAnimateTime = 300;
+	var $msgAnimateTime = 150;
+	var $msgShowTime = 2000;
+
+	function modalAnimate($oldForm, $newForm) {
+		var $oldH = $oldForm.height();
+		var $newH = $newForm.height();
+		$divForms.css("height", $oldH);
+		$oldForm.fadeToggle($modalAnimateTime, function() {
+			$divForms.animate({
+				height : $newH
+			}, $modalAnimateTime, function() {
+				$newForm.fadeToggle($modalAnimateTime);
+			});
+		});
+	}
 
 }

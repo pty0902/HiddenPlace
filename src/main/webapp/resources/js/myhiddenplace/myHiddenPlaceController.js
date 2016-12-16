@@ -1,6 +1,4 @@
-$('head')
-		.append(
-				'<script src=\'/resources/js/myhiddenplace/myHiddenPlaceDao.js\'><\/script>');
+$('head').append('<script src=\'/resources/js/myhiddenplace/myHiddenPlaceDao.js\'><\/script>');
 
 //myHiddenPlace controller 객체
 function MyHiddenPlaceController() {
@@ -24,12 +22,14 @@ function MyHiddenPlaceController() {
 		return myHiddenPlace;
 	};
 
-	// 글 목록 페이지요청 controller 메서드
-	this.requestMHPUrl = function() {
+	// 검색바에서 검색 요청시 글 목록 페이지요청 controller 메서드
+	this.requestSelectAllKeyWordUrl = function(keyWord) {
 
-		var requestUrl = 'myHiddenPlaceSelectAll.html';
+	  var requestUrl = '/myhiddenplace/selectAllKeyWordUrl/keyWord=' + keyWord;
 
-		document.location = requestUrl;
+	  requestUrl = encodeURI(requestUrl);
+   
+      document.location = requestUrl;
 
 	};
 
@@ -175,7 +175,7 @@ function MyHiddenPlaceController() {
 	//조회 넘버 보내주기
 	this.requestSelectOneMhpPage = function(num) {
 		
-		document.location = "myHiddenPlaceSelectOne/num =" + num;
+		document.location = "/myhiddenplace/myHiddenPlaceSelectOne/num =" + num;
 		
 	}
 	

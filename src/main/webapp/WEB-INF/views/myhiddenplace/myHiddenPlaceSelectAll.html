@@ -344,18 +344,26 @@ $(document).ready(function() {
 	});
 </script>
 
-	<!-- 내알못 목록 호출 핸들링(페이징 검색 테마 포함) -->
-	<script>
+<!-- 내알못 목록 호출 핸들링(페이징 검색 테마 포함) -->
+<script>
 
 $(document).ready(function() {
+	
+   var url = decodeURI(location.href); 
    
+   var keyWordUrl = url.split('='); 
+   var keyWord = keyWordUrl[1];
+   
+   if(keyWord == undefined){
+	 keyWord = "";
+   }
+	
 	var pageController  = new PageController();
   	var mhpController = new MyHiddenPlaceController();
   	var searchController = new SearchController();
 	var endPage;
   	var startPage; 
   	var themeCode = 0;
-  	var keyWord = "";
   	var page = 1;
   	
   	mhpSelectAll();

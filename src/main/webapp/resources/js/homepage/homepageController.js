@@ -1,8 +1,6 @@
 function HomepageController() {
 	
-	var userDao = new UserDao();
-	
-	// where 홈페이지 from header
+	// where 홈페이지
 	this.requestHomepageUrl = function() {
 
 		var requestUrl = "/";
@@ -10,24 +8,17 @@ function HomepageController() {
 		document.location = requestUrl;
 
 	};
+	
+	// where 글목록
+	this.requestSelectAllUrl = function() {
 
-	// where 회원정보관리 from header
-	this.requestMypageUrl = function() {
+		var requestUrl = '/myhiddenplace/myHiddenPlaceSelectAll';
 
-		var userId = localStorage.getItem("userId");
-		var requestUrl = "/user/mypageView";
-
-		var isSuccess = userDao.mypageAuth(userId);
-
-		if (isSuccess === "success") {
-			document.location = requestUrl;
-		} else if (isSuccess === "fail") {
-			alert("일반 회원가입 사용자만 회원 정보를 수정할 수 있습니다.");
-		}
+		document.location = requestUrl;
 
 	};
 
-	// where 즐겨찾기 from header
+	// where 즐겨찾기
 	this.requestBookmarkUrl = function() {
 
 		var requestUrl = "/bookmark/userBookmarkView";
@@ -36,7 +27,7 @@ function HomepageController() {
 
 	};
 
-	// where 로그인페이지 from header
+	// where 로그인페이지
 	this.requestLoginUrl = function() {
 
 		var requestUrl = "/user/loginView";

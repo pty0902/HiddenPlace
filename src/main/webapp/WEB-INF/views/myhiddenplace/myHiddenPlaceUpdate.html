@@ -17,7 +17,7 @@
 <!-- <script src="../bootstrap/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/style.css" />
 <link rel="stylesheet" type="text/css"href="/resources/bootstrap/css/swiper.min.css" />
- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=	f617f92098af4b2430be59f43550867c"></script>
+<!--  <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=	f617f92098af4b2430be59f43550867c"></script> -->
 <script src="/resources/js/myhiddenplace/myHiddenPlaceController.js"></script>
 
 
@@ -89,117 +89,117 @@
 <script type="text/javascript">
 $(document).ready(function() {
    
-	var url = unescape(location.href); // url = http://localhost:8080/user/forgetPwUpdateView/pty0902@naver.com
-	var numUrl = url.split('='); // pm[0] = http: , pm[1] = , 
-	var num = numUrl[1];
-	
-	var mhpController = new MyHiddenPlaceController();
-	var myHiddenPlace = mhpController.requestSelectOneMHP(num);
-	
-	var address = myHiddenPlace.address;
-	var keyWord = address;
-	
-	var latitude; //위도
-	var longitude; //경도
+   var url = unescape(location.href); // url = http://localhost:8080/user/forgetPwUpdateView/pty0902@naver.com
+   var numUrl = url.split('='); // pm[0] = http: , pm[1] = , 
+   var num = numUrl[1];
    
-	//받아온 타이틀 이미지 찍기
-	keyWord = encodeURIComponent(address);
+   var mhpController = new MyHiddenPlaceController();
+   var myHiddenPlace = mhpController.requestSelectOneMHP(num);
+   
+   var address = myHiddenPlace.address;
+   var keyWord = address;
+   
+   var latitude; //위도
+   var longitude; //경도
+   
+   //받아온 타이틀 이미지 찍기
+   keyWord = encodeURIComponent(address);
     
-	var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
+   var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
    
-	$("#keyWord").val(address);
-	
-	$.getJSON(url + "&callback=?" , function(json){
+   $("#keyWord").val(address);
+   
+   $.getJSON(url + "&callback=?" , function(json){
        
         // json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
         var items = json.channel.item;
-		
+      
         // 반복문을 통해 원하는 json값을 뽑아내는 단계. 지금은 위도와 경도를 받기 위해...
         $.each(items, function(i, it){
            
-			// 위도와 경도의 변수를 저장
-        	latitude = it.latitude;
-        	longitude = it.longitude;
+         // 위도와 경도의 변수를 저장
+           latitude = it.latitude;
+           longitude = it.longitude;
         
-       		var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
+             var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
               
-       		if(i == 0) {
-				var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-				var options = { //지도를 생성할 때 필요한 기본 옵션
-					center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
-               		level: 3 //지도의 레벨(확대, 축소 정도)
-				};
+             if(i == 0) {
+            var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+            var options = { //지도를 생성할 때 필요한 기본 옵션
+               center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+                     level: 3 //지도의 레벨(확대, 축소 정도)
+            };
               
-			var marker = new daum.maps.Marker({
-				position: markerPosition
-			});
+         var marker = new daum.maps.Marker({
+            position: markerPosition
+         });
 
-			var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-			marker.setMap(map); //지도위에 마커 뿌리기
-			
-			}
+         var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+         marker.setMap(map); //지도위에 마커 뿌리기
+         
+         }
         
-		}); 
+      }); 
                 
-	});    
+   });    
     
-	//받아온 타이틀 이미지 찍기
-	var titleimg = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + myHiddenPlace.titleImgURL + '" alt="Attachment" style="width: 180px; height: 165px;"></span>';
-	$("#title_img_box").append(titleimg);
+   //받아온 타이틀 이미지 찍기
+   var titleimg = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + myHiddenPlace.titleImgURL + '" alt="Attachment" style="width: 180px; height: 165px;"></span><a class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>';
+   $("#title_img_box").append(titleimg);
      
-	//받아온 상호명 찍기
-	$("#store_name").val(myHiddenPlace.storeName);
+   //받아온 상호명 찍기
+   $("#store_name").val(myHiddenPlace.storeName);
      
-	//받아온 타이틀 찍기
-	$("#title_name").val(myHiddenPlace.title);
+   //받아온 타이틀 찍기
+   $("#title_name").val(myHiddenPlace.title);
      
-	//받아온 테마 찍기
-	$("#thema_select").val(myHiddenPlace.themeCode);
+   //받아온 테마 찍기
+   $("#thema_select").val(myHiddenPlace.themeCode);
     
-	//받아온 내용 찍기
-	$("#summernote").val(myHiddenPlace.content);
+   //받아온 내용 찍기
+   $("#summernote").val(myHiddenPlace.content);
      
-	// 버튼 클릭시 콜백함수 호출 
-	$("#map_search_button").click(function(){
+   // 버튼 클릭시 콜백함수 호출 
+   $("#map_search_button").click(function(){
       
- 	// input 에 입력하는 검색어의 값을 keyWord변수에 담고 한글처리
-	address = $("#keyWord").val();         
-	keyWord = encodeURIComponent(address);
+    // input 에 입력하는 검색어의 값을 keyWord변수에 담고 한글처리
+   address = $("#keyWord").val();         
+   keyWord = encodeURIComponent(address);
     
-	// 입력된 keyWord변수의 값으로 결과를 내기 위해 URL 끝에 +keyWord 삽입과 url변수 선언
-	var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
+   // 입력된 keyWord변수의 값으로 결과를 내기 위해 URL 끝에 +keyWord 삽입과 url변수 선언
+   var url = "https://apis.daum.net/local/v1/search/keyword.json?apikey=6cd9ac4c704c2327f60e490376346f9c&query=" +keyWord; 
    
-	$.getJSON(url + "&callback=?" , function(json){
-		
-		// json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
-		var items = json.channel.item;
-		
-		// 반복문을 통해 원하는 json값을 뽑아내는 단계. 지금은 위도와 경도를 받기 위해...
-		$.each(items, function(i, it){
-		
-			// 위도와 경도의 변수를 저장
-			latitude = it.latitude;
-			longitude = it.longitude;
-			var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
+   $.getJSON(url + "&callback=?" , function(json){
+      
+      // json.channel.item; 은 json데이터 내에서 내가 원하는 값에 접근하기 위해
+      var items = json.channel.item;
+      
+      // 반복문을 통해 원하는 json값을 뽑아내는 단계. 지금은 위도와 경도를 받기 위해...
+      $.each(items, function(i, it){
+      
+         // 위도와 경도의 변수를 저장
+         latitude = it.latitude;
+         longitude = it.longitude;
+         var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
                
-				if(i == 0){
-					var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-					var options = { //지도를 생성할 때 필요한 기본 옵션
-						center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
-						level: 3 //지도의 레벨(확대, 축소 정도)
-					};
+            if(i == 0){
+               var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+               var options = { //지도를 생성할 때 필요한 기본 옵션
+                  center: new daum.maps.LatLng(latitude, longitude), //지도의 중심좌표.
+                  level: 3 //지도의 레벨(확대, 축소 정도)
+               };
                
-					var marker = new daum.maps.Marker({
-						position: markerPosition
-					});
+               var marker = new daum.maps.Marker({
+                  position: markerPosition
+               });
 
-					var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-					marker.setMap(map); //지도위에 마커 뿌리기
-				
-				}
-		});   
-	});            
-	}); 
+               var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+               marker.setMap(map); //지도위에 마커 뿌리기
+            
+            }
+      });   
+   });            
+   }); 
 
    $("#success_button").click(function(){
       
@@ -293,6 +293,11 @@ $(document).ready(function() {
    $("#title_img_box").on("dragenter dragover", function(event){
       event.preventDefault();
    });
+   
+    //타이틀사진 삭제  버튼
+   $(document).on("click",".delbtn", function(){
+      $('#title_img_box *').remove();
+   });
 
 
    $("#title_img_box").on("drop", function(event){
@@ -316,8 +321,14 @@ $(document).ready(function() {
            success: function(data){
               
               var fileInfo = getFileInfo(data);
-              var html = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + fileInfo.imgsrc + '" alt="Attachment" style="width: 180px; height: 165px;"></span>';
+              var html = '<span class="mailbox-attachment-icon has-img"><img id="titleImg" src="' + fileInfo.imgsrc + '" alt="Attachment" style="width: 180px; height: 165px;"></span><a class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>';
              
+              var imageFind = $('#titleImg').attr("src");
+              
+              if(imageFind != undefined){
+              $('#title_img_box *').remove();
+              }
+              
               $("#title_img_box").append(html);
            }
          });   
@@ -338,7 +349,20 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+$(document).ready(function() {
+	$('#cancle_button').click(function() {
+		var url = unescape(location.href);
+		var numUrl = url.split('=');
+		var num = numUrl[1];
+		var mhpController = new MyHiddenPlaceController();
+        mhpController.requestSelectOneMhpPage(num);
+     });
+});
+</script>
 </head>
+
+
 
 <body>
 
@@ -418,11 +442,13 @@ $(document).ready(function() {
    <div class="row"></div>
    <div class="col-md-3"></div>
    <div class="col-md-7">
+   	  <button id="cancle_button" class="btn btn-primary pull-right" style="margin-left:1px" >취소</button>
       <button type="submit" id="success_button" name="submit"
          class="btn btn-primary pull-right">Submit Form</button>
    </div>
    
    <!-- 하단 메뉴 푸터 -->
    <div id="footerDiv"></div>
+   
 </body>
 </html>
