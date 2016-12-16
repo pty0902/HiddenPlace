@@ -8,9 +8,9 @@
 
 	<select id="listMHP" resultType="Reply">
 
-		  select REPLYNUM, USERID, NUM, ROUTENUM, REPLYCOMMENT
-		  from TBL_REPLY
-		  WHERE NUM = #{num}
+		  select TBL_REPLY.REPLYNUM, TBL_REPLY.USERID, TBL_REPLY.NUM, TBL_REPLY.REPLYCOMMENT, TBL_USER.USERNICKNAME
+		  from TBL_REPLY, TBL_USER
+		  WHERE NUM = #{num} AND TBL_REPLY.USERID = TBL_USER.USERID
 		  
 	</select> 
 	
