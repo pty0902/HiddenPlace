@@ -146,6 +146,8 @@ function UserController() {
 
 		localStorage.setItem("email", email); // 비밀번호 찾기 인증 성공시 다음 모달 페이지로 넘기는 이메일을 로컬세션에 저장
 		modalAnimate($formLost, $formLostUpdate); // 다음 모달 페이지로 전환
+		$('#lost_pw').val("");
+		$('#lost_pw_check').val("");
 
 	};
 
@@ -160,6 +162,8 @@ function UserController() {
 			localStorage.removeItem('email');
 			localStorage.clear();
 			modalAnimate($formLostUpdate, $formLogin); // 로그인 모달 페이지로 전환
+			$('#id').val("");
+			$('#pw').val("");
 
 		} else {
 			alert("비밀번호를 변경하는데 오류가 발생하였습니다.");

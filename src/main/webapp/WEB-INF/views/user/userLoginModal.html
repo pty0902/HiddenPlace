@@ -47,21 +47,43 @@
 
 		$('#userInsert').click(function() { // 로그인 -> 회원가입
 			modalAnimate($formLogin, $formRegister)
+			$('#register_id').val("");
+			$('#email_confirm').val("");
+			$('#nickname').val("");
+			$('#register_pw').val("");
+			$('#register_pw_check').val("");
+			$('#phoneNum_2').val("");
+			$('#phoneNum_3').val("");
 		});
-		$('#forgetPw').click(function() { // 로그인 -> 회원가입
+		$('#forgetPw').click(function() { // 로그인 -> 비밀번호찾기
 			modalAnimate($formLogin, $formLost);
+			$('#lost_id').val("");
+			$('#lost_email_confirm').val("");
 		});
 		$('#lost_login').click(function() { // 비밀번호찾기 -> 로그인
 			modalAnimate($formLost, $formLogin);
+			$('#id').val("");
+			$('#pw').val("");
 		});
 		$('#lost_userInsert').click(function() { // 비밀번호찾기 -> 회원가입
 			modalAnimate($formLost, $formRegister);
+			$('#register_id').val("");
+			$('#email_confirm').val("");
+			$('#nickname').val("");
+			$('#register_pw').val("");
+			$('#register_pw_check').val("");
+			$('#phoneNum_2').val("");
+			$('#phoneNum_3').val("");
 		});
 		$('#register_forgetPw').click(function() { // 회원가입 -> 비밀번호 찾기
 			modalAnimate($formRegister, $formLost);
+			$('#lost_id').val("");
+			$('#lost_email_confirm').val("");
 		});
 		$('#register_login').click(function() { // 회원가입 -> 로그인 버튼
 			modalAnimate($formRegister, $formLogin);
+			$('#id').val("");
+			$('#pw').val("");
 		});
 
 		function modalAnimate($oldForm, $newForm) {
